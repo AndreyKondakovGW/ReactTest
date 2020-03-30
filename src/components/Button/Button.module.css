@@ -1,0 +1,11 @@
+.cnopka{
+	background-image: none;
+	background-color:#fddc64;
+	color: black;
+	
+}
+
+.cnopka:hover{
+	background-color:#8f84be;
+	color: black;
+}
