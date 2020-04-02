@@ -1,9 +1,4 @@
-
-
-.navbar{
-	background-color:#8f84be; color: black;
+.head{
+    grid-area: head;
+    background: blueviolet;
 }
-
-.navbar_fixed_top {
-    border: 0;
-  }

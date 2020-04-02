@@ -6,18 +6,16 @@ import Content from './components/Content/Content.jsx';
 import Redactor from './components/Redactor/Redactor.jsx';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
-      <div>
-        <Header />
-        <div>
-            <SideBar />
-            <div>
-              <Route path = " /conent" component= {Content} />
-              <Route path = " /redactor" component = {Redactor} />
+      <div className="wrapper">
+        <Header/>
+        <SideBar/>
+            <div className="main">
+              <Route path = "/conent" render = {() => <Content Topics={props.state.Topics}/>} />
+              <Route path = "/redactor" component = {Redactor} />
             </div>
-        </div>
       </div>
     </BrowserRouter>
   );

@@ -3,11 +3,9 @@ import s from './Header.module.css';
 
 const Header=()=>{
     return (
-        <nav classNmae={`${s.navbar}  ${s.navbar_fixed_top} ${s.stnavbar}`} >
-		      <div className={s.navbar} >
-                  <div className={s.stnavbar}>Conspect structure</div>
-             </div>
-        </nav>
+        <div className={s.head}>
+            <h>Conspect structure</h>
+        </div>
     )
 }
 export default Header;

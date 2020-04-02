@@ -1,10 +1,18 @@
 import React from 'react';
+import Contentbox from '../Contentbox/Contentbox';
+import s from './Content.module.css';
 
 
-const Content=() =>{
+const Content=(props) =>{
+
+    let ReactContents = props.Topics.map(elm => <Contentbox text={elm.name} path={elm.path} /> )
+
     return (
         <div>
-            <h1>Приветствуем вас в Conspect structure </h1>
+            <div className = "titel">Ttitle</div>
+                <div className={s.wrapper}>
+                    {ReactContents}                  
+                </div>
         </div>
     )
 }
