@@ -1,5 +1,5 @@
 import React from 'react';
-import foto from '../../American_Beaver.jpg';
+import foto from '../../../American_Beaver.jpg';
 
 const Redactor = ()=>{
     return (

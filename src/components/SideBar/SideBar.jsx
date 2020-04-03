@@ -1,7 +1,10 @@
 import React from 'react';
 import Button from '../Button/Button';
 import s from './SideBar.module.css';
-import logo from '../../logo.png'
+import logo from '../../logo.png';
+import SidebarMainContent from "./SideBarMainContenet/SideBarMainContent";
+import SideBarReadctorContent from "./SideBarRedactorContent/SideBarRedactorContent"
+import { Route } from 'react-router-dom';
 
 
 const SideBar=() =>{
@@ -10,13 +13,11 @@ const SideBar=() =>{
             <div>
                 <img src={logo} alt="some value"/>
             </div>
-            <form action="" method="post">
-				    <input type="text"  name ="img_name" id="search" placeholder="поиск" required autofocus></input>
-                <Button text='открыть' />      
-            </form>
-            <Button text='Редактор' path="redactor" /> 
-            <Button text='удалить страницу' path="" /> 
-            <Button text='выйти' path="conent" />  
+            <div className="SidebarContent">
+                <Route path="/content" component = {SidebarMainContent}/>
+                <Route path="/redactor" component={SideBarReadctorContent}/>
+            </div>
+            <Button text="Выйти" path=""/> 
         </div>
     )
 }

@@ -1,0 +1,16 @@
+.main {
+    padding: 20px;
+    grid-area: main;
+    background: #f5b05cbb;
+}
+
+@media (min-width: 768px) {
+.main {
+      padding-right: 40px;
+      padding-left: 40px;
+}
+}
+
+.main .page-header {
+    margin-top: 0;
+}

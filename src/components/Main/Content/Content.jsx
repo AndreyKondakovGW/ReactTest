@@ -1,5 +1,5 @@
 import React from 'react';
-import Contentbox from '../Contentbox/Contentbox';
+import Contentbox from '../../Contentbox/Contentbox';
 import s from './Content.module.css';
 
 
@@ -11,7 +11,8 @@ const Content=(props) =>{
         <div>
             <div className = "titel">Ttitle</div>
                 <div className={s.wrapper}>
-                    {ReactContents}                  
+                    {ReactContents}
+                    <Contentbox text="My Conspects" path="myconspects" />                 
                 </div>
         </div>
     )

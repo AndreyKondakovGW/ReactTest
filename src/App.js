@@ -2,9 +2,8 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header.jsx';
 import SideBar from './components/SideBar/SideBar.jsx';
-import Content from './components/Content/Content.jsx';
-import Redactor from './components/Redactor/Redactor.jsx';
-import { BrowserRouter, Route } from 'react-router-dom';
+import Main from './components/Main/Main.jsx';
+import { BrowserRouter} from 'react-router-dom';
 
 const App = (props) => {
   return (
@@ -12,10 +11,7 @@ const App = (props) => {
       <div className="wrapper">
         <Header/>
         <SideBar/>
-            <div className="main">
-              <Route path = "/conent" render = {() => <Content Topics={props.state.Topics}/>} />
-              <Route path = "/redactor" component = {Redactor} />
-            </div>
+        <Main state={props.state}/>
       </div>
     </BrowserRouter>
   );
