@@ -2,7 +2,10 @@
 	background-image: none;
 	background-color:#fddc64;
     color: black;
-    height: 100vh;
+	height: 100px;
+	width: 200px;
+	padding: 50px;
+	margin: 50px;
 }
 
 .contentbox:hover{

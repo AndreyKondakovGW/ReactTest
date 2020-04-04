@@ -2,22 +2,24 @@ import React from 'react';
 import Button from '../Button/Button';
 import s from './SideBar.module.css';
 import logo from '../../logo.png';
-import SidebarMainContent from "./SideBarMainContenet/SideBarMainContent";
-import SideBarReadctorContent from "./SideBarRedactorContent/SideBarRedactorContent"
+import SidebarMainContent from './SideBarMainContenet/SideBarMainContent';
+import SideBarReadctorContent from './SideBarRedactorContent/SideBarRedactorContent';
+import SideBarCreatorContent from './SideBarCreatorContent/SideBarCreatorContent';
 import { Route } from 'react-router-dom';
 
 
-const SideBar=() =>{
+const SideBar=(props) =>{
     return (
         <div className={s.sidebar}>
             <div>
                 <img src={logo} alt="some value"/>
             </div>
             <div className="SidebarContent">
-                <Route path="/content" component = {SidebarMainContent}/>
+                <Route path="/content" render = {()=> <SidebarMainContent CurrentConspect={props.CurrentConspect}/>}/>
                 <Route path="/redactor" component={SideBarReadctorContent}/>
+                <Route path="/creteconspect" component={SideBarCreatorContent}/>
             </div>
-            <Button text="Выйти" path=""/> 
+            <Button text="Выйти" path="content"/> 
         </div>
     )
 }

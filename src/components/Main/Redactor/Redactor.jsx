@@ -1,11 +1,20 @@
 import React from 'react';
-import foto from '../../../American_Beaver.jpg';
+import NavBar from '../NavBar/NavBar';
+import s from './Redactor.module.css';
 
-const Redactor = ()=>{
+const Redactor = (props)=>{
     return (
         <div>
-            <div className = "titel">Redactor</div>
-            <img src={foto} alt="some value"/>
+            <NavBar name={"Redactor "+props.CurrentConspect.name}/>
+            <div className ={s.fotobox}>
+                <div className ={s.button} onClick={props.ChangeCurPL}> [- </div>
+                <div className = {s.foto} >
+                    <img src={require("./../../../"+props.CurrentConspect.path+"/"+props.CurrentConspect.data.curentfoto.path)} alt="some value" id="photo"/>
+                </div>
+                
+                <div className ={s.button} onClick={props.ChangeCurPL}> -] </div>
+            </div>
+            
         </div>
     )
 }

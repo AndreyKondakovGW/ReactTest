@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom';
 
 const Contentbox=(props) =>{
     return (
-        <NavLink to={"/content/"+props.path}> 
+        <NavLink to={props.path}> 
+                {console.log(props.path)}
                 <div className={s.contentbox}>{props.text}</div>  
         </NavLink>
     )

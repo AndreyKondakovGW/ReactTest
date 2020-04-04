@@ -5,8 +5,9 @@ const SideBarReadctorContent=() =>{
     return (
         <div>
             <Button text='Основная' path="content" />
+            <Button text='Открыть Конспект' />
             <form className="form-tag" method="post">
-                <input type="text"  name ="tag1" placeholder="добавить тег (обязательно)" required autofocus></input>
+                <input type="text"  name ="tag1" placeholder="добавить тег (обязательно)" required autoFocus></input>
                 <input type="text"  name ="tag2" placeholder="добавить тег"></input>
                 <input type="text"  name ="tag3" placeholder="добавить тег"></input>
                 <br/>

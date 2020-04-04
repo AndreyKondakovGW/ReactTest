@@ -10,8 +10,8 @@ const App = (props) => {
     <BrowserRouter>
       <div className="wrapper">
         <Header/>
-        <SideBar/>
-        <Main state={props.state}/>
+        <SideBar CurrentConspect={props.state.LogicData.CurrentConspect}/>
+        <Main state={props.state} ChangeCurPR={props.ChangeCurPR} ChangeCurPL={props.ChangeCurPL}/>
       </div>
     </BrowserRouter>
   );
