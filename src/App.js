@@ -9,9 +9,9 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        <Header/>
-        <SideBar CurrentConspect={props.state.LogicData.CurrentConspect}/>
-        <Main state={props.state} ChangeCurPR={props.ChangeCurPR} ChangeCurPL={props.ChangeCurPL}/>
+        <Header Curentuser={props.state.UserData.Username}/>
+        <SideBar CurrentConspect={props.state.LogicData.CurrentConspect} Conspects={props.state.UserData.Conspects}/>
+        <Main state={props.state} dispath={props.dispath}/>
       </div>
     </BrowserRouter>
   );

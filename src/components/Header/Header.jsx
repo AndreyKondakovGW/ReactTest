@@ -1,10 +1,16 @@
 import React from 'react';
 import s from './Header.module.css';
 
-const Header=()=>{
+const Header=(props)=>{
     return (
         <div className={s.head}>
-            <h1>Conspect structure</h1>
+            <div className={s.logo}>
+                Conspect structure
+            </div>
+            <div className={s.user}>
+                {props.Curentuser}
+            </div>
+            
         </div>
     )
 }

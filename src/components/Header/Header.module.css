@@ -2,3 +2,12 @@
     grid-area: head;
     background: blueviolet;
 }
+
+.logo{
+    display: inline;
+}
+
+.user{
+    display: inline;
+    margin-left: 90%;
+}

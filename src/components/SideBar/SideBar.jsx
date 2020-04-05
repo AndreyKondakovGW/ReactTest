@@ -16,7 +16,7 @@ const SideBar=(props) =>{
             </div>
             <div className="SidebarContent">
                 <Route path="/content" render = {()=> <SidebarMainContent CurrentConspect={props.CurrentConspect}/>}/>
-                <Route path="/redactor" component={SideBarReadctorContent}/>
+                <Route path="/redactor" render={()=><SideBarReadctorContent Conspects={props.Conspects}/>}/>
                 <Route path="/creteconspect" component={SideBarCreatorContent}/>
             </div>
             <Button text="Выйти" path="content"/> 

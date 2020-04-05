@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state,{handler,ChangeCurPR,ChangeCurPL} from './redux/state';
+import store,{handler} from './redux/state';
 
 let rerenderall =()=>{
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} ChangeCurPR={ChangeCurPR} ChangeCurPL={ChangeCurPL}/>
+      <App state={store.state} dispath={store.dispath.bind(store)}/>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
 
-rerenderall(state);
+rerenderall(store.state);
 handler(rerenderall);
 
 
