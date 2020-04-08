@@ -3,19 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store,{handler} from './redux/state';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
+import { BrowserRouter} from 'react-router-dom';
 
-let rerenderall =()=>{
   ReactDOM.render(
-    <React.StrictMode>
-      <App state={store.state} dispath={store.dispath.bind(store)}/>
-    </React.StrictMode>,
+      <BrowserRouter>
+        <Provider store={store}>
+          <App/>
+        </Provider>
+      </BrowserRouter>,
     document.getElementById('root')
   );
-}
-
-rerenderall(store.state);
-handler(rerenderall);
 
 
 // If you want your app to work offline and load faster, you can change

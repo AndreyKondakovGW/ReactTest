@@ -3,8 +3,7 @@ import Curentconspectreducer from './Curentconspect-reducer.js'
 let rerenderall = () =>{
     console.log('rerendered');
 }
-let store ={
-    state: {
+let state ={
         UserData: {
             Username: "Kain",
             Topics: [
@@ -32,11 +31,21 @@ let store ={
                     curentfoto: {path: "bobr2.jpg", index: 1},
                 }
             }
-        }
+        },
+
+
+    _CallSubscriber(){
+
     },
+    
+    subscribe(observer){
+        rerenderall=observer;
+    },
+
     _ChangeConspect(name){
-        
+        console.log('rerendered');
     },
+
     addTopic(){
 
     },
@@ -54,4 +63,4 @@ export const handler=(observer)=>{
     rerenderall=observer;
 }
 
-export default store;
+export default state;

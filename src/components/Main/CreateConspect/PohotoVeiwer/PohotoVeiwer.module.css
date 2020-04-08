@@ -1,0 +1,21 @@
+.NameBlock{
+    display: inline;
+    background-color:#fddc64;
+    color: black;
+}
+
+.NameBlock:hover{
+    background-color:#8f84be;
+	color: rgb(255, 255, 255);
+}
+
+.DeleteBlock{
+    display: inline;
+    background-color:#fddc64;
+    color: black;
+}
+
+.DeleteBlock:hover{
+    background-color:#8f84be;
+	color: rgb(255, 255, 255);
+}

@@ -8,7 +8,7 @@ const Header=(props)=>{
                 Conspect structure
             </div>
             <div className={s.user}>
-                {props.Curentuser}
+                {props.CurentUser}
             </div>
             
         </div>
