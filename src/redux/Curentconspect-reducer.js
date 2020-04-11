@@ -1,6 +1,6 @@
-
 const Change_Cur_PR ="ChangeCurPR";
 const Change_Cur_PL ="ChangeCurPL";
+const SET_CURRCONSPECT="SetCurrConspect";
 
 let initialstate={
     LogicData:{
@@ -13,7 +13,7 @@ let initialstate={
                     {path: "bobr2.jpg",index: 1},
                     {path: "bobr3.jpeg",index: 2}
                 ],
-                curentfoto: {path: "bobr2.jpg", index: 1},
+                curentfoto: {path: "bobr2.jpg", index: 1}
             }
         }
     },
@@ -25,9 +25,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             let newstate={...state};
             newstate.LogicData={...state.LogicData}
             newstate.LogicData.CurrentConspect.data.curentfoto={...state.LogicData.CurrentConspect.data.curentfoto}
-            console.log(newstate.LogicData.CurrentConspect.data.fotos)
             newstate.LogicData.CurrentConspect.data.curentfoto=newstate.LogicData.CurrentConspect.data.fotos[(newstate.LogicData.CurrentConspect.data.curentfoto.index+1) % newstate.LogicData.CurrentConspect.data.fotos.length];
-            console.log("PR")
             return newstate
         }
         case Change_Cur_PL:{
@@ -35,10 +33,35 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             newstate.LogicData={...state.LogicData}
             newstate.LogicData.CurrentConspect.data.curentfoto={...state.LogicData.CurrentConspect.data.curentfoto}
             newstate.LogicData.CurrentConspect.data.curentfoto=newstate.LogicData.CurrentConspect.data.fotos[(newstate.LogicData.CurrentConspect.data.curentfoto.index-1+ newstate.LogicData.CurrentConspect.data.fotos.length) % newstate.LogicData.CurrentConspect.data.fotos.length];
-            console.log("PL")
+            return newstate
+        }
+        case SET_CURRCONSPECT:{
+            let newstate={
+                ...state,
+                LogicData:{
+                    ...state.LogicData,
+                    CurrentConspect:{
+                        name: action.conspect.name,
+                        path: action.conspect.path,
+                        data: {
+                            fotos: [action.conspect.data.fotos
+                            ],
+                            curentfoto: action.conspect.data.fotos[0],
+                        }
+                    }
+
+                }
+            }
             return newstate
         }
         default: return state
+    }
+}
+
+export const SetCurrentConspectCR=(newconspect) =>{
+    return{
+        type :SET_CURRCONSPECT,
+        conspect: newconspect
     }
 }
 

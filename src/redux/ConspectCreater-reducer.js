@@ -18,16 +18,15 @@ let initialstate={
 const CurentCreatorreducer =(state=initialstate, action) =>{
     switch (action.type){
         case ADD_FOTO:{
-            let newstate={...state};
-            newstate.CreatorData={...state.CreatorData};
-            newstate.CreatorData.imagePreviewUrl=action.img
-            const NewPoto ={
-                name: action.name, 
-                path: action.path,
-                imagePreviewUrl: action.img
-            }
-            newstate.CreatorData.fotos=state.CreatorData.fotos.slice()
-            newstate.CreatorData.fotos.push(NewPoto)
+            let newstate={
+                ...state,
+                CreatorData: {
+                    ...state.CreatorData,
+                    imagePreviewUrl: action.img,
+                    fotos: [...state.CreatorData.fotos,{name: action.name,path: action.path,imagePreviewUrl: action.img}]
+                },
+
+            };
             return newstate
         }
         case DELETE_FOTO:{
@@ -44,7 +43,7 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
         case CHANGE_PERWIE_PHOTO:{
             let newstate={...state};
             newstate.CreatorData={...state.CreatorData};
-            for (var i=0;i<newstate.CreatorData.fotos.length;i++){
+            for (let i=0;i<newstate.CreatorData.fotos.length;i++){
                 if(newstate.CreatorData.fotos[i].name === action.name) {
                     newstate.CreatorData.imagePreviewUrl=newstate.CreatorData.fotos[i].imagePreviewUrl;
                 }
