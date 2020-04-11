@@ -1,0 +1,16 @@
+.checked{
+    width: 20px;
+    height: 20px;
+    background-color: darkorange;
+}
+.unchecked{
+    width: 20px;
+    height: 20px;
+    background-color: darkorchid;
+}
+.body img{
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

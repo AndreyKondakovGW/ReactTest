@@ -1,5 +1,5 @@
-.rightbutton{
-    display: inline;
-    object-position: right;
-    background-color: rgb(201, 176, 158); 
+.nav{
+    display: inline-block;
+      width: 180px;
+      margin-right: 100px;
 }

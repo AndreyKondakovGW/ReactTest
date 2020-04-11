@@ -1,25 +1,33 @@
 import React from 'react';
-import Contentbox from '../../Contentbox/Contentbox';
+import Conspectbox from './ConspectboxComponent.jsx';
 import NavBar from '../NavBar/NavBar';
 import * as axios from 'axios';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 
-const MyConspect = (props) =>{
-    //axios.get("https://getconspect").then(response =>{
-    //   props.setConspect(response.data.conspects)
-    //})
-    let ReactContents = props.Conspects.map(elm => <Contentbox text={elm.name} path={"/myconspects/"+elm.name} /> )
 
-    return (
-
-        <div>
-            <NavBar name="My Conspects"/>
+class MyConspect extends React.Component{
+    getConspects=()=>{
+        axios.get("https://getconspect").then(response =>{
+            this.props.setConspect(response.data.conspects)
+        })
+    }
+    render(){
+        return (
             <div>
-                {ReactContents}
+                <NavBar name="Конспекты"/>
+                <div>
+                    {this.props.Conspects.map(elm => <Conspectbox 
+                        id={elm.id} 
+                        name={elm.name} 
+                        checked={elm.checked} 
+                        img={elm.img} 
+                        path={"/myconspects/"+elm.name} 
+                        checkf={this.props.checked}/> )}
+                </div>
+                
             </div>
-            
-        </div>
-    )
-
+        )
+}
 }
 
 export default MyConspect;
