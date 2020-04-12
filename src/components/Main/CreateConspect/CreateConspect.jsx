@@ -3,26 +3,23 @@ import NavBar from '../NavBar/NavBar';
 import PohotoVeiwer from './PohotoVeiwer/PohotoVeiwer.jsx'
 import s from './CreateConspect.module.css';
 
-
-const CreateConspect = (props) =>{
-    let ReactContents = props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={props.DeleteFoto} change={props.ChangePerwie} />);
-    let ImgPeriwe = null;
-    if (props.imagePreviewUrl){
-        ImgPeriwe = (<img src={props.imagePreviewUrl} />);
-    }else{
-        ImgPeriwe=(<div className={s.ImagePerwier}>ImagePerwier</div>)
-    }
-    return(
+class CreateConspect extends React.Component{  
+    ReactContents = ()=>{return(this.props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={this.props.DeleteFoto} change={this.props.ChangePerwie} />))}
+    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img src={require("./../../../static/images/"+this.props.imagePreviewUrl)} />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
+    render(){  
+    return( 
         <div>
+            {console.log(this.props.imagePreviewUrl)}
+            {console.log(this.props.fotos)}
             <NavBar name="Create Conspect"/>
             <div className={s.mainbox}> 
-                {ReactContents}
+                {this.ReactContents()}
             </div>
             <div>
-                {ImgPeriwe}
+                {this.ImgPeriwe()}
             </div>
         </div>
     )
 }
-
+}
 export default CreateConspect;

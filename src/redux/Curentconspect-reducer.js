@@ -9,9 +9,9 @@ let initialstate={
             path: "static/Conspect/bobrconspect",
             data: {
                 fotos: [
-                    {path: "bobr1.jpg",index: 0},
-                    {path: "bobr2.jpg",index: 1},
-                    {path: "bobr3.jpeg",index: 2}
+                    {name:"bobr1", path: "bobr1.jpg",index: 0},
+                    {name:"bobr2",path: "bobr2.jpg",index: 1},
+                    {name:"bobr3",path: "bobr3.jpeg",index: 2}
                 ],
                 curentfoto: {path: "bobr2.jpg", index: 1}
             }
@@ -36,6 +36,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             return newstate
         }
         case SET_CURRCONSPECT:{
+            console.log(2)
             let newstate={
                 ...state,
                 LogicData:{

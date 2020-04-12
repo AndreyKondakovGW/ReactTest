@@ -2,7 +2,6 @@ import React from 'react';
 import Conspectbox from './ConspectboxComponent.jsx';
 import NavBar from '../NavBar/NavBar';
 import * as axios from 'axios';
-import { waitForElementToBeRemoved } from '@testing-library/react';
 
 
 class MyConspect extends React.Component{
@@ -14,7 +13,7 @@ class MyConspect extends React.Component{
     render(){
         return (
             <div>
-                <NavBar name="Конспекты"/>
+                <NavBar name="Конспекты" delete={this.props.deletechecked}/>
                 <div>
                     {this.props.Conspects.map(elm => <Conspectbox 
                         id={elm.id} 

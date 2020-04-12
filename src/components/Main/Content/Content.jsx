@@ -15,8 +15,7 @@ const Content=(props) =>{
         <div>
             <NavBar name="Main"/>
             <div className={s.wrapper}>
-                {ReactContents}
-                <Contentbox text="My Conspects" path="myconspects" />                 
+                {ReactContents}                
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Main from './Main';
+import {OpenConspectAC,OpenEmptyConspect} from './../../redux/ConspectCreater-reducer';
 
 let mapStatetoProps=(state)=>{
     return {
@@ -9,6 +10,21 @@ let mapStatetoProps=(state)=>{
     }
 }
 
-const MainConatiner=connect(mapStatetoProps)(Main);
+
+let mapDispatchtoProps =(dispatch) =>{
+    return{
+        GiveCurrentCOnspectCreator: (CurrentConspect)=>{
+            const action=OpenConspectAC(CurrentConspect)
+            dispatch(action)
+        },
+        OpenEmptyConspect: ()=>{
+            const action=OpenEmptyConspect()
+            dispatch(action)
+        }
+        
+    }
+}
+
+const MainConatiner=connect(mapStatetoProps,mapDispatchtoProps)(Main);
 
 export default MainConatiner;

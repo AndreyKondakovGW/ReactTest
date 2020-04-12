@@ -1,12 +1,12 @@
 .checked{
     width: 20px;
     height: 20px;
-    background-color: darkorange;
+    background-color: rgb(41, 224, 35);
 }
 .unchecked{
     width: 20px;
     height: 20px;
-    background-color: darkorchid;
+    background-color: rgb(250, 0, 0);
 }
 .body img{
     width: 200px;

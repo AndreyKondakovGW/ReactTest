@@ -6,6 +6,7 @@ const SET_USERNAME="SetUsername"
 const SET_TOPICS="SetTopics"
 const SET_CONSPECTS="SetConspects"
 const CHECKED_CONSPECT="CheckedConspect"
+const DELETE_CHECKEDCONSPECT="DeleteCheckedConspect"
 
 let initialstate={
     UserData: {
@@ -58,7 +59,6 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case CHECKED_CONSPECT:{
-            console.log(action.id)
             let newstate={
                 ...state,
                 UserData: {
@@ -71,7 +71,16 @@ const UserDatareducer =(state=initialstate, action)=>{
                     })
                 }
             }
-            console.log(newstate)
+            return newstate
+        }
+        case DELETE_CHECKEDCONSPECT:{
+            let newstate={
+                ...state,
+                UserData: {
+                    ...state.UserData,
+                    Conspects: state.UserData.Conspects.filter(elm=>!elm.checked)
+                }
+            }
             return newstate
         }
         default: return state
@@ -81,4 +90,5 @@ export const SetUsernameAC=(name) =>({type :SET_USERNAME,Username: name})
 export const SetTopicsAC=(topics) =>({type :SET_TOPICS,topics})
 export const SetConspectsAC=(conspects) =>({type :SET_CONSPECTS,conspects})
 export const CheckedConspectAC=(id)=>({type :CHECKED_CONSPECT,id})
+export const DeleteCheckedConspectAC=()=>({type:DELETE_CHECKEDCONSPECT})
 export default UserDatareducer; 

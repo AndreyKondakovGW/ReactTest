@@ -2,14 +2,14 @@ import React from 'react';
 import s from './Contentbox.module.css';
 import { NavLink } from 'react-router-dom';
 
-
-const Contentbox=(props) =>{
+class Contentbox extends React.Component{
+    render(){ 
     return (
-        <NavLink to={props.path}> 
-                {console.log(props.path)}
-                <div className={s.contentbox}>{props.text}</div>  
+        <NavLink to={this.props.path}> 
+                <div className={s.contentbox}>{this.props.text}</div>  
         </NavLink>
     )
+    }
 }
 
 export default Contentbox;
