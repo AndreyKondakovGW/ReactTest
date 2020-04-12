@@ -20,12 +20,11 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
     switch (action.type){
         case ADD_FOTO:{
             let newstate={
-                ...state,
                 CreatorData: {
                     ...state.CreatorData,
                     imagePreviewUrl: action.img,
                     fotos: [...state.CreatorData.fotos,{name: action.name,path: action.img}]
-                },
+                }
 
             };
             return newstate

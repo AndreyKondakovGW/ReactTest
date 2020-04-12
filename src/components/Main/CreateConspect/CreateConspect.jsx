@@ -5,7 +5,7 @@ import s from './CreateConspect.module.css';
 
 class CreateConspect extends React.Component{  
     ReactContents = ()=>{return(this.props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={this.props.DeleteFoto} change={this.props.ChangePerwie} />))}
-    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img src={require("./../../../static/images/"+this.props.imagePreviewUrl)} />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
+    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img src={this.props.imagePreviewUrl} />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
     render(){  
     return( 
         <div>
@@ -14,8 +14,6 @@ class CreateConspect extends React.Component{
             <NavBar name="Create Conspect"/>
             <div className={s.mainbox}> 
                 {this.ReactContents()}
-            </div>
-            <div>
                 {this.ImgPeriwe()}
             </div>
         </div>

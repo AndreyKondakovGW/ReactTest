@@ -17,6 +17,7 @@ let mapDispatchtoProps =(dispatch) =>{
             let reader = new FileReader();
             let file = e.target.files[0];
             console.log(reader)
+            debugger;
             console.log(file)
             reader.onloadend = () => {
                 console.log(file)

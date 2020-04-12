@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '../../Button/Button';
 
 const SideBarCreatorContent=(props) =>{
-    debugger
     return (
         <div>
             

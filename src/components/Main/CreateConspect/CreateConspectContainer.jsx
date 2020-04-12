@@ -6,7 +6,7 @@ let mapStatetoProps =(state)=>{
     return {
         name: state.CurentCreatorreducer.CreatorData.name,
         fotos: state.CurentCreatorreducer.CreatorData.fotos,
-        imagePreviewUrl:  state.CurentCreatorreducer.CreatorData.imagePreviewUrl
+        imagePreviewUrl: state.CurentCreatorreducer.CreatorData.imagePreviewUrl
     }
 
 }

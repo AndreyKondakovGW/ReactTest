@@ -1,3 +1,7 @@
+import bobr1 from './../static/images/bobr1.jpg'
+import bobr2 from './../static/images/bobr2.jpg'
+import bobr3 from './../static/images/bobr3.jpeg'
+
 const Change_Cur_PR ="ChangeCurPR";
 const Change_Cur_PL ="ChangeCurPL";
 const SET_CURRCONSPECT="SetCurrConspect";
@@ -9,9 +13,9 @@ let initialstate={
             path: "static/Conspect/bobrconspect",
             data: {
                 fotos: [
-                    {name:"bobr1", path: "bobr1.jpg",index: 0},
-                    {name:"bobr2",path: "bobr2.jpg",index: 1},
-                    {name:"bobr3",path: "bobr3.jpeg",index: 2}
+                    {name:"bobr1", path: bobr1,index: 0},
+                    {name:"bobr2",path: bobr2,index: 1},
+                    {name:"bobr3",path: bobr3,index: 2}
                 ],
                 curentfoto: {path: "bobr2.jpg", index: 1}
             }
