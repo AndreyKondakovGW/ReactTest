@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import './App.css';
+import { Layout } from './components/Layout';
 import HeaderContainer from './components/Header/HeaderContainer'
 import SideBarContainer from './components/SideBar/SideBarContainer';
-import MainConatiner from './components/Main/MainConatiner';
-
+import MainContainer from './components/Main/MainContainer';
 
 const App = (props) => {
   return (
-      <div className="wrapper">
+    <React.Fragment>
+      <Router>
         <HeaderContainer/>
         <SideBarContainer/>
-        <MainConatiner />
-      </div>
+        <Layout>
+        <MainContainer />
+        </Layout>
+      </Router>
+    </React.Fragment>
   );
 }
 export default App;

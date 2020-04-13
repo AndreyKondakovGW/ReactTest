@@ -1,7 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -10,13 +6,26 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter} from 'react-router-dom';
+import styled from 'styled-components';
+
+const Styles = styled.div`
+  *{
+    font-family:
+    "century gothic",
+    "Lucida Sans Unicode",
+    sans-serif;
+  }
+`;
 
   ReactDOM.render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <App/>
-        </Provider>
-      </BrowserRouter>,
+
+        <Styles>
+          <BrowserRouter>
+            <Provider store={store}>
+            <App/>
+            </Provider>
+          </BrowserRouter>
+        </Styles>,
     document.getElementById('root')
   );
 
