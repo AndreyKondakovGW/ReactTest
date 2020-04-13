@@ -2,22 +2,26 @@ import React from 'react';
 import Contentbox from '../../Contentbox/Contentbox';
 import s from './Content.module.css';
 import NavBar from '../NavBar/NavBar';
+import * as axios from 'axios';
 
 
 
-
-
-const Content=(props) =>{
-
-    let ReactContents = props.Topics.map(elm => <Contentbox text={elm.name} path={"/content/"+elm.path} /> )
-
-    return (
+class Topics extends React.Component{
+    getTopics=()=>{
+        axios.get("https://getconspect").then(response =>{
+            this.props.setConspect(response.data.conspects)
+        })
+    }
+    ReactContents = this.props.Topics.map(elm => <Contentbox text={elm.name} path={"/content/"+elm.path} /> )
+    render(){  
+        return(   
         <div>
             <NavBar name="Main"/>
             <div className={s.wrapper}>
-                {ReactContents}                
+                {this.ReactContents}                
             </div>
         </div>
-    )
+        )
+    }
 }
-export default Content;
+export default Topics;

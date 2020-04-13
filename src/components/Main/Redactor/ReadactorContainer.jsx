@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import Redactor from './Redactor';
+import {ChangeCurentPhotoAC} from './../../../redux/Curentconspect-reducer'
 
 let mapStatetoProps =(state)=>{
     return {
+        Photos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
         Conspectname : state.Curentconspectreducer.LogicData.CurrentConspect.name,
-        Conspectpath : state.Curentconspectreducer.LogicData.CurrentConspect.path,      
+        curentfoto : state.Curentconspectreducer.LogicData.CurrentConspect.data.curentfoto,      
         Currentpotopath: state.Curentconspectreducer.LogicData.CurrentConspect.data.curentfoto.path
     }
 }
@@ -16,6 +18,10 @@ let mapDispatchtoProps =(dispatch) =>{
         },
         ChangeCurPL: ()=>{
             dispatch({type: "ChangeCurPL"})
+        },
+        ChangeCurentPhoto: (id)=>{
+            let action=ChangeCurentPhotoAC(id)
+            dispatch(action)
         }
     }
 }

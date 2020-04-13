@@ -4,7 +4,6 @@ import s from './SideBar.module.css';
 import logo from '../../logo.png';
 import SidebarMainContent from './SideBarMainContenet/SideBarMainContent';
 import SideBarReadctorContent from './SideBarRedactorContent/SideBarRedactorContent';
-import SideBarCreatorContent from './SideBarCreatorContent/SideBarCreatorContent';
 import CreateConspectContainerSidebar from './SideBarCreatorContent/SideBarCreatorContainer'
 import { Route } from 'react-router-dom';
 
@@ -18,7 +17,7 @@ const SideBar=(props) =>{
             <div className="SidebarContent">
                 <Route path="/content" render = {()=> <SidebarMainContent CurrentConspect={props.CurrentConspect}/>}/>
                 <Route path="/redactor" render={()=><SideBarReadctorContent Conspects={props.Conspects}/>}/>
-    <Route path="/creteconspect" render={()=><CreateConspectContainerSidebar/>}/>
+                 <Route path="/creteconspect" render={()=><CreateConspectContainerSidebar/>}/>
             </div>
             <Button text="Выйти" path="content"/> 
         </div>

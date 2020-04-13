@@ -64,7 +64,7 @@ const UserDatareducer =(state=initialstate, action)=>{
                 UserData: {
                     ...state.UserData,
                     Conspects: state.UserData.Conspects.map(elm=>{
-                        if (elm.id==action.id){
+                        if (elm.id===action.id){
                             return({...elm,checked: !elm.checked})
                         }
                         return elm;

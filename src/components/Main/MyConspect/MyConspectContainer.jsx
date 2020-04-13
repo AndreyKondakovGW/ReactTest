@@ -10,8 +10,8 @@ let mapStatetoProps =(state)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return {
-        setConspect: () =>{
-            const action =SetConspectsAC;
+        setConspect: (conspects) =>{
+            const action =SetConspectsAC(conspects);
             dispatch(action)
         },
         checked: (id)=>{

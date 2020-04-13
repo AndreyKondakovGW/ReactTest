@@ -24,7 +24,7 @@ class Conspectbox extends React.Component{
                 {this.checkbox()}
                 {this.name}
                 <NavLink to={this.props.path}>
-                    <img src={this.props.img}/>
+                    <img src={this.props.img} alt="some value"/>
                 </NavLink>
             </div>
         )

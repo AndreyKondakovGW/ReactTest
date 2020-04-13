@@ -54,6 +54,19 @@ class NavBar extends React.Component{
                 <Route path ="/myconspects/:contentname" render={()=><div className ={s.nav}>
                     <Contentbox  text="Настроить доступ" path={"/myconspects"}/>
                     </div>}/>
+
+                <Route path ="/redactor" render={()=><div>
+                    <div className ={s.nav}>
+                        <Contentbox  text="Добавит фото" path={"/myconspects"}/>
+                    </div>
+                    <div className ={s.nav}>
+                        <Contentbox  text="удалить фото" path={"/myconspects"}/>
+                    </div>
+                    <div className ={s.nav}>
+                        <Contentbox  text="Добавить Комментарий" path={"/myconspects"}/>
+                    </div>
+                    </div>
+                }/>
             
             
         </div>      

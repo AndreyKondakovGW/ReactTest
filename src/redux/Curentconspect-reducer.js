@@ -4,10 +4,12 @@ import bobr3 from './../static/images/bobr3.jpeg'
 
 const Change_Cur_PR ="ChangeCurPR";
 const Change_Cur_PL ="ChangeCurPL";
+const Change_Cur_P="ChangeCurP";
 const SET_CURRCONSPECT="SetCurrConspect";
 
 let initialstate={
     LogicData:{
+        
         CurrentConspect: {
             name: "Bobrconspect",
             path: "static/Conspect/bobrconspect",
@@ -17,7 +19,7 @@ let initialstate={
                     {name:"bobr2",path: bobr2,index: 1},
                     {name:"bobr3",path: bobr3,index: 2}
                 ],
-                curentfoto: {path: "bobr2.jpg", index: 1}
+                curentfoto: {name:"bobr2", path: bobr2, index: 1}
             }
         }
     },
@@ -39,8 +41,23 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             newstate.LogicData.CurrentConspect.data.curentfoto=newstate.LogicData.CurrentConspect.data.fotos[(newstate.LogicData.CurrentConspect.data.curentfoto.index-1+ newstate.LogicData.CurrentConspect.data.fotos.length) % newstate.LogicData.CurrentConspect.data.fotos.length];
             return newstate
         }
+        case Change_Cur_P:{
+            let newstate={
+                ...state,
+                LogicData: {
+                    ...state.LogicData,
+                    CurrentConspect:{
+                        ...state.LogicData.CurrentConspect,
+                        data:{
+                            ...state.LogicData.CurrentConspect.data,
+                            curentfoto: state.LogicData.CurrentConspect.data.fotos.find(elm=>(elm.index===action.id))
+                        }
+                    }
+                }
+            }
+            return newstate;
+        }
         case SET_CURRCONSPECT:{
-            console.log(2)
             let newstate={
                 ...state,
                 LogicData:{
@@ -70,4 +87,10 @@ export const SetCurrentConspectCR=(newconspect) =>{
     }
 }
 
+export const ChangeCurentPhotoAC=(id)=>{
+    return{
+        type :Change_Cur_P,
+        id:id
+    }
+}
 export default Curentconspectreducer

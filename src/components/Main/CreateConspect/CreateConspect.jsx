@@ -5,7 +5,7 @@ import s from './CreateConspect.module.css';
 
 class CreateConspect extends React.Component{  
     ReactContents = ()=>{return(this.props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={this.props.DeleteFoto} change={this.props.ChangePerwie} />))}
-    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img src={this.props.imagePreviewUrl} />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
+    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img src={this.props.imagePreviewUrl} alt="some value" />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
     render(){  
     return( 
         <div>

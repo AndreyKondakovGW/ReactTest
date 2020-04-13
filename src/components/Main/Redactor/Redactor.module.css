@@ -1,14 +1,35 @@
-.fotobox{
-    margin: auto;
-    margin-left: 500px;
+.wrapper{
+  display: grid;
+  grid-template-areas:
+  "scrolbar photo tags";
+  grid-column-gap: 20px;
+  grid-template-columns: 250px 800px 1fr;
+  margin-top:20px ;
 }
 
+
+.scrolbar{
+    grid-area: scrolbar;
+    overflow-y: scroll;
+    background-color: rgb(202, 162, 200);
+}
+
+.photoviewer{
+    grid-area: photo;
+}
+
+.tagbar{
+    grid-area: tags;
+    background-color: rgb(140, 88, 167);
+}
 .foto{
     display: inline-block;
 }
 
+
 .foto img{
     display:block;
+    width: 500px;
 }
 
 .button{
@@ -21,4 +42,10 @@
 .button:hover{
 	background-color:#8f84be;
 	color: rgb(255, 255, 255);
+}
+
+.item img{
+    margin-bottom: 20px;
+    height: 150px;
+    width: 150px;
 }
