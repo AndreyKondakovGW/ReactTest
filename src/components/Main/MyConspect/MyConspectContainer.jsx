@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import MyConspect from './MyConspect';
-import {SetConspectsAC,CheckedConspectAC,DeleteCheckedConspectAC} from './../../../redux/UserData-reducer';
+import {SetConspectsAC,CheckedConspectAC,DeleteCheckedConspectAC,SettcurConspectpage} from './../../../redux/UserData-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
-        Conspects : state.UserDatareducer.UserData.Conspects
+        Conspects : state.UserDatareducer.UserData.Conspects,
+        Pagesize :state.UserDatareducer.Conspectspagesize,
+        Conspectcount: state.UserDatareducer.TotalConspectscount,
+        CurrentPage: state.UserDatareducer.CurrentConspectPage
     }
 }
 
@@ -20,6 +23,10 @@ let mapDispatchtoProps =(dispatch) =>{
         },
         deletechecked: ()=>{
             const action =DeleteCheckedConspectAC();
+            dispatch(action)
+        },
+        setCurPage: (i)=>{
+            const action = SettcurConspectpage(i)
             dispatch(action)
         }
 

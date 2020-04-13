@@ -9,15 +9,14 @@ const SET_CURRCONSPECT="SetCurrConspect";
 
 let initialstate={
     LogicData:{
-        
         CurrentConspect: {
             name: "Bobrconspect",
             path: "static/Conspect/bobrconspect",
             data: {
                 fotos: [
-                    {name:"bobr1", path: bobr1,index: 0},
-                    {name:"bobr2",path: bobr2,index: 1},
-                    {name:"bobr3",path: bobr3,index: 2}
+                    {name:"bobr1", path: bobr1,index: 0,comments:""},
+                    {name:"bobr2",path: bobr2,index: 1,comments:""},
+                    {name:"bobr3",path: bobr3,index: 2,comments:""}
                 ],
                 curentfoto: {name:"bobr2", path: bobr2, index: 1}
             }

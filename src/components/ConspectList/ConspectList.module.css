@@ -1,3 +1,11 @@
 .Conspectbox{
     background-color: cornsilk;
 }
+
+.open{
+    height: 200px;
+}
+
+.close{
+    height: 0px;
+}

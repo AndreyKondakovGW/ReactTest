@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
-import {SetTopicsAC} from './../../../redux/UserData-reducer';
+import {SetTopicsAC,SettcurTopicpage} from './../../../redux/UserData-reducer';
 import Topics from './Content.jsx';
 
 let mapStatetoProps =(state)=>{
     return {
-        Topics : state.UserDatareducer.UserData.Topics
+        Topics : state.UserDatareducer.UserData.Topics,
+        Pagesize :state.UserDatareducer.Topicspagesize,
+        Topicscount: state.UserDatareducer.TotalTopicscount,
+        CurrentPage: state.UserDatareducer.CurrentTopicPage
     }
 }
 
@@ -14,6 +17,10 @@ let mapDispatchtoProps =(dispatch) =>{
             const action =SetTopicsAC(topics);
             dispatch(action)
         },
+        setCurPage: (i)=>{
+            const action = SettcurTopicpage(i)
+            dispatch(action)
+        }
     }
 }
 

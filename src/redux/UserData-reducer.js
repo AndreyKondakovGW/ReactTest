@@ -7,6 +7,8 @@ const SET_TOPICS="SetTopics"
 const SET_CONSPECTS="SetConspects"
 const CHECKED_CONSPECT="CheckedConspect"
 const DELETE_CHECKEDCONSPECT="DeleteCheckedConspect"
+const SET_CUR_TOP_PAGE="Settcurtoppage"
+const SET_CUR_CON_PAGE="Settcurconpage"
 
 let initialstate={
     UserData: {
@@ -21,7 +23,15 @@ let initialstate={
             {name: "Змеи",id: 2,img: img2,checked: false},
             {name: "Bobrconspect",id: 3,img: img3,checked: false}
         ]
-    }
+    },
+    Topicspagesize:2,
+    TotalTopicscount:3,
+    CurrentTopicPage:1,
+
+    Conspectspagesize:2,
+    TotalConspectscount:3,
+    CurrentConspectPage:1,
+
 }
 
 
@@ -83,6 +93,20 @@ const UserDatareducer =(state=initialstate, action)=>{
             }
             return newstate
         }
+        case SET_CUR_TOP_PAGE:{
+            let newstate={
+                ...state,
+                CurrentTopicPage:action.newpage
+            }
+            return newstate
+        }
+        case SET_CUR_CON_PAGE:{
+            let newstate={
+                ...state,
+                CurrentConspectPage:action.newpage
+            }
+            return newstate
+        }
         default: return state
     }
 }
@@ -91,4 +115,6 @@ export const SetTopicsAC=(topics) =>({type :SET_TOPICS,topics})
 export const SetConspectsAC=(conspects) =>({type :SET_CONSPECTS,conspects})
 export const CheckedConspectAC=(id)=>({type :CHECKED_CONSPECT,id})
 export const DeleteCheckedConspectAC=()=>({type:DELETE_CHECKEDCONSPECT})
+export const SettcurTopicpage=(newpage)=>({type:SET_CUR_TOP_PAGE,newpage})
+export const SettcurConspectpage=(newpage)=>({type:SET_CUR_CON_PAGE,newpage})
 export default UserDatareducer; 
