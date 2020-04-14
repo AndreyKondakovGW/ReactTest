@@ -16,7 +16,7 @@ class NavBar extends React.Component{
                 {this.props.name}
             </div>
                 <Route path="/content" render={()=><div className ={s.nav}>
-                    <Contentbox  text="Мои конспекты" path={"/myconspects"}/>
+                    <Contentbox  text="Мои конспекты" path="/myconspects"/>
                 </div>}/>
 
                 <Route path="/content" render={()=><div className ={s.nav}>
@@ -67,8 +67,6 @@ class NavBar extends React.Component{
                     </div>
                     </div>
                 }/>
-            
-            
         </div>      
     )
 }

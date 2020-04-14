@@ -22,7 +22,8 @@ let initialstate={
             {name: "Ежи",id: 1,img: img1,checked: false},
             {name: "Змеи",id: 2,img: img2,checked: false},
             {name: "Bobrconspect",id: 3,img: img3,checked: false}
-        ]
+        ],
+        
     },
     Topicspagesize:2,
     TotalTopicscount:3,

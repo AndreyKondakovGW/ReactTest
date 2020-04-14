@@ -12,7 +12,7 @@ const Main=(props) =>{
     return (
         <div className={s.main}>
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
-            <Route path = "/content/:contentname" render = {() =><Viewer CurrentConspect={props.CurrentConspect}/>}/>
+            <Route path = "/content/:contentname" component = {() =><Viewer CurrentConspect={props.CurrentConspect}/>}/>
 
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
             <Route path = "/myconspects/:contentname" render = {() =><Viewer CurrentConspect={props.CurrentConspect}/>}/> 

@@ -6,7 +6,7 @@ class Contentbox extends React.Component{
     render(){ 
     return (
         <NavLink to={this.props.path}> 
-                <div className={s.contentbox}>{this.props.text}</div>  
+                <div className={s.contentbox}>{this.props.text}</div>
         </NavLink>
     )
     }
