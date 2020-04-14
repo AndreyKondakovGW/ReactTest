@@ -1,23 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Button from '../Button/Button';
 import s from './SideBar.module.css';
 import logo from '../../logo.png';
 import SidebarMainContent from './SideBarMainContenet/SideBarMainContent';
 import SideBarReadctorContent from './SideBarRedactorContent/SideBarRedactorContent';
 import CreateConspectContainerSidebar from './SideBarCreatorContent/SideBarCreatorContainer';
-
 import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Nav} from 'react-bootstrap';
-import styled from 'styled-components';
+
 
 const SideBar=(props) =>{
     return (
-        
-
-
-
-        
         <div className={s.sidebar}>
             <div>
                 <img src={logo} alt="some value"/>
