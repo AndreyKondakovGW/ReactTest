@@ -1,12 +1,12 @@
 import React from 'react';
-import Conspectbox from './ConspectboxComponent.jsx';
-import NavBar from '../NavBar/NavBar';
+import Conspectbox from './Conspectbox/ConspectboxComponent.jsx';
+import Conspects from './MyConspectComponent.jsx'
 import * as axios from 'axios';
-import s from './MyConspect.module.css'
 
 
 class MyConspect extends React.Component{
     constructor(props){
+        debugger
         super(props)
         this.state={    
             ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => <Conspectbox 
@@ -18,11 +18,11 @@ class MyConspect extends React.Component{
                 checkf={this.props.checked}/> )}
         }
 
-    getConspects=()=>{
-        axios.get("https://getconspect").then(response =>{
-            this.props.setConspect(response.data.conspects)
-        })
-    }
+        componentDidMount(){
+            //axios.get("https://getconspect").then(response =>{
+            //this.props.setConspect(response.data.conspects)
+            //})
+        }
 
     changePage=(pageNum)=>{
         this.props.setCurPage(pageNum)
@@ -59,15 +59,17 @@ class MyConspect extends React.Component{
         for(let i=1;i<=pagescount;i++){
             pages.push(i)
         }
+        {debugger}
         return (
-            <div>
-                <NavBar name="Конспекты" delete={this.props.deletechecked}/>
-                <div>
-                    {pages.map(elm=><span className={this.props.CurrentPage ===elm && s.selected} onClick={()=>{this.changePage(elm)}}>{elm}</span>)}
-                    {this.state.ReactContents}
-                </div>
-                
-            </div>
+        <div>   
+                <Conspects deletechecked={this.props.deletechecked}
+                    pages={pages}
+                    CurrentPage={this.props.CurrentPage}
+                    changePage={this.changePage}
+                    ReactContents={this.state.ReactContents}> 
+                </Conspects>
+                                    
+        </div>
         )
 }
 }

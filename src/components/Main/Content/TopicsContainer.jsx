@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {SetTopicsAC,SettcurTopicpage} from './../../../redux/UserData-reducer';
-import Topics from './Content.jsx';
+import TopicsAPI from './Content.jsx';
 
 let mapStatetoProps =(state)=>{
     return {
@@ -24,6 +24,6 @@ let mapDispatchtoProps =(dispatch) =>{
     }
 }
 
-const MyTopicsContainer=connect(mapStatetoProps,mapDispatchtoProps)(Topics);
+const MyTopicsContainer=connect(mapStatetoProps,mapDispatchtoProps)(TopicsAPI);
 
 export default MyTopicsContainer;
