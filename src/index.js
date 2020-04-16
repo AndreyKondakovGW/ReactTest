@@ -18,11 +18,11 @@ const Styles = styled.div`
 `;
 
   ReactDOM.render(
-
+     
         <Styles>
           <BrowserRouter>
             <Provider store={store}>
-            <App/>
+            <App />
             </Provider>
           </BrowserRouter>
         </Styles>,

@@ -1,23 +1,40 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+//import { Container } from 'react-bootstrap';
 import './App.css';
-import { Layout } from './components/Layout';
-import HeaderContainer from './components/Header/HeaderContainer'
+import HeaderContainer from './components/Header/HeaderContainer';
+
 import SideBarContainer from './components/SideBar/SideBarContainer';
+
 import MainContainer from './components/Main/MainContainer';
+import { Row, Col, Container } from 'react-bootstrap';
+
+import styled from 'styled-components';
+const Styles = styled.div`
+  background-color: rgb(220, 222, 234);
+  width: 100wh;
+  height: 100vh;
+  
+`;
 
 const App = (props) => {
+ const [open, setOpen] = useState(true);
   return (
+    <Styles>
     <React.Fragment>
-      <Router>
-        <HeaderContainer/>
-        <SideBarContainer/>
-        <Layout>
-        <MainContainer />
-        </Layout>
-      </Router>
+    <Router>
+        <Row>
+          <HeaderContainer/>
+        </Row>
+        <Container fluid>
+          <Row >
+            <SideBarContainer  open={open} setOpen={setOpen}/>  
+            <MainContainer open={open} setOpen={setOpen}/> 
+          </Row>
+        </Container>
+    </Router>
     </React.Fragment>
+    </Styles>
   );
 }
 export default App;

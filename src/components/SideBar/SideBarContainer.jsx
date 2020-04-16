@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 let mapStatetoProps=(state)=>{
     return {
         CurrentConspect: state.Curentconspectreducer.LogicData.CurrentConspect,
-        Conspects: state.UserDatareducer.UserData.Conspects
+        Conspects: state.UserDatareducer.UserData.Conspects,
     }
 }
 
