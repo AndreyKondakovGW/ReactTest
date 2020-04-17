@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from '../Button/Button';
 import logo from '../../logo.png';
 import SidebarMainContent from './SideBarMainContenet/SideBarMainContent';
@@ -6,10 +6,10 @@ import SideBarReadctorContent from './SideBarRedactorContent/SideBarRedactorCont
 import CreateConspectContainerSidebar from './SideBarCreatorContent/SideBarCreatorContainer';
 import { Route } from 'react-router-dom';
 
+
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 const StyledSideBar = styled.div`
-    /*transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};*/
     margin: 0;
     padding: 20px;
     /*padding-left: 20px;
@@ -57,7 +57,7 @@ a {
     margin-right: auto;
 
     transition-property: color;
-    transition-duration: 0.3s;
+    transition-duration: 1s;
     transition-timing-function: ease;
 
 /*transition-delay: 0s;
@@ -70,21 +70,7 @@ transition-timing-function: ease-in-out;*/
     color: #f1f1f1;
   }
 
-  .closebtn{
-    width:50%;
-    padding: 0 0 0 0;
-    text-decoration: none;
-    color: black;
-    font-size: 1rem;
-    display: block;
-    
-    text-align:center;
-    padding-top:5px;
-    padding-bottom:5px;
-    margin-left: auto;
-    margin-right: auto;
-
-  }
+  
 `;
 
 
@@ -94,7 +80,6 @@ const SideBar=(props) =>{
         <StyledSideBar  open={props.open}>
         <h2>Welcome.</h2>
         <img src={logo} alt="some value" id="crutch" />
-        <button  class="closebtn" onClick={() => props.setOpen(!props.open)}>&times;</button>
         <br></br>
         <div className="SidebarContent">
             <Route path="/content" render = {()=> <SidebarMainContent CurrentConspect={props.CurrentConspect}/>}/>

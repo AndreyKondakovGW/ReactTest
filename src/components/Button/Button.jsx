@@ -1,11 +1,10 @@
 import React from 'react';
-import s from './Button.module.css';
 import { NavLink } from 'react-router-dom';
 
 const Button=(props) =>{
     return (
         <div>
-            <NavLink to ={"/"+props.path}> {props.text} </NavLink> 
+            <NavLink to ={"/"+props.path}>{props.text}         {props.icon}</NavLink> 
             {/*<button className={s.cnopka}> 
             
             
