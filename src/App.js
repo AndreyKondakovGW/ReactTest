@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-//import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 
 import SideBarContainer from './components/SideBar/SideBarContainer';
 
-import MainContainer from './components/Main/MainConatiner.jsx';
-import { Row, Col, Container } from 'react-bootstrap';
+import MainContainer from './components/Main/MainContainer';
+import { Row,  Container } from 'react-bootstrap';
 
 import styled from 'styled-components';
 const Styles = styled.div`
@@ -24,7 +23,7 @@ const App = (props) => {
     <React.Fragment>
     <Router>
         <Row>
-          <HeaderContainer/>
+          <HeaderContainer open={open} setOpen={setOpen}/>
         </Row>
         <Container fluid>
           <Row >

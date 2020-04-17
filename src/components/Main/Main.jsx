@@ -5,7 +5,6 @@ import MyConspectContainer from './MyConspect/MyConspectContainer.jsx';
 import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.jsx';
 import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx'
 import {Route } from 'react-router-dom';
-//import s from './Main.module.css'
 
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
@@ -16,9 +15,6 @@ display:inline-block;
 height: 100vh;
 padding-left:20px;
 padding-right:20px;
-
-/*margin-left: 220px;*/
-/*transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};*/
 
 /*уголок магии. не трогать*/
 margin-left:${({ open }) => open ? '220px' : '0px'};
@@ -34,6 +30,11 @@ background: url(/bground2.jpg) no-repeat center center fixed;
 -o-background-size: cover;
 background-size: cover;
 background-position: center;
+
+.closebtn{
+  z-index:1000;
+  margin:40px;
+}
 `;
 
 const Main=(props) =>{
@@ -43,7 +44,6 @@ const Main=(props) =>{
             
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
-
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
             <Route path = "/myconspects/:contentname" component = {ConspectViewerContainer}/> 
             
@@ -51,15 +51,11 @@ const Main=(props) =>{
             <Route path = "/creteconspect/:conspect" render = {() => <div>{props.GiveCurrentCOnspectCreator(props.CurrentConspect)}<CreateConspectContainer/></div>} />
 
             <Route path = "/redactor/:conspectname" render = {() => <RedactorContainer/>} />
-            <button  class="closebtn" onClick={() => props.setOpen(!props.open)}     >&times;</button>
         
         </StyledMain>
     )
 }
 
-//<StyledMain open={props.open} onClick={() => props.setOpen(!props.open)}>
-//<button  class="closebtn" onclick={"onClick"}     >&times;</button>
-//open={open} onClick={() => setOpen(!open)}
 Main.propTypes = {
     open: bool.isRequired,
     setOpen: func.isRequired,
