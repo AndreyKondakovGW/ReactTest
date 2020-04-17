@@ -42,6 +42,7 @@ transition-timing-function: ease-in-out;
 }
 #myToggle{
   outline:none;
+  
 }
 `;
 
