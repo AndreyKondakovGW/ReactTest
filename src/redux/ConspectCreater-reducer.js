@@ -7,10 +7,10 @@ const OPEN_EMPTY_CONSPECT="Open_Empty_Conspect";
 
 let initialstate={
         CreatorData: {
+            id:"",
             name: "",
             path: "",
             fotos: [
-                {name: "Empty",path: "EmptyPath"}
             ],
             imagePreviewUrl:''
         }
@@ -23,7 +23,7 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
                 CreatorData: {
                     ...state.CreatorData,
                     imagePreviewUrl: action.img,
-                    fotos: [...state.CreatorData.fotos,{name: action.name,path: action.img}]
+                    fotos: [...state.CreatorData.fotos,{name: action.name,path: action.img,comments:"", index: state.CreatorData.fotos.length}]
                 }
 
             };
@@ -53,11 +53,9 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
         case OPEN_EMPTY_CONSPECT:{
             let newstate={
                 CreatorData: {
-                    name: "",
+                    name: "newconspect",
                     path: "",
-                    fotos: [
-                        {name: "Empty",path: "EmptyPath"}
-                    ],
+                    fotos: [],
                     imagePreviewUrl:''
                 }
             }
@@ -116,5 +114,6 @@ export const OpenEmptyConspect=()=>{
         type: OPEN_EMPTY_CONSPECT
     }
 }
+
 
 export default CurentCreatorreducer

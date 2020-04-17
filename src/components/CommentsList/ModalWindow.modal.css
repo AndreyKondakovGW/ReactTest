@@ -1,0 +1,18 @@
+.Overlay{
+    position: absolute;
+    background-color: rgb(230, 230, 250,0.5);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center 
+}
+.Window{
+    width: 500px;
+    height: 400px;
+
+    background-color: orange;
+    opacity: 1;
+}

@@ -14,7 +14,7 @@ class TopicsAPI extends React.Component{
         }
     }
     componentDidMount(){
-        //axios.get("https://getconspect").then(response =>{
+        //axios.get("https://getconspect/:page=2 & pagesize=2").then(response =>{
            // this.props.setTopics(response.data.conspects)
         //})
     }

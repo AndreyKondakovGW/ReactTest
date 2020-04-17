@@ -6,11 +6,6 @@ const SideBarReadctorContent=(props) =>{
     return (
         <div>
             <Button text='Основная' path="content" />
-            <MyConspectList>
-                <div>
-                    {props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name} />)}
-                </div>
-            </MyConspectList>
         </div>
     )
 };

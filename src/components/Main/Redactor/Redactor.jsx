@@ -1,7 +1,6 @@
 import React from 'react';
-import NavBar from '../NavBar/NavBar';
+import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import s from './Redactor.module.css';
-import Button from './../../Button/Button.jsx';
 import Actionbox from './../../ActionBox/ActionBox.jsx';
 
 class ScrolbarItem  extends React.Component{ 
@@ -10,7 +9,6 @@ class ScrolbarItem  extends React.Component{
     }
     render(){
         return (<div className={s.item} >
-            {console.log(this.ChangePhoto)}
             <img src={this.props.img} onClick={this.ChangePhoto} alt="some value"/>
             </div>)
     }
@@ -20,35 +18,60 @@ class TagsForm  extends React.Component{
         super(props)
         this.state={
             maxTagAmount: 5,
-            tags: ["",""]
+            tags: [{id: 0,text:""},{id: 1,text:""}]
         }
+        this.handleSubmit=this.handleSubmit.bind(this)
     }
     Addtag=()=>{
         this.setState({
             ...this.state,
-            tags: [...this.state.tags,""]
+            tags: [...this.state.tags,{id:this.state.tags.length,text: ""}]
         })
     }
+
+    ClearForm=()=>{
+        this.setState({
+            ...this.state,
+            tags: [{id: 0,text:""},{id: 1,text:""}]
+        })
+    }
+
+    handleChange=(e)=>{
+        let value = e.target.value;
+        this.setState({
+            ...this.state,
+            tags: this.state.tags.map(elm=>(elm.id==e.target.name)?{id: elm.id,text: value}:elm)
+        })
+    }
+
+    handleSubmit=()=> {
+        console.log(this.state.tags)
+        this.ClearForm()
+    }
+
     Showtags=()=>(this.state.tags.map(elm=><div>
-        <input type='text' value={elm}/>
+        <input type='text'
+               name= {elm.id}
+               value={elm.text}
+               onChange={this.handleChange}
+               placeholder="Введите тэг"/>
     </div>))
     Addtagsbutton=()=>{return(this.state.maxTagAmount>this.state.tags.length?<Actionbox text="+" action={this.Addtag}/>:<div>Вы достигли лимита тэгов</div>)}
     render(){
         return (<div>
-            <Button text="Добавить тэги"/>
+            <Actionbox text="Добавить тэги" action={this.handleSubmit}/>
             {this.Showtags()}
             {this.Addtagsbutton()}
-            {console.log(this.state.tags)}
         </div>)
     }
 }
 
-class Redactor extends React.Component{ 
+class Redactor extends React.Component{  
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
-    render(){
+    render(){ 
     return (
         <div>
-            <NavBar name={"Redactor "+this.props.Conspectname}/>
+            <NavBarContainer name={"Redactor "+this.props.Conspectname}/>
             <div className ={s.wrapper}>
                 <div className={s.scrolbar}>
                     {this.ConspectPhotos()}

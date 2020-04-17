@@ -4,7 +4,7 @@ import {DELETEFOTOCreator,CHANGEPERWIEPHOTOCreator} from './../../../redux/Consp
 
 let mapStatetoProps =(state)=>{
     return {
-        name: state.CurentCreatorreducer.CreatorData.name,
+        Conspects: state.UserDatareducer.UserData.Conspects,
         fotos: state.CurentCreatorreducer.CreatorData.fotos,
         imagePreviewUrl: state.CurentCreatorreducer.CreatorData.imagePreviewUrl
     }

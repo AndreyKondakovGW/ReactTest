@@ -20,7 +20,7 @@ class MyConspect extends React.Component{
 
         componentDidMount(){
             //axios.get("https://getconspect").then(response =>{
-            //this.props.setConspect(response.data.conspects)
+            //this.props.setConspect(response.data.conspects,response.data.pdf)
             //})
         }
 

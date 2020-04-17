@@ -6,8 +6,14 @@
     height: 100vh;
 }
 
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+}
+
 .ImagePerwier{
-    widows: 200px;
-    height: 200px;
+    widows: 400px;
+    height: 400px;
     background: cornsilk;
 }
