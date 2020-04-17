@@ -2,6 +2,13 @@
 	background-image: none;
 	background-color:#fddc64;
 	color: black;
+	display:block;
+	margin-left : auto;
+	margin-right: auto;
+	margin-top : 0;
+	margin-bottom: 0;
+	width:100%;
+	
 }
 
 .cnopka:hover{

@@ -1,4 +1,5 @@
 .pdf{
-    width: 1300px; 
-    height: 800px;
+    display:block;
+    width: 80%; 
+    height: 100vh;
 }

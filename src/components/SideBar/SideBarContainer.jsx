@@ -5,7 +5,7 @@ import {OpenEmptyConspect} from './../../redux/ConspectCreater-reducer';
 let mapStatetoProps=(state)=>{
     return {
         CurrentConspect: state.Curentconspectreducer.LogicData.CurrentConspect,
-        Conspects: state.UserDatareducer.UserData.Conspects
+        Conspects: state.UserDatareducer.UserData.Conspects,
     }
 }
 let mapDispatchtoProps =(dispatch) =>{

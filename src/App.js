@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//import { Container } from 'react-bootstrap';
 import './App.css';
-import HeaderContainer from './components/Header/HeaderContainer'
-import SideBarContainer from './components/SideBar/SideBarContainer';
-import MainConatiner from './components/Main/MainConatiner';
+import HeaderContainer from './components/Header/HeaderContainer';
 
+import SideBarContainer from './components/SideBar/SideBarContainer';
+
+import MainContainer from './components/Main/MainConatiner.jsx';
+import { Row, Col, Container } from 'react-bootstrap';
+
+import styled from 'styled-components';
+const Styles = styled.div`
+  background-color: rgb(220, 222, 234);
+  width: 100wh;
+  height: 100vh;
+  
+`;
 
 const App = (props) => {
+ const [open, setOpen] = useState(true);
   return (
-      <div className="wrapper">
-        <HeaderContainer/>
-        <SideBarContainer/>
-        <MainConatiner />
-      </div>
+    <Styles>
+    <React.Fragment>
+    <Router>
+        <Row>
+          <HeaderContainer/>
+        </Row>
+        <Container fluid>
+          <Row >
+            <SideBarContainer  open={open} setOpen={setOpen}/>  
+            <MainContainer open={open} setOpen={setOpen}/> 
+          </Row>
+        </Container>
+    </Router>
+    </React.Fragment>
+    </Styles>
   );
 }
 export default App;

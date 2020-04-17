@@ -1,8 +1,10 @@
 
 .wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 50px;
+    grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
 }
 
 .selected{
