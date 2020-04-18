@@ -7,7 +7,7 @@ import Button from '../../Button/Button.jsx';
 import CommentsList from '../../CommentsList/CommentsList.jsx';
 
 import { Nav, Navbar } from 'react-bootstrap';
-import { Upload, Link45deg ,Check, FilePlus, FileMinus} from 'react-bootstrap-icons';
+import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledLine = styled.div`
 text-align: center;
@@ -93,7 +93,7 @@ class NavBar extends React.Component{
         <StyledNavBar>
       <Navbar expand="sm" >
       <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           

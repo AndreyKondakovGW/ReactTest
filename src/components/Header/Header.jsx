@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import { ChevronDoubleRight, ChevronDoubleLeft } from 'react-bootstrap-icons';
+import { ChevronDoubleRight, ChevronDoubleDown } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledHeader = styled.div`
   .navbar {
@@ -22,19 +22,21 @@ const StyledHeader = styled.div`
     border: 0;
     width:30px;
     height:30px;
+    transform: ${({ open }) => open ? 'rotate(-0.5turn)' : 'none'};
     transition-property: color;
     transition-duration: 1s;
     transition-timing-function: ease;
     outline:none;
     padding-bottom:5px;
   }
+
   .closebtn:hover {
+    
     background-color:#018786;
     color: #f1f1f1;
   }
   
 #basic-navbar-nav {
-  
 transition-delay: 0s;
 transition-duration: .4s;
 transition-property: height;
@@ -52,7 +54,8 @@ const Header=(props)=>{
     <Navbar expand="sm" fixed="top">
     <button  class="closebtn" onClick={() => props.setOpen(!props.open)}><ChevronDoubleRight /></button>
       <Navbar.Brand href="/">Conspect Structure</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle"/>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
+      {/*     ${({ open }) => open ? '0%' : '-100%'}    */}
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>
