@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from './../Button/Button.jsx';
-import s from './ConspectList.module.css';
 import ActionBox from './../ActionBox/ActionBox.jsx'
-    
+import { FileEarmarkText} from 'react-bootstrap-icons';
+
 class MyConspectList extends React.Component{
     constructor(props){
         super(props)
@@ -23,7 +22,7 @@ class MyConspectList extends React.Component{
     return (
         <div>
             <div  onClick={ this.ChageState }>
-                <ActionBox text="Открыть конспекты в редакторе" action={this.ChageState}/>
+                <ActionBox text="Открыть конспект" icon={<FileEarmarkText/>} action={this.ChageState}/>
             </div>
             {this.Content()}
         </div>

@@ -12,17 +12,17 @@ const StyledMain = styled.div`
 display:inline-block;
   float:right;
   width: 100%;
-height: 100vh;
+height: 100%;
 padding-left:20px;
 padding-right:20px;
 
 /*уголок магии. не трогать*/
 margin-left:${({ open }) => open ? '220px' : '0px'};
 transition-delay: 0s;
-transition-duration: 1s;
+transition-duration: .4s;
 transition-property: margin-left;
-/*transition-timing-function: ease-in-out;
-animation: slide-open 1s forwards;*/
+transition-timing-function: ease-in-out;
+
 
 background: url(/bground2.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;

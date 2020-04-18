@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import { XDiamond } from 'react-bootstrap-icons';
+import { ChevronDoubleRight, ChevronDoubleLeft } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledHeader = styled.div`
   .navbar {
@@ -33,7 +33,7 @@ const StyledHeader = styled.div`
     color: #f1f1f1;
   }
   
-  #basic-navbar-nav {
+#basic-navbar-nav {
   
 transition-delay: 0s;
 transition-duration: .4s;
@@ -50,19 +50,19 @@ const Header=(props)=>{
     return (
     <StyledHeader open={props.open}>
     <Navbar expand="sm" fixed="top">
-    <button  class="closebtn" onClick={() => props.setOpen(!props.open)}><XDiamond /></button>
+    <button  class="closebtn" onClick={() => props.setOpen(!props.open)}><ChevronDoubleRight /></button>
       <Navbar.Brand href="/">Conspect Structure</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>
             <Nav.Link>
-              <Link to="/about">Помощь</Link>
+              <Link to="/help">Помощь</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/contact">@{props.CurentUser}</Link>
+              <Link to="/user">@{props.CurentUser}</Link>
             </Nav.Link>
           </Nav.Item>
         </Nav>

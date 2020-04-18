@@ -71,7 +71,7 @@ class Redactor extends React.Component{
     render(){ 
     return (
         <div>
-            <NavBarContainer name={"Redactor "+this.props.Conspectname}/>
+            <NavBarContainer name={"Redactor " + this.props.Conspectname}/>
             <div className ={s.wrapper}>
                 <div className={s.scrolbar}>
                     {this.ConspectPhotos()}
