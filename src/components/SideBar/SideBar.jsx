@@ -82,14 +82,15 @@ const SideBar=(props) =>{
         <br></br>
         <div className="SidebarContent">
         <form action="" method="post">
-				    <input type="text"  name ="img_name" id="search" placeholder="поиск" required autofocus></input>
-                    <Button text='открыть' />      
+				<input type="text"  name ="img_name" id="search" placeholder="поиск" required autofocus></input>
+                <Button text='открыть' />      
                 </form>
                 <br/>
                 <div onClick={openemptyconspect}>
                     <Button text='Создать Конспект' path="creteconspect" />
                 </div>
-                <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} />  
+                <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} />
+                <Button text='Создать выборку' path="topicrequest" />  
             </div>
             <Button text="Выйти" path="content"/> 
             {/* <button id="close">&times; close</button> */}

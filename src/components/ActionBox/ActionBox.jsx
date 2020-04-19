@@ -3,6 +3,7 @@ import s from './ActionBox.module.css';
 
 class ActionBox extends React.Component{
     onclik =()=>{
+        console.log(this.props.action)
         this.props.action()
     }
     render(){

@@ -3,7 +3,8 @@ import MyTopicsContainer from './Content/TopicsContainer.jsx';
 import RedactorContainer from './Redactor/ReadactorContainer.jsx';
 import MyConspectContainer from './MyConspect/MyConspectContainer.jsx';
 import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.jsx';
-import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx'
+import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx';
+import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
 import {Route } from 'react-router-dom';
 
 import { bool, func } from 'prop-types';
@@ -49,8 +50,8 @@ const Main=(props) =>{
             
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect" render = {() => <div>{props.GiveCurrentCOnspectCreator(props.CurrentConspect)}<CreateConspectContainer/></div>} />
-
             <Route path = "/redactor/:conspectname" render = {() => <RedactorContainer/>} />
+            <Route path="/topicrequest" component={TagRequestContainer}/>
         
         </StyledMain>
     )

@@ -9,6 +9,9 @@ import CommentsList from '../../CommentsList/CommentsList.jsx'
 
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
+
+
+
 const StyledNavBar = styled.div`
 margin-top:56px;
 background-color:rgba(255,255,255,0.5);

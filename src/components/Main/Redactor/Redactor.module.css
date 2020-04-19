@@ -9,6 +9,7 @@
 
 
 .scrolbar{
+    position: absolute;
     grid-area: scrolbar;
     overflow-y: scroll;
     background-color: rgb(202, 162, 200);
@@ -23,6 +24,9 @@
     background-color: rgb(140, 88, 167);
 }
 .foto{
+    position: relative;
+    width: 500px;
+    height: 500px;
     display: inline-block;
 }
 
