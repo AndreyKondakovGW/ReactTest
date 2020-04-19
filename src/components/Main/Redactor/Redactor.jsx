@@ -76,6 +76,7 @@ class Redactor extends React.Component{
                 <div className={s.scrolbar}>
                     {this.ConspectPhotos()}
                 </div>
+
                 <div className={s.photoviewer}>
                     <div className ={s.button} onClick={this.props.ChangeCurPR}> [- </div>
                     <div className = {s.foto} >
@@ -83,6 +84,7 @@ class Redactor extends React.Component{
                     </div>
                     <div className ={s.button} onClick={this.props.ChangeCurPL}> -] </div>
                 </div>
+                
                 <div className ={s.tagbar}>
                     <TagsForm/>
                 </div>

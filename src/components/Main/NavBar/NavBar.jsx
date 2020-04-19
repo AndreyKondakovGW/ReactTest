@@ -1,11 +1,11 @@
 import React from 'react';
+
 import ActionBox from './../../ActionBox/ActionBox.jsx'
+import MyConspectList from './../../ConspectList/ConspectList.jsx';
+import CommentsList from '../../CommentsList/CommentsList.jsx';
+import Button from '../../Button/Button.jsx';
 
 import {Route} from 'react-router-dom';
-import MyConspectList from './../../ConspectList/ConspectList.jsx';
-import Button from '../../Button/Button.jsx';
-import CommentsList from '../../CommentsList/CommentsList.jsx';
-
 import { Nav, Navbar } from 'react-bootstrap';
 import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown} from 'react-bootstrap-icons';
 import styled from 'styled-components';
@@ -100,7 +100,6 @@ class NavBar extends React.Component{
                 <Route path="/content" render={()=>
                     <Button  text="Мои конспекты" path={"myconspects"}/>
                     }/>
-
                 <Route path="/content" render={()=>
                     <Button  text="Составить выборку" path={"myconspects"}/>
                     }/>
@@ -136,8 +135,8 @@ class NavBar extends React.Component{
                 <Route path ="/redactor" render={()=><StyledLine>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name}/>
                         <Button  text="Удалить фото" icon={<FileMinus/>} path={"myconspects"}/>
-                        {/*TODO*/}
                         <CommentsList />
+                        {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
                         <MyConspectList>
                         <div>
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name} />)}

@@ -1,51 +1,60 @@
 .wrapper{
-  display: grid;
+margin-top:20px ;
+width:100%;
+height: 100vh;
+  display:  inline-grid;
   grid-template-areas:
   "scrolbar photo tags";
-  grid-column-gap: 20px;
-  grid-template-columns: 250px 800px 1fr;
-  margin-top:20px ;
+  grid-column-gap: 10px;
+  grid-template-columns: 200px 1fr 200px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 
 .scrolbar{
     grid-area: scrolbar;
+    overflow-x: scroll;
     overflow-y: scroll;
     background-color: rgb(202, 162, 200);
-}
 
+}
 .photoviewer{
     grid-area: photo;
-}
 
+}
 .tagbar{
     grid-area: tags;
     background-color: rgb(140, 88, 167);
+
 }
+
 .foto{
     display: inline-block;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #f1f1f1;
+
 }
-
-
 .foto img{
     display:block;
-    width: 500px;
+    width: 100%;
 }
-
 .button{
     display: inline-block;
     background-color: #fddc64;
     width: 50px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+
 }
 .button:hover{
 	background-color:#8f84be;
 	color: rgb(255, 255, 255);
 }
-
 .item img{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: 150px;
     width: 150px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #f1f1f1;
 }
