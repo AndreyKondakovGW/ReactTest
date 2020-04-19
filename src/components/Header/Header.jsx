@@ -17,21 +17,19 @@ const StyledHeader = styled.div`
     }
   }
   .closebtn{
+    border-radius: 20%;
     margin-right:15px;
     background-color:#02dac5;
     border: 0;
     width:30px;
     height:30px;
-    transform: ${({ open }) => open ? 'rotate(-0.5turn)' : 'none'};
-    transition-property: color;
-    transition-duration: 1s;
-    transition-timing-function: ease;
+    transform: ${({ open }) => open ? 'rotate(0.5turn)' : 'none'};
+    transition: color 1s ease, transform .4s ease-in-out;
     outline:none;
     padding-bottom:5px;
   }
 
   .closebtn:hover {
-    
     background-color:#018786;
     color: #f1f1f1;
   }
@@ -42,10 +40,6 @@ transition-duration: .4s;
 transition-property: height;
 transition-timing-function: ease-in-out;
 }
-#myToggle{
-  outline:none;
-  
-}
 `;
 
 const Header=(props)=>{
@@ -55,7 +49,6 @@ const Header=(props)=>{
     <button  class="closebtn" onClick={() => props.setOpen(!props.open)}><ChevronDoubleRight /></button>
       <Navbar.Brand href="/">Conspect Structure</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
-      {/*     ${({ open }) => open ? '0%' : '-100%'}    */}
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>

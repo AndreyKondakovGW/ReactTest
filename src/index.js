@@ -40,7 +40,6 @@ const Styles = styled.div`
   position: relative;
   overflow: hidden;
   display: inline-block;
-
 }
 
 label {
@@ -76,6 +75,16 @@ transition-timing-function: ease;
   position: absolute;
   z-index: -10000;
 }
+
+#myToggle{
+  border: 0;
+  outline:none;
+  transition: color 1s ease, transform .4s ease-in-out;
+}
+#myToggle:hover{
+  color:#02dac5;
+}
+
 `;
 
   ReactDOM.render(

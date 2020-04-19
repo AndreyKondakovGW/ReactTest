@@ -44,6 +44,7 @@ const Main=(props) =>{
             
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
+            
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
             <Route path = "/myconspects/:contentname" component = {ConspectViewerContainer}/> 
             
