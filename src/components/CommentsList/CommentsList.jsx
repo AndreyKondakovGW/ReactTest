@@ -1,7 +1,11 @@
 import React from 'react';
 import ActionBox from '../ActionBox/ActionBox.jsx';
 import ModalWindow from './ModalWindow.jsx';
-
+import { LayoutTextSidebarReverse } from 'react-bootstrap-icons';
+import styled from 'styled-components';
+const StyledCommentsList = styled.div`
+    display: block;
+`;
 class CommentsList extends React.Component{
     constructor(props){
         super(props)
@@ -41,14 +45,14 @@ class CommentsList extends React.Component{
             this.closeCommentList()
         }
         return(
-            <div>
-                <ActionBox text="Добавить комментарий" action={open}/>
-                <ModalWindow isOpen={this.state.isOpen}
+            <StyledCommentsList>
+                <ActionBox text="Комментарий" icon={<LayoutTextSidebarReverse/>} action={open}/>
+                <ModalWindow  isOpen={this.state.isOpen}
                          titel="ModalWindaow"
                          children={<textarea placeholder="Введите комментрарий"></textarea>}
                          submit={submit}
                          cancel={cancal}/>
-            </div>
+            </StyledCommentsList>
         )
     }
 

@@ -17,7 +17,7 @@ const Styles = styled.div`
 `;
 
 const App = (props) => {
- const [open, setOpen] = useState(true);
+ const [open, setOpen] = useState(false);
   return (
     <Styles>
     <React.Fragment>

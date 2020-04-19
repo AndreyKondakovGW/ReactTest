@@ -128,16 +128,18 @@ class Redactor extends React.Component{
     render(){ 
     return (
         <div>
-            <NavBarContainer name={"Redactor "+this.props.Conspectname}/>
+            <NavBarContainer name={"Redactor " + this.props.Conspectname}/>
             <div className ={s.wrapper}>
                 <div className={s.scrolbar}>
                     {this.ConspectPhotos()}
                 </div>
+
                 <div className={s.photoviewer}>
                     <div className ={s.button} onClick={this.props.ChangeCurPR}> [- </div>
                         <ImgCroper img={this.props.Currentpotopath} width={500} height={500}></ImgCroper>
                     <div className ={s.button} onClick={this.props.ChangeCurPL}> -] </div>
                 </div>
+                
                 <div className ={s.tagbar}>
                     <TagsForm/>
                 </div>
