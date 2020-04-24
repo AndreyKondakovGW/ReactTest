@@ -4,14 +4,16 @@ const DELETE_FOTO ="Delete_Foto";
 const CHANGE_PERWIE_PHOTO="Change_Perwie_Photo";
 const OPEN_CONSPECT="Open_Conspect";
 const OPEN_EMPTY_CONSPECT="Open_Empty_Conspect";
+const SET_COMMENTCR="SET_COMMENTCR";
 
 let initialstate={
         CreatorData: {
             id:"",
-            name: "",
+            name: "Ещё не названный",
             path: "",
             fotos: [
             ],
+            comments: "",
             imagePreviewUrl:''
         }
 }
@@ -53,9 +55,10 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
         case OPEN_EMPTY_CONSPECT:{
             let newstate={
                 CreatorData: {
-                    name: "newconspect",
+                    name: "Ещё не названный",
                     path: "",
                     fotos: [],
+                    comments: "",
                     imagePreviewUrl:''
                 }
             }
@@ -64,10 +67,20 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
         case OPEN_CONSPECT:{
             let newstate={
                 CreatorData: {
+                    ...state.CreatorData,
                     name: action.name,
                     path: action.path,
                     fotos: action.fotos.map(elm => {return {...elm,path: elm.path}}),
                     imagePreviewUrl: action.fotos[0].imagePreviewUrl
+                }
+            }
+            return newstate
+        }
+        case SET_COMMENTCR:{
+            let newstate={
+                CreatorData: {
+                    ...state.CreatorData,
+                    comments:action.comment
                 }
             }
             return newstate
@@ -115,5 +128,11 @@ export const OpenEmptyConspect=()=>{
     }
 }
 
+export const SetCommentCreateAC=(comment)=>{
+    return{
+        type: SET_COMMENTCR,
+        comment: comment
+    }
+}
 
 export default CurentCreatorreducer

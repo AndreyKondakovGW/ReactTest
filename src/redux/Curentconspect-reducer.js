@@ -9,6 +9,7 @@ const Change_Cur_PL ="ChangeCurPL";
 const Change_Cur_P="ChangeCurP";
 const SET_CURRCONSPECT="SetCurrConspect";
 const SET_CURRENTPDF="SET_CURRENTPDF";
+const SET_COMMENT="SET_COMMENT";
 
 let initialstate={
     LogicData:{
@@ -21,7 +22,7 @@ let initialstate={
                     {name:"bobr2",path: bobr2,index: 1,comments:""},
                     {name:"bobr3",path: bobr3,index: 2,comments:""}
                 ],
-                curentfoto: {name:"bobr2", path: bobr2, index: 1}
+                curentfoto: {name:"bobr2", path: bobr2, index: 1,comments:""}
             }
         },
         currentpdf: pdf,
@@ -81,11 +82,28 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             return newstate
         }
         case SET_CURRENTPDF:{
+            console.log(action.pdf)
             let newstate={
                 ...state,
                 LogicData:{
                     ...state.LogicData,
                     currentpdf: action.pdf
+                }
+            }
+            return newstate
+        }
+        case SET_COMMENT:{
+            let newstate={
+                ...state,
+                LogicData:{
+                    ...state.LogicData,
+                    CurrentConspect:{
+                        ...state.LogicData.CurrentConspect,
+                        data:{
+                            ...state.LogicData.CurrentConspect.data,
+                            curentfoto: {...state.LogicData.CurrentConspect.data.curentfoto,comments:action.comment}
+                        }
+                    }
                 }
             }
             return newstate
@@ -115,4 +133,12 @@ export const SetCurrentpdfAC=(pdf)=>{
         pdf: pdf
     }
 }
+
+export const SetCommentAC=(comment)=>{
+    return{
+        type: SET_COMMENT,
+        comment: comment
+    }
+}
+
 export default Curentconspectreducer

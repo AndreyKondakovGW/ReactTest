@@ -34,7 +34,6 @@ const ModalWindow=(props) =>{
                         {props.children}
                     </div>
                     <div className="Footer">
-                        <ActionBox text="Сохранить" action={props.submit}/>
                         <ActionBox text="Закрыть" action={props.cancel}/>
                     </div>
                 </div>

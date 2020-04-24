@@ -15,9 +15,9 @@ let initialstate={
     UserData: {
         Username: "Kain",
         Topics: [
-            {name: "тема 1", path: "topic1"},
-            {name: "тема 2", path: "topic2"},
-            {name: "тема 3", path: "topic3"}],
+            {name: "тема 1", id:1},
+            {name: "тема 2", id:2},
+            {name: "тема 3", id:3}],
 
         Conspects: [
             {name: "Ежи",id: 1,img: img1,checked: false},
@@ -30,7 +30,7 @@ let initialstate={
     TotalTopicscount:3,
     CurrentTopicPage:1,
 
-    Conspectspagesize:2,
+    Conspectspagesize:4,
     TotalConspectscount:3,
     CurrentConspectPage:1,
 
@@ -54,8 +54,9 @@ const UserDatareducer =(state=initialstate, action)=>{
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Topics: [action.topics]
-                }
+                    Topics: action.topics
+                },
+                TotalTopicscount: action.topics.length
             }
             return newstate
 
@@ -65,8 +66,9 @@ const UserDatareducer =(state=initialstate, action)=>{
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Conspects:action.conspects
-                }
+                    Conspects: action.conspects.map(elm=>{return({...elm,img: img1,checked: false})})
+                },
+                TotalConspectscount: action.conspects.length 
             }
             return newstate
         }

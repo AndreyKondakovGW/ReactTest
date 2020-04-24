@@ -2,7 +2,7 @@ import React from 'react';
 
 import ActionBox from './../../ActionBox/ActionBox.jsx'
 import MyConspectList from './../../ConspectList/ConspectList.jsx';
-import CommentsList from '../../CommentsList/CommentsList.jsx';
+import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
 
 import {Route} from 'react-router-dom';
@@ -101,7 +101,7 @@ class NavBar extends React.Component{
                     <Button  text="Мои конспекты" path={"myconspects"}/>
                     }/>
                 <Route path="/content" render={()=>
-                    <Button  text="Составить выборку" path={"myconspects"}/>
+                    <Button  text="Составить выборку" path={"topicrequest"}/>
                     }/>
 
                 <Route path = "/myconspects/:contentname" render ={()=>
@@ -125,7 +125,7 @@ class NavBar extends React.Component{
                     }/>
             
                 <Route path ="/myconspects/:contentname" render={()=>
-                    <CommentsList />
+                    <CommentsListConatiner />
                     }/>
                      
                 <Route path ="/myconspects/:contentname" render={()=>
@@ -135,7 +135,7 @@ class NavBar extends React.Component{
                 <Route path ="/redactor" render={()=><StyledLine>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name}/>
                         <Button  text="Удалить фото" icon={<FileMinus/>} path={"myconspects"}/>
-                        <CommentsList />
+                        <CommentsListConatiner />
                         {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
                         <MyConspectList>
                         <div>
@@ -147,9 +147,9 @@ class NavBar extends React.Component{
 
                 <Route path ="/creteconspect" render={()=><StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                <label for="file" >Загрузить файл {<FilePlus/>}</label>
+                <label htmlFor="file" >Загрузить файл {<FilePlus/>}</label>
                            
-                        <CommentsList />
+                        <CommentsListConatiner />
                         <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
                         <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos}/>
                     </StyledLine>}

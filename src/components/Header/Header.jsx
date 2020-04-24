@@ -46,7 +46,7 @@ const Header=(props)=>{
     return (
     <StyledHeader open={props.open}>
     <Navbar expand="sm" fixed="top">
-    <button  class="closebtn" onClick={() => props.setOpen(!props.open)}><ChevronDoubleRight /></button>
+    <button  className="closebtn" onClick={() => props.setOpen(!props.open)}><ChevronDoubleRight /></button>
       <Navbar.Brand href="/">Conspect Structure</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">

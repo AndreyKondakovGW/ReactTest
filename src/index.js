@@ -87,8 +87,7 @@ transition-timing-function: ease;
 
 `;
 
-  ReactDOM.render(
-     
+  ReactDOM.render(    
         <Styles>
           <BrowserRouter>
             <Provider store={store}>
