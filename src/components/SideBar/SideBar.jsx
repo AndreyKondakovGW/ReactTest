@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
 
-import { Search, Pencil,FileEarmarkPlus, BoxArrowInRight} from 'react-bootstrap-icons';
+import { Pencil,FileEarmarkPlus, BoxArrowInRight} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledSideBar = styled.div`
     margin: 0;
@@ -62,11 +62,8 @@ const SideBar=(props) =>{
         <h2>Welcome.</h2>
         <img src={logo} alt="some value" id="logo" />
         <div className="SidebarContent">
-
-        <form action="" method="post" >
-			<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autoFocus></input>
-            <Button text='Открыть' icon={<Search/>} />      
-        </form>
+            <Button text='Мои Конспекты' path="myconspects" />
+            <Button text='Мои тэги' path="content" />
             <Button text='Создать Конспект' 
                     path="creteconspect" 
                     icon={<FileEarmarkPlus/>} 
@@ -74,7 +71,7 @@ const SideBar=(props) =>{
             <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} icon={<Pencil/>}  />
             <Button text='Создать выборку' path="topicrequest" />  
         </div>
-    <Button text="Выйти" path="content" icon={<BoxArrowInRight/>} /> 
+    <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>
     )
 }
@@ -85,3 +82,8 @@ SideBar.propTypes = {
   };
 
 export default SideBar;
+
+//        <form action="" method="post" >
+//<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autoFocus></input>
+//<Button text='Открыть' icon={<Search/>} />      
+//</form>

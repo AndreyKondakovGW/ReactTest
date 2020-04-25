@@ -8,6 +8,7 @@ const Change_Cur_PR ="ChangeCurPR";
 const Change_Cur_PL ="ChangeCurPL";
 const Change_Cur_P="ChangeCurP";
 const SET_CURRCONSPECT="SetCurrConspect";
+const ADD_PHOTO="ADD_PHOTO";
 const SET_CURRENTPDF="SET_CURRENTPDF";
 const SET_COMMENT="SET_COMMENT";
 
@@ -69,25 +70,41 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                     ...state.LogicData,
                     CurrentConspect:{
                         name: action.conspect.name,
-                        path: action.conspect.path,
+                        id: action.conspect.id,
                         data: {
-                            fotos: action.conspect.data.fotos
-                            ,
-                            curentfoto: action.conspect.data.fotos[0],
+                            fotos: action.conspect.data.fotos,
+                            curentfoto: state.LogicData.CurrentConspect.data.fotos[0]
                         }
-                    },
-                    currentpdf: action.pdf
+                    }
                 }
             }
+            console.log("Текущий конспект "+action.conspect.name)
             return newstate
         }
         case SET_CURRENTPDF:{
-            console.log(action.pdf)
             let newstate={
                 ...state,
                 LogicData:{
                     ...state.LogicData,
                     currentpdf: action.pdf
+                }
+            }
+            return newstate
+        }
+
+        case ADD_PHOTO:{
+            let newstate={
+                ...state,
+                LogicData:{
+                    ...state.LogicData,
+                    CurrentConspect:{
+                        ...state.LogicData.CurrentConspect,
+                        data: {
+                            ...state.LogicData.CurrentConspect.data,
+                            fotos: [...state.LogicData.CurrentConspect.data.fotos,action.photo],
+                            curentfoto: state.LogicData.CurrentConspect.data.fotos[0]
+                        }
+                    }
                 }
             }
             return newstate
@@ -116,7 +133,6 @@ export const SetCurrentConspectCR=(newconspect) =>{
     return{
         type :SET_CURRCONSPECT,
         conspect: newconspect,
-        pdf: ""
     }
 }
 
@@ -141,4 +157,10 @@ export const SetCommentAC=(comment)=>{
     }
 }
 
+export const AddPhotoAC=(photo)=>{
+    return{
+        type: ADD_PHOTO,
+        photo: photo
+    }
+}
 export default Curentconspectreducer

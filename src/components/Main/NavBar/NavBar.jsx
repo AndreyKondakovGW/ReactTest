@@ -105,7 +105,7 @@ class NavBar extends React.Component{
                     }/>
 
                 <Route path = "/myconspects/:contentname" render ={()=>
-                    <Button text="Открыть в редакторе" path={"redactor/"+this.props.name}/>
+                    <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     }/>  
 
                 <Route exact path ="/myconspects" render={()=>
@@ -113,7 +113,7 @@ class NavBar extends React.Component{
                     }/>
             
                 <Route path ="/myconspects/:contentname" render={()=>
-                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name}/>
+                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                     }/>
             
                 <Route exact path ="/myconspects" render={()=>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Redactor from './Redactor';
-import {ChangeCurentPhotoAC} from './../../../redux/Curentconspect-reducer'
+import {ChangeCurentPhotoAC,SetCurrentConspectCR,AddPhotoAC} from './../../../redux/Curentconspect-reducer'
 
 let mapStatetoProps =(state)=>{
     return {
@@ -23,7 +23,33 @@ let mapDispatchtoProps =(dispatch) =>{
         ChangeCurentPhoto: (id)=>{
             let action=ChangeCurentPhotoAC(id)
             dispatch(action)
-        }
+        },
+        OpenConspect: (name, id, fotos)=>{
+            console.log("hello Container")
+            console.log(fotos)
+            let reader = new FileReader();
+            const conspect={
+                name:name,
+                id: id,
+                data: {
+                    fotos: fotos.map(elm=>{
+                        reader.onloadend = () => {
+                            let image = reader.result
+                            return({...elm,path: image})
+                        } 
+                        console.log(elm)
+                        reader.readAsDataURL(elm.PromiseValue.path)   
+                    })
+                }
+            }
+            console.log(conspect)
+            let action=SetCurrentConspectCR(conspect)
+            dispatch(action)
+        },
+        Addphoto: (photo)=>{
+            let action=AddPhotoAC(photo)
+            dispatch(action)
+        }      
     }
 }
 

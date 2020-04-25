@@ -13,12 +13,22 @@ class TopicsAPI extends React.Component{
             <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
         }
     }
+    /*
     componentDidMount(){
         console.log("Отправлелен запрос на получене тэгов")
-        //axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            //console.log(response.data)
-            //this.props.setTopics(response.data)
-        //})
+        axios.get("http://127.0.0.1:5000/gettags").then(response =>{
+            console.log(response.data)
+            this.props.setTopics(response.data)
+        })
+    }
+    */
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps !== this.props) {
+        this.setState({    
+            ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
+                <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
+        })
+        }
     }
 
     changePage=(pageNum)=>{
