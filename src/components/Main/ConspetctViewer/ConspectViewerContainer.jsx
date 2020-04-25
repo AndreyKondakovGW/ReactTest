@@ -5,6 +5,7 @@ import {SetCurrentConspectCR,SetCurrentpdfAC} from './../../../redux/Curentconsp
 let mapStatetoProps =(state)=>{
     return {
         curntpdf: state.Curentconspectreducer.LogicData.currentpdf
+        
     }
 }
 let mapDispatchtoProps =(dispatch) =>{

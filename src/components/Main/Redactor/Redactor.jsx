@@ -3,6 +3,7 @@ import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import Actionbox from './../../ActionBox/ActionBox.jsx';
 import Cropper from 'react-easy-crop'
 import Slider from '@material-ui/core/Slider';
+import * as axios from 'axios';
 
 import styled from 'styled-components';
 const StyledRedactor = styled.div`
@@ -82,8 +83,6 @@ const ImgCroper = (props)=> {
     const [croppedAreaPixels, setCroppedAreaPixels] = useState({width:100,height:100})
   
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => { //croppedAreaPixels.x (.y ) координаты относитеьно левого верхнего угла экрана
-        console.log((crop.x+0.5*(props.width-croppedAreaPixels.width))/(props.width-croppedAreaPixels.width)*100)
-        console.log((crop.y+0.5*(props.height-croppedAreaPixels.height))/(props.height-croppedAreaPixels.height)*100)
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
 
@@ -193,10 +192,46 @@ class TagsForm  extends React.Component{
     }
 }
 
-class Redactor extends React.Component{  
+/*
+const  LoadPhotoByID= async (id)=>{
+    let reader = new FileReader();
+    let response= await axios.get('http://127.0.0.1:5000/getphotobyid/'+ id,{ responseType: 'blob' } )
+    
+}
+const LoadConspectFromData= async (conspectname,id)=>{
+    let fotos= await axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id)
+    let imges=await fotos.data.map(async function(elm)
+    {
+        let response= await axios.get('http://127.0.0.1:5000/getphotobyid/'+ id,{ responseType: 'blob' } )
+        const file = new Blob(
+            [response.data], 
+            {type: 'image'});
+        console.log(file)
+        return ({name: elm.filename,path: file,index: elm.id,comments: ""})
+    })
+    console.log("Полученный массив фотографий")
+    console.log(imges)
+    return (imges)     
+}
+*/
 
+
+class Redactor extends React.Component{ 
+    /*
+    componentDidMount(){
+        console.log(this.props.match.params.conspectname)
+        console.log(this.props.match.params.id)
+        if (this.props.match.params.contentname!=""){
+                LoadConspectFromData(this.props.match.params.conspectname,this.props.match.params.id).then(result=>
+                    this.props.OpenConspect(this.props.match.params.conspectname,this.props.match.params.id,result))    
+        }
+    }
+    */
+
+    
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
     render(){ 
+        console.log(this.props.Photos)
     return (
         <StyledRedactor>
             <NavBarContainer name={"Redactor " + this.props.Conspectname}/>

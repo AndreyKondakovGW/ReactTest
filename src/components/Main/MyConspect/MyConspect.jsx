@@ -7,23 +7,25 @@ import * as axios from 'axios';
 class MyConspect extends React.Component{
     constructor(props){
         super(props)
+        console.log(this.props.Conspects)
         this.state={    
             ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => <Conspectbox 
                 id={elm.id} 
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name} 
+                path={"/myconspects/"+elm.name+"/"+elm.id} 
                 checkf={this.props.checked}/> )}
         }
-        
+       /* 
         componentDidMount(){
             console.log("Отправлелен запрос на получене конспектов")
-            //axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-                //console.log(response.data)
-                //this.props.setConspect(response.data)
-           //})
+            axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+                console.log(response.data)
+                this.props.setConspect(response.data)
+           })
         }
+        */
 
     changePage=(pageNum)=>{
         this.props.setCurPage(pageNum)
@@ -33,7 +35,7 @@ class MyConspect extends React.Component{
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name} 
+                path={"/myconspects/"+elm.name+"/"+elm.id}  
                 checkf={this.props.checked}/>)
         })
     }
@@ -46,10 +48,11 @@ class MyConspect extends React.Component{
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name} 
+                path={"/myconspects/"+elm.name+"/"+elm.id} 
                 checkf={this.props.checked}/>)
             
         })
+        console.log(this.props.Conspects)
         }
     }
 

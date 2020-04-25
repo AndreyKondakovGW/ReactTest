@@ -102,18 +102,22 @@ class NavBar extends React.Component{
           
                 <Route path="/content" render={()=><StyledLine>
                     <Button  text="Мои конспекты" path={"myconspects"}/>
-                    <Button  text="Составить выборку" path={"topicrequest"}/>
-                    </StyledLine>
-                }/>
-                
-                <Route exact path ="/myconspects" render={()=><StyledLine>
+                    <Button  text="Составить выборку" path={"topicrequest"}/></StyledLine>}/>
+
+                <Route exact path ="/myconspects" render={()=>
                     <Button  text="Добавить конспект" path={"creteconspect"}/>
+                    }/>
+            
+                <Route path ="/myconspects/:contentname" render={()=>
+                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
+                    }/>
+            
+                <Route exact path ="/myconspects" render={()=>
                     <ActionBox text="Удалить выбранные" action={this.delete}/>
-                    </StyledLine>
                 }/>
                 
                 <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
-                    <Button text="Открыть в редакторе" path={"redactor/"+this.props.name}/>
+                    <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name}/>
                     <Button  text="Удалить" path={"myconspects"}/>
                     <CommentsListConatiner />
