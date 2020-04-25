@@ -10,19 +10,21 @@ class TopicsAPI extends React.Component{
         super(props)
         this.state={
             ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
-            <Contentbox text={elm.name} path={"/content/"+elm.path} /> )
+            <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
         }
     }
     componentDidMount(){
-        //axios.get("https://getconspect/:page=2 & pagesize=2").then(response =>{
-           // this.props.setTopics(response.data.conspects)
+        console.log("Отправлелен запрос на получене тэгов")
+        //axios.get("http://127.0.0.1:5000/gettags").then(response =>{
+            //console.log(response.data)
+            //this.props.setTopics(response.data)
         //})
     }
 
     changePage=(pageNum)=>{
         this.props.setCurPage(pageNum)
         this.setState({
-            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm => <Contentbox text={elm.name} path={"/content/"+elm.path} /> )
+            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm => <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
         })
     }
 

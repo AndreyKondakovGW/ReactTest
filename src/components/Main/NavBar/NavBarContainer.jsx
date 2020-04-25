@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import NavBar from './NavBar.jsx';
 import {DeleteCheckedConspectAC} from './../../../redux/UserData-reducer';
-import {ADDFOTOCreator} from './../../../redux/ConspectCreater-reducer';
+import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
 import {SetCurrentConspectCR} from '../../../redux/Curentconspect-reducer';
 
 let mapStatetoProps =(state)=>{
@@ -16,7 +16,7 @@ let mapStatetoProps =(state)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
-        deleted: ()=>{
+        delete: ()=>{
             const action =DeleteCheckedConspectAC();
             dispatch(action)
         },
@@ -47,7 +47,9 @@ let mapDispatchtoProps =(dispatch) =>{
                 }}
             console.log(conspect)
             const action=SetCurrentConspectCR(conspect)
+            const action2=OpenConspectAC(conspect)
             dispatch(action)
+            dispatch(action2)
         }
     }
 }

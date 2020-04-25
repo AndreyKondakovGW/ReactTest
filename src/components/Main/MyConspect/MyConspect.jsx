@@ -6,7 +6,6 @@ import * as axios from 'axios';
 
 class MyConspect extends React.Component{
     constructor(props){
-        debugger
         super(props)
         this.state={    
             ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => <Conspectbox 
@@ -17,11 +16,13 @@ class MyConspect extends React.Component{
                 path={"/myconspects/"+elm.name} 
                 checkf={this.props.checked}/> )}
         }
-
+        
         componentDidMount(){
-            //axios.get("https://getconspect").then(response =>{
-            //this.props.setConspect(response.data.conspects,response.data.pdf)
-            //})
+            console.log("Отправлелен запрос на получене конспектов")
+            //axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+                //console.log(response.data)
+                //this.props.setConspect(response.data)
+           //})
         }
 
     changePage=(pageNum)=>{
@@ -59,7 +60,6 @@ class MyConspect extends React.Component{
         for(let i=1;i<=pagescount;i++){
             pages.push(i)
         }
-        {debugger}
         return (
         <div>   
                 <Conspects deletechecked={this.props.deletechecked}

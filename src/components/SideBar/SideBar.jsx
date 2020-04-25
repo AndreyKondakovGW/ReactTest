@@ -64,7 +64,7 @@ const SideBar=(props) =>{
         <div className="SidebarContent">
 
         <form action="" method="post" >
-			<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autofocus></input>
+			<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autoFocus></input>
             <Button text='Открыть' icon={<Search/>} />      
         </form>
             <Button text='Создать Конспект' 
