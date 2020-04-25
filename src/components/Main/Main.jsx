@@ -13,7 +13,7 @@ const StyledMain = styled.div`
 display:inline-block;
   float:right;
   width: 100%;
-height: 100vh;
+height: auto;
 padding-left:20px;
 padding-right:20px;
 
@@ -30,7 +30,7 @@ background: url(/bground2.jpg) no-repeat center center fixed;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-background-position: center;
+/*background-position: center;*/
 
 .closebtn{
   z-index:1000;

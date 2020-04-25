@@ -3,7 +3,10 @@ import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import {Dropdown } from 'react-bootstrap';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import s from './TagRequest.module.css';
+import styled from 'styled-components';
+const StyledTagRequest = styled.div`
 
+`;
 class TagRequest extends React.Component{
     AddBlocFConteiner=()=>{
         this.props.AddBlockF(0,this.props.data.length,this.props.tags[0])
