@@ -13,7 +13,7 @@ const StyledMain = styled.div`
 display:inline-block;
   float:right;
   width: 100%;
-height: 100%;
+height: 100vh;
 padding-left:20px;
 padding-right:20px;
 

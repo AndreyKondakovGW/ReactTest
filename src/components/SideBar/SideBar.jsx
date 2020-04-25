@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
 
-import { Search, Pencil,FileEarmarkPlus, BoxArrowInRight} from 'react-bootstrap-icons';
+import { Search, Pencil,FileEarmarkPlus,FileEarmarkCode, BoxArrowInRight} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledSideBar = styled.div`
     margin: 0;
@@ -71,8 +71,8 @@ const SideBar=(props) =>{
                     path="creteconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
-            <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} icon={<Pencil/>}  />
-            <Button text='Создать выборку' path="topicrequest" />  
+            <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />          
+            <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} icon={<Pencil/>}/>
         </div>
     <Button text="Выйти" path="content" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>
