@@ -9,12 +9,17 @@ const StyledRedactor = styled.div`
 .wrapper{
     margin-top:20px ;
     width:100%;
-    height: 100vh;
-      display:  inline-grid;
+    height: auto;
+      display:  grid;
       grid-template-areas:
       "scrolbar photo tags";
       grid-column-gap: 10px;
-      grid-template-columns: 200px 1fr 200px;
+      /*grid-template-columns: 200px 1fr 200px;*/
+
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+      grid-auto-flow: row;
+      align-items: flex-start;
+
       text-align: center;
       vertical-align: middle;
     }
@@ -34,7 +39,7 @@ const StyledRedactor = styled.div`
     }
     .tagbar{
         grid-area: tags;
-        background-color: rgb(140, 88, 167);
+        background-color: rgba(140, 88, 167,0);
     
     }
     
@@ -85,6 +90,7 @@ const ImgCroper = (props)=> {
       return (
         <>
         <div className = "foto">
+            
         <Cropper
           image={props.img}
           crop={crop}
