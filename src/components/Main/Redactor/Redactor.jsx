@@ -1,11 +1,77 @@
 import React, {useState,useCallback} from 'react';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
-import s from './Redactor.module.css';
 import Actionbox from './../../ActionBox/ActionBox.jsx';
 import Cropper from 'react-easy-crop'
 import Slider from '@material-ui/core/Slider';
 import * as axios from 'axios';
 
+import styled from 'styled-components';
+const StyledRedactor = styled.div`
+.wrapper{
+    margin-top:20px ;
+    width:100%;
+    height: 100vh;
+      display:  inline-grid;
+      grid-template-areas:
+      "scrolbar photo tags";
+      grid-column-gap: 10px;
+      grid-template-columns: 200px 1fr 200px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    
+    
+    .scrolbar{
+        position: absolute;
+        grid-area: scrolbar;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        background-color: rgb(202, 162, 200);
+    
+    }
+    .photoviewer{
+        grid-area: photo;
+    
+    }
+    .tagbar{
+        grid-area: tags;
+        background-color: rgb(140, 88, 167);
+    
+    }
+    
+    .foto{
+        position: relative;
+        width: 500px;
+        height: 500px;
+        display: inline-block;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+    
+    }
+    .foto img{
+        display:block;
+        width: 100%;
+    }
+    .button{
+        display: inline-block;
+        background-color: #fddc64;
+        width: 50px;
+    
+    }
+    .button:hover{
+        background-color:#8f84be;
+        color: rgb(255, 255, 255);
+    }
+    .item img{
+        margin-bottom: 10px;
+        height: 150px;
+        width: 150px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+    }
+`;
 const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1)
@@ -17,7 +83,7 @@ const ImgCroper = (props)=> {
 
       return (
         <>
-        <div className = {s.foto}>
+        <div className = "foto">
         <Cropper
           image={props.img}
           crop={crop}
@@ -29,7 +95,6 @@ const ImgCroper = (props)=> {
           
         />
         </div>
-        Zoom
         <Slider
             value={zoom}
             min={1}
@@ -63,7 +128,7 @@ class ScrolbarItem  extends React.Component{
         this.props.action(this.props.id)
     }
     render(){
-        return (<div className={s.item} >
+        return (<div className="item" >
             <img src={this.props.img} onClick={this.ChangePhoto} alt="some value"/>
             </div>)
     }
@@ -162,25 +227,25 @@ class Redactor extends React.Component{
     render(){ 
         console.log(this.props.Photos)
     return (
-        <div>
+        <StyledRedactor>
             <NavBarContainer name={"Redactor " + this.props.Conspectname}/>
-            <div className ={s.wrapper}>
-                <div className={s.scrolbar}>
+            <div className ="wrapper">
+                <div className="scrolbar">
                     {this.ConspectPhotos()}
                 </div>
 
-                <div className={s.photoviewer}>
-                    <div className ={s.button} onClick={this.props.ChangeCurPR}> [- </div>
+                <div className="photoviewer">
+                    <div className ="button" onClick={this.props.ChangeCurPR}> [- </div>
                         <ImgCroper img={this.props.Currentpotopath} width={500} height={500}></ImgCroper>
-                    <div className ={s.button} onClick={this.props.ChangeCurPL}> -] </div>
+                    <div className ="button" onClick={this.props.ChangeCurPL}> -] </div>
                 </div>
                 
-                <div className ={s.tagbar}>
+                <div className ="tagbar">
                     <TagsForm/>
                 </div>
             </div>
             
-        </div>
+        </StyledRedactor>
     )
 }
 }

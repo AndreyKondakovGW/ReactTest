@@ -7,6 +7,8 @@ class Viewer extends React.Component{
     //componentDidMount(){
          //if (this.props.match.url.split('/')[1]=="content")
             //console.log("Отправлелен запрос на получене  пдфки тэга "+this.props.match.url.split('/')[2])
+
+
             //axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[2],
            // {   method: 'GET',
             //    responseType: 'blob'}

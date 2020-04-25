@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const Styles = styled.div`
   background-color: rgb(220, 222, 234);
   width: 100wh;
-  height: 100vh;
+  height: auto;
   
 `;
 
