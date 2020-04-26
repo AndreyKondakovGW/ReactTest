@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
 
-import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode} from 'react-bootstrap-icons';
+import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode,Code,FileEarmark} from 'react-bootstrap-icons';
 
 import styled from 'styled-components';
 const StyledSideBar = styled.div`
@@ -44,28 +44,20 @@ transition-timing-function: ease-in-out;
 }
 
 `;
-const StyledLine = styled.div`
-    background-color: rgb(0,0,0);
-    color: black;
-    position: fixed;
-    width:220px;
-    height: 100vh;
-    z-index: 201;
-`;
+
 
 const SideBar=(props) =>{
     let openemptyconspect=()=>{
         props.OpenEmptyConspect()
     }
     return (
-        <StyledSideBar  open={props.open}>
-            
+    <StyledSideBar  open={props.open}>
         <h2>Welcome.</h2>
         <img src={logo} alt="some value" id="logo" />
         <div className="SidebarContent">
-            <Button text='Мои Конспекты' path="myconspects" />
-            <Button text='Мои тэги' path="content" />
-            <Button text='Создать Конспект' 
+            <Button text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
+            <Button text='Мои тэги'icon={<Code/>}  path="content" />
+            <Button text='Создать конспект' 
                     path="creteconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
@@ -88,3 +80,11 @@ export default SideBar;
 //<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autoFocus></input>
 //<Button text='Открыть' icon={<Search/>} />      
 //</form>
+{/*const StyledLine = styled.div`
+    background-color: rgb(0,0,0);
+    color: black;
+    position: fixed;
+    width:220px;
+    height: 100vh;
+    z-index: 201;
+`;*/}

@@ -11,9 +11,13 @@ import { Row,  Container } from 'react-bootstrap';
 import styled from 'styled-components';
 const Styles = styled.div`
   background-color: rgb(220, 222, 234);
-  width: 100wh;
-  height: auto;
-  
+  width: 100%;
+height: 100vh;
+background: url(/bground2.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 `;
 
 const App = (props) => {
