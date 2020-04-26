@@ -60,6 +60,7 @@ const Main=(props) =>{
             
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>
+            <Route path = "/redactor/:conspectname" component = {RedactorContainer} />
             <Route path = "/redactor/:conspectname/:id" component = {RedactorContainer} />
             <Route path="/topicrequest" component={TagRequestContainer}/>
 
