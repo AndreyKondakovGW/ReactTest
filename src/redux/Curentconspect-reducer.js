@@ -79,6 +79,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                 }
             }
             console.log("Текущий конспект "+action.conspect.name)
+            console.log(newstate.LogicData.CurrentConspect.data.curentfoto)
             return newstate
         }
         case SET_CURRENTPDF:{

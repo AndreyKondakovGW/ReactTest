@@ -5,6 +5,7 @@ import MyConspectContainer from './MyConspect/MyConspectContainer.jsx';
 import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.jsx';
 import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx';
 import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
+import backimg from '../../static/bground2.jpg'
 import {Route } from 'react-router-dom';
 import * as axios from 'axios';
 
@@ -46,6 +47,7 @@ const Main=(props) =>{
       axios.get("http://127.0.0.1:5000/logout")
     }
     */
+    
     return (
        
         <StyledMain open={props.open} >
@@ -57,13 +59,11 @@ const Main=(props) =>{
             <Route path = "/myconspects/:contentname/:id" component = {ConspectViewerContainer}/> 
             
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
-            <Route path = "/creteconspect/:conspect" component = {CreateConspectContainer}/>
-            <Route path = "/redactor/:conspectname" component = {RedactorContainer} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>
             <Route path = "/redactor/:conspectname/:id" component = {RedactorContainer} />
             <Route path="/topicrequest" component={TagRequestContainer}/>
 
-
+            
             
         </StyledMain>
     )

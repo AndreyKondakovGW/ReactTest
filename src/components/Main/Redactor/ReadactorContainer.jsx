@@ -26,20 +26,12 @@ let mapDispatchtoProps =(dispatch) =>{
         },
         OpenConspect: (name, id, fotos)=>{
             console.log("hello Container")
-            console.log(fotos)
-            let reader = new FileReader();
+            
             const conspect={
                 name:name,
                 id: id,
                 data: {
-                    fotos: fotos.map(elm=>{
-                        reader.onloadend = () => {
-                            let image = reader.result
-                            return({...elm,path: image})
-                        } 
-                        console.log(elm)
-                        reader.readAsDataURL(elm.PromiseValue.path)   
-                    })
+                    fotos: fotos
                 }
             }
             console.log(conspect)

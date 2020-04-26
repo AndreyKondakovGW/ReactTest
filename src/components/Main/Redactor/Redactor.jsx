@@ -186,41 +186,55 @@ class TagsForm  extends React.Component{
     }
 }
 
-/*
-const  LoadPhotoByID= async (id)=>{
-    let reader = new FileReader();
-    let response= await axios.get('http://127.0.0.1:5000/getphotobyid/'+ id,{ responseType: 'blob' } )
-    
+const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
+        let promise = new Promise(async (resolve, reject) => {
+            let f=[]
+            var i=0
+            while (i<fotos.data.length)
+            {
+                let promise = new Promise((resolve, reject) => {
+                    resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' }))      
+                })
+                let response=await promise
+                const file = new Blob(
+                    [response.data], 
+                    {type: 'image'});
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = event.target.result
+                    f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}]
+                    i+=1
+                }     
+                reader.readAsDataURL(file);
+            }
+            if (i==fotos.data.length){
+                resolve(f)
+            }
+            
+        })
+        promise.then(result=>{
+            console.log("Полученный массив фотографий")
+            console.log(result) 
+            OpenConspect(name,id, result)  
+        })  
 }
-const LoadConspectFromData= async (conspectname,id)=>{
-    let fotos= await axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id)
-    let imges=await fotos.data.map(async function(elm)
-    {
-        let response= await axios.get('http://127.0.0.1:5000/getphotobyid/'+ id,{ responseType: 'blob' } )
-        const file = new Blob(
-            [response.data], 
-            {type: 'image'});
-        console.log(file)
-        return ({name: elm.filename,path: file,index: elm.id,comments: ""})
-    })
-    console.log("Полученный массив фотографий")
-    console.log(imges)
-    return (imges)     
-}
-*/
+
 
 
 class Redactor extends React.Component{ 
     /*
-    componentDidMount(){
+    componentDidMount= async ()=>{
         console.log(this.props.match.params.conspectname)
         console.log(this.props.match.params.id)
         if (this.props.match.params.contentname!=""){
-                LoadConspectFromData(this.props.match.params.conspectname,this.props.match.params.id).then(result=>
-                    this.props.OpenConspect(this.props.match.params.conspectname,this.props.match.params.id,result))    
+            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
+                console.log(response)
+                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
+            })   
         }
     }
     */
+    
 
     
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}

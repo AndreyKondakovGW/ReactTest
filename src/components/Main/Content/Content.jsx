@@ -22,6 +22,7 @@ class TopicsAPI extends React.Component{
         })
     }
     */
+    
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {
         this.setState({    
