@@ -13,9 +13,9 @@ import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display:inline-block;
-  float:right;
-  width: 100%;
-height: auto;
+float:right;
+width: 100%;
+height: 100%;
 padding-left:20px;
 padding-right:20px;
 

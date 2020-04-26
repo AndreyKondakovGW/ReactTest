@@ -7,7 +7,8 @@ import Button from '../../Button/Button.jsx';
 
 import {Route} from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown} from 'react-bootstrap-icons';
+import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,FileEarmarkMinus,FileEarmark,FileEarmarkCode} from 'react-bootstrap-icons';
+
 import styled from 'styled-components';
 const StyledLine = styled.div`
 text-align: center;
@@ -101,28 +102,23 @@ class NavBar extends React.Component{
         <Nav className="ml-auto">
           
                 <Route path="/content" render={()=><StyledLine>
-                    <Button  text="Мои конспекты" path={"myconspects"}/>
-                    <Button  text="Составить выборку" path={"topicrequest"}/></StyledLine>}/>
+                    <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
+                    <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
+                </StyledLine>}/>
 
-                <Route exact path ="/myconspects" render={()=>
-                    <Button  text="Добавить конспект" path={"creteconspect"}/>
-                    }/>
-            
-                <Route path ="/myconspects/:contentname" render={()=>
-                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                    }/>
-            
-                <Route exact path ="/myconspects" render={()=>
-                    <ActionBox text="Удалить выбранные" action={this.delete}/>
+                <Route exact path ="/myconspects" render={()=><StyledLine>
+                    <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect"}/>
+                    <ActionBox text="Удалить..." icon={<FileEarmarkMinus/>} action={this.delete}/>
+                </StyledLine> 
                 }/>
-                
+
                 <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
-                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name}/>
+                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Удалить" path={"myconspects"}/>
                     <CommentsListConatiner />
                     <Button  text="Доступ" path={"myconspects"}/>
-                    </StyledLine>
+                </StyledLine>
                 }/>  
    
                 <Route path ="/redactor" render={()=><StyledLine>
@@ -135,7 +131,7 @@ class NavBar extends React.Component{
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name} />)}
                         </div>
                         </MyConspectList>
-                        </StyledLine>
+                    </StyledLine>
                 }/>
 
                 <Route path ="/creteconspect" render={()=><StyledLine>
@@ -144,7 +140,7 @@ class NavBar extends React.Component{
                     <CommentsListConatiner />
                     <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos}/>
-                    </StyledLine>
+                </StyledLine>
                 }/>
         </Nav>
       </Navbar.Collapse>

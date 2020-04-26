@@ -5,72 +5,109 @@ import Cropper from 'react-easy-crop'
 import Slider from '@material-ui/core/Slider';
 import * as axios from 'axios';
 
+import { ArrowLeft, ArrowRight,PlusSquare} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledRedactor = styled.div`
-.wrapper{
+
     margin-top:20px ;
     width:100%;
-    height: 100vh;
-      display:  inline-grid;
-      grid-template-areas:
-      "scrolbar photo tags";
-      grid-column-gap: 10px;
-      grid-template-columns: 200px 1fr 200px;
-      text-align: center;
-      vertical-align: middle;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    flex-flow: row wrap;
+    justify-content:center;
+    align-items: flex-start;
+    
+.button{
+        display: inline-block;
+        color: black;
+        background-color:#02dac5;
+        margin:5px;
+        width: 50px;
+        height:30px;
+        line-height: 30px;
+        transition-property: color;
+        transition-duration: 1s;
+        transition-timing-function: ease;
+        :hover{
+            background-color:#018786;
+            color: #f1f1f1;
+            cursor:pointer;
+        }
     }
-    
-    
-    .scrolbar{
-        position: absolute;
-        grid-area: scrolbar;
-        overflow-x: scroll;
-        overflow-y: scroll;
-        background-color: rgb(202, 162, 200);
-    
-    }
+
+/*================================================*/
     .photoviewer{
-        grid-area: photo;
-    
+        margin:15px;
+        margin-top:0px;
+        /*display:inline-block;*/
     }
-    .tagbar{
-        grid-area: tags;
-        background-color: rgb(140, 88, 167);
-    
-    }
-    
     .foto{
         position: relative;
-        width: 500px;
-        height: 500px;
-        display: inline-block;
+
+        width: 60vw; 
+        height: 60vh;
+
         border-style: solid;
         border-width: 1px;
         border-color: #f1f1f1;
-    
+        display:inline-block;
+        flex-direction: column;
+        margin:5px;
+        margin-top:0px;
     }
-    .foto img{
+
+    .foto img{ /*img внутри .foto*/
         display:block;
-        width: 100%;
     }
-    .button{
-        display: inline-block;
-        background-color: #fddc64;
-        width: 50px;
-    
+    /*================================================*/
+
+    .scrolbar{
+       margin:15px;
+       margin-top:0px;
+        /*display:block;*/
+        overflow-x: scroll;
+        overflow-y: scroll;
+        background-color: rgba(202, 162, 200,0);
+        border-style: solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
     }
-    .button:hover{
-        background-color:#8f84be;
-        color: rgb(255, 255, 255);
-    }
-    .item img{
+    .item img{ /*img внутри .scrolbar*/
         margin-bottom: 10px;
         height: 150px;
         width: 150px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #f1f1f1;
+        box-shadow: 20px -15px 10px 5px rgba(0, 0, 0, .2);
+        box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
+        :hover{
+            cursor:pointer;
+        }
     }
+    
+    .tagbar{
+        margin:15px;
+        margin-top:-15px;
+        /*display:block;*/
+        background-color: rgba(140, 88, 167,0);
+    }
+    
+    .instruments{
+        display: flex;
+        flex-direction: column;
+    }
+    @media (max-width: 800px) {
+        .foto {
+            width: 80vw; 
+        }
+        .instruments {
+            flex-direction: row;
+        }
+      }
+      @media (max-width: 418px) {
+        .instruments {
+            flex-direction: column;
+        }
+      }
 `;
 const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -82,19 +119,21 @@ const ImgCroper = (props)=> {
     }, [])
 
       return (
-        <>
+        <div className = "imgCropper">
+
         <div className = "foto">
-        <Cropper
-          image={props.img}
-          crop={crop}
-          zoom={zoom}
-          aspect={4 / 3}
-          onCropChange={setCrop}
-          onCropComplete={onCropComplete}
-          onZoomChange={setZoom}
-          
-        />
+            <Cropper
+              image={props.img}
+              crop={crop}
+              zoom={zoom}
+              aspect={4 / 3}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
         </div>
+
+        <p id="noMargin">Zoom</p>   
         <Slider
             value={zoom}
             min={1}
@@ -102,7 +141,8 @@ const ImgCroper = (props)=> {
             step={0.1}
             onChange={(e, zoom) => setZoom(zoom)}
           />
-               Width
+
+        <p id="noMargin">Width</p>   
         <Slider
             value={(crop.x+0.5*(props.width-croppedAreaPixels.width))/(props.width-croppedAreaPixels.width)*100}
             min={0}
@@ -110,7 +150,8 @@ const ImgCroper = (props)=> {
             step={1}
             onChange={(e, x) => setCrop({x: x/100*(props.width-croppedAreaPixels.width)-0.5*(props.width-croppedAreaPixels.width),y:crop.y})}
         />
-        Heigth
+
+        <p id="noMargin">Height</p>
         <Slider
             value={(crop.y+0.5*(props.height-croppedAreaPixels.height))/(props.height-croppedAreaPixels.height)*100}
             min={0}
@@ -118,11 +159,9 @@ const ImgCroper = (props)=> {
             step={1}
             onChange={(e, y) => setCrop({x: crop.x,y:y/100*(props.height-croppedAreaPixels.height)-0.5*(props.height-croppedAreaPixels.height)})}
         />
-        </>
+        </div>
       )
   }
-
-
 class ScrolbarItem  extends React.Component{ 
     ChangePhoto=()=>{
         this.props.action(this.props.id)
@@ -174,12 +213,12 @@ class TagsForm  extends React.Component{
                name= {elm.id}
                value={elm.text}
                onChange={this.handleChange}
-               placeholder="Введите тэг"/>
+               placeholder="Введите тэг..."/>
     </div>))
-    Addtagsbutton=()=>{return(this.state.maxTagAmount>this.state.tags.length?<Actionbox text="+" action={this.Addtag}/>:<div>Вы достигли лимита тэгов</div>)}
+    Addtagsbutton=()=>{return(this.state.maxTagAmount>this.state.tags.length?<Actionbox icon={<PlusSquare/>} action={this.Addtag}/>:<div></div>)}
     render(){
         return (<div>
-            <Actionbox text="Добавить тэги" action={this.handleSubmit}/>
+            <Actionbox text="Добавить тэги" id="noTopMargin" action={this.handleSubmit}/>
             {this.Showtags()}
             {this.Addtagsbutton()}
         </div>)
@@ -241,27 +280,33 @@ class Redactor extends React.Component{
     render(){ 
         console.log(this.props.Photos)
     return (
-        <StyledRedactor>
+        <div>
             <NavBarContainer name={"Redactor " + this.props.Conspectname}/>
-            <div className ="wrapper">
-                <div className="scrolbar">
-                    {this.ConspectPhotos()}
+            {/*  <div className ="wrapper">  </div> */}
+            <StyledRedactor>
+                <div className="photoviewer">
+                    <ImgCroper img={this.props.Currentpotopath}width={500} height={500}></ImgCroper>{/* */}
+                    <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
+                    <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
                 </div>
 
-                <div className="photoviewer">
-                    <div className ="button" onClick={this.props.ChangeCurPR}> [- </div>
-                        <ImgCroper img={this.props.Currentpotopath} width={500} height={500}></ImgCroper>
-                    <div className ="button" onClick={this.props.ChangeCurPL}> -] </div>
+                <div className="instruments"> 
+                    <div className="scrolbar">
+                        {this.ConspectPhotos()}
+                    </div>
+
+                    <div className ="tagbar">
+                        <TagsForm/>
+                    </div>
                 </div>
+
                 
-                <div className ="tagbar">
-                    <TagsForm/>
-                </div>
-            </div>
+            </StyledRedactor>
             
-        </StyledRedactor>
+        </div>
     )
 }
 }
+
 
 export default Redactor;

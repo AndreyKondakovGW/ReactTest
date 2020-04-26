@@ -9,6 +9,8 @@ import { BrowserRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
 const Styles = styled.div`
+width: 100%;
+height: 100%;
   *{
     font-family:
     "century gothic",
@@ -83,6 +85,12 @@ transition-timing-function: ease;
 }
 #myToggle:hover{
   color:#02dac5;
+}
+#noMargin{
+  margin:0px;
+}
+#noTopMargin{
+ margin-top:0px;
 }
 
 `;
