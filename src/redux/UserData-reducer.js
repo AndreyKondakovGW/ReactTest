@@ -26,7 +26,7 @@ let initialstate={
         ],
         
     },
-    Topicspagesize:2,
+    Topicspagesize:6,
     TotalTopicscount:3,
     CurrentTopicPage:1,
 

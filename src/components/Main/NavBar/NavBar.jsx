@@ -48,21 +48,21 @@ class ConspectSaver extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            name: ""
+            name: this.props.name
         }
         this.handleSubmit=this.handleSubmit.bind(this)
     }
 
     ClearForm=()=>{
         this.setState({
-            name: ""
+            name: this.props.name
         })
     }
 
     handleSubmit=()=> {
         console.log(this.state.name)
         if ((this.state.name!="") &&(this.props.fotos.length>0)) 
-            this.props.save(this.state.name,this.props.fotos) 
+            this.props.save(this.state.name,this.props.fotos,this.props.id,this.props.conspects,this.props.OpenConspect) 
         this.ClearForm()
     }
 
@@ -73,20 +73,21 @@ class ConspectSaver extends React.Component{
         })
     }
     render(){   
-        return (
+        return(
             <div>
-                <input 
+                {(this.props.mutable)?<input 
                 id="lineinput"
-                
                        name="conspectname"
                        value={this.state.name}
                        onChange={this.handleChange}
-                       placeholder="Название..."/>
+                       placeholder="Название..."/>:
+                       <div>{this.state.name}</div>}
                 <ActionBox  id="lineab" text="Сохранить" icon={<Check/>} action={this.handleSubmit}/>
             </div>
         )
     }
 }
+
 class NavBar extends React.Component{
     delete=()=>{
         console.log('delete')
@@ -96,23 +97,26 @@ class NavBar extends React.Component{
     return (
       <StyledNavBar>
       <Navbar expand="sm" >
-      <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
+      
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           
                 <Route path="/content" render={()=><StyledLine>
+                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
                     <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
                     <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 
                 <Route exact path ="/myconspects" render={()=><StyledLine>
-                    <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect"}/>
+                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
+                    <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить..." icon={<FileEarmarkMinus/>} action={this.delete}/>
                 </StyledLine> 
                 }/>
 
                 <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
+                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Удалить" path={"myconspects"}/>
@@ -122,24 +126,35 @@ class NavBar extends React.Component{
                 }/>  
    
                 <Route path ="/redactor" render={()=><StyledLine>
-                        <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name}/>
+                        <Navbar.Brand href="#">В редакторе открыт конспект {this.props.name}</Navbar.Brand>
+                        <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                         <Button  text="Удалить фото" icon={<FileMinus/>} path={"myconspects"}/>
                         <CommentsListConatiner />
                         {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
                         <MyConspectList>
                         <div>
-                            {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name} />)}
+                            {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                         </div>
                         </MyConspectList>
                     </StyledLine>
                 }/>
 
                 <Route path ="/creteconspect" render={()=><StyledLine>
+                    <Navbar.Brand href="#">Текущий конспект {this.props.name}</Navbar.Brand>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label for="file" >Загрузить файл {<FilePlus/>}</label>
                     <CommentsListConatiner />
                     <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos}/>
+                </StyledLine>
+                }/>
+
+                <Route path ="/creteconspect/newconspect" render={()=><StyledLine>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
+                </StyledLine>
+                }/>
+
+                <Route path ="/creteconspect/:conspect/:id" render={()=><StyledLine>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.name} conspects={this.props.CurentConspectfotos} mutable={false}/>
                 </StyledLine>
                 }/>
         </Nav>

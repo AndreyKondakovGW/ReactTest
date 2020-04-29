@@ -2,17 +2,60 @@ import { connect } from 'react-redux';
 import NavBar from './NavBar.jsx';
 import {DeleteCheckedConspectAC} from './../../../redux/UserData-reducer';
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
-import {SetCurrentConspectCR} from '../../../redux/Curentconspect-reducer';
+import {SetCurrentConspectCR,LoadConspectAC} from '../../../redux/Curentconspect-reducer';
+import * as axios from 'axios';
 
 let mapStatetoProps =(state)=>{
     return {
         fotos: state.CurentCreatorreducer.CreatorData.fotos,
         imagePreviewUrl: state.CurentCreatorreducer.CreatorData.imagePreviewUrl,
-        Conspects: state.UserDatareducer.UserData.Conspects
+        Conspects: state.UserDatareducer.UserData.Conspects,
+        conspectname: state.CurentCreatorreducer.CreatorData.name,
+        id: state.Curentconspectreducer.LogicData.CurrentConspect.id,
+        CurentConspectfotos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos
     }
 
 }
-
+const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
+    let promise = new Promise(async (resolve, reject) => {
+        let f=[]
+        var i=0
+        while (i<fotos.data.length)
+        {
+            let promise = new Promise((resolve, reject) => {
+                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
+                resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+            })
+            let response= await promise
+            const file = new Blob(
+                [response.data], 
+                {type: 'image'});
+            let promise2 = new Promise((resolve, reject) => {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = event.target.result
+                    console.log(img)
+                    console.log(i)
+                    f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
+                    i+=1
+                    resolve(f)                
+                }
+                reader.readAsDataURL(file);
+            })
+            f=await promise2
+        }
+        if (f.length==fotos.data.length){
+            console.log(f)
+            resolve(f)
+        }
+        
+    })
+    promise.then(result=>{
+        console.log("Полученный массив фотографий")
+        console.log(result) 
+        OpenConspect(name,id, result)  
+    })  
+}
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
@@ -29,27 +72,67 @@ let mapDispatchtoProps =(dispatch) =>{
             reader.onloadend = () => {
                 console.log(file)
                 let name = file.name
-                let path = file.name
+                let id = "null"
                 let image = reader.result
-                const action=ADDFOTOCreator(name,path,image)
+                const action=ADDFOTOCreator(name,id,image,file)
                 dispatch(action)
             } 
             reader.readAsDataURL(file)          
         },
-        SaveConspect: (name,fotos)=>{
-            console.log(name)
-            console.log(fotos)
+
+        OpenConspect: (name, id, fotos)=>{
+            console.log("hello Container")
             const conspect={
                 name:name,
-                path:name,
-                data:{
-                    fotos:fotos
-                }}
+                id: id,
+                data: {
+                    fotos: fotos
+                }
+            }
             console.log(conspect)
-            const action=SetCurrentConspectCR(conspect)
-            const action2=OpenConspectAC(conspect)
+            let action=SetCurrentConspectCR(conspect)
             dispatch(action)
+            let action2=OpenConspectAC(conspect)
             dispatch(action2)
+        },
+
+        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect)=>{
+            console.log("Пытаюсь сохранит конспект")
+            console.log(name)
+            console.log(fotos)
+            console.log(CurentConspectfotos)
+            const OldIDs=new Set (CurentConspectfotos.map(elm=>elm.index))
+            const NewIDs=new Set (fotos.map(elm=>elm.index))
+            OldIDs.forEach(elm=>{
+                if (!NewIDs.has(elm)){
+                    axios.delete('http://127.0.0.1:5000/deletephoto/'+ elm)
+                    console.log("элемент был удалён " + elm)
+                }
+            })
+            console.log(OldIDs)
+            axios.put('http://127.0.0.1:5000/put_conspect/'+name)
+            fotos.forEach(elm=>{
+                if (elm.index=="null"){
+                    console.log("новая фотка:"+ elm.name)
+                    let formData = new FormData();
+                    formData.append('file', elm.file);
+                    axios.post( 'http://127.0.0.1:5000/savephoto/'+ name,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                    ).then(function(response){
+                        console.log('SUCCESS!!');
+                        console.log(response)
+                    }).catch(function(){
+                        console.log('FAILURE!!');
+                      });
+                }
+            })
+            let action=LoadConspectAC(name,id,OpenConspect);
+            dispatch(action);
         }
     }
 }

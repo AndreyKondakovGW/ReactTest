@@ -7,7 +7,6 @@ import * as axios from 'axios';
 class MyConspect extends React.Component{
     constructor(props){
         super(props)
-        console.log(this.props.Conspects)
         this.state={    
             ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => <Conspectbox 
                 id={elm.id} 
@@ -17,7 +16,7 @@ class MyConspect extends React.Component{
                 path={"/myconspects/"+elm.name+"/"+elm.id} 
                 checkf={this.props.checked}/> )}
         }
-     /*
+        /*
         componentDidMount(){
             console.log("Отправлелен запрос на получене конспектов")
             axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
@@ -53,7 +52,6 @@ class MyConspect extends React.Component{
                 checkf={this.props.checked}/>)
             
         })
-        console.log(this.props.Conspects)
         }
     }
 

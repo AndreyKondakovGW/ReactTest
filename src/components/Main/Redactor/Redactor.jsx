@@ -113,24 +113,29 @@ const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState({width:100,height:100})
+    const [croppedArea,setcroppedArea] =useState({})
   
-    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => { //croppedAreaPixels.x (.y ) координаты относитеьно левого верхнего угла экрана
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        console.log(croppedArea)
+        console.log(croppedAreaPixels)
+        props.SetCordinate(croppedArea.x,croppedArea.x+croppedArea.width,croppedArea.y,croppedArea.y+croppedArea.height)
+        setcroppedArea(croppedArea)
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
 
       return (
         <div className = "imgCropper">
 
-        <div className = "foto">
-            <Cropper
-              image={props.img}
-              crop={crop}
-              zoom={zoom}
-              aspect={4 / 3}
-              onCropChange={setCrop}
-              onCropComplete={onCropComplete}
-              onZoomChange={setZoom}
-            />
+        <div className = "foto"><Cropper
+          image={props.img}
+          crop={crop}
+          zoom={zoom}
+          aspect={4 / 3}
+          onCropChange={setCrop}
+          onCropComplete={onCropComplete}
+          onZoomChange={setZoom}
+          
+        />
         </div>
 
         <p id="noMargin">Zoom</p>   
@@ -144,20 +149,20 @@ const ImgCroper = (props)=> {
 
         <p id="noMargin">Width</p>   
         <Slider
-            value={(crop.x+0.5*(props.width-croppedAreaPixels.width))/(props.width-croppedAreaPixels.width)*100}
+            value={100-croppedArea.width+croppedArea.x}
             min={0}
             max={100}
             step={1}
-            onChange={(e, x) => setCrop({x: x/100*(props.width-croppedAreaPixels.width)-0.5*(props.width-croppedAreaPixels.width),y:crop.y})}
+            onChange={(e, x) => setCrop({x:x,y:crop.y})}
         />
 
         <p id="noMargin">Height</p>
         <Slider
-            value={(crop.y+0.5*(props.height-croppedAreaPixels.height))/(props.height-croppedAreaPixels.height)*100}
+            value={100-croppedArea.height+croppedArea.y}
             min={0}
             max={100}
             step={1}
-            onChange={(e, y) => setCrop({x: crop.x,y:y/100*(props.height-croppedAreaPixels.height)-0.5*(props.height-croppedAreaPixels.height)})}
+            onChange={(e, y) => setCrop({x: crop.x,y:y})}
         />
         </div>
       )
@@ -204,7 +209,8 @@ class TagsForm  extends React.Component{
     }
 
     handleSubmit=()=> {
-        console.log(this.state.tags)
+        console.log(this.props.Coordinate)
+        this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!=""),this.props.curentfoto.index,this.props.Coordinate)
         this.ClearForm()
     }
 
@@ -232,21 +238,29 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             while (i<fotos.data.length)
             {
                 let promise = new Promise((resolve, reject) => {
-                    resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' }))      
+                    console.log("Запрашиваю картинку по id"+fotos.data[i].id)
+                    resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                 })
-                let response=await promise
+                let response= await promise
                 const file = new Blob(
                     [response.data], 
                     {type: 'image'});
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    const img = event.target.result
-                    f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}]
-                    i+=1
-                }     
-                reader.readAsDataURL(file);
+                let promise2 = new Promise((resolve, reject) => {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        const img = event.target.result
+                        console.log(img)
+                        console.log(i)
+                        f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
+                        i+=1
+                        resolve(f)                
+                    }
+                    reader.readAsDataURL(file);
+                })
+                f=await promise2
             }
-            if (i==fotos.data.length){
+            if (f.length==fotos.data.length){
+                console.log(f)
                 resolve(f)
             }
             
@@ -265,27 +279,39 @@ class Redactor extends React.Component{
     componentDidMount= async ()=>{
         console.log(this.props.match.params.conspectname)
         console.log(this.props.match.params.id)
-        if (this.props.match.params.contentname!=""){
+        if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+            console.log("Загружаю конспект "+this.props.match.params.conspectname)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
-            })   
+            }) 
         }
     }
-    */
     
+
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps !== this.props) {
+        console.log(this.props.match.params.conspectname)
+        console.log(this.props.match.params.id)
+        if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
+                console.log(response)
+                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
+            })    
+        }
+        }
+    }*/
 
     
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
     render(){ 
-        console.log(this.props.Photos)
     return (
         <div>
-            <NavBarContainer name={"Redactor " + this.props.Conspectname}/>
+            <NavBarContainer name={this.props.Conspectname}/>
             {/*  <div className ="wrapper">  </div> */}
             <StyledRedactor>
                 <div className="photoviewer">
-                    <ImgCroper img={this.props.Currentpotopath}width={500} height={500}></ImgCroper>{/* */}
+                    <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
                     <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
                     <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
                 </div>
@@ -296,7 +322,7 @@ class Redactor extends React.Component{
                     </div>
 
                     <div className ="tagbar">
-                        <TagsForm/>
+                        <TagsForm Coordinate={this.props.coordinate} SaveTags={this.props.SaveTags} curentfoto={this.props.curentfoto}/>
                     </div>
                 </div>
 

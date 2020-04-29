@@ -58,11 +58,11 @@ const SideBar=(props) =>{
             <Button text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
             <Button text='Мои тэги'icon={<Code/>}  path="content" />
             <Button text='Создать конспект' 
-                    path="creteconspect" 
+                    path="creteconspect/newconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
             <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />          
-            <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name} icon={<Pencil/>}/>
+            <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id} icon={<Pencil/>}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>

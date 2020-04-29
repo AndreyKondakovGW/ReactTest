@@ -8,12 +8,13 @@ import SideBarContainer from './components/SideBar/SideBarContainer';
 import MainContainer from './components/Main/MainContainer';
 import { Row,  Container } from 'react-bootstrap';
 
+import background from './static/bground2.jpg'
 import styled from 'styled-components';
 const Styles = styled.div`
   background-color: rgb(220, 222, 234);
   width: 100%;
 height: 100vh;
-background: url(/bground2.jpg) no-repeat center center fixed;
+background: url(${background}) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;

@@ -8,7 +8,7 @@ const SET_COMMENTCR="SET_COMMENTCR";
 
 let initialstate={
         CreatorData: {
-            id:"",
+            id: -1,
             name: "Ещё не названный",
             path: "",
             fotos: [
@@ -25,7 +25,7 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
                 CreatorData: {
                     ...state.CreatorData,
                     imagePreviewUrl: action.img,
-                    fotos: [...state.CreatorData.fotos,{name: action.name,path: action.img,comments:"", index: state.CreatorData.fotos.length}]
+                    fotos: [...state.CreatorData.fotos,{name: action.name,path: action.img,comments:"", index: action.id,file: action.file}]
                 }
 
             };
@@ -56,7 +56,7 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
             let newstate={
                 CreatorData: {
                     name: "Ещё не названный",
-                    path: "",
+                    id: -1,
                     fotos: [],
                     comments: "",
                     imagePreviewUrl:''
@@ -69,7 +69,7 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
                 CreatorData: {
                     ...state.CreatorData,
                     name: action.name,
-                    path: action.path,
+                    id: action.id,
                     fotos: action.fotos.map(elm => {return {...elm,path: elm.path}}),
                     imagePreviewUrl: action.fotos[0].imagePreviewUrl
                 }
@@ -90,12 +90,13 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
     }
 }
 
-export const ADDFOTOCreator = (name,path,img) =>{
+export const ADDFOTOCreator = (name,id,img,file) =>{
     return{
         type: ADD_FOTO,
         name: name,
-        path: path,
-        img:img
+        id: id,
+        img:img,
+        file:file
     }
 }
 
@@ -117,7 +118,7 @@ export const OpenConspectAC=(conspect)=>{
     return{
         type: OPEN_CONSPECT,
         name: conspect.name,
-        path: conspect.path,
+        id: conspect.id,
         fotos:conspect.data.fotos,
     }
 }
