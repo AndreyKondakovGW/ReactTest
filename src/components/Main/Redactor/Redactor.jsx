@@ -7,6 +7,7 @@ import * as axios from 'axios';
 
 import { ArrowLeft, ArrowRight,PlusSquare} from 'react-bootstrap-icons';
 import styled from 'styled-components';
+import preloader from '../../../static/2.gif'
 const StyledRedactor = styled.div`
 
     margin-top:20px ;
@@ -116,8 +117,6 @@ const ImgCroper = (props)=> {
     const [croppedArea,setcroppedArea] =useState({})
   
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-        console.log(croppedArea)
-        console.log(croppedAreaPixels)
         props.SetCordinate(croppedArea.x,croppedArea.x+croppedArea.width,croppedArea.y,croppedArea.y+croppedArea.height)
         setcroppedArea(croppedArea)
         setCroppedAreaPixels(croppedAreaPixels)
@@ -249,8 +248,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
                     let reader = new FileReader();
                     reader.onload = function(event) {
                         const img = event.target.result
-                        console.log(img)
-                        console.log(i)
                         f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
                         i+=1
                         resolve(f)                
@@ -275,11 +272,13 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 
 class Redactor extends React.Component{ 
-    /*
+    
     componentDidMount= async ()=>{
         console.log(this.props.match.params.conspectname)
         console.log(this.props.match.params.id)
+        
         if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+            this.props.LoadData()
             console.log("Загружаю конспект "+this.props.match.params.conspectname)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 console.log(response)
@@ -293,45 +292,53 @@ class Redactor extends React.Component{
         if (prevProps !== this.props) {
         console.log(this.props.match.params.conspectname)
         console.log(this.props.match.params.id)
-        if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+        console.log(this.props.CurentconspectID)
+        console.log(this.props.dataisLoading)
+        if ((!this.props.dataisLoading) && (this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+            this.props.LoadData()
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
             })    
         }
         }
-    }*/
+    }
+
+    ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
+
+    Content=()=>{return ((!this.props.dataisLoading)?
+        <StyledRedactor>
+        ({})
+        <div className="photoviewer">
+            <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
+            <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
+            <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
+        </div>
+        <div className="instruments"> 
+            <div className="scrolbar">
+                {this.ConspectPhotos()}
+            </div>
+
+            <div className ="tagbar">
+                <TagsForm Coordinate={this.props.coordinate} SaveTags={this.props.SaveTags} curentfoto={this.props.curentfoto}/>
+            </div>
+        </div>
+
+        
+    </StyledRedactor>:
+    <div>
+        <img src={preloader} width={500} height={500}></img>
+    </div>)}
 
     
-    ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
-    render(){ 
-    return (
+    render(){
+    return(
         <div>
             <NavBarContainer name={this.props.Conspectname}/>
             {/*  <div className ="wrapper">  </div> */}
-            <StyledRedactor>
-                <div className="photoviewer">
-                    <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
-                    <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
-                    <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
-                </div>
-
-                <div className="instruments"> 
-                    <div className="scrolbar">
-                        {this.ConspectPhotos()}
-                    </div>
-
-                    <div className ="tagbar">
-                        <TagsForm Coordinate={this.props.coordinate} SaveTags={this.props.SaveTags} curentfoto={this.props.curentfoto}/>
-                    </div>
-                </div>
-
-                
-            </StyledRedactor>
-            
+            {this.Content()} 
         </div>
-    )
-}
+    )}
 }
 
 

@@ -15,6 +15,7 @@ const SET_CURRENTPDF="SET_CURRENTPDF";
 const SET_COMMENT="SET_COMMENT";
 const OPEN_EMPTY="OPEN_EMPTY";
 const LOAD_CONSPECT="LOAD_CONSPECT";
+const DATA_LOADSWITH="DATA_LOADSWITH";
 
 let initialstate={
     LogicData:{
@@ -34,7 +35,8 @@ let initialstate={
         x2:0,
         y1:0,
         y2:0
-    }
+    },
+    dataisLoading: false
 }
 
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
@@ -130,7 +132,8 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                             curentfoto: action.conspect.data.fotos[0]
                         }
                     }
-                }
+                },
+                dataisLoading: false
             }
             console.log("Текущий конспект "+action.conspect.name)
             console.log(newstate.LogicData.CurrentConspect.data.curentfoto)
@@ -142,7 +145,8 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                 LogicData:{
                     ...state.LogicData,
                     currentpdf: {name: action.name,pdf:action.pdf}
-                }
+                },
+                dataisLoading: false
             }
             return newstate
         }
@@ -213,6 +217,13 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             }
             return newstate
         }
+        case DATA_LOADSWITH:{
+            let newstate={
+                ...state,
+                dataisLoading: !state.dataisLoading
+            }
+            return newstate
+        }
         default: return state
     }
 }
@@ -276,6 +287,12 @@ export const SetCordinateAC=(x1,x2,y1,y2)=>{
         x2:x2,
         y1:y1,
         y2:y2
+    }
+}
+
+export const DataLoadSwitch=()=>{
+    return{
+    type:DATA_LOADSWITH
     }
 }
 export default Curentconspectreducer

@@ -16,7 +16,7 @@ class MyConspect extends React.Component{
                 path={"/myconspects/"+elm.name+"/"+elm.id} 
                 checkf={this.props.checked}/> )}
         }
-        /*
+        
         componentDidMount(){
             console.log("Отправлелен запрос на получене конспектов")
             axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
@@ -24,7 +24,7 @@ class MyConspect extends React.Component{
                 this.props.setConspect(response.data)
            })
         }
-        */
+        
         
 
     changePage=(pageNum)=>{

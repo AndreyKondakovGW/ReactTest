@@ -13,7 +13,7 @@ class TopicsAPI extends React.Component{
             <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
         }
     }
-    /*
+    
     componentDidMount(){
         console.log("Отправлелен запрос на получене тэгов")
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
@@ -21,7 +21,7 @@ class TopicsAPI extends React.Component{
             this.props.setTopics(response.data)
         })
     }
-    */
+    
     
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {

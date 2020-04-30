@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import Redactor from './Redactor';
-import {ChangeCurentPhotoAC,SetCurrentConspectCR,AddPhotoAC,LoadConspectAC,SetCordinateAC} from './../../../redux/Curentconspect-reducer';
+import {ChangeCurentPhotoAC,SetCurrentConspectCR,AddPhotoAC,LoadConspectAC,SetCordinateAC,DataLoadSwitch} from './../../../redux/Curentconspect-reducer';
 import * as axios from 'axios';
 
 let mapStatetoProps =(state)=>{
     return {
+        dataisLoading: state.Curentconspectreducer.dataisLoading,
         Photos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
         Conspectname : state.Curentconspectreducer.LogicData.CurrentConspect.name,
         CurentconspectID:state.Curentconspectreducer.LogicData.CurrentConspect.id,
@@ -48,6 +49,10 @@ let mapDispatchtoProps =(dispatch) =>{
             let action=AddPhotoAC(photo)
             dispatch(action)
         },
+        LoadData: ()=>{
+            dispatch(DataLoadSwitch())
+        },
+        
         SetCordinate:(x1,x2,y1,y2)=>{
             let action=SetCordinateAC(x1,x2,y1,y2)
             dispatch(action)

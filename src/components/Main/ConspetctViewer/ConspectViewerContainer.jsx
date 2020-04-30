@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Viewer from './ConspetctViewer.jsx';
-import {SetCurrentConspectCR,SetCurrentpdfAC} from './../../../redux/Curentconspect-reducer'
+import {SetCurrentConspectCR,SetCurrentpdfAC,DataLoadSwitch} from './../../../redux/Curentconspect-reducer'
 
 let mapStatetoProps =(state)=>{
     return {
+        dataisLoading: state.Curentconspectreducer.dataisLoading,
         curntpdf: state.Curentconspectreducer.LogicData.currentpdf
         
     }
@@ -14,9 +15,12 @@ let mapDispatchtoProps =(dispatch) =>{
             const action =SetCurrentConspectCR(conspects,pdf);
             dispatch(action)
         },
-        setPdf: (pdf) =>{
-            const action =SetCurrentpdfAC(pdf);
+        setPdf: (pdf,name) =>{
+            const action =SetCurrentpdfAC(pdf,name);
             dispatch(action)
+        },
+        LoadData: ()=>{
+            dispatch(DataLoadSwitch())
         }
     }
 }

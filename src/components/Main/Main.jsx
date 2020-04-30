@@ -41,12 +41,12 @@ background-size: cover;
 `;
 
 const Main=(props) =>{
-  /*
+  
     let logout=()=>{
       console.log("logout")
       axios.get("http://127.0.0.1:5000/logout")
     }
-    */
+    
     
     return (
        

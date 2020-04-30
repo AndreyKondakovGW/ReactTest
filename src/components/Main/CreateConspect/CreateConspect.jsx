@@ -47,7 +47,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 
 class CreateConspect extends React.Component{
-    /*
+    
     componentDidMount= async ()=>{
         if (!(this.props.match.params.id)){
             this.props.OpenEmptyConspect()
@@ -62,7 +62,7 @@ class CreateConspect extends React.Component{
         }
         console.log("Открыт конспект" + this.props.createrid)
     }
-    */
+    
     
     ReactContents = ()=>{return(this.props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={this.props.DeleteFoto} change={this.props.ChangePerwie} path={elm.path}/>))}
     ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img className={s.ImagePerwier} src={this.props.imagePreviewUrl} alt="some value" />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}

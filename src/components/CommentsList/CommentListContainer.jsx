@@ -19,7 +19,6 @@ let mapDispatchtoProps =(dispatch) =>{
             console.log("save")
             console.log(isCreater)
             const action=(isCreater)?SetCommentCreateAC(value):SetCommentAC(value)
-            console.log(action)
             dispatch(action)
 
 
