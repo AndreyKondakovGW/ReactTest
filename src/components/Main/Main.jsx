@@ -5,6 +5,7 @@ import MyConspectContainer from './MyConspect/MyConspectContainer.jsx';
 import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.jsx';
 import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx';
 import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
+import SubscriberContainer from './Subscriber/SubscriberContainer';
 import backimg from '../../static/bground2.jpg'
 import {Route } from 'react-router-dom';
 import * as axios from 'axios';
@@ -64,8 +65,7 @@ const Main=(props) =>{
             <Route path = "/creteconspect/newconspect" component = {CreateConspectContainer} />
             <Route path="/topicrequest" component={TagRequestContainer}/>
 
-            
-            
+            <Route path="/comunity" component={SubscriberContainer}/>
         </StyledMain>
     )
 }

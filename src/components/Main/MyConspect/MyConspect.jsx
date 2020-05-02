@@ -1,6 +1,8 @@
 import React from 'react';
 import Conspectbox from './Conspectbox/ConspectboxComponent.jsx';
 import Conspects from './MyConspectComponent.jsx'
+import { Alert} from 'react-bootstrap';
+import ActionBox from './../../ActionBox/ActionBox.jsx'
 import * as axios from 'axios';
 
 
@@ -54,7 +56,16 @@ class MyConspect extends React.Component{
         })
         }
     }
-
+    AletrF=()=>{
+        console.log(this.props)
+        return(
+        (this.props.AlertisOpen)?
+            <Alert variant="danger" onClose={this.props.closeAlert} dismissible>
+                <Alert.Heading>Внимание если в ваполните удалене следующих конспектов данные тэги будут именены!!</Alert.Heading>
+                    {this.props.AlertText}
+                <ActionBox text="Всё равно удалить" action={this.props.delete}/>
+            </Alert>:<></>
+    )}
     render(){
         let pagescount=Math.ceil(this.props.Conspectcount /this.props.Pagesize);
 
@@ -63,12 +74,13 @@ class MyConspect extends React.Component{
             pages.push(i)
         }
         return (
-        <div>   
+        <div> 
                 <Conspects deletechecked={this.props.deletechecked}
                     pages={pages}
                     CurrentPage={this.props.CurrentPage}
                     changePage={this.changePage}
-                    ReactContents={this.state.ReactContents}> 
+                    ReactContents={this.state.ReactContents}
+                    alert={this.AletrF}> 
                 </Conspects>
                                     
         </div>

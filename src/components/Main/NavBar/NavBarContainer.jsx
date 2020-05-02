@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NavBar from './NavBar.jsx';
-import {DeleteCheckedConspectAC} from './../../../redux/UserData-reducer';
+import {DeleteCheckedConspectAC,ShowAlertAC} from './../../../redux/UserData-reducer';
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
 import {SetCurrentConspectCR,LoadConspectAC} from '../../../redux/Curentconspect-reducer';
 import * as axios from 'axios';
@@ -59,10 +59,35 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
-        delete: ()=>{
-            const action =DeleteCheckedConspectAC();
-            dispatch(action)
+        ShowAlert:(Conspects)=>{
+            let alertT=[]
+            console.log(Conspects.filter(elm=>elm.checked))
+            let promise = new Promise(async (resolve, reject) => {
+                var i=0
+                while (i<Conspects.filter(elm=>elm.checked).length){
+                    let promise = new Promise((resolve, reject) => {
+                        resolve(axios.get('http://127.0.0.1:5000/related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
+                    })
+                    let response= await promise
+                    alertT=[...alertT,{name: Conspects.filter(elm=>elm.checked)[i].name,tags: response.data.map(elm=>elm.tag_name).join()}]
+                    i+=1
+                }
+                console.log(alertT)
+                if (alertT.length==Conspects.filter(elm=>elm.checked).length){
+                    resolve(alertT)
+                }
+            })
+            promise.then(result=>{
+                console.log(result)
+                if  (!result.every(elm=>elm.tags==""))
+                {
+                    dispatch(ShowAlertAC(result.map(elm=>"Тэги: " + elm.tags +" из конспекта " + elm.name).join("\n")))
+                }else{
+                    dispatch(DeleteCheckedConspectAC());
+                }
+            })
         },
+        
         AddFoto: (e)=>{
             let reader = new FileReader();
             let file = e.target.files[0];

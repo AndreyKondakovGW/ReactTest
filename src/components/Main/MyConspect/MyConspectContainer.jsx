@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import MyConspect from './MyConspect';
-import {SetConspectsAC,CheckedConspectAC,SettcurConspectpage} from './../../../redux/UserData-reducer';
+import {SetConspectsAC,CheckedConspectAC,SettcurConspectpage,DeleteCheckedConspectAC,CloseAlertAC} from './../../../redux/UserData-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
+        AlertisOpen: state.UserDatareducer.Allertpageisopen,
+        AlertText: state.UserDatareducer.AllertText,
         Conspects : state.UserDatareducer.UserData.Conspects,
         Pagesize :state.UserDatareducer.Conspectspagesize,
         Conspectcount: state.UserDatareducer.TotalConspectscount,
@@ -13,6 +15,13 @@ let mapStatetoProps =(state)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return {
+        closeAlert: ()=>{
+            dispatch(CloseAlertAC())
+        },
+        delete: ()=>{
+            const action =DeleteCheckedConspectAC();
+            dispatch(action)
+        },
         setConspect: (conspects) =>{
             const action =SetConspectsAC(conspects);
             dispatch(action)

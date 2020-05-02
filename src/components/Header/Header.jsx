@@ -58,7 +58,7 @@ const Header=(props)=>{
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/user">@{props.CurentUser}</Link>
+              <Link to="/comunity">@{props.CurentUser}</Link>
             </Nav.Link>
           </Nav.Item>
         </Nav>

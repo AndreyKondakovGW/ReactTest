@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActionBox from './../../ActionBox/ActionBox.jsx'
+import ActionBox from './../../ActionBox/ActionBox.jsx';
 import MyConspectList from './../../ConspectList/ConspectList.jsx';
 import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
@@ -89,10 +89,6 @@ class ConspectSaver extends React.Component{
 }
 
 class NavBar extends React.Component{
-    delete=()=>{
-        console.log('delete')
-        this.props.delete()
-    }
     render(){   
     return (
       <StyledNavBar>
@@ -111,7 +107,7 @@ class NavBar extends React.Component{
                 <Route exact path ="/myconspects" render={()=><StyledLine>
                     <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
-                    <ActionBox text="Удалить..." icon={<FileEarmarkMinus/>} action={this.delete}/>
+                    <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine> 
                 }/>
 
@@ -119,7 +115,6 @@ class NavBar extends React.Component{
                     <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                    <Button  text="Удалить" path={"myconspects"}/>
                     <CommentsListConatiner />
                     <Button  text="Доступ" path={"myconspects"}/>
                 </StyledLine>
@@ -128,7 +123,6 @@ class NavBar extends React.Component{
                 <Route path ="/redactor" render={()=><StyledLine>
                         <Navbar.Brand href="#">В редакторе открыт конспект {this.props.name}</Navbar.Brand>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                        <Button  text="Удалить фото" icon={<FileMinus/>} path={"myconspects"}/>
                         <CommentsListConatiner />
                         {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
                         <MyConspectList>
@@ -153,10 +147,12 @@ class NavBar extends React.Component{
                 </StyledLine>
                 }/>
 
-                <Route path ="/creteconspect/:conspect/:id" render={()=><StyledLine>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.name} conspects={this.props.CurentConspectfotos} mutable={false}/>
+                <Route path ="/creteconspect/:conspect" render={()=><StyledLine>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.conspectname} conspects={this.props.CurentConspectfotos} mutable={false}/>
                 </StyledLine>
                 }/>
+
+                <Route path="/comunity" render={()=><StyledLine><Navbar.Brand href="#">{this.props.name}</Navbar.Brand></StyledLine>}/>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

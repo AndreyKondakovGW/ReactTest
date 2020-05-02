@@ -3,7 +3,7 @@ import Header from './Header';
 
 let mapStatetoProps =(state)=>{
     return {
-        CurentUser : state.UserDatareducer.UserData.Username
+        CurentUser : state.UserDatareducer.UserData.Username.name
     }
 }
 
