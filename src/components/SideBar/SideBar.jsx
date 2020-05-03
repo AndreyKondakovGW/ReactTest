@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
 
-import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode,Code,FileEarmark} from 'react-bootstrap-icons';
+import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode,Code,FileEarmark,PeopleFill} from 'react-bootstrap-icons';
 
 import styled from 'styled-components';
 const StyledSideBar = styled.div`
@@ -16,7 +16,7 @@ const StyledSideBar = styled.div`
     color: black;
     position: fixed;
     width:220px;
-    height: 100vh;
+    height: 100%;
     overflow: auto;
     z-index: 200;
 
@@ -63,7 +63,7 @@ const SideBar=(props) =>{
                     onClick={openemptyconspect} />
             <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />          
             <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id} icon={<Pencil/>}/>
-            <Button text='Мои Поверенные' path={"comunity"}/>
+            <Button text='Мои поверенные' icon={<PeopleFill/>}  path={"comunity"}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>

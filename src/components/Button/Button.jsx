@@ -18,10 +18,14 @@ margin-right: 5px;
 display: block;
 margin-top:15px;
 margin-bottom: 15px;
-
+            
+box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+transition-property: box-shadow;
+transition-duration: .3s;
 :hover{
     background-color:#018786;
     color: #f1f1f1;
+    box-shadow: none;
 }
 
     a {
@@ -34,7 +38,6 @@ margin-bottom: 15px;
         line-height: 35px;
         transition-property: color;
         transition-duration: 1s;
-        transition-timing-function: ease;
     
     }
     a:hover{

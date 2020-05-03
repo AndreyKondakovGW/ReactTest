@@ -4,6 +4,7 @@ import ActionBox from './../../ActionBox/ActionBox.jsx';
 import MyConspectList from './../../ConspectList/ConspectList.jsx';
 import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
+import UserFinderContainer from '../UsersFinder/UserFinderContainer';
 
 import {Route} from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
@@ -39,7 +40,6 @@ background-color:rgba(255,255,255,0.5);
   #myToggle{
     outline:none;
   }
-
 
 
 `;
@@ -93,35 +93,52 @@ class NavBar extends React.Component{
     return (
       <StyledNavBar>
       <Navbar expand="sm" >
-      
+
+      <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
+
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          
-                <Route path="/content" render={()=><StyledLine>
-                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
-                    <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
-                    <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
-                </StyledLine>}/>
 
                 <Route exact path ="/myconspects" render={()=><StyledLine>
-                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
-                </StyledLine> 
-                }/>
+                </StyledLine>}/>
 
                 <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
-                    <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
+                    {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                     <CommentsListConatiner />
                     <Button  text="Доступ" path={"myconspects"}/>
-                </StyledLine>
-                }/>  
+                </StyledLine>}/>  
+
+                <Route path="/content" render={()=><StyledLine>
+                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
+                    <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
+                    <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
+                </StyledLine>}/>
+
+                <Route path ="/creteconspect" render={()=><StyledLine>
+                     {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
+                    <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
+                    <label for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <CommentsListConatiner />
+                    <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
+                </StyledLine>}/>
+                {/*<Route path ="/creteconspect/newconspect" render={()=><StyledLine>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
+                </StyledLine>}/>*/}
+                
    
+                <Route path ="/creteconspect/:conspect/:id" render={()=>
+                <StyledLine>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.conspectname} conspects={this.props.CurentConspectfotos} mutable={false}/>
+                </StyledLine>}/>
+
                 <Route path ="/redactor" render={()=><StyledLine>
-                        <Navbar.Brand href="#">В редакторе открыт конспект {this.props.name}</Navbar.Brand>
+                    {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                         <CommentsListConatiner />
                         {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
@@ -130,29 +147,12 @@ class NavBar extends React.Component{
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                         </div>
                         </MyConspectList>
-                    </StyledLine>
-                }/>
-
-                <Route path ="/creteconspect" render={()=><StyledLine>
-                    <Navbar.Brand href="#">Текущий конспект {this.props.name}</Navbar.Brand>
-                    <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label for="file" >Загрузить файл {<FilePlus/>}</label>
-                    <CommentsListConatiner />
-                    <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
-                </StyledLine>
-                }/>
-
-                <Route path ="/creteconspect/newconspect" render={()=><StyledLine>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
-                </StyledLine>
-                }/>
-
-                <Route path ="/creteconspect/:conspect/:id" render={()=><StyledLine>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.conspectname} conspects={this.props.CurentConspectfotos} mutable={false}/>
-                </StyledLine>
-                }/>
-
-                <Route path="/comunity" render={()=><StyledLine><Navbar.Brand href="#">{this.props.name}</Navbar.Brand></StyledLine>}/>
+                    </StyledLine>}/>
+                {/* */}
+                <Route path="/comunity" render={()=>
+                <StyledLine>
+                       <UserFinderContainer add={this.props.add}/> 
+                </StyledLine>}/> 
         </Nav>
       </Navbar.Collapse>
     </Navbar>

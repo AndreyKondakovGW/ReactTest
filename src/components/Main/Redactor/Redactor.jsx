@@ -308,7 +308,7 @@ class Redactor extends React.Component{
 
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-        ({})
+       {/*({})*/} 
         <div className="photoviewer">
             <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
             <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>

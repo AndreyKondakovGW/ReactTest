@@ -10,7 +10,8 @@ class MyConspect extends React.Component{
     constructor(props){
         super(props)
         this.state={    
-            ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => <Conspectbox 
+            ReactContents : this.props.Conspects.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
+            <Conspectbox 
                 id={elm.id} 
                 name={elm.name} 
                 checked={elm.checked} 
@@ -20,7 +21,7 @@ class MyConspect extends React.Component{
         }
         
         componentDidMount(){
-            console.log("Отправлелен запрос на получене конспектов")
+            console.log("Отправлелен запрос на получение конспектов")
             axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
                 console.log(response.data)
                 this.props.setConspect(response.data)
