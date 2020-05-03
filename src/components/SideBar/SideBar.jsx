@@ -63,6 +63,7 @@ const SideBar=(props) =>{
                     onClick={openemptyconspect} />
             <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />          
             <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id} icon={<Pencil/>}/>
+            <Button text='Мои Поверенные' path={"comunity"}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>

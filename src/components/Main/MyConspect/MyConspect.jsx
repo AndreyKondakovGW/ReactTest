@@ -61,7 +61,7 @@ class MyConspect extends React.Component{
         return(
         (this.props.AlertisOpen)?
             <Alert variant="danger" onClose={this.props.closeAlert} dismissible>
-                <Alert.Heading>Внимание если в ваполните удалене следующих конспектов данные тэги будут именены!!</Alert.Heading>
+                <Alert.Heading>Внимание если вы ваполните удаление следующих конспектов данные тэги будут именены!!</Alert.Heading>
                     {this.props.AlertText}
                 <ActionBox text="Всё равно удалить" action={this.props.delete}/>
             </Alert>:<></>

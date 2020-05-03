@@ -147,7 +147,7 @@ class NavBar extends React.Component{
                 </StyledLine>
                 }/>
 
-                <Route path ="/creteconspect/:conspect" render={()=><StyledLine>
+                <Route path ="/creteconspect/:conspect/:id" render={()=><StyledLine>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.conspectname} conspects={this.props.CurentConspectfotos} mutable={false}/>
                 </StyledLine>
                 }/>

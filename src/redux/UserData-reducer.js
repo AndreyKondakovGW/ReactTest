@@ -10,12 +10,16 @@ const SET_TOPICS="SetTopics"
 const SET_CONSPECTS="SetConspects"
 const CHECKED_CONSPECT="CheckedConspect"
 const DELETE_CHECKEDCONSPECT="DeleteCheckedConspect"
-const SHOW_ALLERT="SHOW_ALLERT"
+
 const SET_CUR_TOP_PAGE="Settcurtoppage"
 const SET_CUR_CON_PAGE="Settcurconpage"
+
 const CLOSEALERT="CLOSEALERT"
+const SHOW_ALLERT="SHOW_ALLERT"
+
 const ADD_SUBSCRIBER="ADD_SUBSCRIBER"
 const SET_SUBSCRIBERS="SET_SUBSCRIBERS"
+const SET_CUR_OPTION="SET_CUR_OPTION"
 
 let initialstate={
     UserData: {
@@ -36,6 +40,7 @@ let initialstate={
         ],
         
     },
+    CurentOption: "",
 
     Allertpageisopen:false,
     AllertText:"",
@@ -147,14 +152,19 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case ADD_SUBSCRIBER:{
+            if (state.CurentOption!=""){
+            axios.post('http://127.0.0.1:5000/add_friend/'+state.CurentOption.id)
             let newstate={
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Subscribers: [...state.UserData.Subscribers,{name:action.name,id:action.id}]
-                }
+                    Subscribers: [...state.UserData.Subscribers,{username:state.CurentOption.name,id:state.CurentOption.id}]
+                },
+                CurentOption: ""
             }
+            console.log("Добавлен поверенный: "+state.CurentOption.name+" "+state.CurentOption.id)
             return newstate
+        }
         }
         case SET_SUBSCRIBERS:{
             let newstate={
@@ -162,7 +172,15 @@ const UserDatareducer =(state=initialstate, action)=>{
                 UserData: {
                     ...state.UserData,
                     Subscribers:action.subcribers
-                }
+                },
+                CurentOption: ""
+            }
+            return newstate
+        }
+        case SET_CUR_OPTION:{
+            let newstate={
+                ...state,
+                CurentOption:{name: action.name,id:action.id}
             }
             return newstate
         }
@@ -183,13 +201,17 @@ export const ShowAlertAC=(alert)=>({
 export const CloseAlertAC=()=>({
     type: CLOSEALERT
 })
-export const AddSubscriber=(name,id)=>({
-    type: ADD_SUBSCRIBER,
-    name:name,
-    id:id
+export const AddSubscriber=()=>({
+    type: ADD_SUBSCRIBER
 })
 export const SetSubscribres=(subcribers)=>({
     type: SET_SUBSCRIBERS,
     subcribers: subcribers
+})
+
+export const SetCurOptionAC=(name,id)=>({
+    type: SET_CUR_OPTION,
+    name:name,
+    id:id
 })
 export default UserDatareducer; 

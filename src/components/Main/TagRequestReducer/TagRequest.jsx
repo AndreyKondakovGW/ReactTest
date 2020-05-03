@@ -38,6 +38,7 @@ class TagRequest extends React.Component{
             <div>
                 <NavBarContainer name="Tagrequest"/>
                 {this.TagListComponent()}
+                <ActionBox text="Показать" action={this.props.WriteRequestF}/>
                 <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
             </div>
         )

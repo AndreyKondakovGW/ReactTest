@@ -6,7 +6,8 @@ import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.j
 import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx';
 import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
 import SubscriberContainer from './Subscriber/SubscriberContainer';
-import backimg from '../../static/bground2.jpg'
+import HelloComponent from './HelloComponent/HelloComponent';
+import backimg from '../../static/bground2.jpg';
 import {Route } from 'react-router-dom';
 import * as axios from 'axios';
 
@@ -52,7 +53,7 @@ const Main=(props) =>{
     return (
        
         <StyledMain open={props.open} >
-            
+            <Route exact path ="/main/:username" component = {HelloComponent}/>
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
             

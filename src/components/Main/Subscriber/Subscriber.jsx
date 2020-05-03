@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import NavBarContainer from '../NavBar/NavBarContainer';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import bobr from '../../../static/images/bobr1.jpg';
+import UserFinderContainer from '../UsersFinder/UserFinderContainer';
 import * as axios from 'axios';
 
 class SubscriberAdder extends React.Component{
@@ -52,18 +53,23 @@ class SubscriberAdder extends React.Component{
 }
 
 class Subscriber extends React.Component{
-
+    componentDidMount(){
+        console.log("Отправлелен запрос на получене конспектов")
+        axios.get("http://127.0.0.1:5000/friend_list").then(response =>{
+            console.log(response.data)
+            this.props.setsubscribers(response.data)
+       })
+    }
     render(){
         return (
             <div>
-
                 <NavBarContainer name="Мои поверенные"/>
-                {this.props.Subscribers.map(elm=><><NavLink to={"/comunity/"+elm.name+"/conspect_and_tags"}>
-                    <div>{elm.name}</div>
+                {this.props.Subscribers.map(elm=><><NavLink to={"/comunity/"+elm.username+"/conspect_and_tags"}>
+                    <div>{elm.username}</div>
                     <img src={bobr} alt="some value"/>
                     </NavLink></>)}
                 <div>
-                    <SubscriberAdder SearchUsers={this.props.SearchUsers} add={this.props.add}/>
+                    <UserFinderContainer add={this.props.add}/>
                 </div>
             </div>
         )

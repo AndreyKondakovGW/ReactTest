@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import FormControl from 'react-bootstrap';
+import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
 
@@ -8,6 +8,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
       href=""
       ref={ref}
       onClick={(e) => {
+        console.log(e)
         e.preventDefault();
         onClick(e);
       }}
@@ -17,69 +18,56 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     </a>
   ));
   
-  // forwardRef again here!
-  // Dropdown needs access to the DOM of the Menu to measure it
-  const UserFinder = React.forwardRef(
-    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-      const [value, setValue] = useState('');
-      const [options,setOptions]=[];
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <input
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={(e) => handleChange(e)}
-            value={value}
-          />
-          <ul className="list-unstyled">
-            {React.Children.toArray(children)}
-          </ul>
-        </div>
-      );
-    },
-  );
+
   class UserFinderForm extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            options: []
+            options: [],
+            value: ""
         }
+        this.handleChange=this.handleChange.bind(this)
     }
-
-    SetOption=(newoptions)=>{
+    handleChange=(e)=>{
+      console.log(this)
+      let value = e.target.value;
+      if (value!=""){
+          axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
+             this.setState({
+                value: value,
+                options:response.data
+             })
+          })
+      }
       this.setState({
-
-      })
+        ...this.state,
+        value: value,
+     })
     }
-   // handleChange=(e)=>{
-     //   let value = e.target.value;
-     //   if (value!=""){
-       //     axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
-        //        console.log(response)
-        //        this.setState({
-         //           options: response.data
-           //     })
-         //   })
-    //    }
-  ///  }
+
 
   render(){
+    console.log(this.props.CurentOption)
     return (
+    <>
+    <div>{this.props.CurentOption.name}</div>
+    <ActionBox text="Добавить пользователя" action={this.props.add}/>
     <Dropdown>
-      <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        Custom toggle
+      <Dropdown.Toggle>
+        Выберете пользователя
       </Dropdown.Toggle>
-  
-      <Dropdown.Menu as={UserFinder}>
-        {UserFinder.options.map(elm=><Dropdown.Item eventKey={elm.id}>{elm.username}</Dropdown.Item>)}
+      <Dropdown.Menu>
+      <input
+            autoFocus
+            className="mx-3 my-2 w-auto"
+            placeholder="Введите имя пользователя"
+            onChange={(e) => this.handleChange(e)}
+            value={this.state.value}
+          />
+            {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
       </Dropdown.Menu>
     </Dropdown>
+    </>
   )
   }
 }

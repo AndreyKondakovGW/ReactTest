@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import {AddSubscriber,SetSubscribres} from './../../../redux/UserData-reducer';
 import Subscriber from './Subscriber.jsx';
 
-
 let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
@@ -12,15 +11,12 @@ let mapStatetoProps =(state)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
-        add:(name,id)=>{
-            let action = AddSubscriber(name,id)
-            dispatch(action)
+        add:()=>{
+            console.log("add")
+            dispatch(AddSubscriber())
         },
-        SearchUsers:(str)=>{
-            
-        },
-        setsubscribers:()=>{
-
+        setsubscribers:(subscribers)=>{
+            dispatch(SetSubscribres(subscribers))
         }
     }
 }

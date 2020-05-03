@@ -1,23 +1,21 @@
 import { connect } from 'react-redux';
-import {AddSubscriber} from './../../../redux/UserData-reducer';
+import {AddSubscriber,SetCurOptionAC} from './../../../redux/UserData-reducer';
 import UserFinderForm from './UserFinder.jsx';
 
 
 let mapStatetoProps =(state)=>{
     return {
-        Subscribers: state.UserDatareducer.UserData.Subscribers
+        Subscribers: state.UserDatareducer.UserData.Subscribers,
+        CurentOption: state.UserDatareducer.CurentOption
     }
 
 }
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
-        add:(name,id)=>{
-            let action = AddSubscriber(name,id)
-            dispatch(action)
-        },
-        SearchUsers:(str)=>{
-            
+        setoption:(name,id)=>{
+            console.log(name)
+            dispatch(SetCurOptionAC(name,id))
         },
         setsubscribers:()=>{
 
