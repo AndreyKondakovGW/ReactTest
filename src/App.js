@@ -14,7 +14,6 @@ const Styles = styled.div`
   background-color: rgb(220, 222, 234);
   width: 100%;
 height: 100vh;
-background: url(${background}) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -42,3 +41,5 @@ const App = (props) => {
   );
 }
 export default App;
+
+//background: url(${background}) no-repeat center center fixed;

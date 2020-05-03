@@ -43,10 +43,10 @@ background-size: cover;
 `;
 
 const Main=(props) =>{
-  
     let logout=()=>{
       console.log("logout")
       axios.get("http://127.0.0.1:5000/logout")
+      document.location.reload(true);
     }
     
     
@@ -66,7 +66,9 @@ const Main=(props) =>{
             <Route path = "/creteconspect/newconspect" component = {CreateConspectContainer} />
             <Route path="/topicrequest" component={TagRequestContainer}/>
 
+            <Route path="/logout" render = {() => <div>{logout()}</div>} />
             <Route path="/comunity" component={SubscriberContainer}/>
+            
         </StyledMain>
     )
 }
@@ -78,4 +80,3 @@ Main.propTypes = {
 
 export default Main;
 
-//<Route path="/logout" render = {() => <div>{logout()}</div>} />

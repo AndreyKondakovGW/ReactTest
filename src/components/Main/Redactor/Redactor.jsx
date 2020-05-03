@@ -115,6 +115,8 @@ const ImgCroper = (props)=> {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState({width:100,height:100})
     const [croppedArea,setcroppedArea] =useState({})
+    const [aspectX,setaspectX] =useState(4)
+    const [aspectY,setaspectY] =useState(3)
   
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         props.SetCordinate(croppedArea.x,croppedArea.x+croppedArea.width,croppedArea.y,croppedArea.y+croppedArea.height)
@@ -129,7 +131,7 @@ const ImgCroper = (props)=> {
           image={props.img}
           crop={crop}
           zoom={zoom}
-          aspect={4 / 3}
+          aspect={aspectX / aspectY}
           onCropChange={setCrop}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
@@ -146,23 +148,23 @@ const ImgCroper = (props)=> {
             onChange={(e, zoom) => setZoom(zoom)}
           />
 
-        <p id="noMargin">Width</p>   
-        <Slider
-            value={100-croppedArea.width+croppedArea.x}
-            min={0}
-            max={100}
-            step={1}
-            onChange={(e, x) => setCrop({x:x,y:crop.y})}
-        />
 
-        <p id="noMargin">Height</p>
+        <p id="noMargin">aspectX</p>   
         <Slider
-            value={100-croppedArea.height+croppedArea.y}
-            min={0}
-            max={100}
+            value={aspectX}
+            min={1}
+            max={5}
             step={1}
-            onChange={(e, y) => setCrop({x: crop.x,y:y})}
-        />
+            onChange={(e, aspectX) => setaspectX(aspectX)}
+          />
+          <p id="noMargin">aspectY</p>   
+        <Slider
+            value={aspectY}
+            min={1}
+            max={5}
+            step={1}
+            onChange={(e, aspectY) => setaspectY(aspectY)}
+          />
         </div>
       )
   }
@@ -308,7 +310,6 @@ class Redactor extends React.Component{
 
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-        ({})
         <div className="photoviewer">
             <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
             <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
@@ -343,3 +344,23 @@ class Redactor extends React.Component{
 
 
 export default Redactor;
+
+/*
+        <p id="noMargin">Width</p>   
+        <Slider
+            value={100-croppedArea.width+croppedArea.x}
+            min={0}
+            max={100}
+            step={1}
+            onChange={(e, x) => setCrop({x:x,y:crop.y})}
+        />
+
+        <p id="noMargin">Height</p>
+        <Slider
+            value={100-croppedArea.height+croppedArea.y}
+            min={0}
+            max={100}
+            step={1}
+            onChange={(e, y) => setCrop({x: crop.x,y:y})}
+        />
+*/
