@@ -54,7 +54,7 @@ class SubscriberAdder extends React.Component{
 
 class Subscriber extends React.Component{
     componentDidMount(){
-        console.log("Отправлелен запрос на получене конспектов")
+        console.log("Отправлелен запрос на получение конспектов")
         axios.get("http://127.0.0.1:5000/friend_list").then(response =>{
             console.log(response.data)
             this.props.setsubscribers(response.data)
@@ -67,10 +67,12 @@ class Subscriber extends React.Component{
                 {this.props.Subscribers.map(elm=><><NavLink to={"/comunity/"+elm.username+"/conspect_and_tags"}>
                     <div>{elm.username}</div>
                     <img src={bobr} alt="some value"/>
-                    </NavLink></>)}
-                <div>
-                    <UserFinderContainer add={this.props.add}/>
-                </div>
+                    </NavLink> </>)}
+                {/*
+                 <UserFinderContainer add={this.props.add}/>
+                */}
+                   
+               
             </div>
         )
     }

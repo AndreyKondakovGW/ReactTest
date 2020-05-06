@@ -12,7 +12,6 @@ const PohotoVeiwer=(props) =>{
 
     return(
         <div>
-            {props.name}
             <div className={s.DeleteBlock} onClick={deleteB}>-</div>
             <img  src={props.path} className={s.imgbox} onClick={changeP}/>
         </div>

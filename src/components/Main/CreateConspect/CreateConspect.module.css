@@ -17,3 +17,16 @@
     height: 400px;
     background: cornsilk;
 }
+
+.scrolbar{
+    margin:15px;
+    width: 100px;
+    margin-top:0px;
+    overflow-x: scroll;
+    height: 50vh;
+    overflow-y: scroll;
+    background-color: rgba(202, 162, 200,0);
+    border-style: solid;
+    border-width: 1px;
+    border-color: #f1f1f1;
+}

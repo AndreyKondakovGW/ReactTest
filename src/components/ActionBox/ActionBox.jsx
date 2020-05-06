@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 const StyledActionBox = styled.div`
-
-color: black;
-background-color:#02dac5;
 font-size: 1em;
 width:180px;
 height:35px;
@@ -18,11 +15,18 @@ display: inline-block;
 margin-top:15px;
 margin-bottom: 15px;
 
+background-color:#02dac5;
+color: black;
 transition-property: color;
 transition-duration: 1s;
 transition-timing-function: ease;
 
+box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+transition-property: box-shadow;
+transition-duration: .3s;
+        
 :hover{
+    box-shadow: none;
     background-color:#018786;
     color: #f1f1f1;
     cursor: pointer

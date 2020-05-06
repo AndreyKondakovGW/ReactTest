@@ -68,6 +68,7 @@ const StyledRedactor = styled.div`
        margin-top:0px;
         /*display:block;*/
         overflow-x: scroll;
+        height: 50vh;
         overflow-y: scroll;
         background-color: rgba(202, 162, 200,0);
         border-style: solid;
@@ -310,6 +311,7 @@ class Redactor extends React.Component{
 
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
+       {/*({})*/} 
         <div className="photoviewer">
             <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
             <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>

@@ -2,9 +2,44 @@ import React,{useState} from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
+import styled from 'styled-components';
+const StyledLine = styled.div`
+text-align: center;
+*{
+    display:inline-block;
+}
+`;
+const StyledDropdown = styled.div`
+#dropdown{
+    margin-left:5px;
+    margin-right:5px;
+    border-radius: 0%;
+    border: 0px;
+    background-color:#02dac5;
+    color: black;
+    font-size: 1em;
+
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+
+    transition: color 1s ease, 
+                box-shadow .3s ease;
+    :hover {
+      background-color:#018786;
+      color: #f1f1f1;
+      box-shadow: none;
+    }
+}
+#dropdownmenu{
+  margin-left:5px;
+    margin-right:5px;
+}
+`;
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
+      
+      <a
       href=""
       ref={ref}
       onClick={(e) => {
@@ -16,6 +51,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
       {children}
       &#x25bc;
     </a>
+
   ));
   
 
@@ -49,24 +85,23 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   render(){
     console.log(this.props.CurentOption)
     return (
-    <>
-    <div>{this.props.CurentOption.name}</div>
-    <ActionBox text="Добавить пользователя" action={this.props.add}/>
-    <Dropdown>
-      <Dropdown.Toggle>
-        Выберете пользователя
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-      <input
+      <>
+      <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Выберете пользователя->"} action={this.props.add}/>
+
+      <StyledDropdown>
+      <Dropdown id="nav-dropdown">
+        <Dropdown.Toggle id="dropdown"><StyledLine>Поиск пользователя...</StyledLine></Dropdown.Toggle>
+        <Dropdown.Menu id="dropdownmenu">
+          <input
             autoFocus
             className="mx-3 my-2 w-auto"
-            placeholder="Введите имя пользователя"
+            placeholder="Введите имя..."
             onChange={(e) => this.handleChange(e)}
-            value={this.state.value}
-          />
-            {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
-      </Dropdown.Menu>
-    </Dropdown>
+            value={this.state.value}/>
+        {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+        </Dropdown.Menu>
+      </Dropdown>
+    </StyledDropdown>
     </>
   )
   }

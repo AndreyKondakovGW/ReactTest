@@ -4,6 +4,7 @@ import {DeleteCheckedConspectAC,ShowAlertAC} from './../../../redux/UserData-red
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
 import {SetCurrentConspectCR,LoadConspectAC} from '../../../redux/Curentconspect-reducer';
 import * as axios from 'axios';
+import {AddSubscriber} from './../../../redux/UserData-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
@@ -59,6 +60,10 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
+        add:()=>{
+            console.log("add")
+            dispatch(AddSubscriber())
+        },
         ShowAlert:(Conspects)=>{
             let alertT=[]
             console.log(Conspects.filter(elm=>elm.checked))

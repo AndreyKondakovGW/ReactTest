@@ -1,7 +1,71 @@
 import React from 'react';
-import s from './Conspectbox.module.css';
+//import s from './Conspectbox.module.css';
 import { NavLink } from 'react-router-dom';
+import {Plus,Dash} from 'react-bootstrap-icons';
+import styled from 'styled-components';
+const StyledLine = styled.div`
+text-align: left;
+margin-bottom:10px;
+*{
+    display:inline-block;
+}
+`;
+const StyledChecked = styled.div`
+    border-radius: 20%;
+    width: 27px;
+    height: 27px;
+    padding-left: 6px;
+    background-color: rgb(88, 214, 88);
+    margin-right:10px;
 
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    :hover{
+        cursor: pointer;
+        box-shadow: none;
+    }
+`;
+const StyledUnchecked = styled.div`
+border-radius: 20%;
+    width: 27px;
+    height: 27px;
+    padding-left: 6px;
+    background-color: rgb(255, 80, 80);
+    margin-right:10px;
+
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    :hover{
+        cursor: pointer;
+        box-shadow: none;
+    }
+`;
+const StyledConspectbox = styled.div`
+margin:15px;
+display:inline-block;
+a{
+    color: black;
+    font-size: 1em;
+    transition-property: color;
+    transition-duration: .3s;
+:hover{
+    color: #f1f1f1;
+}
+}
+
+    img{
+        width: 200px;
+        height: 200px;
+        box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .4);
+        transition-property: box-shadow;
+        transition-duration: .3s;
+        :hover{
+            box-shadow: none;
+        }
+    }
+`;
 
 class Conspectbox extends React.Component{
     check=()=>{
@@ -10,23 +74,25 @@ class Conspectbox extends React.Component{
     }
     checkbox=()=>{
         if (this.props.checked){
-            return (<div className={s.checked} onClick={this.check}>+
-                </div>)
+            return (
+                <StyledChecked onClick={this.check}><Plus/></StyledChecked>)
         }
         else{
-            return (<div className={s.unchecked} onClick={this.check}>-
-            </div>)
+            return (<StyledUnchecked onClick={this.check}><Dash/></StyledUnchecked>)
         }
     }
     render(){
         return (
-            <div className={s.body} >
-                {this.checkbox()}
+            <StyledConspectbox>
+                <StyledLine>
+                    {this.checkbox()}
+                    <NavLink to={this.props.path}>{this.props.name}</NavLink>
+                </StyledLine>
+                
                 <NavLink to={this.props.path}>
-                    <div>{this.props.name}</div>
                     <img src={this.props.img} alt="some value"/>
                 </NavLink>
-            </div>
+            </StyledConspectbox>
         )
     
     }

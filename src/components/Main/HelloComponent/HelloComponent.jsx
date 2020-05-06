@@ -1,11 +1,17 @@
 import React from 'react';
-import s from './HelloComponent.module.css'
+//import s from './HelloComponent.module.css'
+import { Row,  Container } from 'react-bootstrap';
+import styled from 'styled-components';
+const StyledHellobox = styled.div`
+font-size:5em;
+ padding: 20% 0;
+text-align:center;
+
+`;
 
 const HelloComponent=(props) =>{
     return (
-        <div className={s.hellobox}>
-            <h1>Добро пожаловать в ConspectSturcters</h1>
-        </div>
+            <StyledHellobox>Добро пожаловать в Conspect Structure</StyledHellobox>
     )
 }
 export default HelloComponent;

@@ -16,6 +16,11 @@ const StyledHeader = styled.div`
       color:#02dac5;
     }
   }
+
+  .navbar-brand{
+    margin-right:0;
+  }
+  
   .closebtn{
     border-radius: 20%;
     margin-right:15px;
@@ -24,7 +29,10 @@ const StyledHeader = styled.div`
     width:30px;
     height:30px;
     transform: ${({ open }) => open ? 'rotate(0.5turn)' : 'none'};
-    transition: color 1s ease, transform .4s ease-in-out;
+    box-shadow: ${({ open }) => open ? '-3px -3px 3px 0px rgba(0, 0, 0, .3)' : '3px 3px 3px 0px rgba(0, 0, 0, .3)'};
+    transition: color 1s ease, 
+                transform .4s ease-in-out,
+                box-shadow .3s ease;
     outline:none;
     padding-bottom:5px;
   }
@@ -32,6 +40,7 @@ const StyledHeader = styled.div`
   .closebtn:hover {
     background-color:#018786;
     color: #f1f1f1;
+    box-shadow: none;
   }
   
 #basic-navbar-nav {
