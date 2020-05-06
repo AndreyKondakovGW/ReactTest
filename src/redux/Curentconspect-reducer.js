@@ -202,10 +202,19 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             return newstate
         }
         case LOAD_CONSPECT:{
+            let newstate={
+                ...state,
+                LogicData:{
+                    ...state.LogicData,
+                    currentpdf: {name: "simplePDF",pdf:pdf}
+                }
+            }
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ action.id).then(response=>{
                 console.log(response)
                 LoadConspectFromData(response,action.conspectname,action.id,action.OpenConspect)
             })
+            return newstate
+
         }
         case SET_COORDINATE:{
             let newstate={

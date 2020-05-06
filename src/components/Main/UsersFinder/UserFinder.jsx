@@ -37,24 +37,6 @@ const StyledDropdown = styled.div`
 }
 `;
 
-const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-      
-      <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        console.log(e)
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-      &#x25bc;
-    </a>
-
-  ));
-  
-
   class UserFinderForm extends React.Component{
     constructor(props){
         super(props)
@@ -83,7 +65,6 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 
 
   render(){
-    console.log(this.props.CurentOption)
     return (
       <>
       <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Выберете пользователя->"} action={this.props.add}/>
@@ -92,6 +73,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
       <Dropdown id="nav-dropdown">
         <Dropdown.Toggle id="dropdown"><StyledLine>Поиск пользователя...</StyledLine></Dropdown.Toggle>
         <Dropdown.Menu id="dropdownmenu">
+          {this.props.message}
           <input
             autoFocus
             className="mx-3 my-2 w-auto"

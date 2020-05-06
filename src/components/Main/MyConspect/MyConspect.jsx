@@ -1,6 +1,7 @@
 import React from 'react';
 import Conspectbox from './Conspectbox/ConspectboxComponent.jsx';
-import Conspects from './MyConspectComponent.jsx'
+import Conspects from './MyConspectComponent.jsx';
+import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import { Alert} from 'react-bootstrap';
 import ActionBox from './../../ActionBox/ActionBox.jsx'
 import * as axios from 'axios';
@@ -76,7 +77,9 @@ class MyConspect extends React.Component{
         }
         return (
         <div> 
-                <Conspects deletechecked={this.props.deletechecked}
+                <NavBarContainer name="Конспекты"/>
+                <Conspects 
+                    Readcted={true}
                     pages={pages}
                     CurrentPage={this.props.CurrentPage}
                     changePage={this.changePage}

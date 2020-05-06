@@ -52,7 +52,13 @@ class ConspectSaver extends React.Component{
         }
         this.handleSubmit=this.handleSubmit.bind(this)
     }
-
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps !== this.props) {
+            this.setState({
+                name: this.props.name
+            })
+        }
+    }
     ClearForm=()=>{
         this.setState({
             name: this.props.name
@@ -72,9 +78,12 @@ class ConspectSaver extends React.Component{
             name: value
         })
     }
-    render(){   
+    render(){
         return(
             <div>
+                {console.log(this.props.name)}
+                {console.log(this.props.fotos)}
+                
                 {(this.props.mutable)?<input 
                 id="lineinput"
                        name="conspectname"
@@ -119,7 +128,7 @@ class NavBar extends React.Component{
                     <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 
-                <Route exact path ="/creteconspect" render={()=><StyledLine>
+                <Route exact path ="/creteconspect/newconspect" render={()=><StyledLine>
                      {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label for="file" >Загрузить файл {<FilePlus/>}</label>
@@ -127,31 +136,39 @@ class NavBar extends React.Component{
                     <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
                 </StyledLine>}/>
-                {/*<Route path ="/creteconspect/newconspect" render={()=><StyledLine>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
-                </StyledLine>}/>*/}
                 
    
                 <Route path ="/creteconspect/:conspect/:id" render={()=>
                 <StyledLine>
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.conspectname} conspects={this.props.CurentConspectfotos} mutable={false}/>
+                    <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
+                    <label for="file" >Загрузить файл {<FilePlus/>}</label>
+                    {console.log(this.props.name)}
+                    {console.log(this.props.conspectname)}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.name} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
                 </StyledLine>}/>
+                
 
-                <Route path ="/redactor" render={()=><StyledLine>
+
+                <Route path ="/redactor" render={()=><><StyledLine>
                     {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                         <CommentsListConatiner />
+                        </StyledLine>
                         {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
                         <MyConspectList>
                         <div>
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                         </div>
                         </MyConspectList>
-                    </StyledLine>}/>
+                        </>
+                    }/>
                 {/* */}
-                <Route path="/comunity" render={()=>
+
+
+
+                <Route exact path="/comunity" render={()=>
                 <>
-                  <UserFinderContainer add={this.props.add}/>
+                  <UserFinderContainer message="Поиск пользователя" add={this.props.add}/>
                 </>
                 }></Route>
         </Nav>
