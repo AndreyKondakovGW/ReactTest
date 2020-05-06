@@ -12,12 +12,12 @@ line-height: 35px;
 text-align:center;
 vertical-align:middle;
 
+margin-top:15px;
+margin-bottom: 15px;
 margin-left:5px;
 margin-right: 5px;
     
 display: block;
-margin-top:15px;
-margin-bottom: 15px;
             
 box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
 transition-property: box-shadow;

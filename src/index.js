@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
 width: 100%;
-height: 100%;
+height: 100vh;
   *{
     font-family:
     "century gothic",
@@ -65,10 +65,14 @@ transition-property: color;
 transition-duration: 1s;
 transition-timing-function: ease;
 
+box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+transition-property: box-shadow;
+transition-duration: .3s;
 :hover{
     background-color:#018786;
     color: #f1f1f1;
     cursor: pointer;
+    box-shadow: none;
 }
   
 }

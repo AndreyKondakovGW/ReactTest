@@ -1,9 +1,53 @@
 import React from 'react';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
-import PohotoVeiwer from './PohotoVeiwer/PohotoVeiwer.jsx'
-import s from './CreateConspect.module.css';
+import PohotoVeiwer from './PohotoVeiwer/PohotoVeiwer.jsx';
 import * as axios from 'axios';
+import styled from 'styled-components';
+const StyledMainbox = styled.div`
 
+    margin-top:20px ;
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: flex-start;
+
+.mygrid{
+width:100%;
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+grid-gap: 10px;
+justify-items: center;
+align-items: center;
+}
+`;
+const StyledImagePerwier = styled.div`
+width:100%;
+height:50vh;
+margin-bottom:20px;
+display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+
+    img{
+        /*это работает и слава богу DO NOT TOUCH PLEASE*/
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
+    }
+`;
+const StyledInvite = styled.div`
+height:35px;
+line-height: 35px;
+font-size:1em;
+text-align:center;
+`;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve, reject) => {
         let f=[]
@@ -45,7 +89,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     })  
 }
 
-
 class CreateConspect extends React.Component{
     
     componentDidMount= async ()=>{
@@ -63,23 +106,34 @@ class CreateConspect extends React.Component{
         console.log("Открыт конспект" + this.props.createrid)
     }
     
-    ReactContents = ()=>{return(this.props.fotos.map(elm => <PohotoVeiwer name={elm.name} delete={this.props.DeleteFoto} change={this.props.ChangePerwie} path={elm.path}/>))}
-    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?(<img className={s.ImagePerwier} src={this.props.imagePreviewUrl} alt="some value" />):(<div className={s.ImagePerwier}>ImagePerwier</div>))}
+    ReactContents = ()=>{return(this.props.fotos.map(elm => 
+                        <PohotoVeiwer name={elm.name} 
+                                    delete={this.props.DeleteFoto} 
+                                    change={this.props.ChangePerwie} 
+                                    path={elm.path}/>))}
+
+    ImgPeriwe = ()=> {return((this.props.imagePreviewUrl)?
+                    (<StyledImagePerwier>
+                        <img src={this.props.imagePreviewUrl} alt="some value" />
+                    </StyledImagePerwier>)
+                    :
+                    (<StyledImagePerwier>
+                       <StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite> 
+                    </StyledImagePerwier>))}
     render(){
         console.log("Conspectname")  
     return( 
         <div>
             <NavBarContainer name={this.props.Conspectname}/>
-            <div className={s.mainbox}> 
-                <div className={s.wrapper}>
+            <StyledMainbox>
+                {this.ImgPeriwe()}
+                <div className="mygrid">
                     {this.ReactContents()}
                 </div>
-                {this.ImgPeriwe()}
-            </div>
-            <div className={s.scrolbar}>
+            </StyledMainbox>
+            {/*<div className={s.scrolbar}>
                 {this.ReactContents()}
-            </div>
-            
+            </div> */}
         </div>
     )
 }

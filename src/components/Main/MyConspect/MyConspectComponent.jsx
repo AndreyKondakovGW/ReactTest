@@ -14,20 +14,6 @@ const StyledConspects = styled.div`
     align-items: flex-start;
 `;
 
-const StyledGrid = styled.div`
-    display: flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-
-    justify-content:flex-start;
-    align-items: flex-start;
-
-    @media (max-width: 500px) {
-        justify-content:center;
-        align-items: center;
-      }
-`;
-
 const StyledLine = styled.div`
 width:100%;
 text-align: center;
@@ -36,6 +22,14 @@ text-align: center;
 }
 `;
 
+const StyledGrid = styled.div`
+width:100%;
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+grid-gap: 15px;
+justify-items: center;
+align-items: center;
+`;
 const Conspects=(props)=>{
     return(
         <div>

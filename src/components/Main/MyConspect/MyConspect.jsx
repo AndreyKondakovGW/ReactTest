@@ -82,8 +82,7 @@ class MyConspect extends React.Component{
                     changePage={this.changePage}
                     ReactContents={this.state.ReactContents}
                     alert={this.AletrF}> 
-                </Conspects>
-                                    
+                </Conspects>                   
         </div>
         )
 }
