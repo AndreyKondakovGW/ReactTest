@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import s from './Content.module.css';
 import styled from 'styled-components';
 const StyledTags = styled.div`
@@ -33,12 +34,11 @@ text-align: center;
 const Topics=(props)=>{
     return(
         <div>
-        <NavBarContainer name="Main"/>
+            {/*<NavBarContainer name="Main"/>*/}
         <StyledTags>
             <StyledLine>
              {props.pages.map(elm=><span className={props.CurrentPage ===elm && s.selected} onClick={()=>{props.changePage(elm)}}>{elm}</span>)}
             </StyledLine>
-
             <StyledGrid>{props.ReactContents}</StyledGrid>
         </StyledTags>
         </div>

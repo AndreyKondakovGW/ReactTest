@@ -342,8 +342,6 @@ class Redactor extends React.Component{
         </div>
     )}
 }
-
-
 export default Redactor;
 
 /*
