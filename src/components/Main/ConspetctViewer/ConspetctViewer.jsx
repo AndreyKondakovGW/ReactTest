@@ -46,10 +46,10 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         OpenConspect(name,id, result)  
     })  
 }
-const LoadPDF=async (LoadData,conspectname,setPdf)=>{
+const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     LoadData()
     console.log("Отправлелен запрос на получене  конспекта "+conspectname)
-    axios('http://127.0.0.1:5000/getconspectpdf/'+conspectname,
+    axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
     {   
         method: 'GET',
         responseType: 'blob'}
@@ -78,13 +78,12 @@ const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
 }
 
 class Viewer extends React.Component{
-    /*
     componentDidMount(){
         if (this.props.match.url.split('/')[2]!=this.props.curntpdf.name){
         if (this.props.match.url.split('/')[1]=="content"){
             this.props.LoadData()
             console.log("Отправлелен запрос на получене  пдфки тэга "+this.props.match.url.split('/')[2])
-            axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[2],
+            axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[3],
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{
@@ -97,7 +96,7 @@ class Viewer extends React.Component{
         }
         if ((this.props.match.url.split('/')[1]=="myconspects")){
             if (this.props.match.url.split('/')[4]=="pdf"){
-                LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)
+                LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
             }
             if (this.props.match.url.split('/')[4]=="content"){
                 LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
@@ -105,7 +104,6 @@ class Viewer extends React.Component{
         }
         }
     }
-    */
 
 
 Contentpdf=()=>{
@@ -126,7 +124,7 @@ Content=()=>{
             {this.props.Photos.map(elm=><div className={s.img}><img  src={elm.path}/></div>)}
         </div>
         <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"pdf"}>
-            <ActionBox text="Создать пдф конспекта" action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}/>
+            <ActionBox text="Создать пдф конспекта" action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)}/>
         </NavLink>
     </div>:
 <div>
