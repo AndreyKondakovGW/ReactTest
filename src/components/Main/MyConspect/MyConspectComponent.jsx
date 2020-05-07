@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import s from './MyConspect.module.css'
 import styled from 'styled-components';
 const StyledConspects = styled.div`
@@ -33,16 +32,14 @@ align-items: center;
 const Conspects=(props)=>{
     return(
         <div>
-                <NavBarContainer name="Конспекты"/>
                 <StyledConspects>
-                    {props.alert()}
-                <StyledLine>
+                    {(props.alert)?props.alert():<></>}
+                    <StyledLine>
                     {props.pages.map(elm=>
                         <div className={props.CurrentPage ===elm && s.selected} onClick={()=>props.changePage(elm)}>
                             {elm}
                         </div>)}
-                </StyledLine>
-                    
+                    </StyledLine>
                    <StyledGrid>{props.ReactContents}</StyledGrid>
                 </StyledConspects>
                 

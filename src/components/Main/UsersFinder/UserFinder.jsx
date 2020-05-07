@@ -107,7 +107,6 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 
 
   render(){
-    console.log(this.props.CurentOption)
     return (
       <StyledLine>
       <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>

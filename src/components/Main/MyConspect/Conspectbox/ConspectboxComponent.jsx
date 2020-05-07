@@ -83,7 +83,7 @@ class Conspectbox extends React.Component{
         return (
             <StyledConspectbox>
                 <StyledLine>
-                    {this.checkbox()}
+                    {(!this.props.Readcted)?this.checkbox():<></>}
                     <NavLink to={this.props.path}>{this.props.name}</NavLink>
                 </StyledLine>
                 

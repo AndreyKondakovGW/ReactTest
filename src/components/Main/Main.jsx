@@ -6,6 +6,7 @@ import ConspectViewerContainer from './ConspetctViewer/ConspectViewerContainer.j
 import CreateConspectContainer from './CreateConspect/CreateConspectContainer.jsx';
 import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
 import SubscriberContainer from './Subscriber/SubscriberContainer';
+import SubscribersContentContainer from './SubscribersContent/SubscribersContentContainer';
 import HelloComponent from './HelloComponent/HelloComponent';
 import backimg from '../../static/bground2.jpg';
 import {Route } from 'react-router-dom';
@@ -74,8 +75,9 @@ const Main=(props) =>{
             <Route path="/topicrequest" component={TagRequestContainer}/>
 
             <Route path="/logout" render = {() => <div>{logout()}</div>} />
-
-            <Route path="/comunity" component={SubscriberContainer}/>
+            
+            <Route exact path="/comunity" component={SubscriberContainer}/>
+            <Route path="/comunity/:name" component={SubscribersContentContainer}/>
         </StyledMain>
     )
 }

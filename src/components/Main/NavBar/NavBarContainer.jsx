@@ -161,6 +161,7 @@ let mapDispatchtoProps =(dispatch) =>{
                       });
                 }
             })
+            
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);
         }

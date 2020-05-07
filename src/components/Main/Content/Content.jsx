@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../Button/Button';
+import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import Topics from './TopicsComponent.jsx';
 import * as axios from 'axios';
 
@@ -48,6 +49,7 @@ class TopicsAPI extends React.Component{
         }
         return(   
         <div>
+            <NavBarContainer name="Main"/>
             <Topics pages={pages} 
                     CurrentPage={this.props.CurrentPage} 
                     changePage={this.changePage}

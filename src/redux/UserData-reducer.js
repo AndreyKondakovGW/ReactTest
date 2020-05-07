@@ -40,6 +40,24 @@ let initialstate={
         ],
         
     },
+    Subscriberdata:{
+        Topics: [
+            {name: "тема 1", id:1},
+            {name: "тема 2", id:2},
+            {name: "тема 3", id:3}],
+        Conspects: [
+            {name: "Ежи",id: 1,img: img1,checked: false},
+            {name: "Змеи",id: 2,img: img2,checked: false},
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+        ], 
+        Conspectspagesize:3,
+        TotalConspectscount:3,
+        CurrentConspectPage:1,
+        
+        Topicspagesize:3,
+        TotalTopicscount:3,
+        CurrentTopicsPage:1,
+    },
     CurentOption: "",
 
     Allertpageisopen:false,
