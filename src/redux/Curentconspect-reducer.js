@@ -24,6 +24,9 @@ let initialstate={
             id: -1,
             data: {
                 fotos: [
+                    {name:"1", path:bobr1},
+                    {name:"2", path:bobr2},
+                    {name:"3", path:bobr3}
                 ],
                 curentfoto: {}
             }
