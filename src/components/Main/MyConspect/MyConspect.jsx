@@ -17,7 +17,7 @@ class MyConspect extends React.Component{
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name+"/"+elm.id} 
+                path={"/myconspects/"+elm.name+"/"+elm.id+"/content"} 
                 checkf={this.props.checked}/> )}
         }
         
@@ -39,7 +39,7 @@ class MyConspect extends React.Component{
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name+"/"+elm.id}  
+                path={"/myconspects/"+elm.name+"/"+elm.id+"/content"}  
                 checkf={this.props.checked}/>)
         })
     }
@@ -52,7 +52,7 @@ class MyConspect extends React.Component{
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name+"/"+elm.id} 
+                path={"/myconspects/"+elm.name+"/"+elm.id+"/content"} 
                 checkf={this.props.checked}/>)
             
         })

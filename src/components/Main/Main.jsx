@@ -64,7 +64,7 @@ const Main=(props) =>{
             <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
 
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
-            <Route path = "/myconspects/:contentname/:id" component = {ConspectViewerContainer}/> 
+            <Route path = "/myconspects/:conspectname/:id/:n" component = {ConspectViewerContainer}/> 
 
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>

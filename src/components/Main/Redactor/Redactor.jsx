@@ -278,7 +278,10 @@ class Redactor extends React.Component{
     componentDidMount= async ()=>{
         console.log(this.props.match.params.conspectname)
         console.log(this.props.match.params.id)
-        
+        axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+                console.log(response.data)
+                this.props.setConspect(response.data)
+           })
         if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
             this.props.LoadData()
             console.log("Загружаю конспект "+this.props.match.params.conspectname)
@@ -307,27 +310,29 @@ class Redactor extends React.Component{
     }
 
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
-
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-       {/*({})*/} 
-        <div className="photoviewer">
-            <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>{/* */}
-            <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
-            <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
-        </div>
-
-        <div className="instruments"> 
-            <div className="scrolbar">
-                {this.ConspectPhotos()}
-        </div>
-
-        <div className ="tagbar">
-            <TagsForm Coordinate={this.props.coordinate} SaveTags={this.props.SaveTags} curentfoto={this.props.curentfoto}/>
-        </div>
-        </div>
-    </StyledRedactor>
-    :
+            {/*({})*/} 
+            {(this.props.match.params.id!=-1)?<>
+                <div className="photoviewer">
+                    <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>
+                    <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
+                    <div className ="button" onClick={this.props.ChangeCurPL}> <ArrowRight/> </div>
+                </div>
+                <div className="instruments"> 
+                    <div className="scrolbar">
+                        {this.ConspectPhotos()}
+                    </div>
+                    <div className ="tagbar">
+                        <TagsForm Coordinate={this.props.coordinate} SaveTags={this.props.SaveTags} curentfoto={this.props.curentfoto}/>
+                    </div>
+            
+                </div>
+            </>:
+            <div>
+                Нет открытого конспекта, воспользуйтесь кнопкой открыть конспект, либо создайте новый конспект, если список конспектов пуст
+            </div>}
+    </StyledRedactor>:
     <div>
         <img src={preloader} width={500} height={500}></img>
     </div>)}

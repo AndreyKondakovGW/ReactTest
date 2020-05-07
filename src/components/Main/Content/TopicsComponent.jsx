@@ -2,6 +2,7 @@ import React from 'react';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import s from './Content.module.css';
 import styled from 'styled-components';
+import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 const StyledTags = styled.div`
     margin-top:20px ;
     width:100%;

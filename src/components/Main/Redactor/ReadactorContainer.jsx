@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Redactor from './Redactor';
+import {SetConspectsAC} from './../../../redux/UserData-reducer';
 import {ChangeCurentPhotoAC,SetCurrentConspectCR,AddPhotoAC,LoadConspectAC,SetCordinateAC,DataLoadSwitch} from './../../../redux/Curentconspect-reducer';
 import * as axios from 'axios';
 
@@ -62,7 +63,11 @@ let mapDispatchtoProps =(dispatch) =>{
             console.log(coordinate)
             axios.post('http://127.0.0.1:5000/sendfragment',{photo_id:photoid,x1:coordinate.x1,y1:coordinate.y1,x2:coordinate.x2,y2:coordinate.y2,tags:tags}).then(function(){
                 console.log('SUCCESS!!')})
-        }      
+        },
+        setConspect: (conspects) =>{
+            const action =SetConspectsAC(conspects);
+            dispatch(action)
+        },      
     }
 }
 

@@ -143,24 +143,19 @@ class NavBar extends React.Component{
                     {console.log(this.props.conspectname)}
                     {(()=>{return(<ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.name} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
                 </StyledLine>}/>
-                
 
 
-                <Route path ="/redactor" render={()=><><StyledLine>
-                    {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
-                        <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                        <CommentsListConatiner />
-                        </StyledLine>
-                        {/*TODO. ЗАМЕНИТЬ НА ДРОПДАУН*/}
-                        <MyConspectList>
+                <Route path ="/redactor" render={()=><>
+                    <StyledLine>
+                        <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
+                        {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
+                    </StyledLine>
+                    <MyConspectList>
                         <div>
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                         </div>
-                        </MyConspectList>
-                        </>
-                    }/>
-                {/* */}
-
+                    </MyConspectList>
+                </>}/>
 
 
                 <Route exact path="/comunity" render={()=>
