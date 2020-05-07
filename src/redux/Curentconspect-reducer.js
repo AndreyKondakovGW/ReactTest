@@ -20,12 +20,12 @@ const DATA_LOADSWITH="DATA_LOADSWITH";
 let initialstate={
     LogicData:{
         CurrentConspect: {
-            name: "Bobrconspect",
+            name: "EmptyConspect",
             id: -1,
             data: {
                 fotos: [
                 ],
-                curentfoto: {name:"bobr2", path: bobr2, index: 1,comments:""}
+                curentfoto: {}
             }
         },
         currentpdf: {name: "simplePDF",pdf:pdf}

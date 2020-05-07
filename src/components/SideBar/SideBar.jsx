@@ -61,8 +61,8 @@ const SideBar=(props) =>{
                     path="creteconspect/newconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
-            <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />          
-            <Button text='Редактор' path={"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id} icon={<Pencil/>}/>
+            <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />
+            <Button text='Редактор' path={(props.CurrentConspect.id!=-1)?"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id:"redactor/emptyconspect/"+props.CurrentConspect.id} icon={<Pencil/>}/>
             <Button text='Мои поверенные' icon={<PeopleFill/>}  path={"comunity"}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
