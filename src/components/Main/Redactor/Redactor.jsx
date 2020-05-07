@@ -6,8 +6,8 @@ import Slider from '@material-ui/core/Slider';
 import * as axios from 'axios';
 
 import { ArrowLeft, ArrowRight,PlusSquare} from 'react-bootstrap-icons';
+import preloader from '../../../static/2.gif';
 import styled from 'styled-components';
-import preloader from '../../../static/2.gif'
 const StyledRedactor = styled.div`
 
     margin-top:20px ;
@@ -41,7 +41,6 @@ const StyledRedactor = styled.div`
     .photoviewer{
         margin:15px;
         margin-top:0px;
-        /*display:inline-block;*/
     }
     .foto{
         position: relative;

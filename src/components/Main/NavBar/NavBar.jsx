@@ -40,8 +40,6 @@ background-color:rgba(255,255,255,0.5);
   #myToggle{
     outline:none;
   }
-
-
 `;
 
 class ConspectSaver extends React.Component{
@@ -108,7 +106,6 @@ class NavBar extends React.Component{
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-
                 <Route exact path ="/myconspects" render={()=><StyledLine>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>

@@ -1,5 +1,4 @@
 import React from 'react';
-//import s from './Conspectbox.module.css';
 import { NavLink } from 'react-router-dom';
 import {Plus,Dash} from 'react-bootstrap-icons';
 import styled from 'styled-components';
@@ -43,7 +42,6 @@ border-radius: 20%;
     }
 `;
 const StyledConspectbox = styled.div`
-margin:15px;
 display:inline-block;
 a{
     color: black;
@@ -54,10 +52,10 @@ a{
     color: #f1f1f1;
 }
 }
-
     img{
         width: 200px;
         height: 200px;
+        object-fit: cover;
         box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .4);
         transition-property: box-shadow;
         transition-duration: .3s;

@@ -59,16 +59,23 @@ const Main=(props) =>{
        
         <StyledMain open={props.open} >
             <Route exact path ="/main/:username" component = {HelloComponent}/>
+
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
+
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
-            <Route path = "/myconspects/:contentname/:id" component = {ConspectViewerContainer}/> 
+            <Route path = "/myconspects/:conspectname/:id/:n" component = {ConspectViewerContainer}/> 
+
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>
-            <Route path = "/redactor/:conspectname/:id" component = {RedactorContainer} />
             <Route path = "/creteconspect/newconspect" component = {CreateConspectContainer} />
+
+            <Route path = "/redactor/:conspectname/:id" component = {RedactorContainer} />
+            
             <Route path="/topicrequest" component={TagRequestContainer}/>
+
             <Route path="/logout" render = {() => <div>{logout()}</div>} />
+            
             <Route exact path="/comunity" component={SubscriberContainer}/>
             <Route path="/comunity/:name" component={SubscribersContentContainer}/>
         </StyledMain>

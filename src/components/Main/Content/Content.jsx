@@ -1,5 +1,5 @@
 import React from 'react';
-import Contentbox from '../../Contentbox/Contentbox';
+import Button from '../../Button/Button';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import Topics from './TopicsComponent.jsx';
 import * as axios from 'axios';
@@ -11,12 +11,12 @@ class TopicsAPI extends React.Component{
         super(props)
         this.state={
             ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
-            <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
+            <Button text={elm.name} path={"content/"+elm.name} /> )
         }
     }
     
     componentDidMount(){
-        console.log("Отправлелен запрос на получене тэгов")
+        console.log("Отправлелен запрос на получение тэгов")
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
             console.log(response.data)
             this.props.setTopics(response.data)
@@ -28,7 +28,7 @@ class TopicsAPI extends React.Component{
         if (prevProps !== this.props) {
         this.setState({    
             ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
-                <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
+                <Button text={elm.name} path={"content/"+elm.name} /> )
         })
         }
     }
@@ -36,7 +36,7 @@ class TopicsAPI extends React.Component{
     changePage=(pageNum)=>{
         this.props.setCurPage(pageNum)
         this.setState({
-            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm => <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
+            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm => <Button text={elm.name} path={"content/"+elm.name} /> )
         })
     }
 
