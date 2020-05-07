@@ -65,7 +65,6 @@ const StyledRedactor = styled.div`
     .scrolbar{
        margin:15px;
        margin-top:0px;
-        /*display:block;*/
         overflow-x: scroll;
         height: 50vh;
         overflow-y: scroll;
@@ -78,7 +77,6 @@ const StyledRedactor = styled.div`
         margin-bottom: 10px;
         height: 150px;
         width: 150px;
-        box-shadow: 20px -15px 10px 5px rgba(0, 0, 0, .2);
         box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
         :hover{
             cursor:pointer;
@@ -109,6 +107,29 @@ const StyledRedactor = styled.div`
             flex-direction: column;
         }
       }
+`;
+
+const StyledInvite = styled.div`
+width:100%;
+height: 100%;
+font-size:1em;
+display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+    text-align:center;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+`;
+
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
 `;
 const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -271,8 +292,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         })  
 }
 
-
-
 class Redactor extends React.Component{ 
     
     componentDidMount= async ()=>{
@@ -312,7 +331,6 @@ class Redactor extends React.Component{
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-            {/*({})*/} 
             {(this.props.match.params.id!=-1)?<>
                 <div className="photoviewer">
                     <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>
@@ -328,23 +346,23 @@ class Redactor extends React.Component{
                     </div>
             
                 </div>
-            </>:
-            <div>
-                Нет открытого конспекта, воспользуйтесь кнопкой открыть конспект, либо создайте новый конспект, если список конспектов пуст
-            </div>}
-    </StyledRedactor>:
-    <div>
-        <img src={preloader} width={500} height={500}></img>
-    </div>)}
+            </>
+            :
+            <StyledInvite>
+                Чтобы начать работу, откройте конспект либо создайте новый, если список конспектов пуст.
+            </StyledInvite>}
+    </StyledRedactor>
+    :
+    <StyledInvite><img src={preloader}></img></StyledInvite>)}
 
     
     render(){
     return(
-        <div>
+        <StyledInterface>
             <NavBarContainer name={this.props.Conspectname}/>
             {/*  <div className ="wrapper">  </div> */}
             {this.Content()} 
-        </div>
+        </StyledInterface>
     )}
 }
 export default Redactor;

@@ -6,7 +6,7 @@ import Button from '../../Button/Button.jsx';
 import { NavLink } from 'react-router-dom';
 import ActionBox from './../../ActionBox/ActionBox.jsx';
 import * as axios from 'axios';
-
+import styled from 'styled-components';
 
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve, reject) => {
@@ -109,39 +109,38 @@ class Viewer extends React.Component{
 
 
 Contentpdf=()=>{
-    return ((!this.props.dataisLoading)?<>
-    <iframe className={s.pdf} src={this.props.curntpdf.pdf}/>
-    <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"content"}>
-        <ActionBox text="Вернутся к просмотру фото" action={()=>LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)}/>
-    </NavLink>
-    </>:
-<div>
-    <img src={preloader} width={500} height={500}></img>
-</div>)}
+    return ((!this.props.dataisLoading)?
+    <StyledPreview>
+        <iframe className={s.pdf} src={this.props.curntpdf.pdf}/>
+        <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"content"}>
+            <ActionBox text="Вернуться к просмотру фото" action={()=>LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)}/>
+        </NavLink>
+    </StyledPreview>
+    :
+    <StyledInvite><img src={preloader}></img></StyledInvite>)}
 
 Content=()=>{
     return ((!this.props.dataisLoading)?
-    <div>
-        <div className={s.scrolbar}>
-            {this.props.Photos.map(elm=><div className={s.img}><img  src={elm.path}/></div>)}
+    <StyledPreview>
+        <div className="scrolbar">
+            {this.props.Photos.map(elm=>
+            <div className="item"><img  src={elm.path}/></div>)}
         </div>
-        <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"pdf"}>
-            <ActionBox text="Создать пдф конспекта" action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}/>
+        {/*<NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"pdf"}>
+            <ActionBox text="Создать PDF" action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}/>
         </NavLink>
-    </div>:
-<div>
-    <img src={preloader} width={500} height={500}></img>
-</div>)}
+        */}
+    </StyledPreview>
+    :
+    <StyledInvite><img src={preloader}></img></StyledInvite>)}
     render(){
     return (
-        <div>
+        <StyledInterface>
             <NavBar name={this.props.match.params.contentname} id={this.props.match.params.id}/>
             {console.log(this.props.match.url.split('/')[4])}
-            {(this.props.match.url.split('/')[4]=="pdf")?<>
-            {this.Contentpdf()}</>:<></>}
-            {(this.props.match.url.split('/')[4]=="content")?<>
-            {this.Content()}</>:<></>}
-        </div>
+            {(this.props.match.url.split('/')[4]=="pdf")?<>{this.Contentpdf()}</>:<></>}
+            {(this.props.match.url.split('/')[4]=="content")?<>{this.Content()}</>:<></>}
+        </StyledInterface>
     )
     }
 }
@@ -150,3 +149,55 @@ export default Viewer;
 /*
     LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)} path={"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"pdf"}/>
 */
+const StyledPreview = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+justify-content:center;
+align-items: flex-start;
+text-align:center;
+.scrolbar{
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 70vh;
+    width: calc(100vw - 40px);
+    
+    border-style: solid;
+    border-width: 1px;
+    border-color: #f1f1f1;
+    .item{
+        margin:20px;
+        margin-top:0px;
+    }
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
+    }
+}
+`;
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+`;
+
+const StyledInvite = styled.div`
+width:100%;
+height: 100%;
+font-size:1em;
+display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+    text-align:center;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+`;

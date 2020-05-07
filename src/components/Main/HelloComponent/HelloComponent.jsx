@@ -1,19 +1,32 @@
 import React from 'react';
-//import s from './HelloComponent.module.css'
-import { Row,  Container } from 'react-bootstrap';
 import styled from 'styled-components';
-const StyledHellobox = styled.div`
-font-size:5em;
- padding: 20% 0;
-text-align:center;
-*{
-    display:block;
-}
+const StyledInvite = styled.div`
+width:100%;
+height: 100%;
+font-size:2em;
+display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+    text-align:center;
+    img{
+        width: 50px;
+        height: 50px;
+    }
 `;
-
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+`;
 const HelloComponent=(props) =>{
     return (
-            <StyledHellobox>Добро пожаловать в Conspect Structure.</StyledHellobox>
+        <StyledInterface>
+            <StyledInvite>Добро пожаловать в Conspect Structure.</StyledInvite>
+        </StyledInterface>
+            
     )
 }
 export default HelloComponent;
