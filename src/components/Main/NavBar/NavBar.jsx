@@ -115,7 +115,7 @@ class NavBar extends React.Component{
                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                    <CommentsListConatiner />
+
                     <Button  text="Доступ" path={"myconspects"}/>
                 </StyledLine>}/>  
 
@@ -171,4 +171,4 @@ class NavBar extends React.Component{
 }
 }
 export default NavBar;
-//                            <StyledLine> </StyledLine></Navbar>
+//                                            <CommentsListConatiner />

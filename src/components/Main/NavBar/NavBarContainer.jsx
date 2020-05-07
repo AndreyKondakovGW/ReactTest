@@ -140,27 +140,30 @@ let mapDispatchtoProps =(dispatch) =>{
                 }
             })
             console.log(OldIDs)
-            axios.put('http://127.0.0.1:5000/put_conspect/'+name)
-            fotos.forEach(elm=>{
-                if (elm.index=="null"){
-                    console.log("новая фотка:"+ elm.name)
-                    let formData = new FormData();
-                    formData.append('file', elm.file);
-                    axios.post( 'http://127.0.0.1:5000/savephoto/'+ name,
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
+            axios.put('http://127.0.0.1:5000/put_conspect/'+name+"/True").then(response=>{
+                console.log(response.data.conspect_id)
+                fotos.forEach(elm=>{
+                    if (elm.index=="null"){
+                        console.log("новая фотка:"+ elm.name)
+                        let formData = new FormData();
+                        formData.append('file', elm.file);
+                        axios.post('http://127.0.0.1:5000/savephoto/'+ response.data.conspect_id,
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
                         }
+                        ).then(function(response){
+                            console.log('SUCCESS!!');
+                            console.log(response)
+                        }).catch(function(){
+                            console.log('FAILURE!!');
+                          });
                     }
-                    ).then(function(response){
-                        console.log('SUCCESS!!');
-                        console.log(response)
-                    }).catch(function(){
-                        console.log('FAILURE!!');
-                      });
-                }
+                })
             })
+            
             
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);
