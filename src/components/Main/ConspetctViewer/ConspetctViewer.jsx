@@ -78,6 +78,7 @@ const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
 }
 
 class Viewer extends React.Component{
+    /*
     componentDidMount(){
         if (this.props.match.url.split('/')[2]!=this.props.curntpdf.name){
         if (this.props.match.url.split('/')[1]=="content"){
@@ -104,12 +105,13 @@ class Viewer extends React.Component{
         }
         }
     }
+    */
 
 
 Contentpdf=()=>{
     return ((!this.props.dataisLoading)?<>
     <iframe className={s.pdf} src={this.props.curntpdf.pdf}/>
-    <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"pdf"}>
+    <NavLink to ={"/"+"myconspects/"+this.props.match.url.split('/')[2]+"/"+this.props.match.url.split('/')[3]+"/"+"content"}>
         <ActionBox text="Вернутся к просмотру фото" action={()=>LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)}/>
     </NavLink>
     </>:
