@@ -5,10 +5,11 @@ import MyConspectList from './../../ConspectList/ConspectList.jsx';
 import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
 import UserFinderContainer from '../UsersFinder/UserFinderContainer';
-
+import * as axios from 'axios';
 import {Route} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,FileEarmarkMinus,FileEarmark,FileEarmarkCode} from 'react-bootstrap-icons';
+import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,FileEarmarkMinus,FileEarmark,FileEarmarkCode, CodeSlash} from 'react-bootstrap-icons';
 
 import styled from 'styled-components';
 const StyledLine = styled.div`
@@ -94,15 +95,41 @@ class ConspectSaver extends React.Component{
         )
     }
 }
-
 class NavBar extends React.Component{
+    LoadPDF = (LoadData,conspectname,setPdf,conspectid)=>{
+        this.props.LoadData()
+        console.log("Отправлелен запрос на получене  конспекта "+conspectname)
+        axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
+        {   
+            method: 'GET',
+            responseType: 'blob'}
+        ).then(response =>{
+            const file = new Blob(
+                [response.data], 
+                {type: 'application/pdf'});
+            var fileURL = URL.createObjectURL(file);
+        setPdf(fileURL,conspectname)
+        })
+    }
+    LoadContent=(setConspects,LoadData,id,conspectname,OpenConspect)=>{
+        axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+            console.log(response.data)
+            setConspects(response.data)
+        })
+        if ((id!=-1)&&(this.props.id !=id )){
+            this.props.LoadData()
+            console.log("Загружаю конспект "+conspectname)
+            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id).then(response=>{
+                console.log(response)
+                this.props.LoadConspectFromData(response,conspectname,id,OpenConspect)
+            }) 
+        }
+    }
     render(){   
     return (
       <StyledNavBar>
       <Navbar expand="sm" >
-
       <Navbar.Brand href="#">{this.props.name}</Navbar.Brand>
-
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -111,24 +138,31 @@ class NavBar extends React.Component{
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
+                <Route path = "/myconspects/:contentname/:id" render ={()=><StyledLine>
                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                     {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
-                    <ActionBox text="Создать PDF" />
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-
                     <Button  text="Доступ" path={"myconspects"}/>
-                </StyledLine>}/>  
+                </StyledLine>}/>
+
+                <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><StyledLine>
+                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
+                        <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
+                    </NavLink>
+                </StyledLine>}/>
+                <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
+                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
+                        <ActionBox text="Вернуться к просмотру фото" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                    </NavLink>
+                </StyledLine>}/>
 
                 <Route path="/content" render={()=><StyledLine>
-                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                     <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
                     <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 
                 <Route exact path ="/creteconspect/newconspect" render={()=><StyledLine>
-                     {/*<Navbar.Brand href="#">Конспект {this.props.name}</Navbar.Brand>*/}
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label for="file" >Загрузить файл {<FilePlus/>}</label>
                     <CommentsListConatiner />
