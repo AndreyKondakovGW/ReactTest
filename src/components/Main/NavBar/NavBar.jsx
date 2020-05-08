@@ -113,6 +113,8 @@ class NavBar extends React.Component{
 
                 <Route path = "/myconspects/:contentname" render ={()=><StyledLine>
                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
+                    {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
+                    <ActionBox text="Создать PDF" />
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
 
@@ -149,12 +151,13 @@ class NavBar extends React.Component{
                     <StyledLine>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
-                    </StyledLine>
+                    
                     <MyConspectList>
                         <div>
                             {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                         </div>
                     </MyConspectList>
+                    </StyledLine>
                 </>}/>
 
 

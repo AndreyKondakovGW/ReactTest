@@ -11,6 +11,8 @@ text-align: center;
 `;
 const StyledDropdown = styled.div`
 #dropdown{
+    width:180px;
+    height: 35px;
     margin-left:5px;
     margin-right:5px;
     border-radius: 0%;
@@ -57,7 +59,7 @@ class MyConspectList extends React.Component{
     return (
         <StyledDropdown>
         <Dropdown id="nav-dropdown">
-          <Dropdown.Toggle id="dropdown"><StyledLine>Открыть конспект<FileEarmarkText/></StyledLine></Dropdown.Toggle>
+          <Dropdown.Toggle id="dropdown">Открыть <FileEarmarkText/></Dropdown.Toggle>
           <Dropdown.Menu id="dropdownmenu">
           {this.props.children}
           </Dropdown.Menu>

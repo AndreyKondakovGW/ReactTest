@@ -46,9 +46,9 @@ let initialstate={
             {name: "тема 2", id:2},
             {name: "тема 3", id:3}],
         Conspects: [
-            {name: "Ежи",id: 1,img: img1,checked: false},
-            {name: "Змеи",id: 2,img: img2,checked: false},
-            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            {name: "Ежи",id: 1,img: img1},
+            {name: "Змеи",id: 2,img: img2},
+            {name: "Bobrconspect",id: 3,img: img3}
         ], 
         Conspectspagesize:3,
         TotalConspectscount:3,

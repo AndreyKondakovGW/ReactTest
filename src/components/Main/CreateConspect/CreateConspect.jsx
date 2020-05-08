@@ -43,10 +43,25 @@ display:flex;
     }
 `;
 const StyledInvite = styled.div`
-height:35px;
-line-height: 35px;
+width:100%;
+height: 100%;
 font-size:1em;
-text-align:center;
+display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+    text-align:center;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+`;
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve, reject) => {
@@ -117,13 +132,11 @@ class CreateConspect extends React.Component{
                         <img src={this.props.imagePreviewUrl} alt="some value" />
                     </StyledImagePerwier>)
                     :
-                    (<StyledImagePerwier>
-                       <StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite> 
-                    </StyledImagePerwier>))}
+                    (<StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite>))}
     render(){
         console.log("Conspectname")  
     return( 
-        <div>
+        <StyledInterface>
             <NavBarContainer name={this.props.Conspectname}/>
             <StyledMainbox>
                 {this.ImgPeriwe()}
@@ -134,7 +147,7 @@ class CreateConspect extends React.Component{
             {/*<div className={s.scrolbar}>
                 {this.ReactContents()}
             </div> */}
-        </div>
+        </StyledInterface>
     )
 }
 }

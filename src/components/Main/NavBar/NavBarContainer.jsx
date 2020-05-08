@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import NavBar from './NavBar.jsx';
-import {DeleteCheckedConspectAC,ShowAlertAC} from './../../../redux/UserData-reducer';
+import {DeleteCheckedConspectAC,ShowAlertAC,SetConspectsAC} from './../../../redux/UserData-reducer';
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
-import {SetCurrentConspectCR,LoadConspectAC} from '../../../redux/Curentconspect-reducer';
+import {SetCurrentConspectCR,LoadConspectAC,DataLoadSwitch,SetCurrentpdfAC} from '../../../redux/Curentconspect-reducer';
 import * as axios from 'axios';
 import {AddSubscriber} from './../../../redux/UserData-reducer';
 
@@ -17,49 +17,49 @@ let mapStatetoProps =(state)=>{
     }
 
 }
-const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
-    let promise = new Promise(async (resolve, reject) => {
-        let f=[]
-        var i=0
-        while (i<fotos.data.length)
-        {
-            let promise = new Promise((resolve, reject) => {
-                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
-                resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
-            })
-            let response= await promise
-            const file = new Blob(
-                [response.data], 
-                {type: 'image'});
-            let promise2 = new Promise((resolve, reject) => {
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    const img = event.target.result
-                    console.log(img)
-                    console.log(i)
-                    f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
-                    i+=1
-                    resolve(f)                
-                }
-                reader.readAsDataURL(file);
-            })
-            f=await promise2
-        }
-        if (f.length==fotos.data.length){
-            console.log(f)
-            resolve(f)
-        }
-        
-    })
-    promise.then(result=>{
-        console.log("Полученный массив фотографий")
-        console.log(result) 
-        OpenConspect(name,id, result)  
-    })  
-}
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
+        LoadConspectFromData: async (fotos,name,id,OpenConspect)=>{
+            let promise = new Promise(async (resolve, reject) => {
+                let f=[]
+                var i=0
+                while (i<fotos.data.length)
+                {
+                    let promise = new Promise((resolve, reject) => {
+                        console.log("Запрашиваю картинку по id"+fotos.data[i].id)
+                        resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                    })
+                    let response= await promise
+                    const file = new Blob(
+                        [response.data], 
+                        {type: 'image'});
+                    let promise2 = new Promise((resolve, reject) => {
+                        let reader = new FileReader();
+                        reader.onload = function(event) {
+                            const img = event.target.result
+                            console.log(img)
+                            console.log(i)
+                            f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
+                            i+=1
+                            resolve(f)                
+                        }
+                        reader.readAsDataURL(file);
+                    })
+                    f=await promise2
+                }
+                if (f.length==fotos.data.length){
+                    console.log(f)
+                    resolve(f)
+                }
+                
+            })
+            promise.then(result=>{
+                console.log("Полученный массив фотографий")
+                console.log(result) 
+                OpenConspect(name,id, result)  
+            })  
+        },
         add:()=>{
             console.log("add")
             dispatch(AddSubscriber())
@@ -125,7 +125,6 @@ let mapDispatchtoProps =(dispatch) =>{
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
         },
-
         SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect)=>{
             console.log("Пытаюсь сохранит конспект")
             console.log(name)
@@ -167,6 +166,20 @@ let mapDispatchtoProps =(dispatch) =>{
             
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);
+        },
+
+
+        LoadData: ()=>{
+            dispatch(DataLoadSwitch())
+        },
+        
+        setPdf: (pdf,name) =>{
+            const action =SetCurrentpdfAC(pdf,name);
+            dispatch(action)
+        },
+        setConspects: (conspects) =>{
+            const action =SetConspectsAC(conspects);
+            dispatch(action)
         }
     }
 }
