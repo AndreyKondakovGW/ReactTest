@@ -17,6 +17,10 @@ text-align: center;
 *{
     display:inline-block;
 }
+#filelabel,  .button, .actionbox, .dropdown{
+    margin:5px;
+}
+
 `;
 const StyledNavBar = styled.div`
 margin-top:56px;
@@ -38,9 +42,6 @@ background-color:rgba(255,255,255,0.5);
     }
   }
 
-  #myToggle{
-    outline:none;
-  }
 `;
 
 class ConspectSaver extends React.Component{
@@ -82,15 +83,16 @@ class ConspectSaver extends React.Component{
             <div>
                 {console.log(this.props.name)}
                 {console.log(this.props.fotos)}
-                
-                {(this.props.mutable)?<input 
-                id="lineinput"
+                {(this.props.mutable)?
+                <input id="lineinput"
                        name="conspectname"
                        value={this.state.name}
                        onChange={this.handleChange}
-                       placeholder="Название..."/>:
-                       <div>{this.state.name}</div>}
-                <ActionBox  id="lineab" text="Сохранить" icon={<Check/>} action={this.handleSubmit}/>
+                       placeholder="Название..."
+                />
+                :
+                <div>{this.state.name}</div>}
+                <ActionBox  text="Сохранить" icon={<Check/>} action={this.handleSubmit}/>
             </div>
         )
     }
@@ -153,7 +155,7 @@ class NavBar extends React.Component{
                 </StyledLine>}/>
                 <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
-                        <ActionBox text="Вернуться к просмотру фото" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                        <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
                     </NavLink>
                 </StyledLine>}/>
 
@@ -164,8 +166,8 @@ class NavBar extends React.Component{
 
                 <Route exact path ="/creteconspect/newconspect" render={()=><StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label for="file" >Загрузить файл {<FilePlus/>}</label>
-                    <CommentsListConatiner />
+                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <CommentsListConatiner/>
                     <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
                 </StyledLine>}/>
@@ -174,10 +176,10 @@ class NavBar extends React.Component{
                 <Route path ="/creteconspect/:conspect/:id" render={()=>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
                     {console.log(this.props.name)}
                     {console.log(this.props.conspectname)}
-                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name={this.props.name} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
                 </StyledLine>}/>
 
 
@@ -185,21 +187,25 @@ class NavBar extends React.Component{
                     <StyledLine>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
-                    
-                    <MyConspectList>
-                        <div>
-                            {this.props.Conspects.map(elm => <Button text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
-                        </div>
+                    <MyConspectList >
+                        {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
                     </MyConspectList>
                     </StyledLine>
                 </>}/>
 
 
                 <Route exact path="/comunity" render={()=>
-                <>
+                <div>
                   <UserFinderContainer message="Поиск пользователя" add={this.props.add}/>
-                </>
+                </div>
                 }></Route>
+
+                <Route path ="/topicrequest" render={()=>
+                <StyledLine>
+                    <ActionBox text="Показать" action={this.props.WriteRequestF}/>
+                    <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
+                </StyledLine>}/>
+                
         </Nav>
       </Navbar.Collapse>
     </Navbar>

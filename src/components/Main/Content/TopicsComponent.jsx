@@ -23,6 +23,7 @@ align-items: center;
 `;
 const StyledLine = styled.div`
 width:100%;
+margin-bottom:10px;
 text-align: center;
 *{
     display:inline-block;

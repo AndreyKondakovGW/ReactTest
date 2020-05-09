@@ -1,10 +1,11 @@
 import React from 'react';
 import Conspects from '../MyConspect/MyConspectComponent.jsx';
 import Conspectbox from '../MyConspect/Conspectbox/ConspectboxComponent.jsx';
-import Contentbox from '../../Contentbox/Contentbox.jsx';
+import Button from '../../Button/Button';
+//import Contentbox from '../../Contentbox/Contentbox.jsx';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import Topics from '../Content/TopicsComponent';
-
+import styled from 'styled-components';
 class SubscribersContent extends React.Component{
     constructor(props){
         super(props)
@@ -20,7 +21,7 @@ class SubscribersContent extends React.Component{
                 checkf={this.props.checked}
             /> ),
             ReactContentsTopics : this.props.Topics.slice(this.props.TopicsPagesize*(this.props.TopicsCurrentPage-1),this.props.TopicsPagesize*this.props.TopicsCurrentPage).map(elm => 
-                <Contentbox text={elm.name} path={"/content/"+elm.name} /> )}
+                <Button text={elm.name} path={"content/"+elm.name} /> )}
     }
     /*
     componentDidMount(){
@@ -59,7 +60,7 @@ class SubscribersContent extends React.Component{
         this.setState({
             ...this.state,
             ReactContentsTopics : this.props.Topics.slice(this.props.TopicsPagesize*(this.props.TopicsCurrentPage-1),this.props.TopicsPagesize*this.props.TopicsCurrentPage).map(elm => 
-                <Contentbox text={elm.name} path={"/content/"+elm.name} /> )
+                <Button text={elm.name} path={"content/"+elm.name} /> )
         })
     }
 
@@ -76,23 +77,52 @@ class SubscribersContent extends React.Component{
         pagesT.push(i)
     }
     return (
-    <div> 
-            <NavBarContainer name={"Контенет пользователя "+ this.props.match.url.split('/')[2]}/>
-            <h1>Конспекты</h1>
-            <Conspects
-                pages={pagesC}
-                CurrentPage={this.props.ConspectCurrentPage}
-                changePage={this.changePageConspect}
-                ReactContents={this.state.ReactContentsConspect}> 
-            </Conspects>
-            <h1>Тэги</h1>
-            <Topics pages={pagesT} 
-                    CurrentPage={this.props.TopicsCurrentPage} 
-                    changePage={this.changePageTopics}
-                    ReactContents={this.state.ReactContentsTopics}>
-            </Topics>                   
-    </div>
+    <StyledInterface> 
+            <NavBarContainer name={"Контент пользователя "+ this.props.match.url.split('/')[2]}/>
+            <div className="contentbox">
+                <div className="contentname">Конспекты</div>
+                <Conspects
+                    pages={pagesC}
+                    CurrentPage={this.props.ConspectCurrentPage}
+                    changePage={this.changePageConspect}
+                    ReactContents={this.state.ReactContentsConspect}> 
+                </Conspects>
+            </div>
+            
+            <div className="contentbox">
+                <div className="contentname">Тэги</div>
+                <Topics pages={pagesT} 
+                        CurrentPage={this.props.TopicsCurrentPage} 
+                        changePage={this.changePageTopics}
+                        ReactContents={this.state.ReactContentsTopics}>
+                </Topics>   
+            </div>     
+    </StyledInterface>
     )
 }
 }
-export default SubscribersContent
+export default SubscribersContent;
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+.contentname{
+    padding-left:16px;
+    font-size: 20px;
+    height:35px;
+line-height: 35px;
+}
+.contentbox{
+    display: flex;
+flex-direction: column;
+}
+`;
+
+{/*const StyledLine = styled.div`
+font-size: 20px;
+text-align: center;
+*{
+    display:inline-block;
+}
+`;*/}

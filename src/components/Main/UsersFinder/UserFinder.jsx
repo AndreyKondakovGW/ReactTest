@@ -8,60 +8,37 @@ text-align: center;
 *{
     display:inline-block;
 }
-.flexDropdown{
-  display: flex;
-  flex-direction: column;
+label, input, .button, .actionbox, .dropdown{
+  margin:5px;
 }
-#dropdowntoggle{
-color: black;
- background-color:#02dac5;
- font-size: 1em;
- width:180px;
- height:35px;
- line-height: 35px;
- text-align:center;
- vertical-align:middle;
-    margin-top:15px;
-    margin-bottom: 15px;
-    margin-left:5px;
-    margin-right:5px;
-
-    padding-top:0px;
-    padding-bottom: 0px;
-    padding-left:0px;
-    padding-right:0px;
-
-
- border-radius: 0%;
- border: 0px;
-
-    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
-
-    transition: color 1s ease, 
-                box-shadow .3s ease;
-    :hover {
-      background-color:#018786;
-      color: #f1f1f1;
-      box-shadow: none;
-    }
-}
-#dropdownmenu{
-  margin-left:5px;
-  margin-right:5px;
+.dropdown-toggle.btn.btn-primary{
+  padding:0px;
   width:180px;
-  display:block;
-  .myinput{
-    font-size: 1em;
-    width:164px;
-    height:35px;
-    line-height: 35px;
-    margin-left:8px;
-    margin-right:8px;
-  }
+  height: 35px;
+
+  border-radius: 0%;
+  border: 0px;
+  background-color:#02dac5;
+  color: black;
+  font-size: 1em;
+  outline:hidden;
+  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+  transition-property: box-shadow;
+  transition-duration: .3s;
+
+  transition: color 1s ease, 
+              box-shadow .3s ease;
+  :hover {
+    background-color:#018786;
+    color: #f1f1f1;
+    box-shadow: none;
+  }  
 }
 
+.dropdown-menu{
+  padding:0px;
+  display:grid;
+}
 `;
 
 
@@ -104,29 +81,24 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         value: value,
      })
     }
-
-
   render(){
     return (
       <StyledLine>
-      <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
-      <Dropdown id="nav-dropdown">
-        <div className="flexDropdown">
-<Dropdown.Toggle id="dropdowntoggle">Поиск...</Dropdown.Toggle>
-        <Dropdown.Menu id="dropdownmenu">
-          <input 
-            autoFocus
-            className="myinput"
-            placeholder="Введите имя..."
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.value}
-            />
-        {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
-        </Dropdown.Menu>
-        </div>
-        
+        <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
+        <Dropdown className="dropdown">
+           <Dropdown.Toggle>Поиск...</Dropdown.Toggle>
+           <Dropdown.Menu>
+           <input 
+             autoFocus
+             id="lineinput"
+             className="myinput"
+             placeholder="Введите имя..."
+             onChange={(e) => this.handleChange(e)}
+             value={this.state.value}
+             />
+           {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+           </Dropdown.Menu>
       </Dropdown>
-    
     </StyledLine>
   )
   }

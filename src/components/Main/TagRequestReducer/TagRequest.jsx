@@ -2,11 +2,8 @@ import React from 'react';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import {Dropdown } from 'react-bootstrap';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
-import s from './TagRequest.module.css';
 import styled from 'styled-components';
-const StyledTagRequest = styled.div`
-
-`;
+import { ExpandMore } from '@material-ui/icons';
 class TagRequest extends React.Component{
     AddBlocFConteiner=()=>{
         this.props.AddBlockF(0,this.props.data.length,this.props.tags[0])
@@ -14,34 +11,136 @@ class TagRequest extends React.Component{
     AddBlocFConteiner2=(elm)=>{
         this.props.AddBlockF(elm.length,elm[0].u,this.props.tags[0])
     }
+
     AddButton(elm){
-        return (elm.length>0 && elm.length<this.props.maxIn)?<ActionBox text="добавить пересечене" action={()=>this.AddBlocFConteiner2(elm)}/>:<div></div>
+        return (elm.length>0 && elm.length<this.props.maxIn)?
+        <ActionBox  text="Пересечь с..." action={()=>this.AddBlocFConteiner2(elm)}/>
+        :
+        <div></div>
     }
     AddColonButton(){
-        return (this.props.data.length<this.props.maxUn)?<ActionBox text="добавить обединение" action={this.AddBlocFConteiner}/>:<div></div>
+        return (this.props.data.length<this.props.maxUn)?
+        <ActionBox  text="Объединить с..." action={this.AddBlocFConteiner}/>
+        :
+        <div></div>
     }
 
-    TagListComponent(){ return <div>{this.props.data.map(elm=><div className={s.Row}>               
-                                                    {elm.map(e=><Dropdown>
-                                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                                            {e.name}
-                                                        </Dropdown.Toggle>
-
-                                                        <Dropdown.Menu>
-                                                            {this.props.tags.map(t=><Dropdown.Item onClick={()=>this.props.ChangeBlockF(e.i,e.u,t)}>{t}</Dropdown.Item>)} 
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>)}
-                                                    {this.AddButton(elm)}
-                                                    </div>)} <div className={s.Row}>{this.AddColonButton()}</div></div>}
+    TagListComponent(){ return <StyledExpr>
+                                {this.props.data.map(elm=>
+                                <StyledLine>
+                                    <div className="addintersect">  
+                                        {this.AddButton(elm)}
+                                        {elm.map(e=>
+                                        //<div>
+                                                    <Dropdown className="dropdown">
+                                                        <Dropdown.Toggle variant="success">{e.name}</Dropdown.Toggle>
+                                                         <Dropdown.Menu>
+                                                             {this.props.tags.map(t=>
+                                                             <Dropdown.Item onClick={()=>this.props.ChangeBlockF(e.i,e.u,t)}>
+                                                                 {t}
+                                                             </Dropdown.Item>
+                                                             )} 
+                                                         </Dropdown.Menu>
+                                                    </Dropdown>
+                                                    //<ExpandMore className="upsidedown"/>*/
+                                                    
+                                                   // </div>
+                                                 )}
+                                    </div>
+                                    {(this.props.data.length<=this.props.maxUn)?<ExpandMore fontSize="large" className="booloperation"/>:<div></div>}
+                                </StyledLine>
+                                    )} 
+                                   <div>{this.AddColonButton()}</div> 
+                                </StyledExpr>}
     render(){
         return(
-            <div>
+            <StyledInterface>
                 <NavBarContainer name="Tagrequest"/>
                 {this.TagListComponent()}
+                
+                {/*<StyledTagRequest></StyledTagRequest>*/}
+                
+                {/*
                 <ActionBox text="Показать" action={this.props.WriteRequestF}/>
                 <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
-            </div>
+                */}
+            </StyledInterface>
         )
     }
 }
 export default TagRequest;
+const StyledLine = styled.div`
+margin:5px;
+margin-right:0px;
+margin-left:0px;
+display: flex;
+flex-direction: row;
+.booloperation{
+    width: 35px;
+    height: 35px;
+    margin-top:5px;
+}
+`;
+
+const StyledExpr = styled.div`
+width:100%;
+height: 100%;
+
+display:flex;
+flex-direction: row;
+flex-wrap:wrap;
+justify-content:center;
+align-items: baseline;
+align-content:center;
+text-align:center;
+
+#filelabel,  .button, .actionbox, .dropdown{
+    margin:5px;
+}
+/*.actionbox{
+    margin-bottom:10px;
+}
+.dropdown{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+
+.upsidedown{
+    transform: rotate(0.5turn);
+}*/
+
+.dropdown-toggle.btn.btn-success{
+    padding:0px;
+    width:90px;
+    height: 35px;
+  
+    border-radius: 0%;
+    border: 0px;
+    background-color:   rgb(192, 175, 211);
+    color: black;
+    font-size: 1em;
+    outline:hidden;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+  
+    transition: color 1s ease, 
+                box-shadow .3s ease;
+    :hover {
+      background-color:rgb(119, 90, 163);
+      color: #f1f1f1;
+      box-shadow: none;
+    }  
+  }
+
+`;
+
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+`;
+
+
