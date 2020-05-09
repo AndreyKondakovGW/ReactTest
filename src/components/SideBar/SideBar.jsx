@@ -33,14 +33,10 @@ transition-timing-function: ease-in-out;
     margin-right: auto;
     display: block;
 }
-#search{
-    width:180px;
-    height:35px;
-    line-height: 35px;
-    margin-left:4px;
-    margin-top:15px;
-    margin-bottom:15px;
-    display: block;
+.SidebarContent{
+.button{
+    margin-bottom:10px;
+}
 }
 
 `;
@@ -55,9 +51,9 @@ const SideBar=(props) =>{
         <h2>Welcome.</h2>
         <img src={logo} alt="some value" id="logo" />
         <div className="SidebarContent">
-            <Button text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
-            <Button text='Мои тэги'icon={<Code/>}  path="content" />
-            <Button text='Создать конспект' 
+            <Button  text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
+            <Button  text='Мои тэги'icon={<Code/>}  path="content" />
+            <Button  text='Создать конспект' 
                     path="creteconspect/newconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />

@@ -4,7 +4,6 @@ import PohotoVeiwer from './PohotoVeiwer/PohotoVeiwer.jsx';
 import * as axios from 'axios';
 import styled from 'styled-components';
 const StyledMainbox = styled.div`
-
     margin-top:20px ;
     width:100%;
     height: 100%;

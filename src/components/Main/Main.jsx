@@ -45,6 +45,9 @@ background-size: cover;
   z-index:1000;
   margin:40px;
 }
+.nomargin{
+  margin:0px;
+}
 `;
 
 const Main=(props) =>{

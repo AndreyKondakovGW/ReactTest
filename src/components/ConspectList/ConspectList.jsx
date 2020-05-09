@@ -10,17 +10,22 @@ text-align: center;
 }
 `;
 const StyledDropdown = styled.div`
-#dropdown{
+display:flex;
+flex-direction: column;
+justify-content:center;
+align-items: flex-start;
+
+.dropdown-toggle.btn.btn-primary{
+    padding:0px;
     width:180px;
     height: 35px;
-    margin-left:5px;
-    margin-right:5px;
+
     border-radius: 0%;
     border: 0px;
     background-color:#02dac5;
     color: black;
     font-size: 1em;
-
+    outline:hidden;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     transition-property: box-shadow;
     transition-duration: .3s;
@@ -31,11 +36,11 @@ const StyledDropdown = styled.div`
       background-color:#018786;
       color: #f1f1f1;
       box-shadow: none;
-    }
+    }  
 }
-#dropdownmenu{
-  margin-left:5px;
-    margin-right:5px;
+.dropdown-menu{
+    padding:0px;
+    display:grid;
 }
 `;
 
@@ -58,12 +63,12 @@ class MyConspectList extends React.Component{
     render(){
     return (
         <StyledDropdown>
-        <Dropdown id="nav-dropdown">
-          <Dropdown.Toggle id="dropdown">Открыть <FileEarmarkText/></Dropdown.Toggle>
-          <Dropdown.Menu id="dropdownmenu">
-          {this.props.children}
-          </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown className="dropdown">
+              <Dropdown.Toggle>Открыть <FileEarmarkText/></Dropdown.Toggle>
+              <Dropdown.Menu>
+              {this.props.children}
+              </Dropdown.Menu>
+            </Dropdown>
       </StyledDropdown>
     )
 }

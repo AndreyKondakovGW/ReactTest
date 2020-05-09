@@ -148,8 +148,8 @@ text-align:center;
 .scrolbar{
     overflow-y: scroll;
     overflow-x: scroll;
-    height: 70vh;
-    width: calc(100% - 40px);
+    height: 100%;
+    width: 100%;
     
     border-style: solid;
     border-width: 1px;

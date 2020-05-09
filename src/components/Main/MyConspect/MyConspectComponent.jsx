@@ -16,6 +16,7 @@ const StyledConspects = styled.div`
 const StyledLine = styled.div`
 width:100%;
 text-align: center;
+margin-bottom:10px;
 *{
     display:inline-block;
 }

@@ -8,12 +8,16 @@ line-height: 35px;
 text-align:center;
 vertical-align:middle;
 
-margin-left:5px;
-margin-right: 5px;
-
-display: inline-block;
+/*
 margin-top:15px;
 margin-bottom: 15px;
+margin-left:5px;
+margin-right: 5px;
+*/
+
+
+display: inline-block;
+
 
 background-color:#02dac5;
 color: black;
@@ -41,10 +45,10 @@ class ActionBox extends React.Component{
     }
     render(){
         return(
-        <StyledActionBox onClick={this.onclik} >
-            
+        <StyledActionBox 
+                className="actionbox" 
+                onClick={this.onclik}>
             {this.props.text} {this.props.icon}
-           
             </StyledActionBox>
     )
     }

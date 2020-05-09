@@ -138,6 +138,7 @@ class UserAccsesForm extends React.Component{
                       <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
                       <label for={elm.username}>{elm.username}</label></div>
                 )}
+                <div>
                 <input 
                   autoFocus
                   className="myinput"
@@ -145,6 +146,7 @@ class UserAccsesForm extends React.Component{
                   onChange={(e) => this.handleChange(e)}
                   value={this.state.value}
                 />
+                </div>
                 {this.state.options.filter(option=>!this.state.checkinoption.has(option.user_id)).map(elm=>
                   <div>
                       <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>

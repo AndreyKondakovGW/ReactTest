@@ -28,14 +28,28 @@ height: 100vh;
                                     not supported by any browser */
   }
 
-  #lineinput{
+/*inputs*/
+
+#file {
+  opacity: 0;
+  position: absolute;
+  z-index: -10000;
+}
+
+#lineinput{
+
     width:180px;
     height:35px;
     line-height: 35px;
-    margin-left:5px;
-    margin-right: 5px;
-    margin-top:15px;
-    margin-bottom:15px;
+      padding:1px;
+      outline:0px;
+      box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+      transition-property: box-shadow;
+      transition-duration: .3s;
+      
+        :focus{
+          box-shadow: 0 0 4px 1px rgb(119, 90, 163);
+        }
 }
 
 .upload-btn-wrapper {
@@ -44,7 +58,7 @@ height: 100vh;
   display: inline-block;
 }
 
-label {
+#filelabel {
 color: black;
 background-color:#02dac5;
 font-size: 1em;
@@ -53,13 +67,8 @@ height:35px;
 line-height: 35px;
 text-align:center;
 vertical-align:middle;
-
-margin-left:5px;
-margin-right: 5px;
     
 display: inline-block;
-margin-top:15px;
-margin-bottom: 15px;
 
 transition-property: color;
 transition-duration: 1s;
@@ -75,26 +84,6 @@ transition-duration: .3s;
     box-shadow: none;
 }
   
-}
-#file {
-  opacity: 0;
-  position: absolute;
-  z-index: -10000;
-}
-
-#myToggle{
-  border: 0;
-  outline:none;
-  transition: color 1s ease, transform .4s ease-in-out;
-}
-#myToggle:hover{
-  color:#02dac5;
-}
-#noMargin{
-  margin:0px;
-}
-#noTopMargin{
- margin-top:0px;
 }
 
 `;
