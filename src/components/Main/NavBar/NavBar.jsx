@@ -5,6 +5,7 @@ import MyConspectList from './../../ConspectList/ConspectList.jsx';
 import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
 import UserFinderContainer from '../UsersFinder/UserFinderContainer';
+import UserAccsesForm from '../UserAccsesForm/UserAccsesForm.jsx';
 import * as axios from 'axios';
 import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -138,13 +139,13 @@ class NavBar extends React.Component{
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id" render ={()=><StyledLine>
+                <Route path = "/myconspects/:contentname/:id" render ={()=><><StyledLine>
                     {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                     {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
                     <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
                     <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                    <Button  text="Доступ" path={"myconspects"}/>
-                </StyledLine>}/>
+                </StyledLine>
+                <UserAccsesForm conspectid={this.props.id}/></>}/>
 
                 <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>

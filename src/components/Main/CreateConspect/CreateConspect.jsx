@@ -121,7 +121,8 @@ class CreateConspect extends React.Component{
         console.log("Открыт конспект" + this.props.createrid)
     }
     
-    ReactContents = ()=>{return(this.props.fotos.map(elm => 
+    ReactContents = ()=>{console.log(this.props.fotos)
+                        return(this.props.fotos.map(elm => 
                         <PohotoVeiwer name={elm.name} 
                                     delete={this.props.DeleteFoto} 
                                     change={this.props.ChangePerwie} 
@@ -134,7 +135,8 @@ class CreateConspect extends React.Component{
                     :
                     (<StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite>))}
     render(){
-        console.log("Conspectname")  
+        console.log("Conspectname")
+        console.log(this.props.fotos)  
     return( 
         <StyledInterface>
             <NavBarContainer name={this.props.Conspectname}/>

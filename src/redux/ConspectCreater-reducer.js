@@ -71,9 +71,10 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
                     name: action.name,
                     id: action.id,
                     fotos: action.fotos.map(elm => {return {...elm,path: elm.path}}),
-                    imagePreviewUrl: action.fotos[0].imagePreviewUrl
+                    imagePreviewUrl: action.fotos[0].path
                 }
             }
+            console.log(newstate)
             return newstate
         }
         case SET_COMMENTCR:{

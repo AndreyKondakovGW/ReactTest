@@ -61,7 +61,7 @@ const Main=(props) =>{
             <Route exact path ="/main/:username" component = {HelloComponent}/>
 
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
-            <Route path = "/content/:contentname" component = {ConspectViewerContainer}/>
+            <Route path = "/content/:conspectname" component = {ConspectViewerContainer}/>
 
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
             <Route path = "/myconspects/:conspectname/:id/:n" component = {ConspectViewerContainer}/> 
@@ -77,7 +77,7 @@ const Main=(props) =>{
             <Route path="/logout" render = {() => <div>{logout()}</div>} />
             
             <Route exact path="/comunity" component={SubscriberContainer}/>
-            <Route path="/comunity/:name" component={SubscribersContentContainer}/>
+            <Route path="/comunity/:name/:id/conspect_and_tags" component={SubscribersContentContainer}/>
         </StyledMain>
     )
 }

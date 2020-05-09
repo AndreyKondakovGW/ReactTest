@@ -82,7 +82,7 @@ class Viewer extends React.Component{
         if (this.props.match.url.split('/')[1]=="content"){
             this.props.LoadData()
             console.log("Отправлелен запрос на получене  пдфки тэга "+this.props.match.url.split('/')[2])
-            axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[3],
+            axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[2],
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{
@@ -126,8 +126,9 @@ Content=()=>{
     render(){
     return (
         <StyledInterface>
-            <NavBarContainer name={this.props.match.params.contentname} id={this.props.match.params.id}/>
+            <NavBarContainer name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
             {console.log(this.props.match.url.split('/')[4])}
+            {(this.props.match.url.split('/')[1]=="content")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]=="pdf")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]=="content")?<>{this.Content()}</>:<></>}
         </StyledInterface>

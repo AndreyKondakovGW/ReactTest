@@ -64,72 +64,56 @@ color: black;
 
 `;
 
-
-const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-      
-      <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        console.log(e)
-        e.preventDefault();
-        onClick(e);
-      }}>{children}&#x25bc;</a>
-
-  ));
-  
-
-  class UserFinderForm extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            options: [],
-            value: ""
-        }
-        this.handleChange=this.handleChange.bind(this)
+class UserFinderForm extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={
+      options: [],
+      value: ""
     }
-    handleChange=(e)=>{
-      console.log(this)
-      let value = e.target.value;
-      if (value!=""){
-          axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
-             this.setState({
-                value: value,
-                options:response.data
-             })
-          })
-      }
-      this.setState({
-        ...this.state,
-        value: value,
-     })
+    this.handleChange=this.handleChange.bind(this)
+  }
+  handleChange=(e)=>{
+    let value = e.target.value;
+    if (value!=""){
+      axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
+        this.setState({
+          value: value,
+          options:response.data
+        })
+      })
     }
-
+    this.setState({
+      ...this.state,
+      value: value,
+    })
+  }
 
   render(){
-    return (
+    return (<>
       <StyledLine>
-      <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
+        <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
+      </StyledLine>
       <Dropdown id="nav-dropdown">
-        <div className="flexDropdown">
-<Dropdown.Toggle id="dropdowntoggle">Поиск...</Dropdown.Toggle>
-        <Dropdown.Menu id="dropdownmenu">
-          <input 
-            autoFocus
-            className="myinput"
-            placeholder="Введите имя..."
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.value}
-            />
-        {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
-        </Dropdown.Menu>
-        </div>
-        
+          <div className="flexDropdown">
+            <StyledLine>
+              <Dropdown.Toggle id="dropdowntoggle">Поиск...</Dropdown.Toggle>
+            </StyledLine>
+            <Dropdown.Menu id="dropdownmenu">
+              <input 
+                autoFocus
+                className="myinput"
+                placeholder="Введите имя..."
+                onChange={(e) => this.handleChange(e)}
+                value={this.state.value}
+              />
+              {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+            </Dropdown.Menu>
+          </div>
       </Dropdown>
-    
-    </StyledLine>
-  )
+      </>
+    )
   }
 }
 
-  export default  UserFinderForm;
+export default  UserFinderForm;
