@@ -75,6 +75,9 @@ margin-right:0px;
 margin-left:0px;
 display: flex;
 flex-direction: row;
+
+align-items: center;
+
 .booloperation{
     width: 35px;
     height: 35px;
@@ -97,18 +100,6 @@ text-align:center;
 #filelabel,  .button, .actionbox, .dropdown{
     margin:5px;
 }
-/*.actionbox{
-    margin-bottom:10px;
-}
-.dropdown{
-    margin-top:0px;
-    margin-bottom:0px;
-}
-
-
-.upsidedown{
-    transform: rotate(0.5turn);
-}*/
 
 .dropdown-toggle.btn.btn-success{
     padding:0px;
@@ -121,10 +112,10 @@ text-align:center;
     color: black;
     font-size: 1em;
     outline:hidden;
+    
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     transition-property: box-shadow;
     transition-duration: .3s;
-  
     transition: color 1s ease, 
                 box-shadow .3s ease;
     :hover {

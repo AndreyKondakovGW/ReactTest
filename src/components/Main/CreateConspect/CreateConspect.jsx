@@ -50,6 +50,7 @@ display:flex;
     flex-wrap:wrap;
     justify-content:center;
     align-items: center;
+    align-content: center;
     text-align:center;
     img{
         width: 50px;
