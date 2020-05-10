@@ -3,43 +3,6 @@ import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
 import styled from 'styled-components';
-const StyledLine = styled.div`
-text-align: center;
-*{
-    display:inline-block;
-}
-label, input, .button, .actionbox, .dropdown{
-  margin:5px;
-}
-.dropdown-toggle.btn.btn-primary{
-  padding:0px;
-  width:180px;
-  height: 35px;
-
-  border-radius: 0%;
-  border: 0px;
-  background-color:#02dac5;
-  color: black;
-  font-size: 1em;
-  outline:hidden;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-  transition-property: box-shadow;
-  transition-duration: .3s;
-
-  transition: color 1s ease, 
-              box-shadow .3s ease;
-  :hover {
-    background-color:#018786;
-    color: #f1f1f1;
-    box-shadow: none;
-  }  
-}
-
-.dropdown-menu{
-  padding:0px;
-  display:grid;
-}
-`;
 
 class UserFinderForm extends React.Component{
   constructor(props){
@@ -67,28 +30,48 @@ class UserFinderForm extends React.Component{
   }
 
   render(){
-    return (<>
-    <StyledLine>
-        <ActionBox text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
-      </StyledLine>
-      <Dropdown id="nav-dropdown">
-          <div className="flexDropdown">
-            <StyledLine><Dropdown.Toggle id="dropdowntoggle">Поиск...</Dropdown.Toggle></StyledLine>
-            <Dropdown.Menu id="dropdownmenu">
+    return (
+    <StyledFlexRow>
+        <ActionBox  text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
+      <Dropdown>
+            <Dropdown.Toggle id="filelabel" >Поиск...</Dropdown.Toggle>
+            <Dropdown.Menu>
               <input 
                 autoFocus
-                className="myinput"
+                id="lineinput"
                 placeholder="Введите имя..."
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.value}
               />
-              {this.state.options.map(elm=><Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+              {this.state.options.map(elm=>
+                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>
+                  {elm.username}
+                </Dropdown.Item>)}
             </Dropdown.Menu>
-          </div>
       </Dropdown>
-      </>
+      </StyledFlexRow>
     )
   }
 }
 
 export default  UserFinderForm;
+const StyledFlexRow = styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
+#filelabel, .actionbox{
+  margin:5px;
+}
+.dropdown-menu.show{
+  padding:5px;
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-content:center;
+  text-align:center;
+}
+`;

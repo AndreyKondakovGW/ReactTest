@@ -141,13 +141,16 @@ class NavBar extends React.Component{
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id" render ={()=><><StyledLine>
-                    {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
-                    {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
-                    <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
-                    <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                </StyledLine>
-                <UserAccsesForm conspectid={this.props.id}/></>}/>
+                <Route path = "/myconspects/:contentname/:id" render ={()=>
+                <>
+                    <StyledLine>
+                        {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
+                        {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
+                        <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
+                        <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
+                    </StyledLine>
+                <UserAccsesForm conspectid={this.props.id}/>
+                </>}/>
 
                 <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
@@ -185,20 +188,18 @@ class NavBar extends React.Component{
 
 
                 <Route path ="/redactor" render={()=><>
-                    <StyledLine>
+                    <StyledFlexRow>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
-                    <MyConspectList >
-                        {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
-                    </MyConspectList>
-                    </StyledLine>
+                        <MyConspectList >
+                            {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
+                        </MyConspectList>
+                    </StyledFlexRow>
                 </>}/>
 
 
                 <Route exact path="/comunity" render={()=>
-                <div>
                   <UserFinderContainer message="Поиск пользователя" add={this.props.add}/>
-                </div>
                 }></Route>
 
                 <Route path ="/topicrequest" render={()=>
@@ -216,3 +217,36 @@ class NavBar extends React.Component{
 }
 export default NavBar;
 //                                            <CommentsListConatiner />
+const StyledFlexRow = styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
+#filelabel, .actionbox, .button{
+  margin:5px;
+}
+.dropdown-menu.show{
+  padding:0px;
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-content:center;
+  text-align:center;
+  a{
+    background-color:   rgb(192, 175, 211);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    transition: color 1s ease, 
+                box-shadow .3s ease;
+    :hover {
+      background-color:rgb(119, 90, 163);
+      color: #f1f1f1;
+      box-shadow: none;
+    }  
+  }
+}
+`;

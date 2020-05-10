@@ -59,6 +59,9 @@ height: 100vh;
 }
 
 #filelabel {
+  padding:0px;
+  border-radius: 0%;
+  border: 0px;
 color: black;
 background-color:#02dac5;
 font-size: 1em;
