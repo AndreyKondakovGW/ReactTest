@@ -43,6 +43,30 @@ background-color:rgba(255,255,255,0.5);
     }
   }
 
+#dditem, #dditemcenter{
+    margin:5px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    text-align:center;
+    align-items:center;
+}
+#dditemcenter{
+    justify-content:center;
+}
+
+.dropdown-menu.show{
+    border-radius: 0%;
+    border: 0px;
+    padding:0px;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-content:center;
+    text-align:center;
+  }
 `;
 
 class ConspectSaver extends React.Component{
@@ -141,16 +165,28 @@ class NavBar extends React.Component{
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id/:option" render ={()=>
-                <>
-                    <StyledLine>
+                <Route path = "/myconspects/:contentname/:id" render ={()=>
+                <StyledFlexRowConspect>
                         {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
                         {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
+                        <Route path = "/myconspects/:contentname/:id/content" render ={(props)=>
+                           <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
+                             <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
+                           </NavLink>}
+                        />
+                        
+                        <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=>
+                           <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
+                             <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                        </NavLink>}
+                        />
+
                         <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
+                        
                         <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
-                    </StyledLine>
-                <UserAccsesForm conspectid={this.props.id}/>
-                </>}/>
+                        <UserAccsesForm conspectid={this.props.id}/>
+                </StyledFlexRowConspect>
+                }/>s
 
                 <Route path = "/myconspects/:contentname/:id/:option" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
@@ -201,13 +237,13 @@ class NavBar extends React.Component{
 
 
                 <Route path ="/redactor" render={()=><>
-                    <StyledFlexRow>
+                    <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
-                        <MyConspectList >
-                            {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id} />)}
+                        <MyConspectList>
+                            {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id}/>)}
                         </MyConspectList>
-                    </StyledFlexRow>
+                    </StyledFlexRowRedactor>
                 </>}/>
 
 
@@ -231,7 +267,43 @@ class NavBar extends React.Component{
 }
 }
 export default NavBar;
-const StyledFlexRow = styled.div`
+
+const StyledFlexRowConspect = styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
+#filelabel, .actionbox, .button{
+  margin:5px;
+}
+#textlabel{
+    margin:0px;
+}
+
+.dropdown-menu.show{
+  a{
+    padding:0px;
+  }
+  .actionbox{
+    background-color:   rgb(192, 175, 211);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .5);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    transition: color 1s ease, 
+                box-shadow .3s ease;
+    :hover {
+      background-color:rgb(119, 90, 163);
+      color: #f1f1f1;
+      box-shadow: none;
+    }  
+  }
+}
+`;
+const StyledFlexRowRedactor = styled.div`
+
+>>>>>>> 3d51c3c4cf27e34e25e466f1d417d9a97169ed83
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
@@ -242,13 +314,6 @@ text-align:center;
   margin:5px;
 }
 .dropdown-menu.show{
-  padding:0px;
-  display:flex;
-  flex-direction:column;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-content:center;
-  text-align:center;
   a{
     background-color:   rgb(192, 175, 211);
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
