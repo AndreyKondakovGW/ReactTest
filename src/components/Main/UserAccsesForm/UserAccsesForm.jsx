@@ -2,67 +2,6 @@ import React,{useState} from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
-import styled from 'styled-components';
-const StyledLine = styled.div`
-text-align: center;
-*{
-    display:inline-block;
-}
-.flexDropdown{
-  display: flex;
-  flex-direction: column;
-}
-#dropdowntoggle{
-color: black;
- background-color:#02dac5;
- font-size: 1em;
- width:180px;
- height:35px;
- line-height: 35px;
- text-align:center;
- vertical-align:middle;
-    margin-top:15px;
-    margin-bottom: 15px;
-    margin-left:5px;
-    margin-right:5px;
-
-    padding-top:0px;
-    padding-bottom: 0px;
-    padding-left:0px;
-    padding-right:0px;
-
-
- border-radius: 0%;
- border: 0px;
-
-    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
-
-    transition: color 1s ease, 
-                box-shadow .3s ease;
-    :hover {
-      background-color:#018786;
-      color: #f1f1f1;
-      box-shadow: none;
-    }
-}
-#dropdownmenu{
-  margin-left:5px;
-  margin-right:5px;
-  width:180px;
-  display:block;
-  .myinput{
-    font-size: 1em;
-    width:164px;
-    height:35px;
-    line-height: 35px;
-    margin-left:8px;
-    margin-right:8px;
-  }
-}
-
-`;
 
 class UserAccsesForm extends React.Component{
     constructor(props){
@@ -121,43 +60,45 @@ class UserAccsesForm extends React.Component{
   
     render(){
       return (
-          <Dropdown id="nav-dropdown">
-            <div className="flexDropdown">
-            <StyledLine>
-              <Dropdown.Toggle id="dropdowntoggle">Доступ</Dropdown.Toggle>
-            </StyledLine>
-              <Dropdown.Menu id="dropdownmenu">
-              <Dropdown.Item>
-                <div>
-                  Выберете того кому разрешить доступ
+          <Dropdown>
+              <Dropdown.Toggle id="filelabel">Доступ</Dropdown.Toggle>
+              <Dropdown.Menu>
+
+              <div id="dditem">
+                <input type="checkbox" name="Все поверенные" id="Все поверенные" checked={false} onChange={() => {}}/>
+                <label id="textlabel" for="Все поверенные">Все поверенные</label>
+              </div>
+                
+              {this.state.selecteoptions.map(elm=>
+                <div id="dditem">
+                    <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
+                    <label id="textlabel" for={elm.username}>{elm.username}</label>
                 </div>
-              </Dropdown.Item>
-                <input type="checkbox" name="Все поверенные" id="Все поверенные" checked={false} onChange={() => {}} />
-                <label for="Все поверенные">Все поверенные</label>
-                {this.state.selecteoptions.map(elm=><div>
-                      <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
-                      <label for={elm.username}>{elm.username}</label></div>
-                )}
-                <div>
+              )}
+
+              <div id="dditemcenter">
                 <input 
-                  autoFocus
-                  className="myinput"
-                  placeholder="Введите имя..."
-                  onChange={(e) => this.handleChange(e)}
-                  value={this.state.value}
-                />
+                autoFocus
+                id="lineinput"
+                className="myinput"
+                placeholder="Введите имя..."
+                onChange={(e) => this.handleChange(e)}
+                value={this.state.value}/>
+              </div>
+              
+              {this.state.options.filter(option=>!this.state.checkinoption.has(option.user_id)).map(elm=>
+                <div id="dditem">
+                    <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
+                    <label  id="textlabel" for={elm.username}>{elm.username}</label>
                 </div>
-                {this.state.options.filter(option=>!this.state.checkinoption.has(option.user_id)).map(elm=>
-                  <div>
-                      <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
-                      <label for={elm.username}>{elm.username}</label>
-                  </div>
-                )}
-                <Dropdown.Item>
-                  <ActionBox text="Добавить выбранных" action={this.HandleSubmit}/>
-                </Dropdown.Item>
+              )}
+
+              <Dropdown.Item>
+                <ActionBox text="Добавить выбранных" action={this.HandleSubmit}/>
+              </Dropdown.Item>
+
               </Dropdown.Menu>
-            </div>
+            
           </Dropdown>
       )
     }

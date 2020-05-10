@@ -36,6 +36,7 @@ class UserFinderForm extends React.Component{
       <Dropdown>
             <Dropdown.Toggle id="filelabel" >Поиск...</Dropdown.Toggle>
             <Dropdown.Menu>
+            <div id="dditemcenter">
               <input 
                 autoFocus
                 id="lineinput"
@@ -43,9 +44,10 @@ class UserFinderForm extends React.Component{
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.value}
               />
+            </div>
               {this.state.options.map(elm=>
                 <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>
-                  {elm.username}
+                  <div id="dditemcenter">{elm.username}</div>
                 </Dropdown.Item>)}
             </Dropdown.Menu>
       </Dropdown>
@@ -65,13 +67,17 @@ text-align:center;
 #filelabel, .actionbox{
   margin:5px;
 }
-.dropdown-menu.show{
-  padding:5px;
-  display:flex;
-  flex-direction:column;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-content:center;
-  text-align:center;
+#dditemcenter{
+  background-color:   rgb(192, 175, 211);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .5);
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    transition: color 1s ease, 
+                box-shadow .3s ease;
+    :hover {
+      background-color:rgb(119, 90, 163);
+      color: #f1f1f1;
+      box-shadow: none;
+    }  
 }
 `;
