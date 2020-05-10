@@ -40,21 +40,12 @@ class SubscribersContent extends React.Component{
                     name={elm.name} 
                     checked={elm.checked} 
                     img={elm.img} 
-                    path={"/myconspects/"+elm.name+"/"+elm.id} 
+                    path={"/subscriberconspects/"+elm.name+"/"+elm.id} 
                     checkf={this.props.checked}
                 /> ),
             ReactContentsTopics : this.state.Topics.slice(this.props.TopicsPagesize*(this.props.TopicsCurrentPage-1),this.props.TopicsPagesize*this.props.TopicsCurrentPage).map(elm => 
                 <Button text={elm.name} path={"/content/"+elm.name} /> )
         })
-    }
-    setConspectCurPage(n){
-        console.log(n)
-        console.log(this.state)
-        this.setState({
-            ...this.state,
-            ConspectCurrentPage:n
-        })
-        console.log(this.state)
     }
     
     componentDidMount(){
@@ -65,6 +56,7 @@ class SubscribersContent extends React.Component{
                 console.log(response.data)
                 this.setState({
                     ...this.state,
+                    
                     Conspects: response.data.map(function(elm){return({...elm,img: img1})}),
                     ReactContentsConspect : response.data.map(function(elm){return({...elm,img: img1})}).slice(this.props.ConspectPagesize*(this.props.ConspectCurrentPage-1),this.props.ConspectPagesize*this.props.ConspectCurrentPage).map(elm => 
                         <Conspectbox 
@@ -73,7 +65,7 @@ class SubscribersContent extends React.Component{
                             name={elm.name} 
                             checked={elm.checked} 
                             img={elm.img} 
-                            path={"/myconspects/"+elm.name+"/"+elm.id+"/content"} 
+                            path={"/subscriberconspects/"+elm.name+"/"+elm.id+"/content"} 
                             checkf={this.props.checked}
                         /> )
                 })
@@ -89,17 +81,17 @@ class SubscribersContent extends React.Component{
     
    changePageConspect=(pageNum)=>{
     console.log(pageNum)
-    this.setConspectCurPage(pageNum)
     this.setState({ 
-        ...this.state,   
-        ReactContentsConspect : this.state.Conspects.slice(this.state.ConspectPagesize*(this.state.ConspectCurrentPage-1),this.state.ConspectPagesize*this.state.ConspectCurrentPage).map(elm => 
+        ...this.state,
+        ConspectCurrentPage: pageNum,
+        ReactContentsConspect : this.state.Conspects.slice(this.state.ConspectPagesize*(pageNum-1),this.state.ConspectPagesize*pageNum).map(elm => 
             <Conspectbox 
                 Readcted={true}
                 id={elm.id} 
                 name={elm.name} 
                 checked={elm.checked} 
                 img={elm.img} 
-                path={"/myconspects/"+elm.name+"/"+elm.id+"/content"} 
+                path={"/subscriberconspects/"+elm.name+"/"+elm.id+"/content"} 
                 checkf={this.props.checked}
             /> )
     })
@@ -118,13 +110,13 @@ class SubscribersContent extends React.Component{
    render(){
     
 
-    let pagescountC=Math.ceil(this.state.Conspects.length /this.state.ConspectPagesize);
+    let pagescountC=Math.ceil(this.state.Conspects.length / this.state.ConspectPagesize);
     let pagesC=[];
     for(let i=1;i<=pagescountC;i++){
         pagesC.push(i)
     }
     //-----------------------------------------------------------------
-    let pagescountT=Math.ceil(this.state.Topics.length /this.props.TopicsPagesize);
+    let pagescountT=Math.ceil(this.state.Topics.length / this.props.TopicsPagesize);
     let pagesT=[];
     for(let i=1;i<=pagescountT;i++){
         pagesT.push(i)
@@ -141,16 +133,7 @@ class SubscribersContent extends React.Component{
                     changePage={this.changePageConspect}
                     ReactContents={this.state.ReactContentsConspect}> 
                 </Conspects>
-            </div>
-            
-            <div className="contentbox">
-                <div className="contentname">Тэги</div>
-                <Topics pages={pagesT} 
-                        CurrentPage={this.props.TopicsCurrentPage} 
-                        changePage={this.changePageTopics}
-                        ReactContents={this.state.ReactContentsTopics}>
-                </Topics>   
-            </div>     
+            </div>   
     </StyledInterface>
     )
 }

@@ -3,6 +3,7 @@ import NavBar from './NavBar.jsx';
 import {DeleteCheckedConspectAC,ShowAlertAC,SetConspectsAC} from './../../../redux/UserData-reducer';
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
 import {SetCurrentConspectCR,LoadConspectAC,DataLoadSwitch,SetCurrentpdfAC} from '../../../redux/Curentconspect-reducer';
+import {WriteRequest,Openempty} from './../../../redux/TagRequestReducere';
 import * as axios from 'axios';
 import {AddSubscriber} from './../../../redux/UserData-reducer';
 
@@ -13,7 +14,8 @@ let mapStatetoProps =(state)=>{
         Conspects: state.UserDatareducer.UserData.Conspects,
         conspectname: state.CurentCreatorreducer.CreatorData.name,
         id: state.Curentconspectreducer.LogicData.CurrentConspect.id,
-        CurentConspectfotos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos
+        CurentConspectfotos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
+        topicrequest: state.TagRequestReducere.request
     }
 
 }
@@ -92,7 +94,6 @@ let mapDispatchtoProps =(dispatch) =>{
                 }
             })
         },
-        
         AddFoto: (e)=>{
             let reader = new FileReader();
             let file = e.target.files[0];
@@ -109,7 +110,6 @@ let mapDispatchtoProps =(dispatch) =>{
             } 
             reader.readAsDataURL(file)          
         },
-
         OpenConspect: (name, id, fotos)=>{
             console.log("hello Container")
             const conspect={
@@ -167,12 +167,9 @@ let mapDispatchtoProps =(dispatch) =>{
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);
         },
-
-
         LoadData: ()=>{
             dispatch(DataLoadSwitch())
         },
-        
         setPdf: (pdf,name) =>{
             const action =SetCurrentpdfAC(pdf,name);
             dispatch(action)
@@ -180,6 +177,14 @@ let mapDispatchtoProps =(dispatch) =>{
         setConspects: (conspects) =>{
             const action =SetConspectsAC(conspects);
             dispatch(action)
+        },
+        WriteRequestF: ()=>{
+            const action =WriteRequest();
+            dispatch(action);
+            dispatch(Openempty());
+        },
+        Openempty: ()=>{
+            dispatch(Openempty())
         }
     }
 }

@@ -1,6 +1,7 @@
 const ADD_BLOCK="ADD_BLOCK";
 const WRITE_REQUEST="WRITE_REQUEST";
 const CHANGE_BLOCK="CHANGE_BLOCK";
+const SET_EMPTY="SET_EMPTY";
 
 
 let initialstate={
@@ -44,11 +45,19 @@ const TagRequestReducere =(state=initialstate, action) =>{
         case WRITE_REQUEST:{
                 let newstate={
                     ...state,
-                    request: '('+state.data.map(el=>el.map(e=>e.name).join(' & ')).join(') | (') +')'
+                    request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'
                 }
                 console.log(newstate.request)
                 return newstate
             }
+        case SET_EMPTY:{
+            let newstate={
+                ...state,
+                data: [
+                ]
+            }
+            return newstate
+        }
             default: return state
     }
 }
@@ -73,6 +82,12 @@ export const ChangeBlock=(i,u,name)=>{
         i:i,
         u:u,
         name:name
+    }
+}
+
+export const Openempty=()=>{
+    return{
+        type :SET_EMPTY 
     }
 }
 

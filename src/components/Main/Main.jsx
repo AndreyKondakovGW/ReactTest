@@ -67,7 +67,8 @@ const Main=(props) =>{
             <Route path = "/content/:conspectname" component = {ConspectViewerContainer}/>
 
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
-            <Route path = "/myconspects/:conspectname/:id/:n" component = {ConspectViewerContainer}/> 
+            <Route path = "/myconspects/:conspectname/:id/:option" component = {ConspectViewerContainer}/>
+            <Route path = "/subscriberconspects/:conspectname/:id/:option" component = {ConspectViewerContainer}/>  
 
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>
@@ -81,6 +82,8 @@ const Main=(props) =>{
             
             <Route exact path="/comunity" component={SubscriberContainer}/>
             <Route path="/comunity/:name/:id/conspect_and_tags" component={SubscribersContentContainer}/>
+
+            <Route path="/get_sample_pdf" component={ConspectViewerContainer}/>
         </StyledMain>
     )
 }

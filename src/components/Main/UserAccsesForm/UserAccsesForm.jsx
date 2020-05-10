@@ -71,7 +71,9 @@ class UserAccsesForm extends React.Component{
         options: [],
         selecteoptions:[],
         value: "",
-        checkinoption: new Set()
+        checkinoption: new Set(),
+        checkallsubscribers: false,
+        checkeveryone:false
       }
       this.handleChange=this.handleChange.bind(this)
     }
@@ -113,9 +115,16 @@ class UserAccsesForm extends React.Component{
 
     HandleSubmit=()=>{
       console.log(this.state.selecteoptions)
+      console.log(this.state.checkallsubscribers)
       console.log(this.props.conspectid)
+      if (this.state.checkallsubscribers){
+        axios.post('http://127.0.0.1:5000/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
+      }
+      if (this.state.checkeveryone){
+        axios.post('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid+'/viewer')
+      }
       this.state.selecteoptions.forEach(elm => {
-        axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+"/"+elm.user_id+"/viewer")
+        axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm.user_id+'/viewer')
       });
     }
   
@@ -132,8 +141,14 @@ class UserAccsesForm extends React.Component{
                   Выберете того кому разрешить доступ
                 </div>
               </Dropdown.Item>
-                <input type="checkbox" name="Все поверенные" id="Все поверенные" checked={false} onChange={() => {}} />
-                <label for="Все поверенные">Все поверенные</label>
+                <div>
+                  <input type="checkbox" id="Все пользователи" checked={this.state.checkeveryone} onChange={() => {this.setState({...this.state, checkeveryone:!this.state.checkeveryone})}} />
+                  <label for="Все пользователи">Все пользователи</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
+                  <label for="Все поверенные">Все поверенные</label>
+                </div>
                 {this.state.selecteoptions.map(elm=><div>
                       <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
                       <label for={elm.username}>{elm.username}</label></div>

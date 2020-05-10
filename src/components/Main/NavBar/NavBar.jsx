@@ -141,7 +141,7 @@ class NavBar extends React.Component{
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id" render ={()=>
+                <Route path = "/myconspects/:contentname/:id/:option" render ={()=>
                 <>
                     <StyledLine>
                         {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
@@ -152,13 +152,24 @@ class NavBar extends React.Component{
                 <UserAccsesForm conspectid={this.props.id}/>
                 </>}/>
 
-                <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><StyledLine>
+                <Route path = "/myconspects/:contentname/:id/:option" render ={(props)=><StyledLine>
+                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
+                            <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                        </NavLink>
+                </StyledLine>}/>
+                <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
+                            <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
+                        </NavLink> 
+                </StyledLine>}/>
+
+                <Route path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
+                    <NavLink to ={"/"+"subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
                         <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
                     </NavLink>
                 </StyledLine>}/>
-                <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
-                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
+                <Route path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
+                    <NavLink to ={"/"+"subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
                         <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
                     </NavLink>
                 </StyledLine>}/>
@@ -172,19 +183,21 @@ class NavBar extends React.Component{
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
                     <CommentsListConatiner/>
-                    <Button  text="Доступ" icon={<Link45deg/>} path={"myconspects"}/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true}/>
                 </StyledLine>}/>
                 
    
-                <Route path ="/creteconspect/:conspect/:id" render={()=>
+                <Route path ="/creteconspect/:conspect/:id" render={()=><>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
                     {console.log(this.props.name)}
                     {console.log(this.props.conspectname)}
                     {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
-                </StyledLine>}/>
+                </StyledLine>
+                <UserAccsesForm conspectid={this.props.id}/>
+                </>}/>
+                
 
 
                 <Route path ="/redactor" render={()=><>
@@ -204,7 +217,9 @@ class NavBar extends React.Component{
 
                 <Route path ="/topicrequest" render={()=>
                 <StyledLine>
-                    <ActionBox text="Показать" action={this.props.WriteRequestF}/>
+                    <NavLink to={"/get_sample_pdf"}>
+                        <ActionBox text="Показать" action={this.props.WriteRequestF}/>
+                    </NavLink>
                     <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
                 </StyledLine>}/>
                 
@@ -216,7 +231,6 @@ class NavBar extends React.Component{
 }
 }
 export default NavBar;
-//                                            <CommentsListConatiner />
 const StyledFlexRow = styled.div`
 display:flex;
 flex-direction:row;

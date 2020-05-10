@@ -61,6 +61,7 @@ const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     })
 }
 
+
 const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
     axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
         console.log(response.data)
@@ -93,7 +94,21 @@ class Viewer extends React.Component{
                 this.props.setPdf(fileURL,this.props.match.url.split('/')[2])
         })
         }
-        if ((this.props.match.url.split('/')[1]=="myconspects")){
+        if (this.props.match.url.split('/')[1]=="get_sample_pdf"){
+            this.props.LoadData()
+            console.log("Отправлелен запрос на получене  пдфки тэга выборки"+this.props.topicrequest)
+            axios('http://127.0.0.1:5000/get_sample_pdf/'+this.props.topicrequest,
+            {   method: 'GET',
+                responseType: 'blob'}
+            ).then(response =>{
+                const file = new Blob(
+                    [response.data], 
+                    {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                this.props.setPdf(fileURL,this.props.match.url.split('/')[2])
+        })
+        }
+        if ((this.props.match.url.split('/')[1]=="myconspects") || (this.props.match.url.split('/')[1]=="subscriberconspects")){
             if (this.props.match.url.split('/')[4]=="pdf"){
                 LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
             }
@@ -128,8 +143,8 @@ Content=()=>{
         <StyledInterface>
             <NavBarContainer name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
             {console.log(this.props.match.url.split('/')[4])}
-            {(this.props.match.url.split('/')[1]=="content")?<>{this.Contentpdf()}</>:<></>}
-            {(this.props.match.url.split('/')[4]=="pdf")?<>{this.Contentpdf()}</>:<></>}
+            {((this.props.match.url.split('/')[1]=="content") || (this.props.match.url.split('/')[4]=="pdf"))?<>{this.Contentpdf()}</>:<></>}
+            {(this.props.match.url.split('/')[1]=="get_sample_pdf")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]=="content")?<>{this.Content()}</>:<></>}
         </StyledInterface>
     )

@@ -7,7 +7,8 @@ let mapStatetoProps =(state)=>{
     return {
         dataisLoading: state.Curentconspectreducer.dataisLoading,
         curntpdf: state.Curentconspectreducer.LogicData.currentpdf,
-        Photos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos
+        Photos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
+        topicrequest: state.TagRequestReducere.request
     }
 }
 let mapDispatchtoProps =(dispatch) =>{

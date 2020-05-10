@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import TagRequest from './TagRequest.jsx';
-import {AddBlock,WriteRequest,ChangeBlock} from './../../../redux/TagRequestReducere';
+import {AddBlock,WriteRequest,ChangeBlock,Openempty} from './../../../redux/TagRequestReducere';
+import {SetTopicsAC} from './../../../redux/UserData-reducer';
 
 
 let mapStatetoProps =(state)=>{
@@ -16,6 +17,11 @@ let mapStatetoProps =(state)=>{
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
+        setTopics: (topics) =>{
+            console.log(topics)
+            const action =SetTopicsAC(topics);
+            dispatch(action)
+        },
         AddBlockF: (i,u,name)=>{
             console.log(i)
             console.log(u)
@@ -29,6 +35,9 @@ let mapDispatchtoProps =(dispatch) =>{
         WriteRequestF: ()=>{
             const action =WriteRequest();
             dispatch(action);
+        },
+        Openempty: ()=>{
+            dispatch(Openempty())
         }
 
     }

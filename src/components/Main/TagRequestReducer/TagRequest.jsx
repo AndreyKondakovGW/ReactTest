@@ -3,8 +3,18 @@ import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import {Dropdown } from 'react-bootstrap';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import styled from 'styled-components';
+import * as axios from 'axios';
 import { ExpandMore } from '@material-ui/icons';
 class TagRequest extends React.Component{
+    componentDidMount(){
+        console.log("Отправлелен запрос на получение тэгов")
+        this.props.Openempty()
+        axios.get("http://127.0.0.1:5000/gettags").then(response =>{
+            console.log(response.data)
+            this.props.setTopics(response.data)
+        })
+    }
+
     AddBlocFConteiner=()=>{
         this.props.AddBlockF(0,this.props.data.length,this.props.tags[0])
     }
@@ -58,12 +68,6 @@ class TagRequest extends React.Component{
                 <NavBarContainer name="Tagrequest"/>
                 {this.TagListComponent()}
                 
-                {/*<StyledTagRequest></StyledTagRequest>*/}
-                
-                {/*
-                <ActionBox text="Показать" action={this.props.WriteRequestF}/>
-                <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
-                */}
             </StyledInterface>
         )
     }
