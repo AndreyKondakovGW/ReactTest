@@ -209,7 +209,7 @@ class NavBar extends React.Component{
                     <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
                     {console.log(this.props.name)}
                     {console.log(this.props.conspectname)}
-                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
                 </StyledLine>}/>
 
 

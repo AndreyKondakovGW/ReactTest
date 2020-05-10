@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { ChevronDoubleRight, ChevronDoubleDown } from 'react-bootstrap-icons';
 import styled from 'styled-components';
+import * as axios from 'axios';
 const StyledHeader = styled.div`
   .navbar {
     background-color: rgb(220, 222, 234);
@@ -50,7 +51,12 @@ transition-property: height;
 transition-timing-function: ease-in-out;
 }
 `;
-
+const GetCurUser=(SetUsername)=>{
+  axios.get('http://127.0.0.1:5000/get_current_user').then(response=>{
+    console.log(response)
+    SetUsername(response.data.name)
+})
+}
 const Header=(props)=>{
     return (
     <StyledHeader open={props.open}>
@@ -67,7 +73,7 @@ const Header=(props)=>{
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/comunity">@{props.CurentUser}</Link>
+              <Link to="/comunity">@{(props.CurentUser==="")?GetCurUser(props.SetUsername):props.CurentUser}</Link>
             </Nav.Link>
           </Nav.Item>
         </Nav>
