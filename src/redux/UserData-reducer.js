@@ -21,9 +21,10 @@ const ADD_SUBSCRIBER="ADD_SUBSCRIBER"
 const SET_SUBSCRIBERS="SET_SUBSCRIBERS"
 const SET_CUR_OPTION="SET_CUR_OPTION"
 
+
 let initialstate={
     UserData: {
-        Username: {name: "Kain",id: 0},
+        Username: "a",
         Subscribers:[
             {name: "Bobrbobrovich",id: 1},
             {name: "Bobr",id: 2}
@@ -84,6 +85,7 @@ const UserDatareducer =(state=initialstate, action)=>{
                     Username:action.Username
                 }
             }
+            console.log(newstate)
             return newstate
         }
         case SET_TOPICS:{
@@ -205,7 +207,7 @@ const UserDatareducer =(state=initialstate, action)=>{
         default: return state
     }
 }
-export const SetUsernameAC=(name) =>({type :SET_USERNAME,Username: name})
+export const SetUsernameAC=(name) =>({type :SET_USERNAME,Username:name})
 export const SetTopicsAC=(topics) =>({type :SET_TOPICS,topics})
 export const SetConspectsAC=(conspects) =>({type :SET_CONSPECTS,conspects})
 export const CheckedConspectAC=(id)=>({type :CHECKED_CONSPECT,id})
@@ -232,4 +234,5 @@ export const SetCurOptionAC=(name,id)=>({
     name:name,
     id:id
 })
+
 export default UserDatareducer; 
