@@ -139,7 +139,7 @@ let mapDispatchtoProps =(dispatch) =>{
                 }
             })
             console.log(OldIDs)
-            axios.put('http://127.0.0.1:5000/put_conspect/'+name+"/True").then(response=>{
+            axios.put('http://127.0.0.1:5000/put_conspect/'+name+"/False").then(response=>{
                 console.log(response.data.conspect_id)
                 fotos.forEach(elm=>{
                     if (elm.index=="null"){
