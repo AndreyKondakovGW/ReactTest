@@ -60,7 +60,7 @@ class UserAccsesForm extends React.Component{
         axios.post('http://127.0.0.1:5000/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
       }
       if (this.state.checkeveryone){
-        axios.post('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid)
+        axios.put('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid)
       }
       this.state.selecteoptions.forEach(elm => {
         axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm.user_id+'/viewer')

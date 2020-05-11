@@ -24,7 +24,7 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 
 let initialstate={
     UserData: {
-        Username: "",
+        Username: "a",
         Subscribers:[
             {name: "Bobrbobrovich",id: 1},
             {name: "Bobr",id: 2}
