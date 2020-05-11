@@ -186,7 +186,7 @@ class NavBar extends React.Component{
                         <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                         <UserAccsesForm conspectid={this.props.id}/>
                 </StyledFlexRowConspect>
-                }/>s
+                }/>
 
                 <Route path = "/myconspects/:contentname/:id/:option" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
