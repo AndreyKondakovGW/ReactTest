@@ -18,7 +18,7 @@ height: 100vh;
     "Lucida Sans Unicode",
     sans-serif;
   }
-  .unselectable {
+  a, .actionbox, #filelabel {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none;   /* Chrome/Safari/Opera */
     -khtml-user-select: none;    /* Konqueror */
@@ -58,10 +58,14 @@ height: 100vh;
   display: inline-block;
 }
 
+#textlabel{
+  margin:0px;
+}
+
 #filelabel {
-  padding:0px;
-  border-radius: 0%;
-  border: 0px;
+padding:0px;
+border-radius: 0%;
+border: 0px;
 color: black;
 background-color:#02dac5;
 font-size: 1em;

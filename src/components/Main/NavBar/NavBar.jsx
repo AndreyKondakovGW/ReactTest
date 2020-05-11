@@ -18,14 +18,15 @@ text-align: center;
 *{
     display:inline-block;
 }
-#filelabel,  .button, .actionbox, .dropdown{
-    margin:5px;
-}
 
 `;
 const StyledNavBar = styled.div`
 margin-top:56px;
 background-color:rgba(255,255,255,0.5);
+
+ .button, .actionbox, #lineinput, #filelabel{
+    margin:5px;
+}
 
 #basic-navbar-nav {
     transition-delay: 0s;
@@ -160,7 +161,7 @@ class NavBar extends React.Component{
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-                <Route exact path ="/myconspects" render={()=><StyledLine>
+                <Route exact path = "/myconspects" render={()=><StyledLine>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
@@ -172,8 +173,7 @@ class NavBar extends React.Component{
                         <Route path = "/myconspects/:contentname/:id/content" render ={(props)=>
                            <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
                              <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
-                           </NavLink>}
-                        />
+                           </NavLink>}/>
                         
                         <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=>
                            <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
@@ -188,17 +188,7 @@ class NavBar extends React.Component{
                 </StyledFlexRowConspect>
                 }/>
 
-                <Route path = "/myconspects/:contentname/:id/:option" render ={(props)=><StyledLine>
-                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
-                            <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
-                        </NavLink>
-                </StyledLine>}/>
-                <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
-                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
-                            <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
-                        </NavLink> 
-                </StyledLine>}/>
-
+                
                 <Route path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
                         <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
@@ -236,7 +226,7 @@ class NavBar extends React.Component{
                 
 
 
-                <Route path ="/redactor" render={()=><>
+                <Route path ="/redactor" render={()=>
                     <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
@@ -244,7 +234,7 @@ class NavBar extends React.Component{
                             {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id}/>)}
                         </MyConspectList>
                     </StyledFlexRowRedactor>
-                </>}/>
+                }/>
 
 
                 <Route exact path="/comunity" render={()=>
@@ -275,12 +265,7 @@ flex-wrap:wrap;
 justify-content:center;
 align-content:center;
 text-align:center;
-#filelabel, .actionbox, .button{
-  margin:5px;
-}
-#textlabel{
-    margin:0px;
-}
+
 
 .dropdown-menu.show{
   a{
@@ -309,9 +294,7 @@ flex-wrap:wrap;
 justify-content:center;
 align-content:center;
 text-align:center;
-#filelabel, .actionbox, .button{
-  margin:5px;
-}
+
 .dropdown-menu.show{
   a{
     background-color:   rgb(192, 175, 211);

@@ -74,11 +74,11 @@ class UserAccsesForm extends React.Component{
               <Dropdown.Menu>
               <div id="dditem">
                   <input type="checkbox" id="Все пользователи" checked={this.state.checkeveryone} onChange={() => {this.setState({...this.state, checkeveryone:!this.state.checkeveryone})}} />
-                  <label for="Все пользователи">Все пользователи</label>
+                  <label id ="textlabel" for="Все пользователи">Все пользователи</label>
                 </div>
                 <div id="dditem">
                   <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
-                  <label for="Все поверенные">Все поверенные</label>
+                  <label id ="textlabel" for="Все поверенные">Все поверенные</label>
                 </div>
                 
               {this.state.selecteoptions.map(elm=>
