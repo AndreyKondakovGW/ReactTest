@@ -123,7 +123,7 @@ class Viewer extends React.Component{
 Contentpdf=()=>{
     return ((!this.props.dataisLoading)?
     <StyledPreview>
-        <iframe className={s.pdf} src={this.props.curntpdf.pdf}/>
+        <iframe className="pdf" src={this.props.curntpdf.pdf}/>
     </StyledPreview>
     :
     <StyledInvite><img src={preloader}></img></StyledInvite>)}
@@ -153,6 +153,7 @@ Content=()=>{
 
 export default Viewer;
 const StyledPreview = styled.div`
+margin-top:20px;
 display: flex;
 flex-direction: column;
 width:100%;
@@ -160,7 +161,12 @@ height: 100%;
 justify-content:center;
 align-items: flex-start;
 text-align:center;
+.pdf{
+    height: 100%;
+    width: 100%;
+}
 .scrolbar{
+    padding-top:20px;
     overflow-y: scroll;
     overflow-x: scroll;
     height: 100%;
