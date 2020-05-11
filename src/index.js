@@ -11,6 +11,7 @@ import styled from 'styled-components';
 const Styles = styled.div`
 width: 100%;
 height: 100vh;
+
   *{
     font-family:
     "century gothic",
@@ -96,13 +97,15 @@ transition-duration: .3s;
 `;
 
   ReactDOM.render(    
-        <Styles>
+        
           <BrowserRouter>
             <Provider store={store}>
+              <Styles>
             <App />
+            </Styles>
             </Provider>
           </BrowserRouter>
-        </Styles>,
+        ,
     document.getElementById('root')
   );
 

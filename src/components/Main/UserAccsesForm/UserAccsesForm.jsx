@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
-
 class UserAccsesForm extends React.Component{
     constructor(props){
       super(props)
@@ -39,6 +38,7 @@ class UserAccsesForm extends React.Component{
             ...this.state,
             value: value,
             options: response.data.filter(option=>!this.state.checkinoption.has(option.user_id)).map(function(elm){return({...elm,cheked: false})})
+            
           })
           console.log(this.state)
         })
@@ -59,7 +59,7 @@ class UserAccsesForm extends React.Component{
         axios.post('http://127.0.0.1:5000/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
       }
       if (this.state.checkeveryone){
-        axios.put('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid)
+        axios.post('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid+'/viewer')
       }
       this.state.selecteoptions.forEach(elm => {
         axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm.user_id+'/viewer')
@@ -79,6 +79,7 @@ class UserAccsesForm extends React.Component{
                   <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
                   <label id ="textlabel" for="Все поверенные">Все поверенные</label>
                 </div>
+                
               {this.state.selecteoptions.map(elm=>
                 <div id="dditem">
                     <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
@@ -95,13 +96,15 @@ class UserAccsesForm extends React.Component{
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.value}/>
               </div>
+              
               {this.state.options.filter(option=>!this.state.checkinoption.has(option.user_id)).map(elm=>
                 <div id="dditem">
                     <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
                     <label  id="textlabel" for={elm.username}>{elm.username}</label>
                 </div>
-              
+
               )}
+
               <Dropdown.Item>
                 <ActionBox text="Добавить выбранных" action={this.HandleSubmit}/>
               </Dropdown.Item>

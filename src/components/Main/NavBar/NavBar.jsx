@@ -56,10 +56,18 @@ background-color:rgba(255,255,255,0.5);
 #dditemcenter{
     justify-content:center;
 }
-
 .dropdown-menu.show{
+    animation: appear 300ms ease-in-out 1;
+    @keyframes appear {
+        0%{ opacity: 0;
+           transform: translateY(-10px);}
+      }
+
+    position:absolute;
+    overflow-y: auto;
     border-radius: 0%;
     border: 0px;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     padding:0px;
     display:flex;
     flex-direction:column;
@@ -67,6 +75,9 @@ background-color:rgba(255,255,255,0.5);
     justify-content:center;
     align-content:center;
     text-align:center;
+    .dropdown-item{
+        background-color:rgba(255,255,255);
+    }
   }
 `;
 
@@ -283,6 +294,9 @@ text-align:center;
       color: #f1f1f1;
       box-shadow: none;
     }  
+  }
+  #lineinput{
+      margin:0px;
   }
 }
 `;

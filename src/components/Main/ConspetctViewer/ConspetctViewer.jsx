@@ -165,7 +165,6 @@ text-align:center;
     overflow-x: scroll;
     height: 100%;
     width: 100%;
-    
     border-style: solid;
     border-width: 1px;
     border-color: #f1f1f1;
@@ -187,10 +186,12 @@ display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 `;
 
 const StyledInvite = styled.div`
 width:100%;
+height: 100%;
 height: 100%;
 font-size:1em;
 display:flex;

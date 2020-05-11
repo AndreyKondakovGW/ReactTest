@@ -8,14 +8,6 @@ line-height: 35px;
 text-align:center;
 vertical-align:middle;
 
-/*
-margin-top:15px;
-margin-bottom: 15px;
-margin-left:5px;
-margin-right: 5px;
-*/
-
-
 display: inline-block;
 
 

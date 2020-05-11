@@ -77,6 +77,7 @@ const StyledRedactor = styled.div`
         margin-bottom: 10px;
         height: 150px;
         width: 150px;
+        object-fit: cover;
         box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
         :hover{
             cursor:pointer;

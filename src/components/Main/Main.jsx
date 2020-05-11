@@ -8,7 +8,7 @@ import TagRequestContainer from './TagRequestReducer/TagRequestContainer.jsx';
 import SubscriberContainer from './Subscriber/SubscriberContainer';
 import SubscribersContentContainer from './SubscribersContent/SubscribersContentContainer';
 import HelloComponent from './HelloComponent/HelloComponent';
-import backimg from '../../static/bground2.jpg';
+
 import {Route } from 'react-router-dom';
 import * as axios from 'axios';
 
@@ -19,6 +19,8 @@ display:inline-block;
 float:right;
 width: 100%;
 height: 100vh;
+overflow: auto;
+position: relative;
 padding-left:20px;
 padding-right:20px;
 
@@ -29,13 +31,11 @@ transition-duration: .4s;
 transition-property: margin-left;
 transition-timing-function: ease-in-out;
 
-
 background: url(/bground2.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
-background-size: cover;
-/*background-position: center;*/
+background-size:cover;
 
 @media (max-width: 324px) {
   margin-top:30px;
