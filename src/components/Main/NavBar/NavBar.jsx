@@ -303,7 +303,6 @@ text-align:center;
 `;
 const StyledFlexRowRedactor = styled.div`
 
->>>>>>> 3d51c3c4cf27e34e25e466f1d417d9a97169ed83
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
