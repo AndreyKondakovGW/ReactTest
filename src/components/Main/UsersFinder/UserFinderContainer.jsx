@@ -6,7 +6,8 @@ import UserFinderForm from './UserFinder.jsx';
 let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
-        CurentOption: state.UserDatareducer.CurentOption
+        CurentOption: state.UserDatareducer.CurentOption,
+        SubscrubersSet: new Set(state.UserDatareducer.UserData.Subscribers.map(elm=>elm.user_id))
     }
 
 }
