@@ -188,16 +188,6 @@ class NavBar extends React.Component{
                 </StyledFlexRowConspect>
                 }/>
 
-                <Route path = "/myconspects/:contentname/:id/:option" render ={(props)=><StyledLine>
-                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
-                            <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
-                        </NavLink>
-                </StyledLine>}/>
-                <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
-                    <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
-                            <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
-                        </NavLink> 
-                </StyledLine>}/>
 
                 <Route path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
