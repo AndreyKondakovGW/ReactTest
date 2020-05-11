@@ -39,7 +39,6 @@ class UserAccsesForm extends React.Component{
             ...this.state,
             value: value,
             options: response.data.filter(option=>!this.state.checkinoption.has(option.user_id)).map(function(elm){return({...elm,cheked: false})})
-            
           })
           console.log(this.state)
         })
@@ -80,14 +79,12 @@ class UserAccsesForm extends React.Component{
                   <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
                   <label for="Все поверенные">Все поверенные</label>
                 </div>
-              <div id="dropdown">
               {this.state.selecteoptions.map(elm=>
                 <div id="dditem">
                     <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
                     <label id="textlabel" for={elm.username}>{elm.username}</label>
                 </div>
               )}
-               </div> 
 
               <div id="dditemcenter">
                 <input 
@@ -98,7 +95,6 @@ class UserAccsesForm extends React.Component{
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.value}/>
               </div>
-              <div id="dropdown">
               {this.state.options.filter(option=>!this.state.checkinoption.has(option.user_id)).map(elm=>
                 <div id="dditem">
                     <input type="checkbox" name={elm.username} id={elm.username} checked={elm.cheked} onChange={() => this.CheckedById(elm.user_id)}/>
@@ -106,7 +102,6 @@ class UserAccsesForm extends React.Component{
                 </div>
               
               )}
-              </div>
               <Dropdown.Item>
                 <ActionBox text="Добавить выбранных" action={this.HandleSubmit}/>
               </Dropdown.Item>

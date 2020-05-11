@@ -19,7 +19,7 @@ class UserFinderForm extends React.Component{
       axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
         this.setState({
           value: value,
-          options:response.data
+          options:response.data.filter(elm=>!this.props.SubscrubersSet.has(elm.user_id))
         })
       })
     }

@@ -6,7 +6,8 @@ import UserAccsesForm from './UserAccsesForm.jsx';
 let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
-        CurentOption: state.UserDatareducer.CurentOption
+        CurentOption: state.UserDatareducer.CurentOption,
+        CurentUser: state.UserDatareducer.UserData.Username
     }
 }
 
