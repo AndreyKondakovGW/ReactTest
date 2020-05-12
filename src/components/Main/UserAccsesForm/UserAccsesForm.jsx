@@ -16,6 +16,17 @@ class UserAccsesForm extends React.Component{
       }
       this.handleChange=this.handleChange.bind(this)
     }
+    componentDidMount=()=>{
+      axios.get('http://127.0.0.1:5000/get_users_with_access/'+this.props.conspectid).then(response=>{
+        console.log(response)
+        this.setState({
+          ...this.state,
+          selecteoptions: response.data.map(function(elm){return({...elm,cheked: true})})
+        })
+        response.data.forEach(elm=>this.state.checkinoption.add(elm.user_id))
+      })
+    }
+
     CheckedById=(id)=>{
       if ((this.state.selecteoptions.find(elm=>elm.user_id===id))&&(this.state.selecteoptions.find(elm=>elm.user_id===id).cheked)){
         this.state.checkinoption.delete(id)
@@ -29,7 +40,6 @@ class UserAccsesForm extends React.Component{
       })
       console.log(this.state)
     }
-
     handleChange=(e)=>{
       let value = e.target.value;
       if (value!=""){
@@ -61,9 +71,23 @@ class UserAccsesForm extends React.Component{
       if (this.state.checkeveryone){
         axios.put('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid)
       }
-      this.state.selecteoptions.forEach(elm => {
-        axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm.user_id+'/viewer')
-      });
+      axios.get('http://127.0.0.1:5000/get_users_with_access/'+this.props.conspectid).then(response=>{
+        let usersold=new Set(response.data.map(elm=>elm.user_id))
+        let usersnew=new Set(this.state.selecteoptions.map(elm=>elm.user_id))
+        usersold.forEach(elm=>{
+          if (!usersnew.has(elm)){
+            console.log("delete"+elm)
+            axios.delete('http://127.0.0.1:5000/remove_user_access/'+elm+'/'+this.props.conspectid)
+          }
+        })
+        usersnew.forEach(elm=>{
+          if (!usersold.has(elm)){
+            console.log("add"+elm)
+            axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm+'/viewer')
+          }
+        })
+      })
+
     }
   
     render(){
@@ -71,10 +95,6 @@ class UserAccsesForm extends React.Component{
           <Dropdown>
               <Dropdown.Toggle id="filelabel">Доступ</Dropdown.Toggle>
               <Dropdown.Menu>
-              <div id="dditem">
-                  <input type="checkbox" id="Все пользователи" checked={this.state.checkeveryone} onChange={() => {this.setState({...this.state, checkeveryone:!this.state.checkeveryone})}} />
-                  <label for="Все пользователи">Все пользователи</label>
-                </div>
                 <div id="dditem">
                   <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
                   <label for="Все поверенные">Все поверенные</label>
@@ -114,3 +134,9 @@ class UserAccsesForm extends React.Component{
 }
   
 export default UserAccsesForm;
+/*
+              <div id="dditem">
+                  <input type="checkbox" id="Все пользователи" checked={this.state.checkeveryone} onChange={() => {this.setState({...this.state, checkeveryone:!this.state.checkeveryone})}} />
+                  <label for="Все пользователи">Все пользователи</label>
+                </div>
+*/

@@ -4,7 +4,6 @@ import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 
 import SideBarContainer from './components/SideBar/SideBarContainer';
-
 import MainContainer from './components/Main/MainContainer';
 import { Row,  Container } from 'react-bootstrap';
 

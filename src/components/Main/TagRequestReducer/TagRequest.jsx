@@ -34,14 +34,12 @@ class TagRequest extends React.Component{
         :
         <div></div>
     }
-
     TagListComponent(){ return <StyledExpr>
                                 {this.props.data.map(elm=>
                                 <StyledLine>
                                     <div className="addintersect">  
                                         {this.AddButton(elm)}
                                         {elm.map(e=>
-                                        //<div>
                                                     <Dropdown className="dropdown">
                                                         <Dropdown.Toggle variant="success">{e.name}</Dropdown.Toggle>
                                                          <Dropdown.Menu>
@@ -52,12 +50,9 @@ class TagRequest extends React.Component{
                                                              )} 
                                                          </Dropdown.Menu>
                                                     </Dropdown>
-                                                    //<ExpandMore className="upsidedown"/>*/
-                                                    
-                                                   // </div>
-                                                 )}
+                                        )}
                                     </div>
-                                    {(this.props.data.length<=this.props.maxUn)?<ExpandMore fontSize="large" className="booloperation"/>:<div></div>}
+                                    {(this.props.data.length<this.props.maxUn)?<ExpandMore fontSize="large" className="booloperation"/>:<div></div>}
                                 </StyledLine>
                                     )} 
                                    <div>{this.AddColonButton()}</div> 

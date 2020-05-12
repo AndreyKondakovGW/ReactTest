@@ -125,7 +125,7 @@ let mapDispatchtoProps =(dispatch) =>{
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
         },
-        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect)=>{
+        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
             console.log("Пытаюсь сохранит конспект")
             console.log(name)
             console.log(fotos)
@@ -161,6 +161,7 @@ let mapDispatchtoProps =(dispatch) =>{
                           });
                     }
                 })
+                //routing(response.data.conspect_id,name)
             })
             
             
