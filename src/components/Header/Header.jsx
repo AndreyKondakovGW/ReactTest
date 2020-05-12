@@ -23,7 +23,7 @@ const StyledHeader = styled.div`
   }
   
   .closebtn{
-    border-radius: 20%;
+    z-index:1000;
     margin-right:15px;
     background-color:#02dac5;
     border: 0;

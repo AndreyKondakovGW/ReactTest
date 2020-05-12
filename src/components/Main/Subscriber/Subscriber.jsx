@@ -26,21 +26,19 @@ class Subscriber extends React.Component{
                 <StyledGrid>
 
                     {this.props.Subscribers.map(elm=>
-                    <StyledUserBox>
+                        <StyledUserBox>
+                        
+                            <StyledLine>
+                                <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>{elm.username}</NavLink> 
+                            </StyledLine>
 
-                        <StyledLine>
-                            <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
-                                {elm.username}
-                            </NavLink> 
-                        </StyledLine>
+                            <NavLink className="noellipsis" to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
+                                <img src={bobr} alt="some value"/>
+                            </NavLink>
 
-                        <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
-                            <img src={bobr} alt="some value"/>
-                        </NavLink>
-                        <ActionBox text="отписаться" action={()=>this.DeleteSubscriber(elm.user_id)
-                        }/> 
-
-                    </StyledUserBox>)}
+                            <ActionBox text="Отписаться" action={()=>this.DeleteSubscriber(elm.user_id)}/> 
+                   
+                        </StyledUserBox>)}
 
                 </StyledGrid>
                 {/*
@@ -55,7 +53,10 @@ export default  Subscriber;
 
 
 const StyledUserBox = styled.div`
-display:inline-block;
+
+display:flex;
+flex-direction: column;
+text-align:center;
 a{
     color: black;
     font-size: 1em;
@@ -76,13 +77,18 @@ a{
             box-shadow: none;
         }
     }
+    .actionbox{
+        margin-top:10px;
+        width:200px;
+        :hover {
+            background-color: rgb(255, 80, 80);
+           
+          }  
+    }
 `;
 const StyledLine = styled.div`
 text-align: left;
 margin-bottom:10px;
-*{
-    display:inline-block;
-}
 `;
 const StyledInterface = styled.div`
 display: flex;

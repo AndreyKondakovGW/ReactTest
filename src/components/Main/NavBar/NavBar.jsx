@@ -15,10 +15,16 @@ import { withRouter } from "react-router-dom";
 
 import styled from 'styled-components';
 const StyledLine = styled.div`
-text-align: center;
+/*text-align: center;
 *{
     display:inline-block;
-}
+}*/
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
 
 `;
 const StyledNavBar = styled.div`
@@ -58,6 +64,7 @@ background-color:rgba(255,255,255,0.5);
     justify-content:center;
 }
 .dropdown-menu.show{
+    background-color:#DCDEEA;
     animation: appear 300ms ease-in-out 1;
     @keyframes appear {
         0%{ opacity: 0;
@@ -66,7 +73,7 @@ background-color:rgba(255,255,255,0.5);
 
     position:absolute;
     overflow-y: auto;
-    border-radius: 0%;
+    border-radius: 8px;
     border: 0px;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     padding:0px;
@@ -229,7 +236,7 @@ class NavBar extends React.Component{
 
                 <Route exact path ="/creteconspect/newconspect" render={()=><StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
                     <CommentsListConatiner/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing}/>
                 </StyledLine>}/>
@@ -238,7 +245,7 @@ class NavBar extends React.Component{
                 <Route path ="/creteconspect/:conspect/:id" render={()=><>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
                     {console.log(this.props.name)}
                     {console.log(this.props.conspectname)}
                     {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
@@ -264,12 +271,12 @@ class NavBar extends React.Component{
                 }></Route>
 
                 <Route path ="/topicrequest" render={()=>
-                <StyledLine>
+                <StyledFlexRowRedactor>
                     <NavLink to={"/get_sample_pdf"}>
                         <ActionBox text="Показать" action={this.props.WriteRequestF}/>
                     </NavLink>
                     <ActionBox text="Сохранить" action={this.props.WriteRequestF}/>
-                </StyledLine>}/>
+                </StyledFlexRowRedactor>}/>
                 
         </Nav>
       </Navbar.Collapse>
@@ -322,17 +329,20 @@ text-align:center;
 
 .dropdown-menu.show{
   a{
-    background-color:   rgb(192, 175, 211);
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     transition-property: box-shadow;
     transition-duration: .3s;
     transition: color 1s ease, 
                 box-shadow .3s ease;
+  }
+
+  .button, a{
+    background-color:   rgb(192, 175, 211);
     :hover {
-      background-color:rgb(119, 90, 163);
-      color: #f1f1f1;
-      box-shadow: none;
-    }  
+        background-color:rgb(119, 90, 163);
+        color: #f1f1f1;
+        box-shadow: none;
+      } 
   }
 }
 `;

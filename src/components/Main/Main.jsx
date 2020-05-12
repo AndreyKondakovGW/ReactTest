@@ -41,10 +41,6 @@ background-size:cover;
   margin-top:30px;
 }
 
-.closebtn{
-  z-index:1000;
-  margin:40px;
-}
 .nomargin{
   margin:0px;
 }

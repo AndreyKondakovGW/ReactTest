@@ -21,17 +21,18 @@ img{
 `;
 
 const StyledDeleteBlock = styled.div`
-    border-radius: 20%;
     width: 20px;
     height: 20px;
     padding-left: 2px;
-    background-color: rgb(255, 80, 80);
+    
+    background-color:#02dac5;
     margin-right:10px;
 
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     transition-property: box-shadow;
     transition-duration: .3s;
     :hover{
+        background-color: rgb(255, 80, 80);
         cursor: pointer;
         box-shadow: none;
     }
@@ -52,7 +53,7 @@ const PohotoVeiwer=(props) =>{
 
     return(
         <StyledLine>
-            <StyledDeleteBlock onClick={deleteB}><Dash id="marginbottom"/></StyledDeleteBlock>
+            <StyledDeleteBlock className ="checkbox" onClick={deleteB}><Dash id="marginbottom"/></StyledDeleteBlock>
             <img  src={props.path} onClick={changeP}/>
         </StyledLine>
     )

@@ -9,15 +9,17 @@ import { BrowserRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
 const Styles = styled.div`
+
 width: 100%;
 height: 100vh;
 
   *{
     font-family:
-    "century gothic",
+    /*font-weight:bold;"century gothic",*/
     "dejavu sans",
     "Lucida Sans Unicode",
-    sans-serif;
+    sans-serif; 
+    
   }
   a, .actionbox, #filelabel {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -28,6 +30,12 @@ height: 100vh;
     user-select: none;           /* Non-prefixed version, currently
                                     not supported by any browser */
   }
+.button, a:not(.noellipsis), .actionbox,  #filelabel, #lineinput, .closebtn,.checkbox{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius:5px;
+}
 
 /*inputs*/
 
@@ -65,7 +73,6 @@ height: 100vh;
 
 #filelabel {
 padding:0px;
-border-radius: 0%;
 border: 0px;
 color: black;
 background-color:#02dac5;
@@ -73,10 +80,6 @@ font-size: 1em;
 width:180px;
 height:35px;
 line-height: 35px;
-text-align:center;
-vertical-align:middle;
-    
-display: inline-block;
 
 transition-property: color;
 transition-duration: 1s;
@@ -91,9 +94,15 @@ transition-duration: .3s;
     cursor: pointer;
     box-shadow: none;
 }
-  
+ 
 }
+a:not(.noellipsis), .actionbox, #filelabel{
+padding-left:6px; 
+text-align:left;
+vertical-align:middle;
+display: inline-block;
 
+}
 `;
 
   ReactDOM.render(    

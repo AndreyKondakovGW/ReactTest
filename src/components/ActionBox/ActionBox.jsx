@@ -5,11 +5,6 @@ font-size: 1em;
 width:180px;
 height:35px;
 line-height: 35px;
-text-align:center;
-vertical-align:middle;
-
-display: inline-block;
-
 
 background-color:#02dac5;
 color: black;
@@ -40,8 +35,8 @@ class ActionBox extends React.Component{
         <StyledActionBox 
                 className="actionbox" 
                 onClick={this.onclik}>
-            {this.props.text} {this.props.icon}
-            </StyledActionBox>
+            {this.props.icon} {this.props.text} 
+        </StyledActionBox>
     )
     }
 }

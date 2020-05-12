@@ -32,7 +32,6 @@ align-items: center;
 `;
 const Conspects=(props)=>{
     return(
-        <div>
                 <StyledConspects>
                     {(props.alert)?props.alert():<></>}
                     <StyledLine>
@@ -43,8 +42,6 @@ const Conspects=(props)=>{
                     </StyledLine>
                    <StyledGrid>{props.ReactContents}</StyledGrid>
                 </StyledConspects>
-                
-        </div>
     )
 }
 export default Conspects;
