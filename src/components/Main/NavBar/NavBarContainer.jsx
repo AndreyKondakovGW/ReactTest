@@ -24,12 +24,12 @@ let mapStatetoProps =(state)=>{
 let mapDispatchtoProps =(dispatch) =>{
     return{
         LoadConspectFromData: async (fotos,name,id,OpenConspect)=>{
-            let promise = new Promise(async (resolve, reject) => {
+            let promise = new Promise(async (resolve) => {
                 let f=[]
                 var i=0
                 while (i<fotos.data.length)
                 {
-                    let promise = new Promise((resolve, reject) => {
+                    let promise = new Promise((resolve) => {
                         console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                         resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                     })
@@ -37,7 +37,7 @@ let mapDispatchtoProps =(dispatch) =>{
                     const file = new Blob(
                         [response.data], 
                         {type: 'image'});
-                    let promise2 = new Promise((resolve, reject) => {
+                    let promise2 = new Promise((resolve) => {
                         let reader = new FileReader();
                         reader.onload = function(event) {
                             const img = event.target.result
@@ -51,7 +51,7 @@ let mapDispatchtoProps =(dispatch) =>{
                     })
                     f=await promise2
                 }
-                if (f.length==fotos.data.length){
+                if (f.length===fotos.data.length){
                     console.log(f)
                     resolve(f)
                 }
@@ -70,10 +70,10 @@ let mapDispatchtoProps =(dispatch) =>{
         ShowAlert:(Conspects)=>{
             let alertT=[]
             console.log(Conspects.filter(elm=>elm.checked))
-            let promise = new Promise(async (resolve, reject) => {
+            let promise = new Promise(async (resolve) => {
                 var i=0
                 while (i<Conspects.filter(elm=>elm.checked).length){
-                    let promise = new Promise((resolve, reject) => {
+                    let promise = new Promise((resolve) => {
                         resolve(axios.get('http://127.0.0.1:5000/related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
                     })
                     let response= await promise
@@ -81,13 +81,13 @@ let mapDispatchtoProps =(dispatch) =>{
                     i+=1
                 }
                 console.log(alertT)
-                if (alertT.length==Conspects.filter(elm=>elm.checked).length){
+                if (alertT.length===Conspects.filter(elm=>elm.checked).length){
                     resolve(alertT)
                 }
             })
             promise.then(result=>{
                 console.log(result)
-                if  (!result.every(elm=>elm.tags==""))
+                if  (!result.every(elm=>elm.tags===""))
                 {
                     dispatch(ShowAlertAC(result.map(elm=>"Тэги: " + elm.tags +" из конспекта " + elm.name).join("\n")))
                 }else{
@@ -126,7 +126,7 @@ let mapDispatchtoProps =(dispatch) =>{
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
         },
-        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
+        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect)=>{
             console.log("Пытаюсь сохранит конспект")
             console.log(name)
             console.log(fotos)
@@ -143,7 +143,7 @@ let mapDispatchtoProps =(dispatch) =>{
             axios.put('http://127.0.0.1:5000/put_conspect/'+name+"/False").then(response=>{
                 console.log(response.data.conspect_id)
                 fotos.forEach(elm=>{
-                    if (elm.index=="null"){
+                    if (elm.index==="null"){
                         console.log("новая фотка:"+ elm.name)
                         let formData = new FormData();
                         formData.append('file', elm.file);
@@ -162,7 +162,6 @@ let mapDispatchtoProps =(dispatch) =>{
                           });
                     }
                 })
-                //routing(response.data.conspect_id,name)
             })
             
             

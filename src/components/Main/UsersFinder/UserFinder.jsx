@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
@@ -15,7 +15,7 @@ class UserFinderForm extends React.Component{
   }
   handleChange=(e)=>{
     let value = e.target.value;
-    if (value!=""){
+    if (value!==""){
       axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
         this.setState({
           value: value,

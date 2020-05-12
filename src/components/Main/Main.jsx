@@ -13,6 +13,7 @@ import {Route } from 'react-router-dom';
 import * as axios from 'axios';
 
 import { bool, func } from 'prop-types';
+import bground2 from '../../static/bground2.jpg'
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display:inline-block;
@@ -31,7 +32,7 @@ transition-duration: .4s;
 transition-property: margin-left;
 transition-timing-function: ease-in-out;
 
-background: url(/bground2.jpg) no-repeat center center fixed;
+background: url(${bground2}) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -56,33 +57,22 @@ const Main=(props) =>{
       axios.get("http://127.0.0.1:5000/logout")
       document.location.reload(true);
     }
-    
-    
     return (
-       
         <StyledMain open={props.open} >
             <Route exact path ="/main/:username" component = {HelloComponent}/>
-
             <Route exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route path = "/content/:conspectname" component = {ConspectViewerContainer}/>
-
             <Route exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
             <Route path = "/myconspects/:conspectname/:id/:option" component = {ConspectViewerContainer}/>
             <Route path = "/subscriberconspects/:conspectname/:id/:option" component = {ConspectViewerContainer}/>  
-
             <Route exact  path = "/creteconspect" render = {() => <div><CreateConspectContainer/></div>} />
             <Route path = "/creteconspect/:conspect/:id" component = {CreateConspectContainer}/>
             <Route path = "/creteconspect/newconspect" component = {CreateConspectContainer} />
-
             <Route path = "/redactor/:conspectname/:id" component = {RedactorContainer} />
-            
             <Route path="/topicrequest" component={TagRequestContainer}/>
-
             <Route path="/logout" render = {() => <div>{logout()}</div>} />
-            
             <Route exact path="/comunity" component={SubscriberContainer}/>
             <Route path="/comunity/:name/:id/conspect_and_tags" component={SubscribersContentContainer}/>
-
             <Route path="/get_sample_pdf" component={ConspectViewerContainer}/>
         </StyledMain>
     )

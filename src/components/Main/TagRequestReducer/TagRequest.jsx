@@ -30,8 +30,7 @@ class TagRequest extends React.Component{
     }
     AddColonButton(){
         return (this.props.data.length<this.props.maxUn)?
-        <ActionBox  text="Объединить с..." action={this.AddBlocFConteiner}/>
-        :
+        <ActionBox  text="Объединить с..." action={this.AddBlocFConteiner}/>:
         <div></div>
     }
     TagListComponent(){ return <StyledExpr>
@@ -60,7 +59,7 @@ class TagRequest extends React.Component{
     render(){
         return(
             <StyledInterface>
-                <NavBarContainer name="Tagrequest"/>
+                <NavBarContainer name="Создание выборки"/>
                 {this.TagListComponent()}
                 
             </StyledInterface>

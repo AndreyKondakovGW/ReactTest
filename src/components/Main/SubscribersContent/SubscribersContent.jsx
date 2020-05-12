@@ -7,11 +7,27 @@ import img3 from '../../../static/images/bobr3.jpeg';
 import Conspects from '../MyConspect/MyConspectComponent.jsx';
 import Conspectbox from '../MyConspect/Conspectbox/ConspectboxComponent.jsx';
 import Button from '../../Button/Button';
-//import Contentbox from '../../Contentbox/Contentbox.jsx';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
-import Topics from '../Content/TopicsComponent';
 import * as axios from 'axios';
+
 import styled from 'styled-components';
+
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+.contentname{
+    padding-left:16px;
+    font-size: 20px;
+    height:35px;
+line-height: 35px;
+}
+.contentbox{
+    display: flex;
+flex-direction: column;
+}
+`;
 
 class SubscribersContent extends React.Component{
     constructor(props){
@@ -71,12 +87,6 @@ class SubscribersContent extends React.Component{
                 })
            })
            console.log("Отправлелен запрос на получене тэгов")
-           /*
-            axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            console.log(response.data)
-            this.props.setTopics(response.data)
-        })
-        */
     }
     
    changePageConspect=(pageNum)=>{
@@ -139,27 +149,4 @@ class SubscribersContent extends React.Component{
 }
 }
 export default SubscribersContent;
-const StyledInterface = styled.div`
-display: flex;
-flex-direction: column;
-width:100%;
-height: 100%;
-.contentname{
-    padding-left:16px;
-    font-size: 20px;
-    height:35px;
-line-height: 35px;
-}
-.contentbox{
-    display: flex;
-flex-direction: column;
-}
-`;
 
-{/*const StyledLine = styled.div`
-font-size: 20px;
-text-align: center;
-*{
-    display:inline-block;
-}
-`;*/}

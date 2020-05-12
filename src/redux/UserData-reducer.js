@@ -24,7 +24,7 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 
 let initialstate={
     UserData: {
-        Username: "Лиза",
+        Username: "",
         Subscribers:[
             {username: "Bobrbobrovich",id: 1},
             {username: "Bobr",id: 2},
@@ -198,7 +198,7 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case ADD_SUBSCRIBER:{
-            if (state.CurentOption!=""){
+            if (state.CurentOption!==""){
             axios.post('http://127.0.0.1:5000/add_friend/'+state.CurentOption.id)
             let newstate={
                 ...state,
@@ -210,7 +210,9 @@ const UserDatareducer =(state=initialstate, action)=>{
             }
             console.log("Добавлен поверенный: "+state.CurentOption.name+" "+state.CurentOption.id)
             return newstate
-        }
+            }else{
+                return state
+            }
         }
         case SET_SUBSCRIBERS:{
             let newstate={

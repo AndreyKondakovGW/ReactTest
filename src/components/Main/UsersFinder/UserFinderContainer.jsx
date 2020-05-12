@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {AddSubscriber,SetCurOptionAC} from './../../../redux/UserData-reducer';
+import {SetCurOptionAC} from './../../../redux/UserData-reducer';
 import UserFinderForm from './UserFinder.jsx';
 
 
@@ -17,9 +17,6 @@ let mapDispatchtoProps =(dispatch) =>{
         setoption:(name,id)=>{
             console.log(name)
             dispatch(SetCurOptionAC(name,id))
-        },
-        setsubscribers:()=>{
-
         }
     }
 }

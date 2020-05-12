@@ -49,7 +49,7 @@ class TopicsAPI extends React.Component{
         }
         return(   
         <div>
-            <NavBarContainer name="Main"/>
+            <NavBarContainer name="Мои тэги"/>
             <Topics pages={pages} 
                     CurrentPage={this.props.CurrentPage} 
                     changePage={this.changePage}

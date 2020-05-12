@@ -1,11 +1,15 @@
 import React from 'react';
+
+
 import Button from '../Button/Button';
+
+
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
-
 import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode,Code,FileEarmark,PeopleFill} from 'react-bootstrap-icons';
-
 import styled from 'styled-components';
+
+
 const StyledSideBar = styled.div`
     margin: 0;
     padding-left:16px;
@@ -58,7 +62,7 @@ const SideBar=(props) =>{
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
             <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />
-            <Button text='Редактор' path={(props.CurrentConspect.id!=-1)?"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id:"redactor/emptyconspect/"+props.CurrentConspect.id} icon={<Pencil/>}/>
+            <Button text='Редактор' path={(props.CurrentConspect.id!==-1)?"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id:"redactor/emptyconspect/"+props.CurrentConspect.id} icon={<Pencil/>}/>
             <Button text='Мои поверенные' icon={<PeopleFill/>}  path={"comunity"}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
@@ -72,16 +76,3 @@ SideBar.propTypes = {
   };
 
 export default SideBar;
-
-//        <form action="" method="post" >
-//<input type="text"  name ="img_name" id="search" placeholder="Поиск..." required autoFocus></input>
-//<Button text='Открыть' icon={<Search/>} />      
-//</form>
-{/*const StyledLine = styled.div`
-    background-color: rgb(0,0,0);
-    color: black;
-    position: fixed;
-    width:220px;
-    height: 100vh;
-    z-index: 201;
-`;*/}

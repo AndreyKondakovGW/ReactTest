@@ -225,15 +225,18 @@ class TagsForm  extends React.Component{
 
     handleChange=(e)=>{
         let value = e.target.value;
+        console.log(e.target.name)
+        console.log(value)
         this.setState({
             ...this.state,
             tags: this.state.tags.map(elm=>(elm.id==e.target.name)?{id: elm.id,text: value}:elm)
         })
+        console.log(this.state)
     }
 
     handleSubmit=()=> {
         console.log(this.props.Coordinate)
-        this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!=""),this.props.curentfoto.index,this.props.Coordinate)
+        this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!==""),this.props.curentfoto.index,this.props.Coordinate)
         this.ClearForm()
     }
 
@@ -280,7 +283,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
                 })
                 f=await promise2
             }
-            if (f.length==fotos.data.length){
+            if (f.length===fotos.data.length){
                 console.log(f)
                 resolve(f)
             }
@@ -302,7 +305,7 @@ class Redactor extends React.Component{
                 console.log(response.data)
                 this.props.setConspect(response.data)
            })
-        if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+        if ((this.props.match.params.id!==-1) && (this.props.CurentconspectID!==this.props.match.params.id)){
             this.props.LoadData()
             console.log("Загружаю конспект "+this.props.match.params.conspectname)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
@@ -319,7 +322,7 @@ class Redactor extends React.Component{
         console.log(this.props.match.params.id)
         console.log(this.props.CurentconspectID)
         console.log(this.props.dataisLoading)
-        if ((!this.props.dataisLoading) && (this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+        if ((!this.props.dataisLoading) && (this.props.match.params.id!==-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
             this.props.LoadData()
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 console.log(response)
@@ -332,7 +335,7 @@ class Redactor extends React.Component{
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-            {(this.props.match.params.id!=-1)?<>
+            {(this.props.match.params.id!==-1)?<>
                 <div className="photoviewer">
                     <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>
                     <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>
@@ -354,7 +357,7 @@ class Redactor extends React.Component{
             </StyledInvite>}
     </StyledRedactor>
     :
-    <StyledInvite><img src={preloader}></img></StyledInvite>)}
+    <StyledInvite><img src={preloader} alt="some image"></img></StyledInvite>)}
 
     
     render(){

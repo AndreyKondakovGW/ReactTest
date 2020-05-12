@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
@@ -21,7 +21,7 @@ class UserAccsesForm extends React.Component{
         this.setState({
           ...this.state,
           checkeveryone: response.data.find(elm=>elm.user_id===-1).username==="True",
-          selecteoptions: response.data.filter(elm=>elm.user_id!=-1).map(function(elm){return({...elm,cheked: true})})
+          selecteoptions: response.data.filter(elm=>elm.user_id!==-1).map(function(elm){return({...elm,cheked: true})})
         })
         response.data.forEach(elm=>this.state.checkinoption.add(elm.user_id))
       })
@@ -30,10 +30,18 @@ class UserAccsesForm extends React.Component{
     CheckedById=(id)=>{
       if ((this.state.selecteoptions.find(elm=>elm.user_id===id))&&(this.state.selecteoptions.find(elm=>elm.user_id===id).cheked)){
         this.state.checkinoption.delete(id)
-        this.state.selecteoptions=this.state.selecteoptions.filter(elm=>elm.user_id!=id)}
+        this.setState({
+          ...this.state,
+          selecteoptions: this.state.selecteoptions.filter(elm=>elm.user_id!==id)
+        })
+      }
       else{
         this.state.checkinoption.add(id)
-        this.state.selecteoptions=[...this.state.selecteoptions,{...this.state.options.find(elm=>elm.user_id===id),cheked:true}]}
+        this.setState({
+          ...this.state,
+          selecteoptions: [...this.state.selecteoptions,{...this.state.options.find(elm=>elm.user_id===id),cheked:true}]
+        })
+      }
       this.setState({
           ...this.state,
           options: this.state.options.map(elm=>(elm.user_id===id)?{...elm,cheked:!elm.cheked}:elm)
@@ -42,16 +50,15 @@ class UserAccsesForm extends React.Component{
     }
     handleChange=(e)=>{
       let value = e.target.value;
-      if (value!=""){
+      if (value!==""){
         axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
           console.log(response.data)
           this.setState({
             ...this.state,
             value: value,
-            options: response.data.filter(option=>(option.user_id!=-1)&&(!this.state.checkinoption.has(option.user_id))).map(function(elm){return({...elm,cheked: false})})
+            options: response.data.filter(option=>(option.user_id!==-1)&&(!this.state.checkinoption.has(option.user_id))).map(function(elm){return({...elm,cheked: false})})
             
           })
-          console.log(this.state)
         })
         
       }
@@ -63,17 +70,8 @@ class UserAccsesForm extends React.Component{
     }
 
     HandleSubmit=()=>{
-      console.log(this.state.selecteoptions)
-      console.log(this.state.checkallsubscribers)
-      console.log(this.props.conspectid)
       if (this.state.checkallsubscribers){
         axios.post('http://127.0.0.1:5000/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
-      }
-      if (this.state.checkeveryone){
-        //axios.put('http://127.0.0.1:5000/share_conspect_to_all/'+this.props.conspectid)
-      }
-      if (!this.state.checkeveryone){
-        //axios.put('http://127.0.0.1:5000/set_conspect_private/'+this.props.conspectid)
       }
       axios.get('http://127.0.0.1:5000/get_users_with_access/'+this.props.conspectid).then(response=>{
         let usersold=new Set(response.data.map(elm=>elm.user_id))

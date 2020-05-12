@@ -1,6 +1,9 @@
 import React from 'react';
+
+
 import {Dash} from 'react-bootstrap-icons';
 import styled from 'styled-components';
+
 const StyledLine = styled.div`
 display:flex;
 display-direction:row;
@@ -45,15 +48,13 @@ const PohotoVeiwer=(props) =>{
     const deleteB=()=>{
         props.delete(props.name)
     }
-
     const changeP=()=>{
         props.change(props.name)
     }
-
     return(
         <StyledLine>
             <StyledDeleteBlock onClick={deleteB}><Dash id="marginbottom"/></StyledDeleteBlock>
-            <img  src={props.path} onClick={changeP}/>
+            <img  src={props.path} onClick={changeP} alt="PhotoViewr"/>
         </StyledLine>
     )
 }

@@ -70,7 +70,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             })
             f=await promise2
         }
-        if (f.length==fotos.data.length){
+        if (f.length===fotos.data.length){
             resolve(f)
         }
         
@@ -100,7 +100,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             let newstate={...state};
             newstate.LogicData={...state.LogicData}
             newstate.LogicData.CurrentConspect={...state.LogicData.CurrentConspect,data: {...state.LogicData.CurrentConspect.data}}
-            for (var i=0;i<state.LogicData.CurrentConspect.data.fotos.length;i++){
+            for (i=0;i<state.LogicData.CurrentConspect.data.fotos.length;i++){
                 if(state.LogicData.CurrentConspect.data.fotos[i].index===state.LogicData.CurrentConspect.data.curentfoto.index){
                     newstate.LogicData.CurrentConspect.data.curentfoto={...state.LogicData.CurrentConspect.data.fotos[(i-1+state.LogicData.CurrentConspect.data.fotos.length) % state.LogicData.CurrentConspect.data.fotos.length]}
                 }
