@@ -140,10 +140,11 @@ class SubscribersContent extends React.Component{
 }
 export default SubscribersContent;
 const StyledInterface = styled.div`
-display: flex;
+/*display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
+height: 100%;*/
+
 .contentname{
     padding-left:16px;
     font-size: 20px;

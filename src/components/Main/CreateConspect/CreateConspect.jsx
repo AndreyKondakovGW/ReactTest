@@ -10,17 +10,18 @@ const StyledMainbox = styled.div`
     display:flex;
     flex-direction: column;
     flex-wrap:wrap;
+    text-align:center;
     justify-content:center;
     align-items: flex-start;
 
-.mygrid{
-width:100%;
-display:grid;
-grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-grid-gap: 10px;
-justify-items: center;
-align-items: center;
-}
+    .mygrid{
+    width:100%;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    }
 `;
 const StyledImagePerwier = styled.div`
 width:100%;
@@ -58,10 +59,11 @@ display:flex;
     }
 `;
 const StyledInterface = styled.div`
-display: flex;
+/*display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
+height: 100%;*/
+
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve, reject) => {

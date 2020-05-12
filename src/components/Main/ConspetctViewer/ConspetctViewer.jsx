@@ -185,10 +185,11 @@ text-align:center;
 }
 `;
 const StyledInterface = styled.div`
-display: flex;
+/*display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
+height: 100%;*/
+
 
 `;
 

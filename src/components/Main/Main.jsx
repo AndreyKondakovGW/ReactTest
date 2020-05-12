@@ -15,9 +15,10 @@ import * as axios from 'axios';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 const StyledMain = styled.div`
+
 display:inline-block;
 float:right;
-width: 100%;
+width: 100vw;
 height: 100vh;
 overflow: auto;
 position: relative;

@@ -127,10 +127,11 @@ display:flex;
 `;
 
 const StyledInterface = styled.div`
-display: flex;
+/*display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
+height: 100%;*/
+
 `;
 const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
