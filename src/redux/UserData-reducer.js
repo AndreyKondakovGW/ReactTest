@@ -24,10 +24,36 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 
 let initialstate={
     UserData: {
-        Username: "",
+        Username: "Лиза",
         Subscribers:[
-            {name: "Bobrbobrovich",id: 1},
-            {name: "Bobr",id: 2}
+            {username: "Bobrbobrovich",id: 1},
+            {username: "Bobr",id: 2},
+            {username: "Andrey",id: 3},
+            {username: "Sergey",id: 4}
+            ,
+            {username: "Nurey",id: 5}
+            ,
+            {username: "Nastya",id: 6}
+            ,
+            {username: "Sofia",id: 7}
+            ,
+            {username: "Anyakonda",id: 8}
+            ,
+            {username: "Vanya",id: 9}
+            ,
+            {username: "ImperorOfHumor",id: 10}
+            ,
+            {username: "Alkl",id: 11}
+            ,
+            {username: "Lena",id: 12}
+            ,
+            {username: "Yana",id: 13}
+            ,
+            {username: "MihChern",id: 14}
+            ,
+            {username: "Iluha",id: 15}
+            ,
+            {username: "Daneel",id: 16}
         ],
         Topics: [
             {name: "тема 1", id:1},

@@ -35,6 +35,10 @@ const StyledDeleteBlock = styled.div`
         cursor: pointer;
         box-shadow: none;
     }
+    #marginbottom{
+        margin-bottom:6px;
+    }
+    
 `;
 
 const PohotoVeiwer=(props) =>{
@@ -48,7 +52,7 @@ const PohotoVeiwer=(props) =>{
 
     return(
         <StyledLine>
-            <StyledDeleteBlock onClick={deleteB}><Dash/></StyledDeleteBlock>
+            <StyledDeleteBlock onClick={deleteB}><Dash id="marginbottom"/></StyledDeleteBlock>
             <img  src={props.path} onClick={changeP}/>
         </StyledLine>
     )

@@ -19,14 +19,15 @@ text-align: center;
 *{
     display:inline-block;
 }
-#filelabel,  .button, .actionbox, .dropdown{
-    margin:5px;
-}
 
 `;
 const StyledNavBar = styled.div`
 margin-top:56px;
 background-color:rgba(255,255,255,0.5);
+
+ .button, .actionbox, #lineinput, #filelabel{
+    margin:5px;
+}
 
 #basic-navbar-nav {
     transition-delay: 0s;
@@ -56,10 +57,18 @@ background-color:rgba(255,255,255,0.5);
 #dditemcenter{
     justify-content:center;
 }
-
 .dropdown-menu.show{
+    animation: appear 300ms ease-in-out 1;
+    @keyframes appear {
+        0%{ opacity: 0;
+           transform: translateY(-10px);}
+      }
+
+    position:absolute;
+    overflow-y: auto;
     border-radius: 0%;
     border: 0px;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     padding:0px;
     display:flex;
     flex-direction:column;
@@ -67,6 +76,9 @@ background-color:rgba(255,255,255,0.5);
     justify-content:center;
     align-content:center;
     text-align:center;
+    .dropdown-item{
+        background-color:rgba(255,255,255);
+    }
   }
 `;
 
@@ -124,12 +136,7 @@ class ConspectSaver extends React.Component{
     }
 }
 
-const CheckConspectIsPblic=(conspectid)=>{
-    axios.get('http://127.0.0.1:5000/get_users_with_access/'+conspectid).then(response=>{
 
-    })
-    return false
-}
 
 class NavBar extends React.Component{
     LoadPDF = (LoadData,conspectname,setPdf,conspectid)=>{
@@ -161,7 +168,6 @@ class NavBar extends React.Component{
             }) 
         }
     }
-
     Routing(id,name) {
         this.props.history.push('/creteconspect/'+name+'/'+id);
     }
@@ -173,35 +179,26 @@ class NavBar extends React.Component{
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-                <Route exact path ="/myconspects" render={()=><StyledLine>
+                <Route exact path = "/myconspects" render={()=><StyledLine>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id" render ={(props)=>
+                <Route path = "/myconspects/:contentname/:id" render ={()=>
                 <StyledFlexRowConspect>
-                        {/*<Navbar.Brand href="#">{this.props.name}</Navbar.Brand>*/}
-                        {/*action={()=>LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf)}*/}
                         <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><>
                            <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
                              <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
                            </NavLink>
-                           {(CheckConspectIsPblic(props.match.params.id))?<>
-                           <ActionBox text="Закрыть для всех"/></>:<>
-                           <ActionBox text="Открыть для всех"/>
-                           <UserAccsesForm conspectid={props.match.params.id}/>
-                           </>}
+                            <UserAccsesForm conspectid={props.match.params.id}/>
                            </>}
                         />
+                        
                         <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><>
                            <NavLink to ={"/"+"myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"content"}>
                              <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
                             </NavLink>
-                            {(CheckConspectIsPblic(props.match.params.id))?<>
-                                <ActionBox text="Закрыть для всех"/></>:<>
-                                <ActionBox text="Открыть для всех"/>
-                                <UserAccsesForm conspectid={props.match.params.id}/>
-                           </>}
+                            <UserAccsesForm conspectid={props.match.params.id}/>
                            </>
                         }/>
                         <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
@@ -210,7 +207,7 @@ class NavBar extends React.Component{
                 </StyledFlexRowConspect>
                 }/>
 
-
+                
                 <Route path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/"+"subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/"+"pdf"}>
                         <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
@@ -251,7 +248,7 @@ class NavBar extends React.Component{
                 
 
 
-                <Route path ="/redactor" render={()=><>
+                <Route path ="/redactor" render={()=>
                     <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!=-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!=-1)?<CommentsListConatiner />:<></>}
@@ -259,7 +256,7 @@ class NavBar extends React.Component{
                             {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id}/>)}
                         </MyConspectList>
                     </StyledFlexRowRedactor>
-                </>}/>
+                }/>
 
 
                 <Route exact path="/comunity" render={()=>
@@ -290,12 +287,7 @@ flex-wrap:wrap;
 justify-content:center;
 align-content:center;
 text-align:center;
-#filelabel, .actionbox, .button{
-  margin:5px;
-}
-#textlabel{
-    margin:0px;
-}
+
 
 .dropdown-menu.show{
   a{
@@ -314,20 +306,20 @@ text-align:center;
       box-shadow: none;
     }  
   }
+  #lineinput{
+      margin:0px;
+  }
 }
 `;
 const StyledFlexRowRedactor = styled.div`
 
->>>>>>> 3d51c3c4cf27e34e25e466f1d417d9a97169ed83
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
 justify-content:center;
 align-content:center;
 text-align:center;
-#filelabel, .actionbox, .button{
-  margin:5px;
-}
+
 .dropdown-menu.show{
   a{
     background-color:   rgb(192, 175, 211);

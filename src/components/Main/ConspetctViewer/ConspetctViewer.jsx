@@ -79,7 +79,6 @@ const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
 
 class Viewer extends React.Component{
     componentDidMount(){
-        if (this.props.match.url.split('/')[2]!=this.props.curntpdf.name){
         if (this.props.match.url.split('/')[1]=="content"){
             this.props.LoadData()
             console.log("Отправлелен запрос на получене  пдфки тэга "+this.props.match.url.split('/')[2])
@@ -116,14 +115,13 @@ class Viewer extends React.Component{
                 LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
             }
         }
-        }
     }
 
 
 Contentpdf=()=>{
     return ((!this.props.dataisLoading)?
     <StyledPreview>
-        <iframe className={s.pdf} src={this.props.curntpdf.pdf}/>
+        <iframe className="pdf" src={this.props.curntpdf.pdf}/>
     </StyledPreview>
     :
     <StyledInvite><img src={preloader}></img></StyledInvite>)}
@@ -142,7 +140,6 @@ Content=()=>{
     return (
         <StyledInterface>
             <NavBarContainer name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
-            {console.log(this.props.match.url.split('/')[4])}
             {((this.props.match.url.split('/')[1]=="content") || (this.props.match.url.split('/')[4]=="pdf"))?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[1]=="get_sample_pdf")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]=="content")?<>{this.Content()}</>:<></>}
@@ -153,6 +150,7 @@ Content=()=>{
 
 export default Viewer;
 const StyledPreview = styled.div`
+margin-top:20px;
 display: flex;
 flex-direction: column;
 width:100%;
@@ -160,12 +158,16 @@ height: 100%;
 justify-content:center;
 align-items: flex-start;
 text-align:center;
+.pdf{
+    height: 100%;
+    width: 100%;
+}
 .scrolbar{
+    padding-top:20px;
     overflow-y: scroll;
     overflow-x: scroll;
     height: 100%;
     width: 100%;
-    
     border-style: solid;
     border-width: 1px;
     border-color: #f1f1f1;
@@ -187,10 +189,12 @@ display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 `;
 
 const StyledInvite = styled.div`
 width:100%;
+height: 100%;
 height: 100%;
 font-size:1em;
 display:flex;

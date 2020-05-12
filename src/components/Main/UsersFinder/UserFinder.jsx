@@ -32,11 +32,12 @@ class UserFinderForm extends React.Component{
   render(){
     return (
     <StyledFlexRow>
-        <ActionBox  text={(this.props.CurentOption.name)?("Добавить " + (this.props.CurentOption.name)):"Добавить"} action={this.props.add}/>
+        {(this.props.CurentOption.name)?
+        <ActionBox  text={"Добавить " + (this.props.CurentOption.name)} action={this.props.add}/>:<></>}
       <Dropdown>
             <Dropdown.Toggle id="filelabel" >Поиск...</Dropdown.Toggle>
             <Dropdown.Menu>
-            <div id="dditemcenter">
+            <div id="dditemcenterinput">
               <input 
                 autoFocus
                 id="lineinput"
@@ -64,9 +65,7 @@ flex-wrap:wrap;
 justify-content:center;
 align-content:center;
 text-align:center;
-#filelabel, .actionbox{
-  margin:5px;
-}
+
 #dditemcenter{
   background-color:   rgb(192, 175, 211);
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .5);
@@ -79,5 +78,9 @@ text-align:center;
       color: #f1f1f1;
       box-shadow: none;
     }  
+}
+
+#dditemcenterinput{
+  justify-content:center;
 }
 `;

@@ -16,12 +16,14 @@ const SET_COMMENT="SET_COMMENT";
 const OPEN_EMPTY="OPEN_EMPTY";
 const LOAD_CONSPECT="LOAD_CONSPECT";
 const DATA_LOADSWITH="DATA_LOADSWITH";
+const CangeConspectAcsess="CangeConspectAcsess";
 
 let initialstate={
     LogicData:{
         CurrentConspect: {
             name: "EmptyConspect",
             id: -1,
+            conspect_is_public: false,
             data: {
                 fotos: [
                     {name:"1", path:bobr1},
@@ -236,6 +238,19 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             }
             return newstate
         }
+        case CangeConspectAcsess:{
+            let newstate={
+                ...state,
+                LogicData:{
+                    ...state.LogicData,
+                    CurrentConspect:{
+                        ...state.LogicData.CurrentConspect,
+                        conspect_is_public: action.ispublic
+                    }
+                }
+            }
+            return newstate
+        }
         default: return state
     }
 }
@@ -305,6 +320,13 @@ export const SetCordinateAC=(x1,x2,y1,y2)=>{
 export const DataLoadSwitch=()=>{
     return{
     type:DATA_LOADSWITH
+    }
+}
+
+export const CangeConspectAcsessAC=(is_public)=>{
+    return{
+        type: CangeConspectAcsess,
+        ispublic:is_public
     }
 }
 export default Curentconspectreducer

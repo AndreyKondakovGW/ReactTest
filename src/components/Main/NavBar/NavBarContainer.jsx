@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import NavBar from './NavBar.jsx';
 import {DeleteCheckedConspectAC,ShowAlertAC,SetConspectsAC} from './../../../redux/UserData-reducer';
 import {ADDFOTOCreator,OpenConspectAC} from './../../../redux/ConspectCreater-reducer';
-import {SetCurrentConspectCR,LoadConspectAC,DataLoadSwitch,SetCurrentpdfAC} from '../../../redux/Curentconspect-reducer';
+import {SetCurrentConspectCR,LoadConspectAC,DataLoadSwitch,SetCurrentpdfAC,CangeConspectAcsessAC} from '../../../redux/Curentconspect-reducer';
 import {WriteRequest,Openempty} from './../../../redux/TagRequestReducere';
 import * as axios from 'axios';
 import {AddSubscriber} from './../../../redux/UserData-reducer';
@@ -15,7 +15,8 @@ let mapStatetoProps =(state)=>{
         conspectname: state.CurentCreatorreducer.CreatorData.name,
         id: state.Curentconspectreducer.LogicData.CurrentConspect.id,
         CurentConspectfotos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
-        topicrequest: state.TagRequestReducere.request
+        topicrequest: state.TagRequestReducere.request,
+        conspectispublic: state.Curentconspectreducer.LogicData.CurrentConspect.conspect_is_public
     }
 
 }
@@ -186,7 +187,11 @@ let mapDispatchtoProps =(dispatch) =>{
         },
         Openempty: ()=>{
             dispatch(Openempty())
+        },
+        CangeConspectAcsess: (is_public)=>{
+            dispatch(CangeConspectAcsessAC(is_public))
         }
+
     }
 }
 
