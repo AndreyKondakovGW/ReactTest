@@ -4,6 +4,8 @@ import preloader from '../../../static/2.gif';
 import * as axios from 'axios';
 import styled from 'styled-components';
 
+import helppdf from '../../../static/pdf/simplePDF.pdf';
+
 const StyledPreview = styled.div`
 margin-top:20px;
 display: flex;
@@ -45,8 +47,8 @@ flex-direction: column;
 width:100%;
 height: 100%;
 
-`;
 
+`;
 const StyledInvite = styled.div`
 width:100%;
 height: 100%;
@@ -64,6 +66,8 @@ display:flex;
     }
 `;
 
+
+
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve) => {
         let f=[]
@@ -71,7 +75,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve) => {
-                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                 resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
@@ -97,14 +100,11 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         
     })
     promise.then(result=>{
-        console.log("Полученный массив фотографий")
-        console.log(result) 
         OpenConspect(name,id, result)  
     })  
 }
 const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     LoadData()
-    console.log("Отправлелен запрос на получене  конспекта "+conspectname)
     axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
     {   
         method: 'GET',
@@ -121,14 +121,11 @@ const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
 
 const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
     axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-        console.log(response.data)
         setConspects(response.data)
     })
     if (id!==-1){
         LoadData()
-        console.log("Загружаю конспект "+conspectname)
         axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id).then(response=>{
-            console.log(response)
             LoadConspectFromData(response,conspectname,id,OpenConspect)
         }) 
     }
@@ -144,7 +141,6 @@ class Viewer extends React.Component{
     componentDidMount(){
         if (this.props.match.url.split('/')[1]==="content"){
             this.props.LoadData()
-            console.log("Отправлелен запрос на получене  пдфки тэга "+this.props.match.url.split('/')[2])
             axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[2],
             {   method: 'GET',
                 responseType: 'blob'}
@@ -156,9 +152,8 @@ class Viewer extends React.Component{
                 this.props.setPdf(fileURL,this.props.match.url.split('/')[2])
         })
         }
-        if (this.props.match.url.split('/')[1]==="get_sample_pdf"){
+        if (this.props.match.url.split('/')[1]==="sample_pdf"){
             this.props.LoadData()
-            console.log("Отправлелен запрос на получене  пдфки тэга выборки"+this.props.topicrequest)
             axios('http://127.0.0.1:5000/get_sample_pdf/'+this.props.topicrequest,
             {   method: 'GET',
                 responseType: 'blob'}
@@ -224,11 +219,18 @@ Content=()=>{
         <StyledInterface>
             <NavBarContainer history={this.props.history} name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
             {((this.props.match.url.split('/')[1]==="content") || (this.props.match.url.split('/')[4]==="pdf"))?<>{this.Contentpdf()}</>:<></>}
-            {(this.props.match.url.split('/')[1]==="get_sample_pdf")?<>{this.Contentpdf()}</>:<></>}
+            {(this.props.match.url.split('/')[1]==="sample_pdf")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]==="content")?<>{this.Content()}</>:<></>}
+            {(this.props.match.url.split('/')[1]==="help")?<>
+            <StyledPreview>
+                <iframe className="pdf" src={helppdf} title="Pdf of contnet"/>
+            </StyledPreview></>:<></>}
         </StyledInterface>
     )
     }
 }
 
 export default Viewer;
+
+
+

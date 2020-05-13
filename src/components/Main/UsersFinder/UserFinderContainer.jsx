@@ -15,7 +15,6 @@ let mapStatetoProps =(state)=>{
 let mapDispatchtoProps =(dispatch) =>{
     return{
         setoption:(name,id)=>{
-            console.log(name)
             dispatch(SetCurOptionAC(name,id))
         }
     }

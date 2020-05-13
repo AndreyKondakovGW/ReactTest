@@ -18,13 +18,10 @@ let mapStatetoProps =(state)=>{
 let mapDispatchtoProps =(dispatch) =>{
     return{
         setTopics: (topics) =>{
-            console.log(topics)
             const action =SetTopicsAC(topics);
             dispatch(action)
         },
         AddBlockF: (i,u,name)=>{
-            console.log(i)
-            console.log(u)
             const action =AddBlock(i,u,name);
             dispatch(action);
         },

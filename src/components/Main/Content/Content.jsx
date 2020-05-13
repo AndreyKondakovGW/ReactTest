@@ -18,7 +18,6 @@ class TopicsAPI extends React.Component{
     componentDidMount(){
         console.log("Отправлелен запрос на получение тэгов")
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            console.log(response.data)
             this.props.setTopics(response.data)
         })
     }

@@ -17,6 +17,7 @@ display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 .contentname{
     padding-left:16px;
     font-size: 20px;
@@ -65,11 +66,7 @@ class SubscribersContent extends React.Component{
     }
     
     componentDidMount(){
-            console.log("Отправлелен запрос на получение конспектов")
-            console.log(this.props.match.url.split('/'))
-            console.log(this.props.match.url)
             axios.get("http://127.0.0.1:5000/get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
-                console.log(response.data)
                 this.setState({
                     ...this.state,
                     
@@ -90,7 +87,6 @@ class SubscribersContent extends React.Component{
     }
     
    changePageConspect=(pageNum)=>{
-    console.log(pageNum)
     this.setState({ 
         ...this.state,
         ConspectCurrentPage: pageNum,
@@ -131,7 +127,6 @@ class SubscribersContent extends React.Component{
     for(let i=1;i<=pagescountT;i++){
         pagesT.push(i)
     }
-    console.log(this.state.ConspectCurrentPage)
     return (
     <StyledInterface> 
             <NavBarContainer name={"Контент пользователя "+ this.props.match.url.split('/')[2]}/>
@@ -149,4 +144,7 @@ class SubscribersContent extends React.Component{
 }
 }
 export default SubscribersContent;
+
+
+
 

@@ -11,6 +11,8 @@ import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,FileEarmarkMinus,FileEarmark,FileEarmarkCode, CodeSlash} from 'react-bootstrap-icons';
+import { createBrowserHistory } from 'history';
+
 
 import styled from 'styled-components';
 const StyledLine = styled.div`
@@ -167,8 +169,7 @@ class ConspectSaver extends React.Component{
     }
 
     handleSubmit=()=> {
-        console.log(this.state.name)
-        if ((this.state.name!=="") &&(this.props.fotos.length>0)) 
+        if ((this.state.name!=="") && (this.props.fotos.length>0)) 
             this.props.save(this.state.name,this.props.fotos,this.props.id,this.props.conspects,this.props.OpenConspect,this.props.routing) 
         this.ClearForm()
     }
@@ -182,8 +183,6 @@ class ConspectSaver extends React.Component{
     render(){
         return(
             <div>
-                {console.log(this.props.name)}
-                {console.log(this.props.fotos)}
                 {(this.props.mutable)?
                 <input id="lineinput"
                        name="conspectname"
@@ -214,7 +213,9 @@ class RequestSaveForm extends React.Component{
     }
 
     handleSubmit=()=> {
-        console.log("saved")
+        this.props.WriteRequest()
+        axios.post(decodeURIComponent('http://127.0.0.1:5000/create_sample_tag/'+this.props.request+'/'+this.state.value))
+
     }
     render(){
         return(<>
@@ -232,7 +233,6 @@ class RequestSaveForm extends React.Component{
 class NavBar extends React.Component{
     LoadPDF = (conspectname,setPdf,conspectid)=>{
         this.props.LoadData()
-        console.log("Отправлелен запрос на получене  конспекта "+conspectname)
         axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
         {   
             method: 'GET',
@@ -251,12 +251,13 @@ class NavBar extends React.Component{
         })
         if ((id!==-1)&&(this.props.id !==id )){
             this.props.LoadData()
-            console.log("Загружаю конспект "+conspectname)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id).then(response=>{
-                console.log(response)
                 this.props.LoadConspectFromData(response,conspectname,id,OpenConspect)
             }) 
         }
+    }
+    Routing=(name,id)=>{
+        createBrowserHistory().push('/creteconspect/'+name+'/'+id)
     }
     render(){   
         const {history}=this.props
@@ -322,15 +323,13 @@ class NavBar extends React.Component{
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing}/>
                 </StyledLine>}/>
                 
-                <Route history={history} path ="/creteconspect/:conspect/:id" render={()=><>
+                <Route history={history} path ="/creteconspect/:conspect/:id" render={(props)=><>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
-                    {console.log(this.props.name)}
-                    {console.log(this.props.conspectname)}
-                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false} routing={this.Routing}/> )})()}
                 </StyledLine>
-                <UserAccsesForm conspectid={this.props.id}/>
+                <UserAccsesForm conspectid={props.match.params.id}/>
                 </>}/>
                 
                 <Route history={history} path ="/redactor" render={()=>
@@ -349,10 +348,19 @@ class NavBar extends React.Component{
 
                 <Route history={history} path ="/topicrequest" render={()=>
                 <StyledFlexRowRedactor>
-                    <NavLink to={"/get_sample_pdf"}>
+                    <NavLink to={"/sample_pdf"}>
                         <ActionBox text="Показать" action={this.props.WriteRequestF}/>
                     </NavLink>
-                    <RequestSaveForm/>
+                    <ActionBox text="Отчистить" action={this.props.Openempty}/>
+                    <RequestSaveForm WriteRequest={this.props.WriteRequestF} request={this.props.topicrequest}/>
+                </StyledFlexRowRedactor>}/>
+
+                <Route history={history} path ="/sample_pdf" render={()=>
+                <StyledFlexRowRedactor>
+                    <NavLink to={"/topicrequest"}>
+                        <ActionBox text="Вернутся"/>
+                    </NavLink>
+                    <RequestSaveForm WriteRequest={this.props.WriteRequestF} request={this.props.topicrequest}/>
                 </StyledFlexRowRedactor>}/>
         </Nav>
       </Navbar.Collapse>

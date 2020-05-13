@@ -16,9 +16,10 @@ import { bool, func } from 'prop-types';
 import bground2 from '../../static/bground2.jpg'
 import styled from 'styled-components';
 const StyledMain = styled.div`
+
 display:inline-block;
 float:right;
-width: 100%;
+width: 100vw;
 height: 100vh;
 overflow: auto;
 position: relative;
@@ -49,7 +50,6 @@ background-size:cover;
 
 const Main=(props) =>{
     let logout=()=>{
-      console.log("logout")
       axios.get("http://127.0.0.1:5000/logout")
       document.location.reload(true);
     }
@@ -70,7 +70,8 @@ const Main=(props) =>{
             <Route history={history} path="/logout" render = {() => <div>{logout()}</div>} />
             <Route history={history} exact path="/comunity" component={SubscriberContainer}/>
             <Route history={history} path="/comunity/:name/:id/conspect_and_tags" component={SubscribersContentContainer}/>
-            <Route history={history} path="/get_sample_pdf" component={ConspectViewerContainer}/>
+            <Route history={history} path="/sample_pdf" component={ConspectViewerContainer}/>
+            <Route history={history} path = "/help" component = {ConspectViewerContainer}/>
         </StyledMain>
     )
 }

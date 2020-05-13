@@ -11,7 +11,6 @@ let mapStatetoProps =(state)=>{
 let mapDispatchtoProps =(dispatch) =>{
     return{
         SetUsername:(name)=>{
-            console.log(name)
             dispatch(SetUsernameAC(name))
         }
     }

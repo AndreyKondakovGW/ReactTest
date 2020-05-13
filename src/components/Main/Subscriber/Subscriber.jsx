@@ -9,15 +9,13 @@ import styled from 'styled-components';
 const StyledLine = styled.div`
 text-align: left;
 margin-bottom:10px;
-*{
-    display:inline-block;
-}
 `;
 const StyledInterface = styled.div`
 display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 `;
 
 
@@ -65,13 +63,9 @@ a{
           }  
     }
 `;
-
-
 class Subscriber extends React.Component{
     componentDidMount(){
-        console.log("Отправлелен запрос на получение конспектов")
         axios.get("http://127.0.0.1:5000/friend_list").then(response =>{
-            console.log(response.data)
             this.props.setsubscribers(response.data)
        })
     }
@@ -82,7 +76,7 @@ class Subscriber extends React.Component{
     render(){
         return (
             <StyledInterface>
-                <NavBarContainer name="Мои поверенные"/>
+                <NavBarContainer name="Мои подписки"/>
                 <StyledGrid>
                     {this.props.Subscribers.map(elm=>
                     <StyledUserBox>
@@ -92,7 +86,7 @@ class Subscriber extends React.Component{
                             </NavLink> 
                         </StyledLine>
                         <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
-                            <img src={bobr} alt="some value"/>
+                            <img src={elm.av} alt="some value"/>
                         </NavLink>
                         <ActionBox text="отписаться" action={()=>this.DeleteSubscriber(elm.user_id)
                         }/> 
@@ -104,5 +98,8 @@ class Subscriber extends React.Component{
 }
 
 export default  Subscriber;
+
+
+
 
 

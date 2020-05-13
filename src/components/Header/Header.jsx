@@ -53,7 +53,6 @@ transition-timing-function: ease-in-out;
 `;
 const GetCurUser=(SetUsername)=>{
   axios.get('http://127.0.0.1:5000/get_current_user').then(response=>{
-    console.log(response)
     SetUsername(response.data.name)
 })
 }

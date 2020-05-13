@@ -78,7 +78,6 @@ a{
 
 class Conspectbox extends React.Component{
     check=()=>{
-        console.log('click')
         this.props.checkf(this.props.id)
     }
     checkbox=()=>{

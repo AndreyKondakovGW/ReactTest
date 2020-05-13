@@ -17,7 +17,6 @@ class UserAccsesForm extends React.Component{
     }
     componentDidMount=()=>{
       axios.get('http://127.0.0.1:5000/get_users_with_access/'+this.props.conspectid).then(response=>{
-        console.log(response.data.find(elm=>elm.user_id===-1).username)
         this.setState({
           ...this.state,
           checkeveryone: response.data.find(elm=>elm.user_id===-1).username==="True",
@@ -46,13 +45,11 @@ class UserAccsesForm extends React.Component{
           ...this.state,
           options: this.state.options.map(elm=>(elm.user_id===id)?{...elm,cheked:!elm.cheked}:elm)
       })
-      console.log(this.state)
     }
     handleChange=(e)=>{
       let value = e.target.value;
       if (value!==""){
         axios.get('http://127.0.0.1:5000/search_users/'+value).then(response=>{
-          console.log(response.data)
           this.setState({
             ...this.state,
             value: value,
@@ -78,13 +75,11 @@ class UserAccsesForm extends React.Component{
         let usersnew=new Set(this.state.selecteoptions.map(elm=>elm.user_id))
         usersold.forEach(elm=>{
           if (!usersnew.has(elm)){
-            console.log("delete"+elm)
             axios.delete('http://127.0.0.1:5000/remove_user_access/'+elm+'/'+this.props.conspectid)
           }
         })
         usersnew.forEach(elm=>{
           if (!usersold.has(elm)){
-            console.log("add"+elm)
             axios.post('http://127.0.0.1:5000/share_conspect/'+this.props.conspectid+'/'+elm+'/viewer')
           }
         })
@@ -142,9 +137,3 @@ class UserAccsesForm extends React.Component{
 }
   
 export default UserAccsesForm;
-/*
-              <div id="dditem">
-                  <input type="checkbox" id="Все пользователи" checked={this.state.checkeveryone} onChange={() => {this.setState({...this.state, checkeveryone:!this.state.checkeveryone})}} />
-                  <label for="Все пользователи">Все пользователи</label>
-                </div>
-*/

@@ -7,10 +7,8 @@ import * as axios from 'axios';
 import { ExpandMore } from '@material-ui/icons';
 class TagRequest extends React.Component{
     componentDidMount(){
-        console.log("Отправлелен запрос на получение тэгов")
         this.props.Openempty()
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            console.log(response.data)
             this.props.setTopics(response.data)
         })
     }
@@ -130,6 +128,7 @@ display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 `;
 
 

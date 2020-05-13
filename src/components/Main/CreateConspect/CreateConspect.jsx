@@ -10,17 +10,18 @@ const StyledMainbox = styled.div`
     display:flex;
     flex-direction: column;
     flex-wrap:wrap;
+    text-align:center;
     justify-content:center;
     align-items: flex-start;
 
-.mygrid{
-width:100%;
-display:grid;
-grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-grid-gap: 10px;
-justify-items: center;
-align-items: center;
-}
+    .mygrid{
+    width:100%;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    }
 `;
 const StyledImagePerwier = styled.div`
 width:100%;
@@ -58,10 +59,11 @@ display:flex;
     }
 `;
 const StyledInterface = styled.div`
-display: flex;
+/*display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
+height: 100%;*/
+
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve, reject) => {
@@ -70,7 +72,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                 resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
@@ -81,8 +82,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
                 let reader = new FileReader();
                 reader.onload = function(event) {
                     const img = event.target.result
-                    console.log(img)
-                    console.log(i)
                     f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
                     i+=1
                     resolve(f)                
@@ -92,14 +91,11 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             f=await promise2
         }
         if (f.length===fotos.data.length){
-            console.log(f)
             resolve(f)
         }
         
     })
     promise.then(result=>{
-        console.log("Полученный массив фотографий")
-        console.log(result) 
         OpenConspect(name,id, result)  
     })  
 }
@@ -111,14 +107,10 @@ class CreateConspect extends React.Component{
             this.props.OpenEmptyConspect()
         }
         if ((this.props.match.params.id) && (this.props.conspectid!==this.props.match.params.id)){
-            console.log(this.props.match.params.conspect)
-            console.log(this.props.match.params.id)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspect,this.props.match.params.id,this.props.OpenConspect)
             })
         }
-        console.log("Открыт конспект" + this.props.createrid)
     }
     
     ReactContents = ()=>{console.log(this.props.fotos)
@@ -135,8 +127,6 @@ class CreateConspect extends React.Component{
                     :
                     (<StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite>))}
     render(){
-        console.log("Conspectname")
-        console.log(this.props.fotos)  
     return( 
         <StyledInterface>
             <NavBarContainer name={this.props.Conspectname}/>
@@ -146,9 +136,6 @@ class CreateConspect extends React.Component{
                     {this.ReactContents()}
                 </div>
             </StyledMainbox>
-            {/*<div className={s.scrolbar}>
-                {this.ReactContents()}
-            </div> */}
         </StyledInterface>
     )
 }

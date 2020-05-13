@@ -31,6 +31,3 @@ const HelloComponent=(props) =>{
     )
 }
 export default HelloComponent;
-//<div>Добро пожаловать</div>
-//               <div>в</div>
-//               <div>Conspect Structure.</div>

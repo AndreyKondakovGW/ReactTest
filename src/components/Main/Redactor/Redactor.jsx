@@ -131,6 +131,7 @@ display: flex;
 flex-direction: column;
 width:100%;
 height: 100%;
+
 `;
 const ImgCroper = (props)=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -224,18 +225,15 @@ class TagsForm  extends React.Component{
     }
 
     handleChange=(e)=>{
-        let value = e.target.value;
-        console.log(e.target.name)
-        console.log(value)
+        let value = e.target.value
         this.setState({
             ...this.state,
-            tags: this.state.tags.map(elm=>(elm.id==e.target.name)?{id: elm.id,text: value}:elm)
+            tags: this.state.tags.map(elm=>(elm.id==e.target.name)?{id: elm.id,text: value.replace('(','').replace(')','').replace('.','').replace('&','').replace('|','').replace(',','')}:elm)
         })
         console.log(this.state)
     }
 
     handleSubmit=()=> {
-        console.log(this.props.Coordinate)
         this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!==""),this.props.curentfoto.index,this.props.Coordinate)
         this.ClearForm()
     }
@@ -264,7 +262,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             while (i<fotos.data.length)
             {
                 let promise = new Promise((resolve, reject) => {
-                    console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                     resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                 })
                 let response= await promise
@@ -284,32 +281,23 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
                 f=await promise2
             }
             if (f.length===fotos.data.length){
-                console.log(f)
                 resolve(f)
             }
             
         })
         promise.then(result=>{
-            console.log("Полученный массив фотографий")
-            console.log(result) 
             OpenConspect(name,id, result)  
         })  
 }
 
 class Redactor extends React.Component{ 
-    
     componentDidMount= async ()=>{
-        console.log(this.props.match.params.conspectname)
-        console.log(this.props.match.params.id)
         axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-                console.log(response.data)
                 this.props.setConspect(response.data)
            })
         if ((this.props.match.params.id!==-1) && (this.props.CurentconspectID!==this.props.match.params.id)){
             this.props.LoadData()
-            console.log("Загружаю конспект "+this.props.match.params.conspectname)
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
             }) 
         }
@@ -318,14 +306,9 @@ class Redactor extends React.Component{
 
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {
-        console.log(this.props.match.params.conspectname)
-        console.log(this.props.match.params.id)
-        console.log(this.props.CurentconspectID)
-        console.log(this.props.dataisLoading)
         if ((!this.props.dataisLoading) && (this.props.match.params.id!==-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
             this.props.LoadData()
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
             })    
         }
@@ -364,29 +347,8 @@ class Redactor extends React.Component{
     return(
         <StyledInterface>
                 <NavBarContainer name={this.props.Conspectname}/>
-                {/*  <div className ="wrapper">  </div> */}
                 {this.Content()} 
         </StyledInterface>
     )}
 }
 export default Redactor;
-
-/*
-        <p id="noMargin">Width</p>   
-        <Slider
-            value={100-croppedArea.width+croppedArea.x}
-            min={0}
-            max={100}
-            step={1}
-            onChange={(e, x) => setCrop({x:x,y:crop.y})}
-        />
-
-        <p id="noMargin">Height</p>
-        <Slider
-            value={100-croppedArea.height+croppedArea.y}
-            min={0}
-            max={100}
-            step={1}
-            onChange={(e, y) => setCrop({x: crop.x,y:y})}
-        />
-*/

@@ -2,6 +2,32 @@ import img1 from './../static/images/bobr1.jpg';
 import img2 from './../static/images/bobr2.jpg';
 import img3 from './../static/images/bobr3.jpeg';
 
+import i1 from '../static/images/1.jpg';
+import i2 from '../static/images/2.jpg';
+import i3 from '../static/images/3.jpg';
+import i4 from '../static/images/4.jpg';
+import i5 from '../static/images/5.jpg';
+import i6 from '../static/images/6.jpg';
+import i7 from '../static/images/7.jpg';
+import i8 from '../static/images/8.jpg';
+import i9 from '../static/images/9.jpg';
+import i10 from '../static/images/10.jpg';
+import i11 from '../static/images/11.jpg';
+import i12 from '../static/images/12.jpg';
+import i13 from '../static/images/13.jpeg';
+import i14 from '../static/images/14.jpeg';
+import i15 from '../static/images/15.jpeg';
+import i16 from '../static/images/16.jpeg';
+import i17 from '../static/images/17.jpg';
+import i18 from '../static/images/18.jpg';
+import i19 from '../static/images/19.jpg';
+import i20 from '../static/images/20.jpg';
+import i21 from '../static/images/21.jpg';
+import i22 from '../static/images/22.jpg';
+import i23 from '../static/images/23.jpg';
+import i24 from '../static/images/24.jpg';
+import i25 from '../static/images/25.jpeg';
+
 import * as axios from 'axios';
 
 
@@ -23,49 +49,13 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 
 
 let initialstate={
+    bobrmass:[i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,i21,i22,i23,i24,i25],
     UserData: {
-        Username: "",
+        Username: "f",
         Subscribers:[
-            {username: "Bobrbobrovich",id: 1},
-            {username: "Bobr",id: 2},
-            {username: "Andrey",id: 3},
-            {username: "Sergey",id: 4}
-            ,
-            {username: "Nurey",id: 5}
-            ,
-            {username: "Nastya",id: 6}
-            ,
-            {username: "Sofia",id: 7}
-            ,
-            {username: "Artyomochka",id: 19}
-            ,
-            {username: "Nikita",id: 18}
-            ,
-
-            {username: "Navalny",id: 17}
-            ,
-            {username: "Varlamov",id: 20}
-            ,
-            {username: "Katz",id: 21}
-            ,
-            
-            {username: "Anyakonda",id: 8}
-            ,
-            {username: "Vanya",id: 9}
-            ,
-            {username: "ImperorOfHumor",id: 10}
-            ,
-            {username: "Alkl",id: 11}
-            ,
-            {username: "Lena",id: 12}
-            ,
-            {username: "Yana",id: 13}
-            ,
-            {username: "MihChern",id: 14}
-            ,
-            {username: "Iluha",id: 15}
-            ,
-            {username: "Daneel",id: 16}
+            {username: "Bobrbobrovich",id: 1,av: i1},
+            {username: "Bobr",id: 2,av: i1},
+            {username: "Andrey",id: 3,av: i1},
         ],
         Topics: [
             {name: "тема 1", id:1},
@@ -128,7 +118,6 @@ const UserDatareducer =(state=initialstate, action)=>{
                     Username:action.Username
                 }
             }
-            console.log(newstate)
             return newstate
         }
         case SET_TOPICS:{
@@ -155,7 +144,6 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case CHECKED_CONSPECT:{
-            console.log("Отмечен конспект id " + action.id)
             let newstate={
                 ...state,
                 UserData: {
@@ -171,7 +159,6 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case SHOW_ALLERT:{
-                console.log(action.alert)
                 let newstate={
                     ...state,
                     Allertpageisopen: true,
@@ -187,7 +174,6 @@ const UserDatareducer =(state=initialstate, action)=>{
             return newstate
         }
         case DELETE_CHECKEDCONSPECT:{
-            console.log(state.UserData.Conspects)
             state.UserData.Conspects.filter(elm=>elm.checked).forEach(elm=>
                 axios.delete('http://127.0.0.1:5000/deleteconspect/'+elm.id))
             let newstate={
@@ -221,11 +207,10 @@ const UserDatareducer =(state=initialstate, action)=>{
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Subscribers: [...state.UserData.Subscribers,{username:state.CurentOption.name,id:state.CurentOption.id}]
+                    Subscribers: [...state.UserData.Subscribers,{username:state.CurentOption.name,id:state.CurentOption.id,av: state.bobrmass[Math.floor(Math.random() * (state.bobrmass.length - 0)) + 0]}]
                 },
                 CurentOption: ""
             }
-            console.log("Добавлен поверенный: "+state.CurentOption.name+" "+state.CurentOption.id)
             return newstate
             }else{
                 return state
@@ -236,7 +221,7 @@ const UserDatareducer =(state=initialstate, action)=>{
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Subscribers:action.subcribers
+                    Subscribers:action.subcribers.map(function(elm){return({...elm,av: state.bobrmass[Math.floor(Math.random() * (state.bobrmass.length - 0)) + 0]})})
                 },
                 CurentOption: ""
             }
