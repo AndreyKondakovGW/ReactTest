@@ -5,11 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
-import { BrowserRouter} from 'react-router-dom';
+import { Router} from 'react-router-dom';
 import styled from 'styled-components';
+import {createBrowserHistory} from 'history'
 
 const Styles = styled.div`
-
 width: 100vw;
 height: 100vh;
 
@@ -19,7 +19,6 @@ height: 100vh;
     "dejavu sans",
     "Lucida Sans Unicode",
     sans-serif; 
-    
   }
   a, .actionbox, #filelabel {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -55,7 +54,6 @@ height: 100vh;
       box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
       transition-property: box-shadow;
       transition-duration: .3s;
-      
         :focus{
           box-shadow: 0 0 4px 1px rgb(119, 90, 163);
         }
@@ -67,12 +65,10 @@ height: 100vh;
   display: inline-block;
 }
 
-#textlabel{
-  margin:0px;
-}
 
 #filelabel {
-padding:0px;
+  padding:0px;
+  padding-left:6px;
 border: 0px;
 color: black;
 background-color:#02dac5;
@@ -81,13 +77,10 @@ width:180px;
 height:35px;
 line-height: 35px;
 
-transition-property: color;
-transition-duration: 1s;
-transition-timing-function: ease;
-
 box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-transition-property: box-shadow;
-transition-duration: .3s;
+transition: box-shadow .3s,
+            color .3s;
+
 :hover{
     background-color:#018786;
     color: #f1f1f1;
@@ -97,23 +90,25 @@ transition-duration: .3s;
  
 }
 a:not(.noellipsis), .actionbox, #filelabel{
-padding-left:6px; 
+
 text-align:left;
 vertical-align:middle;
 display: inline-block;
-
+}
+#noMargin{
+  margin:0px;
 }
 `;
+  const history=createBrowserHistory()
 
   ReactDOM.render(    
-        
-          <BrowserRouter>
+          <Router history={history}>
             <Provider store={store}>
               <Styles>
             <App />
             </Styles>
             </Provider>
-          </BrowserRouter>
+          </Router>
         ,
     document.getElementById('root')
   );

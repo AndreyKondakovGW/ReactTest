@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileEarmarkText} from 'react-bootstrap-icons';
+import { FileEarmark} from 'react-bootstrap-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 class MyConspectList extends React.Component{
@@ -21,7 +21,7 @@ class MyConspectList extends React.Component{
     render(){
     return (
         <Dropdown>
-          <Dropdown.Toggle id="filelabel"><FileEarmarkText/> Открыть</Dropdown.Toggle>
+          <Dropdown.Toggle id="filelabel"><FileEarmark/> Открыть</Dropdown.Toggle>
           <Dropdown.Menu>
           {this.props.children}
           </Dropdown.Menu>

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import SubscribersContent from './SubscribersContent.jsx';
-import {SetConspectsAC,CheckedConspectAC,SettcurConspectpage,DeleteCheckedConspectAC,CloseAlertAC} from './../../../redux/UserData-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
@@ -17,11 +16,6 @@ let mapStatetoProps =(state)=>{
     }
 }
 
-let mapDispatchtoProps =(dispatch) =>{
-    return {
-    }
-}
-
-const SubscribersContentContainer=connect(mapStatetoProps,mapDispatchtoProps)(SubscribersContent);
+const SubscribersContentContainer=connect(mapStatetoProps)(SubscribersContent);
 
 export default SubscribersContentContainer;

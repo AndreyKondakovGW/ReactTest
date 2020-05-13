@@ -22,7 +22,8 @@ const TagRequestReducere =(state=initialstate, action) =>{
                 if (action.i === 0){
                     newstate={
                         ...state,
-                        data:[...state.data,[{name: action.name,i:action.i,u:action.u}]]
+                        data:[...state.data,[{name: action.name,i:action.i,u:action.u}]],
+                        request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'
                     }
                 }
                 else{
@@ -30,7 +31,8 @@ const TagRequestReducere =(state=initialstate, action) =>{
                     newdata[action.u]=[...newdata[action.u],{name: action.name,i:action.i,u:action.u}]
                     newstate={
                         ...state,
-                        data: newdata
+                        data: newdata,
+                        request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'
                     }
                 }
                 return newstate
@@ -40,21 +42,21 @@ const TagRequestReducere =(state=initialstate, action) =>{
         case CHANGE_BLOCK:{
             let newdata=[...state.data]
             newdata[action.u][action.i]={name: action.name,i:action.i,u:action.u}
-            return {...state,data: newdata}
+            return {...state,data: newdata,request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'}
         }
         case WRITE_REQUEST:{
                 let newstate={
                     ...state,
                     request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'
                 }
-                console.log(newstate.request)
                 return newstate
             }
         case SET_EMPTY:{
             let newstate={
                 ...state,
                 data: [
-                ]
+                ],
+                request: '( '+state.data.map(el=>el.map(e=>e.name).join(' ) & ( ')).join(' ) | ( ') +' )'
             }
             return newstate
         }

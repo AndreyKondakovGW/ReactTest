@@ -14,12 +14,10 @@ let mapStatetoProps =(state)=>{
 let mapDispatchtoProps =(dispatch) =>{
     return {
         setTopics: (topics) =>{
-            console.log(topics)
             const action =SetTopicsAC(topics);
             dispatch(action)
         },
         setCurPage: (i)=>{
-            console.log("Новая страница: " + i)
             const action = SettcurTopicpage(i)
             dispatch(action)
         }

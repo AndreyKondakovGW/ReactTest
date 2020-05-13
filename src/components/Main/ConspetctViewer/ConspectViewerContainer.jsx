@@ -29,7 +29,6 @@ let mapDispatchtoProps =(dispatch) =>{
             dispatch(DataLoadSwitch())
         },
         OpenConspect: (name, id, fotos)=>{
-            console.log("hello Container")
             const conspect={
                 name:name,
                 id: id,
@@ -37,7 +36,6 @@ let mapDispatchtoProps =(dispatch) =>{
                     fotos: fotos
                 }
             }
-            console.log(conspect)
             let action=SetCurrentConspectCR(conspect)
             dispatch(action)
         }

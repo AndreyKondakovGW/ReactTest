@@ -5,13 +5,13 @@ import Subscriber from './Subscriber.jsx';
 let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
+        bobrlist: state.UserDatareducer.bobrlist
     }
 }
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
         add:()=>{
-            console.log("add")
             dispatch(AddSubscriber())
         },
         setsubscribers:(subscribers)=>{

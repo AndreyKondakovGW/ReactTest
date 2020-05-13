@@ -18,7 +18,6 @@ class TopicsAPI extends React.Component{
     componentDidMount(){
         console.log("Отправлелен запрос на получение тэгов")
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            console.log(response.data)
             this.props.setTopics(response.data)
         })
     }
@@ -49,7 +48,7 @@ class TopicsAPI extends React.Component{
         }
         return(   
         <div>
-            <NavBarContainer name="Main"/>
+            <NavBarContainer name="Мои тэги"/>
             <Topics pages={pages} 
                     CurrentPage={this.props.CurrentPage} 
                     changePage={this.changePage}

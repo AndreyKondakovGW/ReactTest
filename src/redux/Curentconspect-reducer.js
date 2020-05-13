@@ -51,7 +51,6 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                 resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
@@ -70,14 +69,12 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             })
             f=await promise2
         }
-        if (f.length==fotos.data.length){
+        if (f.length===fotos.data.length){
             resolve(f)
         }
         
     })
     promise.then(result=>{
-        console.log("Полученный массив фотографий")
-        console.log(result) 
         OpenConspect(name,id, result)  
     })  
 }
@@ -100,7 +97,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
             let newstate={...state};
             newstate.LogicData={...state.LogicData}
             newstate.LogicData.CurrentConspect={...state.LogicData.CurrentConspect,data: {...state.LogicData.CurrentConspect.data}}
-            for (var i=0;i<state.LogicData.CurrentConspect.data.fotos.length;i++){
+            for (i=0;i<state.LogicData.CurrentConspect.data.fotos.length;i++){
                 if(state.LogicData.CurrentConspect.data.fotos[i].index===state.LogicData.CurrentConspect.data.curentfoto.index){
                     newstate.LogicData.CurrentConspect.data.curentfoto={...state.LogicData.CurrentConspect.data.fotos[(i-1+state.LogicData.CurrentConspect.data.fotos.length) % state.LogicData.CurrentConspect.data.fotos.length]}
                 }
@@ -140,8 +137,6 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                 },
                 dataisLoading: false
             }
-            console.log("Текущий конспект "+action.conspect.name)
-            console.log(newstate.LogicData.CurrentConspect.data.curentfoto)
             return newstate
         }
         case SET_CURRENTPDF:{
@@ -215,7 +210,6 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                 }
             }
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ action.id).then(response=>{
-                console.log(response)
                 LoadConspectFromData(response,action.conspectname,action.id,action.OpenConspect)
             })
             return newstate

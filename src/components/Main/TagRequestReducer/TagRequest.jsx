@@ -7,10 +7,8 @@ import * as axios from 'axios';
 import { ExpandMore } from '@material-ui/icons';
 class TagRequest extends React.Component{
     componentDidMount(){
-        console.log("Отправлелен запрос на получение тэгов")
         this.props.Openempty()
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
-            console.log(response.data)
             this.props.setTopics(response.data)
         })
     }
@@ -30,8 +28,7 @@ class TagRequest extends React.Component{
     }
     AddColonButton(){
         return (this.props.data.length<this.props.maxUn)?
-        <ActionBox  text="Объединить с..." action={this.AddBlocFConteiner}/>
-        :
+        <ActionBox  text="Объединить с..." action={this.AddBlocFConteiner}/>:
         <div></div>
     }
     TagListComponent(){ return <StyledExpr>
@@ -60,7 +57,7 @@ class TagRequest extends React.Component{
     render(){
         return(
             <StyledInterface>
-                <NavBarContainer name="Tagrequest"/>
+                <NavBarContainer name="Создание выборки"/>
                 {this.TagListComponent()}
                 
             </StyledInterface>
@@ -113,10 +110,8 @@ text-align:center;
     outline:hidden;
     
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
-    transition: color 1s ease, 
-                box-shadow .3s ease;
+    transition: color .3s, 
+                box-shadow .3s;
     :hover {
       background-color:rgb(119, 90, 163);
       color: #f1f1f1;
@@ -130,7 +125,7 @@ const StyledInterface = styled.div`
 display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;/**/
+height: 100%;
 
 `;
 

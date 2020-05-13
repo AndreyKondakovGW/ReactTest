@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import CreateConspect from './CreateConspect.jsx';
 import {DELETEFOTOCreator,CHANGEPERWIEPHOTOCreator,OpenConspectAC,OpenEmptyConspect} from './../../../redux/ConspectCreater-reducer';
 import {SetCurrentConspectCR,OpenEmptyCOnspectAC,LoadConspectAC} from './../../../redux/Curentconspect-reducer';
-import * as axios from 'axios';
 
 let mapStatetoProps =(state)=>{
     return {
@@ -36,7 +35,6 @@ let mapDispatchtoProps =(dispatch) =>{
             dispatch(action);
         },
         OpenConspect: (name, id, fotos)=>{
-            console.log("hello Container")
             const conspect={
                 name:name,
                 id: id,
@@ -44,7 +42,6 @@ let mapDispatchtoProps =(dispatch) =>{
                     fotos: fotos
                 }
             }
-            console.log(conspect)
             let action=SetCurrentConspectCR(conspect)
             dispatch(action)
             let action2=OpenConspectAC(conspect)

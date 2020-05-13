@@ -6,14 +6,15 @@ import styled from 'styled-components';
 const StyledMainbox = styled.div`
     margin-top:20px ;
     width:100%;
-    height: 100%;
+    /*height: 100%;*/
+    padding-bottom:20px;
+    
     display:flex;
     flex-direction: column;
-    flex-wrap:wrap;
-    text-align:center;
+    flex-wrap:nowrap;
     justify-content:center;
     align-items: flex-start;
-
+    
     .mygrid{
     width:100%;
     display:grid;
@@ -25,11 +26,11 @@ const StyledMainbox = styled.div`
 `;
 const StyledImagePerwier = styled.div`
 width:100%;
-height:50vh;
+
 margin-bottom:20px;
-display:flex;
+    display:flex;
     flex-direction: column;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     justify-content:center;
     align-items: center;
 
@@ -38,7 +39,7 @@ display:flex;
         width: auto;
         height: auto;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 50vh;
         box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
     }
 `;
@@ -46,7 +47,7 @@ const StyledInvite = styled.div`
 width:100%;
 height:100%;
 
-font-size:1em;
+    font-size:1em;
     display:flex;
     flex-direction: column;
     flex-wrap:wrap;
@@ -60,11 +61,8 @@ font-size:1em;
     }
 `;
 const StyledInterface = styled.div`
-display: flex;
-flex-direction: column;
 
 width:100%;
-height: 100%;/**/
 
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
@@ -74,19 +72,16 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                console.log("Запрашиваю картинку по id"+fotos.data[i].id)
                 resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
                 [response.data], 
                 {type: 'image'});
-            let promise2 = new Promise((resolve, reject) => {
+            let promise2 = new Promise((resolve) => {
                 let reader = new FileReader();
                 reader.onload = function(event) {
                     const img = event.target.result
-                    console.log(img)
-                    console.log(i)
                     f=[...f,{name: fotos.data[i].filename,path: img,index: fotos.data[i].id,comments: ""}] 
                     i+=1
                     resolve(f)                
@@ -95,15 +90,12 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             })
             f=await promise2
         }
-        if (f.length==fotos.data.length){
-            console.log(f)
+        if (f.length===fotos.data.length){
             resolve(f)
         }
         
     })
     promise.then(result=>{
-        console.log("Полученный массив фотографий")
-        console.log(result) 
         OpenConspect(name,id, result)  
     })  
 }
@@ -114,15 +106,11 @@ class CreateConspect extends React.Component{
         if (!(this.props.match.params.id)){
             this.props.OpenEmptyConspect()
         }
-        if ((this.props.match.params.id) && (this.props.conspectid!=this.props.match.params.id)){
-            console.log(this.props.match.params.conspect)
-            console.log(this.props.match.params.id)
+        if ((this.props.match.params.id) && (this.props.conspectid!==this.props.match.params.id)){
             axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                console.log(response)
                 LoadConspectFromData(response,this.props.match.params.conspect,this.props.match.params.id,this.props.OpenConspect)
             })
         }
-        console.log("Открыт конспект" + this.props.createrid)
     }
     
     ReactContents = ()=>{console.log(this.props.fotos)
@@ -139,18 +127,16 @@ class CreateConspect extends React.Component{
                     :
                     (<StyledInvite>Пожалуйта, загрузите изображение, чтобы начать работу.</StyledInvite>))}
     render(){
-        console.log("Conspectname")
-        console.log(this.props.fotos)  
     return( 
-        <StyledInterface>
+        <StyledInterface> 
+        
             <NavBarContainer name={this.props.Conspectname}/>
             <StyledMainbox>
                 {this.ImgPeriwe()}
-                <div className="mygrid">
-                    {this.ReactContents()}
-                </div>
+                <div className="mygrid">{this.ReactContents()}</div>
             </StyledMainbox>
-        </StyledInterface>
+            </StyledInterface>
+        
     )
 }
 }

@@ -74,7 +74,6 @@ const CurentCreatorreducer =(state=initialstate, action) =>{
                     imagePreviewUrl: action.fotos[0].path
                 }
             }
-            console.log(newstate)
             return newstate
         }
         case SET_COMMENTCR:{

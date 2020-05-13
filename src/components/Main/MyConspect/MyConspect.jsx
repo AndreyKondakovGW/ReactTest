@@ -22,9 +22,7 @@ class MyConspect extends React.Component{
         }
         
         componentDidMount(){
-            console.log("Отправлелен запрос на получение конспектов")
             axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-                console.log(response.data)
                 this.props.setConspect(response.data)
            })
         }
@@ -59,7 +57,6 @@ class MyConspect extends React.Component{
         }
     }
     AletrF=()=>{
-        console.log(this.props)
         return(
         (this.props.AlertisOpen)?
             <Alert variant="danger" onClose={this.props.closeAlert} dismissible>
