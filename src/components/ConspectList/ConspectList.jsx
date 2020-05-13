@@ -21,7 +21,7 @@ class MyConspectList extends React.Component{
     render(){
     return (
         <Dropdown>
-          <Dropdown.Toggle id="filelabel">Открыть<FileEarmarkText/></Dropdown.Toggle>
+          <Dropdown.Toggle id="filelabel"><FileEarmarkText/> Открыть</Dropdown.Toggle>
           <Dropdown.Menu>
           {this.props.children}
           </Dropdown.Menu>

@@ -25,6 +25,7 @@ class UserFinderForm extends React.Component{
     }
     this.setState({
       ...this.state,
+      options: [],
       value: value,
     })
   }

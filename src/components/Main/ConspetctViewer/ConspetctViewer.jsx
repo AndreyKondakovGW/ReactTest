@@ -135,6 +135,12 @@ const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
 }
 
 class Viewer extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            option:"content"
+        }
+    }
     componentDidMount(){
         if (this.props.match.url.split('/')[1]==="content"){
             this.props.LoadData()
@@ -173,6 +179,24 @@ class Viewer extends React.Component{
             }
         }
     }
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps !== this.props){
+            if ((this.state.option!=this.props.match.url.split('/')[4])&&((this.props.match.url.split('/')[1]==="myconspects") || (this.props.match.url.split('/')[1]==="subscriberconspects"))){
+                if (this.props.match.url.split('/')[4]==="pdf"){
+                    this.setState({
+                        option: this.props.match.url.split('/')[4]
+                    })
+                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
+                }
+                if (this.props.match.url.split('/')[4]==="content"){
+                    this.setState({
+                        option: this.props.match.url.split('/')[4]
+                    })
+                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
+                }
+            }
+        }
+    }
 
 
 Contentpdf=()=>{
@@ -198,7 +222,7 @@ Content=()=>{
     render(){
     return (
         <StyledInterface>
-            <NavBarContainer name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
+            <NavBarContainer history={this.props.history} name={this.props.match.params.conspectname} id={this.props.match.params.id}/>
             {((this.props.match.url.split('/')[1]==="content") || (this.props.match.url.split('/')[4]==="pdf"))?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[1]==="get_sample_pdf")?<>{this.Contentpdf()}</>:<></>}
             {(this.props.match.url.split('/')[4]==="content")?<>{this.Content()}</>:<></>}

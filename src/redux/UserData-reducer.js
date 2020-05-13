@@ -37,6 +37,18 @@ let initialstate={
             ,
             {username: "Sofia",id: 7}
             ,
+            {username: "Artyomochka",id: 19}
+            ,
+            {username: "Nikita",id: 18}
+            ,
+
+            {username: "Navalny",id: 17}
+            ,
+            {username: "Varlamov",id: 20}
+            ,
+            {username: "Katz",id: 21}
+            ,
+            
             {username: "Anyakonda",id: 8}
             ,
             {username: "Vanya",id: 9}
@@ -58,7 +70,12 @@ let initialstate={
         Topics: [
             {name: "тема 1", id:1},
             {name: "тема 2", id:2},
-            {name: "тема 3", id:3}],
+            {name: "тема 3", id:3},
+            {name: "непра", id:4},
+            {name: "алгем", id:5}
+        ],
+            
+            
 
         Conspects: [
             {name: "Ежи",id: 1,img: img1,checked: false},
@@ -78,11 +95,11 @@ let initialstate={
             {name: "Bobrconspect",id: 3,img: img3}
         ], 
         Conspectspagesize:3,
-        TotalConspectscount:3,
+        TotalConspectscount:20,
         CurrentConspectPage:1,
         
         Topicspagesize:3,
-        TotalTopicscount:3,
+        TotalTopicscount:100,
         CurrentTopicsPage:1,
     },
     CurentOption: "",
@@ -91,7 +108,7 @@ let initialstate={
     AllertText:"",
 
 
-    Topicspagesize:6,
+    Topicspagesize:100,
     TotalTopicscount:3,
     CurrentTopicPage:1,
 

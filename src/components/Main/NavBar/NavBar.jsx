@@ -14,10 +14,16 @@ import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,
 
 import styled from 'styled-components';
 const StyledLine = styled.div`
-text-align: center;
+/*text-align: center;
 *{
     display:inline-block;
-}
+}*/
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
 
 `;
 const StyledNavBar = styled.div`
@@ -57,6 +63,7 @@ background-color:rgba(255,255,255,0.5);
     justify-content:center;
 }
 .dropdown-menu.show{
+    background-color:#DCDEEA;
     animation: appear 300ms ease-in-out 1;
     @keyframes appear {
         0%{ opacity: 0;
@@ -65,7 +72,7 @@ background-color:rgba(255,255,255,0.5);
 
     position:absolute;
     overflow-y: auto;
-    border-radius: 0%;
+    border-radius: 8px;
     border: 0px;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     padding:0px;
@@ -196,7 +203,7 @@ class RequestSaveForm extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            value: this.props.name
+            value: ""
         }
     }
 
@@ -252,6 +259,7 @@ class NavBar extends React.Component{
         }
     }
     render(){   
+        const {history}=this.props
     return (
       <StyledNavBar>
       <Navbar expand="sm" >
@@ -259,24 +267,24 @@ class NavBar extends React.Component{
       <Navbar.Toggle aria-controls="basic-navbar-nav" id="myToggle" children={<ChevronDoubleDown/>}/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-                <Route exact path = "/myconspects" render={()=><StyledLine>
+                <Route history={history} exact path = "/myconspects" render={()=><StyledLine>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
                     <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
                 </StyledLine>}/>
 
-                <Route path = "/myconspects/:contentname/:id" render ={()=>
+                <Route history={history} path = "/myconspects/:contentname/:id" render ={(props)=>
                 <StyledFlexRowConspect>
-                        <Route path = "/myconspects/:contentname/:id/content" render ={(props)=><>
+                        <Route history={props} path = "/myconspects/:contentname/:id/content" render ={(props)=><>
                            <NavLink to ={"/myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
-                             <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
+                             <ActionBox text="Создать PDF" action={()=>{}}/>
                            </NavLink>
                             <UserAccsesForm conspectid={props.match.params.id}/>
                            </>}
                         />
                         
-                        <Route path = "/myconspects/:contentname/:id/pdf" render ={(props)=><>
+                        <Route history={props} path = "/myconspects/:contentname/:id/pdf" render ={(props)=><>
                            <NavLink to ={"/myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
-                             <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                             <ActionBox text="Вернуться" action={()=>{}}/>
                             </NavLink>
                             <UserAccsesForm conspectid={props.match.params.id}/>
                            </>
@@ -288,36 +296,36 @@ class NavBar extends React.Component{
                 }/>
 
                 
-                <Route path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
+                <Route history={history} path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
                         <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
                     </NavLink>
                     <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
-                <Route path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
+                <Route history={history} path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
                         <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
                     </NavLink>
                     <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
-                <Route path="/content" render={()=><StyledLine>
+                <Route history={history} path="/content" render={()=><StyledLine>
                     <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
                     <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 
-                <Route exact path ="/creteconspect/newconspect" render={()=><StyledLine>
+                <Route history={history} exact path ="/creteconspect/newconspect" render={()=><StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
                     <CommentsListConatiner/>
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing}/>
                 </StyledLine>}/>
                 
-                <Route path ="/creteconspect/:conspect/:id" render={()=><>
+                <Route history={history} path ="/creteconspect/:conspect/:id" render={()=><>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label id="filelabel" for="file" >Загрузить файл {<FilePlus/>}</label>
+                    <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
                     {console.log(this.props.name)}
                     {console.log(this.props.conspectname)}
                     {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false}/>)})()}
@@ -325,7 +333,7 @@ class NavBar extends React.Component{
                 <UserAccsesForm conspectid={this.props.id}/>
                 </>}/>
                 
-                <Route path ="/redactor" render={()=>
+                <Route history={history} path ="/redactor" render={()=>
                     <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!==-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
                         {(this.props.id!==-1)?<CommentsListConatiner />:<></>}
@@ -335,17 +343,17 @@ class NavBar extends React.Component{
                     </StyledFlexRowRedactor>
                 }/>
 
-                <Route exact path="/comunity" render={()=>
+                <Route history={history} exact path="/comunity" render={()=>
                   <UserFinderContainer message="Поиск пользователя" add={this.props.add}/>
                 }></Route>
 
-                <Route path ="/topicrequest" render={()=>
-                <StyledLine>
+                <Route history={history} path ="/topicrequest" render={()=>
+                <StyledFlexRowRedactor>
                     <NavLink to={"/get_sample_pdf"}>
                         <ActionBox text="Показать" action={this.props.WriteRequestF}/>
                     </NavLink>
                     <RequestSaveForm/>
-                </StyledLine>}/>
+                </StyledFlexRowRedactor>}/>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -355,3 +363,5 @@ class NavBar extends React.Component{
 }
 export default (NavBar);
 
+//this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id
+//this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)

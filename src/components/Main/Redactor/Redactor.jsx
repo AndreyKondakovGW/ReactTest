@@ -363,9 +363,9 @@ class Redactor extends React.Component{
     render(){
     return(
         <StyledInterface>
-            <NavBarContainer name={this.props.Conspectname}/>
-            {/*  <div className ="wrapper">  </div> */}
-            {this.Content()} 
+                <NavBarContainer name={this.props.Conspectname}/>
+                {/*  <div className ="wrapper">  </div> */}
+                {this.Content()} 
         </StyledInterface>
     )}
 }

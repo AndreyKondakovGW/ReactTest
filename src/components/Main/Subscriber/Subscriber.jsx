@@ -19,6 +19,9 @@ flex-direction: column;
 width:100%;
 height: 100%;
 `;
+
+
+
 const StyledGrid = styled.div`
 margin-top:20px;
 width:100%;
@@ -28,9 +31,11 @@ grid-gap: 15px;
 justify-items: center;
 align-items: center;
 `;
-
 const StyledUserBox = styled.div`
-display:inline-block;
+
+display:flex;
+flex-direction: column;
+text-align:center;
 a{
     color: black;
     font-size: 1em;
@@ -51,7 +56,16 @@ a{
             box-shadow: none;
         }
     }
+    .actionbox{
+        margin-top:10px;
+        width:200px;
+        :hover {
+            background-color: rgb(255, 80, 80);
+           
+          }  
+    }
 `;
+
 
 class Subscriber extends React.Component{
     componentDidMount(){

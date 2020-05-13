@@ -9,19 +9,22 @@ font-size: 1em;
 width:180px;
 height:35px;
 line-height: 35px;
-text-align:center;
-vertical-align:middle;
 
-/*
-margin-top:15px;
-margin-bottom: 15px;
-margin-left:5px;
-margin-right: 5px;
+/*text-align:center;
+vertical-align:middle;
+display: inline-block;*/
+/*a{
+   display: flex;
+flex-direction: row;            
+justify-items: center;
+align-items: center;
+vertical-align:middle;
+padding-left:6px; 
+}
 */
 
-    
-display: inline-block;
-            
+
+
 box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
 transition-property: box-shadow;
 transition-duration: .3s;
@@ -54,7 +57,7 @@ const Button=(props) =>{
     return (
         <StyledButton className="button">
             <NavLink to ={"/"+props.path}>
-                {props.text} {props.icon}
+                {props.icon} {props.text} 
             </NavLink> 
         </StyledButton>
     )

@@ -15,11 +15,11 @@ const Styles = styled.div`
 `;
 
 const App = (props) => {
+  
  const [open, setOpen] = useState(false);
   return (
     <Styles>
     <React.Fragment>
-    <BrowserRouter >
         <Row>
           <HeaderContainer open={open} setOpen={setOpen}/>
         </Row>
@@ -29,7 +29,6 @@ const App = (props) => {
             <MainContainer open={open} setOpen={setOpen}/> 
           </Row>
         </Container>
-    </BrowserRouter>
     </React.Fragment>
     </Styles>
   );
