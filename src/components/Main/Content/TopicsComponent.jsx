@@ -17,8 +17,8 @@ const StyledGrid = styled.div`
 margin:0px;
 width:100%;
 display:grid;
-grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-grid-gap: 15px;
+grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
+grid-gap: 25px;
 justify-items: center;
 align-items: center;
 `;

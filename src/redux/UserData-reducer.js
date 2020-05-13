@@ -55,15 +55,36 @@ let initialstate={
         Subscribers:[
             {username: "Bobrbobrovich",id: 1,av: i1},
             {username: "Bobr",id: 2,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1},
-            {username: "Andrey",id: 3,av: i1}
+            {username: "Andrey",id: 4,av: i2},
+            {username: "Sergey",id: 5,av: i3},
+            {username: "Nurey",id: 6,av: i4},
+            {username: "Vanya",id: 7,av: i5},
+            {username: "Nastya",id: 8,av: i6},
+            {username: "Sofia",id: 9,av: i7},
+            {username: "Nikita",id: 10,av: i8},
+            {username: "Artyomochka",id: 11,av: i9},
+            {username: "Albert-Molbert",id: 12,av: i10}
+            ,
+            {username: "Daneel",id: 12,av: i11}
+            ,
+            {username: "Iluha",id: 12,av: i12}
+            ,
+            {username: "Kekus",id: 12,av: i13},
+            {username: "BOG_DAN",id: 12,av: i14}
+            ,
+            {username: "Eru$",id: 12,av: i15}
+            ,
+            {username: "Dasha",id: 12,av: i16}
+            ,
+            {username: "Disipticon",id: 12,av: i17}
+            ,
+            {username: "Kisipticon",id: 12,av: i18}
+            ,
+            {username: "Money",id: 12,av: i19}
+            ,
+            {username: "Blackjack",id: 12,av: i20}
+            ,
+            {username: "Anime",id: 12,av: i21}
         ],
         Topics: [
             {name: "тема 1", id:1},
@@ -141,6 +162,42 @@ let initialstate={
             {name: "Ежи",id: 1,img: img1,checked: false},
             {name: "Змеи",id: 2,img: img2,checked: false},
             {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
+            ,
+            {name: "Bobrconspect",id: 3,img: img3,checked: false}
         ],
         
     },
@@ -172,7 +229,7 @@ let initialstate={
     TotalTopicscount:3,
     CurrentTopicPage:1,
 
-    Conspectspagesize:4,
+    Conspectspagesize:100,
     TotalConspectscount:3,
     CurrentConspectPage:1,
 }

@@ -49,9 +49,9 @@ class UserFinderForm extends React.Component{
               />
             </div>
               {this.state.options.map(elm=>
-                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>
-                  <div id="dditemcenter">{elm.username}</div>
-                </Dropdown.Item>)}
+                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+                  {/*<div id="dditemcenter">{elm.username}</div>*/}
+                
             </Dropdown.Menu>
       </Dropdown>
       </StyledFlexRow>

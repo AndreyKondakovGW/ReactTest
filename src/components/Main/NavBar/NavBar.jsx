@@ -247,6 +247,7 @@ class RequestSaveForm extends React.Component{
 }
 
 class NavBar extends React.Component{
+    /*
     LoadPDF = (conspectname,setPdf,conspectid)=>{
         this.props.LoadData()
         axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
@@ -272,6 +273,7 @@ class NavBar extends React.Component{
             }) 
         }
     }
+    */
     Routing=(name,id)=>{
         createBrowserHistory().push('/creteconspect/'+name+'/'+id)
     }
@@ -315,14 +317,14 @@ class NavBar extends React.Component{
                 
                 <Route history={history} path = "/subscriberconspects/:contentname/:id/content" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
-                        <ActionBox text="Создать PDF" action={()=>this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id)}/>
+                        <ActionBox text="Создать PDF" action={()=>{}}/>
                     </NavLink>
                     <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
-                        <ActionBox text="Вернуться" action={()=>this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)}/>
+                        <ActionBox text="Вернуться" action={()=>{}}/>
                     </NavLink>
                     <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>

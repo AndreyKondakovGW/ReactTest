@@ -86,7 +86,8 @@ class Viewer extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            option:"content"
+            option:"content",
+            suboption:"content"
         }
     }
     componentDidMount(){
@@ -127,16 +128,34 @@ class Viewer extends React.Component{
     }
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props){
-            if ((this.state.option!=this.props.match.url.split('/')[4])&&((this.props.match.url.split('/')[1]==="myconspects") || (this.props.match.url.split('/')[1]==="subscriberconspects"))){
+            if (((this.state.option!=this.props.match.url.split('/')[4]) && (this.props.match.url.split('/')[1]==="myconspects"))){
                 if (this.props.match.url.split('/')[4]==="pdf"){
                     this.setState({
+                        ...this.state,
                         option: this.props.match.url.split('/')[4]
                     })
                     LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
                 }
                 if (this.props.match.url.split('/')[4]==="content"){
                     this.setState({
+                        ...this.state,
                         option: this.props.match.url.split('/')[4]
+                    })
+                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
+                }
+            }
+            if ((this.state.suboption!=this.props.match.url.split('/')[4]) && (this.props.match.url.split('/')[1]==="subscriberconspects")){
+                if (this.props.match.url.split('/')[4]==="pdf"){
+                    this.setState({
+                        ...this.state,
+                        suboption: this.props.match.url.split('/')[4]
+                    })
+                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
+                }
+                if (this.props.match.url.split('/')[4]==="content"){
+                    this.setState({
+                        ...this.state,
+                        suboption: this.props.match.url.split('/')[4]
                     })
                     LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
                 }

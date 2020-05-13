@@ -90,10 +90,12 @@ transition: box-shadow .3s,
  
 }
 a:not(.noellipsis), .actionbox, #filelabel{
-
 text-align:left;
 vertical-align:middle;
 display: inline-block;
+  svg:not(#nosvgmargin){
+     margin-bottom:4px;
+  }
 }
 #noMargin{
   margin:0px;

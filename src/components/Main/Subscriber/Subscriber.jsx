@@ -31,6 +31,7 @@ text-align:center;
 a{
     color: black;
     font-size: 1em;
+    
     transition-property: color;
     transition-duration: .3s;
     :hover{
@@ -59,6 +60,7 @@ a{
 `;
 const StyledLine = styled.div`
 text-align: left;
+width:200px;
 `;
 
 class Subscriber extends React.Component{
