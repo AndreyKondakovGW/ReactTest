@@ -140,8 +140,8 @@ class SubscribersContent extends React.Component{
 }
 export default SubscribersContent;
 const StyledInterface = styled.div`
-/*display: flex;
-flex-direction: column;
+display: flex;
+flex-direction: column;/*
 width:100%;
 height: 100%;*/
 

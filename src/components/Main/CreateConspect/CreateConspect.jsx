@@ -44,9 +44,10 @@ display:flex;
 `;
 const StyledInvite = styled.div`
 width:100%;
-height: 100%;
+height:100%;
+
 font-size:1em;
-display:flex;
+    display:flex;
     flex-direction: column;
     flex-wrap:wrap;
     justify-content:center;
@@ -59,10 +60,11 @@ display:flex;
     }
 `;
 const StyledInterface = styled.div`
-/*display: flex;
+display: flex;
 flex-direction: column;
+
 width:100%;
-height: 100%;*/
+height: 100%;/**/
 
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
@@ -148,9 +150,6 @@ class CreateConspect extends React.Component{
                     {this.ReactContents()}
                 </div>
             </StyledMainbox>
-            {/*<div className={s.scrolbar}>
-                {this.ReactContents()}
-            </div> */}
         </StyledInterface>
     )
 }
