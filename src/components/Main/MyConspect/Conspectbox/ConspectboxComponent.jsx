@@ -8,10 +8,7 @@ text-align: left;
 *{
     display:inline-block;
 }
-a{
-    
-    margin-bottom:10px;
-}
+
 `;
 const StyledChecked = styled.div`
     border-radius: 5px;
@@ -56,6 +53,12 @@ const StyledUnchecked = styled.div`
 const StyledConspectbox = styled.div`
 display:inline-block;
 a{
+    width:166px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+    margin-bottom:10px;
     color: black;
     font-size: 1em;
     transition-property: color;

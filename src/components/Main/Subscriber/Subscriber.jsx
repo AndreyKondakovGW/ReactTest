@@ -29,6 +29,10 @@ display:flex;
 flex-direction: column;
 text-align:center;
 a{
+    width:200px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
     color: black;
     font-size: 1em;
     
@@ -60,7 +64,6 @@ a{
 `;
 const StyledLine = styled.div`
 text-align: left;
-width:200px;
 `;
 
 class Subscriber extends React.Component{

@@ -53,7 +53,7 @@ let initialstate={
     UserData: {
         Username: "Vas_Khon",
         Subscribers:[
-            {username: "Bobrbobrovich",id: 1,av: i1},
+            {username: "Bobrbobrovichadadadadadadadadadadad",id: 1,av: i1},
             {username: "Bobr",id: 2,av: i1},
             {username: "Andrey",id: 4,av: i2},
             {username: "Sergey",id: 5,av: i3},
@@ -159,7 +159,7 @@ let initialstate={
             
 
         Conspects: [
-            {name: "Ежи",id: 1,img: img1,checked: false},
+            {name: "Ежииииииииииииииииииииииииииииииии",id: 1,img: img1,checked: false},
             {name: "Змеи",id: 2,img: img2,checked: false},
             {name: "Bobrconspect",id: 3,img: img3,checked: false}
             ,
