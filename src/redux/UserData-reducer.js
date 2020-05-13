@@ -51,7 +51,7 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 let initialstate={
     bobrmass:[i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,i21,i22,i23,i24,i25],
     UserData: {
-        Username: "f",
+        Username: "а",
         Subscribers:[
             {username: "Bobrbobrovich",id: 1,av: i1},
             {username: "Bobr",id: 2,av: i1},

@@ -17,34 +17,37 @@ class UserAccsesForm extends React.Component{
     }
     componentDidMount=()=>{
       axios.get('http://127.0.0.1:5000/get_users_with_access/'+this.props.conspectid).then(response=>{
+        console.log(response.data)
         this.setState({
           ...this.state,
           checkeveryone: response.data.find(elm=>elm.user_id===-1).username==="True",
           selecteoptions: response.data.filter(elm=>elm.user_id!==-1).map(function(elm){return({...elm,cheked: true})})
         })
         response.data.forEach(elm=>this.state.checkinoption.add(elm.user_id))
+        console.log(this.state)
       })
     }
 
     CheckedById=(id)=>{
+      console.log(this.state.selecteoptions)
+      console.log(this.state.options)
+      console.log(id)
       if ((this.state.selecteoptions.find(elm=>elm.user_id===id))&&(this.state.selecteoptions.find(elm=>elm.user_id===id).cheked)){
         this.state.checkinoption.delete(id)
-        this.setState({
-          ...this.state,
-          selecteoptions: this.state.selecteoptions.filter(elm=>elm.user_id!==id)
-        })
+        this.state.selecteoptions=this.state.selecteoptions.filter(elm=>elm.user_id!==id)
+        console.log(this.state)
       }
       else{
         this.state.checkinoption.add(id)
-        this.setState({
-          ...this.state,
-          selecteoptions: [...this.state.selecteoptions,{...this.state.options.find(elm=>elm.user_id===id),cheked:true}]
-        })
+        this.state.selecteoptions.push({...this.state.options.find(elm=>elm.user_id===id),cheked:true})
+        console.log(this.state.options.find(elm=>elm.user_id===id))
       }
       this.setState({
           ...this.state,
           options: this.state.options.map(elm=>(elm.user_id===id)?{...elm,cheked:!elm.cheked}:elm)
       })
+      console.log(this.state.selecteoptions)
+      console.log(this.state.options)
     }
     handleChange=(e)=>{
       let value = e.target.value;
@@ -54,16 +57,18 @@ class UserAccsesForm extends React.Component{
             ...this.state,
             value: value,
             options: response.data.filter(option=>(option.user_id!==-1)&&(!this.state.checkinoption.has(option.user_id))).map(function(elm){return({...elm,cheked: false})})
-            
           })
         })
         
       }
+      else{
       this.setState({
         ...this.state,
         value: value,
         options: []
       })
+    }
+    console.log(this.state)
     }
 
     HandleSubmit=()=>{

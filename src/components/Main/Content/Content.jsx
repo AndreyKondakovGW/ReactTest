@@ -3,6 +3,7 @@ import Button from '../../Button/Button';
 import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import Topics from './TopicsComponent.jsx';
 import * as axios from 'axios';
+import ActionBox from '../../ActionBox/ActionBox';
 
 
 
@@ -11,7 +12,7 @@ class TopicsAPI extends React.Component{
         super(props)
         this.state={
             ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
-            <Button text={elm.name} path={"content/"+elm.name} /> )
+            <><ActionBox text="Удалить тэг" action={()=>{this.DeleteTag(elm.id)}}/> <Button text={elm.name} path={"content/"+elm.name} /></> )
         }
     }
     
@@ -20,14 +21,20 @@ class TopicsAPI extends React.Component{
         axios.get("http://127.0.0.1:5000/gettags").then(response =>{
             this.props.setTopics(response.data)
         })
+
     }
-    
-    
+    DeleteTag(id){
+        axios.delete("http://127.0.0.1:5000/delete_tag/"+id)
+        this.setState({
+            ReactContents : this.props.Topics.filter(elm=>elm.id!==id).slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
+                <><ActionBox text="Удалить тэг" action={()=>{this.DeleteTag(elm.id)}}/> <Button text={elm.name} path={"content/"+elm.name} /></> )
+        })
+    }
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {
         this.setState({    
             ReactContents : this.props.Topics.slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
-                <Button text={elm.name} path={"content/"+elm.name} /> )
+            <><ActionBox text="Удалить тэг" action={()=>{this.DeleteTag(elm.id)}}/> <Button text={elm.name} path={"content/"+elm.name} /></> )
         })
         }
     }
@@ -35,7 +42,7 @@ class TopicsAPI extends React.Component{
     changePage=(pageNum)=>{
         this.props.setCurPage(pageNum)
         this.setState({
-            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm => <Button text={elm.name} path={"content/"+elm.name} /> )
+            ReactContents: this.props.Topics.slice(this.props.Pagesize*(pageNum-1),this.props.Pagesize*pageNum).map(elm =><><ActionBox text="Удалить тэг" action={()=>{this.DeleteTag(elm.id)}}/> <Button text={elm.name} path={"content/"+elm.name} /></> )
         })
     }
 
