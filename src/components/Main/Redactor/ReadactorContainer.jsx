@@ -57,7 +57,7 @@ let mapDispatchtoProps =(dispatch) =>{
             dispatch(action)
         },
         SaveTags:(tags,photoid,coordinate)=>{
-            axios.post('http://127.0.0.1:5000/sendfragment',{photo_id:photoid,x1:coordinate.x1,y1:coordinate.y1,x2:coordinate.x2,y2:coordinate.y2,tags:tags}).then(function(){
+            axios.post('http://conspect-structure.eastus.cloudapp.azure.com/sendfragment',{photo_id:photoid,x1:coordinate.x1,y1:coordinate.y1,x2:coordinate.x2,y2:coordinate.y2,tags:tags}).then(function(){
                 console.log('SUCCESS!!')})
         },
         setConspect: (conspects) =>{

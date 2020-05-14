@@ -66,7 +66,7 @@ class SubscribersContent extends React.Component{
     }
     
     componentDidMount(){
-            axios.get("http://127.0.0.1:5000/get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
+            axios.get("http://conspect-structure.eastus.cloudapp.azure.com/get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
                 this.setState({
                     ...this.state,
                     

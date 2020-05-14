@@ -214,7 +214,7 @@ class RequestSaveForm extends React.Component{
 
     handleSubmit=()=> {
         this.props.WriteRequest()
-        axios.post(decodeURIComponent('http://127.0.0.1:5000/create_sample_tag/'+this.props.request+'/'+this.state.value))
+        axios.post(decodeURIComponent('http://conspect-structure.eastus.cloudapp.azure.com/create_sample_tag/'+this.props.request+'/'+this.state.value))
 
     }
     render(){
@@ -231,33 +231,6 @@ class RequestSaveForm extends React.Component{
 }
 
 class NavBar extends React.Component{
-    /*
-    LoadPDF = (conspectname,setPdf,conspectid)=>{
-        this.props.LoadData()
-        axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
-        {   
-            method: 'GET',
-            responseType: 'blob'}
-        ).then(response =>{
-            const file = new Blob(
-                [response.data], 
-                {type: 'application/pdf'});
-            var fileURL = URL.createObjectURL(file);
-        setPdf(fileURL,conspectname)
-        })
-    }
-    LoadContent=(setConspects,id,conspectname,OpenConspect)=>{
-        axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-            setConspects(response.data)
-        })
-        if ((id!==-1)&&(this.props.id !==id )){
-            this.props.LoadData()
-            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id).then(response=>{
-                this.props.LoadConspectFromData(response,conspectname,id,OpenConspect)
-            }) 
-        }
-    }
-    */
     Routing=(name,id)=>{
         createBrowserHistory().push('/creteconspect/'+name+'/'+id)
     }
@@ -303,14 +276,14 @@ class NavBar extends React.Component{
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
                         <ActionBox text="Создать PDF" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://conspect-structure.eastus.cloudapp.azure.com/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
                         <ActionBox text="Вернуться" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://127.0.0.1:5000/copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://conspect-structure.eastus.cloudapp.azure.com/copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path="/content" render={()=><StyledLine>

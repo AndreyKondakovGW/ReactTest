@@ -262,7 +262,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
             while (i<fotos.data.length)
             {
                 let promise = new Promise((resolve, reject) => {
-                    resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                    resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                 })
                 let response= await promise
                 const file = new Blob(

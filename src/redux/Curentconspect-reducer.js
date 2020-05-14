@@ -51,7 +51,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
@@ -209,7 +209,7 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                     currentpdf: {name: "simplePDF",pdf:pdf}
                 }
             }
-            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ action.id).then(response=>{
+            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ action.id).then(response=>{
                 LoadConspectFromData(response,action.conspectname,action.id,action.OpenConspect)
             })
             return newstate

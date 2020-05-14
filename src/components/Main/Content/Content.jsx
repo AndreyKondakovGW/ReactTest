@@ -18,13 +18,13 @@ class TopicsAPI extends React.Component{
     
     componentDidMount(){
         console.log("Отправлелен запрос на получение тэгов")
-        axios.get("http://127.0.0.1:5000/gettags").then(response =>{
+        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/gettags").then(response =>{
             this.props.setTopics(response.data)
         })
 
     }
     DeleteTag(id){
-        axios.delete("http://127.0.0.1:5000/delete_tag/"+id)
+        axios.delete("http://conspect-structure.eastus.cloudapp.azure.com/delete_tag/"+id)
         this.setState({
             ReactContents : this.props.Topics.filter(elm=>elm.id!==id).slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
                 <><ActionBox text="Удалить тэг" action={()=>{this.DeleteTag(elm.id)}}/> <Button text={elm.name} path={"content/"+elm.name} /></> )

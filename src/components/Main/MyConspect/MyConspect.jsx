@@ -22,7 +22,7 @@ class MyConspect extends React.Component{
         }
         
         componentDidMount(){
-            axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+            axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
                 this.props.setConspect(response.data)
            })
         }

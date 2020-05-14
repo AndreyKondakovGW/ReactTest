@@ -30,7 +30,7 @@ let mapDispatchtoProps =(dispatch) =>{
                 while (i<fotos.data.length)
                 {
                     let promise = new Promise((resolve) => {
-                        resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                        resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                     })
                     let response= await promise
                     const file = new Blob(
@@ -67,7 +67,7 @@ let mapDispatchtoProps =(dispatch) =>{
                 var i=0
                 while (i<Conspects.filter(elm=>elm.checked).length){
                     let promise = new Promise((resolve) => {
-                        resolve(axios.get('http://127.0.0.1:5000/related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
+                        resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
                     })
                     let response= await promise
                     alertT=[...alertT,{name: Conspects.filter(elm=>elm.checked)[i].name,tags: response.data.map(elm=>elm.tag_name).join()}]
@@ -112,20 +112,51 @@ let mapDispatchtoProps =(dispatch) =>{
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
         },
-        SaveConspect: (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
+        SaveConspect: async (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
             const OldIDs=new Set (CurentConspectfotos.map(elm=>elm.index))
             const NewIDs=new Set (fotos.map(elm=>elm.index))
             OldIDs.forEach(elm=>{
                 if (!NewIDs.has(elm)){
-                    axios.delete('http://127.0.0.1:5000/deletephoto/'+ elm)
+                    axios.delete('http://conspect-structure.eastus.cloudapp.azure.com/deletephoto/'+ elm)
                 }
             })
-            axios.put('http://127.0.0.1:5000/put_conspect/'+name+"/False").then(response=>{
+            axios.put('http://conspect-structure.eastus.cloudapp.azure.com/put_conspect/'+name+"/False").then(async function(response){
+                let promise1 = new Promise(async (resolve) => {
+                var i=0
+                while (i<fotos.length){
+                    if (fotos[i].index==="null"){
+                        let formData = new FormData();
+                        formData.append('file', fotos[i].file);
+                        console.log(formData)
+                        await new Promise((resolve, reject) => {
+                            resolve(axios.post('http://conspect-structure.eastus.cloudapp.azure.com/savephoto/'+ response.data.conspect_id,
+                                formData,
+                                {
+                                    headers: {'Content-Type': 'multipart/form-data'}
+                                }
+                            ).then(function(response){
+                                console.log(response);
+                                i++
+                            } 
+                        ))})
+                    }
+                }
+                if (i===fotos.length){
+                    console.log(i)
+                    resolve()
+                }
+                })
+                promise1.then(res=>{
+                    routing(name,response.data.conspect_id)
+                    document.location.reload(true);
+                })
+                /*
                 fotos.forEach(elm=>{
                     if (elm.index==="null"){
                         let formData = new FormData();
                         formData.append('file', elm.file);
-                        axios.post('http://127.0.0.1:5000/savephoto/'+ response.data.conspect_id,
+                        console.log(formData)
+                        axios.post('http://conspect-structure.eastus.cloudapp.azure.com/savephoto/'+ response.data.conspect_id,
                         formData,
                         {
                             headers: {
@@ -133,14 +164,14 @@ let mapDispatchtoProps =(dispatch) =>{
                             }
                         }
                         ).then(function(response){
-                            console.log('SUCCESS!!');
-                        }).catch(function(){
-                            console.log('FAILURE!!');
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error);
                           });
                     }
                 })
-                routing(name,response.data.conspect_id)
-                document.location.reload(true);
+                */
+
             })
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);

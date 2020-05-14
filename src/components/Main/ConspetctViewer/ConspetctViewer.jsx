@@ -75,7 +75,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve) => {
-                resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
@@ -105,7 +105,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 }
 const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     LoadData()
-    axios('http://127.0.0.1:5000/getconspectpdf/'+conspectid,
+    axios('http://conspect-structure.eastus.cloudapp.azure.com/getconspectpdf/'+conspectid,
     {   
         method: 'GET',
         responseType: 'blob'}
@@ -120,12 +120,12 @@ const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
 
 
 const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
-    axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
+    axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
         setConspects(response.data)
     })
     if (id!==-1){
         LoadData()
-        axios.get('http://127.0.0.1:5000/getconspectphotos/'+ id).then(response=>{
+        axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ id).then(response=>{
             LoadConspectFromData(response,conspectname,id,OpenConspect)
         }) 
     }
@@ -142,7 +142,7 @@ class Viewer extends React.Component{
     componentDidMount(){
         if (this.props.match.url.split('/')[1]==="content"){
             this.props.LoadData()
-            axios('http://127.0.0.1:5000/gettagpdf/'+this.props.match.url.split('/')[2],
+            axios('http://conspect-structure.eastus.cloudapp.azure.com/gettagpdf/'+this.props.match.url.split('/')[2],
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{
@@ -155,7 +155,7 @@ class Viewer extends React.Component{
         }
         if (this.props.match.url.split('/')[1]==="sample_pdf"){
             this.props.LoadData()
-            axios('http://127.0.0.1:5000/get_sample_pdf/'+this.props.topicrequest,
+            axios('http://conspect-structure.eastus.cloudapp.azure.com/get_sample_pdf/'+this.props.topicrequest,
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{

@@ -72,7 +72,7 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                resolve(axios.get('http://127.0.0.1:5000/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
@@ -107,7 +107,7 @@ class CreateConspect extends React.Component{
             this.props.OpenEmptyConspect()
         }
         if ((this.props.match.params.id) && (this.props.conspectid!==this.props.match.params.id)){
-            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
+            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 LoadConspectFromData(response,this.props.match.params.conspect,this.props.match.params.id,this.props.OpenConspect)
             })
         }

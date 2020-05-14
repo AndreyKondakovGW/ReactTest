@@ -51,7 +51,7 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 let initialstate={
     bobrmass:[i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,i21,i22,i23,i24,i25],
     UserData: {
-        Username: "а",
+        Username: "",
         Subscribers:[
             {username: "Bobrbobrovich",id: 1,av: i1},
             {username: "Bobr",id: 2,av: i1},
@@ -84,7 +84,7 @@ let initialstate={
             {name: "Змеи",id: 2,img: img2},
             {name: "Bobrconspect",id: 3,img: img3}
         ], 
-        Conspectspagesize:3,
+        Conspectspagesize:10,
         TotalConspectscount:20,
         CurrentConspectPage:1,
         
@@ -102,7 +102,7 @@ let initialstate={
     TotalTopicscount:3,
     CurrentTopicPage:1,
 
-    Conspectspagesize:4,
+    Conspectspagesize:20,
     TotalConspectscount:3,
     CurrentConspectPage:1,
 }
@@ -175,7 +175,7 @@ const UserDatareducer =(state=initialstate, action)=>{
         }
         case DELETE_CHECKEDCONSPECT:{
             state.UserData.Conspects.filter(elm=>elm.checked).forEach(elm=>
-                axios.delete('http://127.0.0.1:5000/deleteconspect/'+elm.id))
+                axios.delete('http://conspect-structure.eastus.cloudapp.azure.com/deleteconspect/'+elm.id))
             let newstate={
                 ...state,
                 UserData: {
@@ -202,7 +202,7 @@ const UserDatareducer =(state=initialstate, action)=>{
         }
         case ADD_SUBSCRIBER:{
             if (state.CurentOption!==""){
-            axios.post('http://127.0.0.1:5000/add_friend/'+state.CurentOption.id)
+            axios.post('http://conspect-structure.eastus.cloudapp.azure.com/add_friend/'+state.CurentOption.id)
             let newstate={
                 ...state,
                 UserData: {

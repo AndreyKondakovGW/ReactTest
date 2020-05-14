@@ -52,7 +52,7 @@ transition-timing-function: ease-in-out;
 }
 `;
 const GetCurUser=(SetUsername)=>{
-  axios.get('http://127.0.0.1:5000/get_current_user').then(response=>{
+  axios.get('http://conspect-structure.eastus.cloudapp.azure.com/get_current_user').then(response=>{
     SetUsername(response.data.name)
 })
 }

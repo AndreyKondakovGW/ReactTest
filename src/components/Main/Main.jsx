@@ -50,7 +50,7 @@ background-size:cover;
 
 const Main=(props) =>{
     let logout=()=>{
-      axios.get("http://127.0.0.1:5000/logout")
+      axios.get("http://conspect-structure.eastus.cloudapp.azure.com/logout")
       document.location.reload(true);
     }
     const {history}=props

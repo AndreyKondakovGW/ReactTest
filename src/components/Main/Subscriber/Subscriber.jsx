@@ -65,12 +65,12 @@ a{
 `;
 class Subscriber extends React.Component{
     componentDidMount(){
-        axios.get("http://127.0.0.1:5000/friend_list").then(response =>{
+        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/friend_list").then(response =>{
             this.props.setsubscribers(response.data)
        })
     }
     DeleteSubscriber(id){
-        axios.delete("http://127.0.0.1:5000/delete_friend/"+id)
+        axios.delete("http://conspect-structure.eastus.cloudapp.azure.com/delete_friend/"+id)
         this.props.setsubscribers(this.props.Subscribers.filter(elm=>elm.user_id!==id))
     }
     render(){
