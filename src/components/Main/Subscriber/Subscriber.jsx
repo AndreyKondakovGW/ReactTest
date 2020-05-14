@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NavBarContainer from '../NavBar/NavBarContainer';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
-import bobr from '../../../static/images/bobr1.jpg';
 import * as axios from 'axios';
 import styled from 'styled-components';
 
@@ -28,11 +27,12 @@ const StyledUserBox = styled.div`
 display:flex;
 flex-direction: column;
 text-align:center;
-a{
-    width:200px;
-white-space: nowrap;
+a.ellipsis{
+  width:200px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
     color: black;
     font-size: 1em;
     
@@ -47,8 +47,7 @@ white-space: nowrap;
         height: 200px;
         object-fit: cover;
         box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .4);
-        transition-property: box-shadow;
-        transition-duration: .3s;
+        transition: box-shadow .3s;
         :hover{
             box-shadow: none;
         }
@@ -56,6 +55,7 @@ white-space: nowrap;
     .actionbox{
         margin-top:10px;
         width:200px;
+        background-color:#c0afd3;
         :hover {
             background-color: rgb(255, 80, 80);
            
@@ -84,7 +84,7 @@ class Subscriber extends React.Component{
                     {this.props.Subscribers.map(elm=>
                     <StyledUserBox>
                         <StyledLine>
-                            <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
+                            <NavLink className="ellipsis" to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
                                 {elm.username}
                             </NavLink> 
                         </StyledLine>

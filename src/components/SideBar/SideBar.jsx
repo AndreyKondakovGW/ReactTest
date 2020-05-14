@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
 import { 
-    FileEarmark,
+    FileEarmarkText,
     StarFill,
     FileEarmarkPlus,
     StarHalf,
@@ -62,7 +62,7 @@ const SideBar=(props) =>{
         <h2>Welcome.</h2>
         <img src={logo} alt="some value" id="logo" />
         <div className="SidebarContent">
-            <Button  text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
+            <Button  text='Мои конспекты' icon={<FileEarmarkText/>} path="myconspects" />
             <Button  text='Мои тэги'icon={<StarFill/>}  path="content" />
             <Button  text='Создать конспект' 
                     path="creteconspect/newconspect" 

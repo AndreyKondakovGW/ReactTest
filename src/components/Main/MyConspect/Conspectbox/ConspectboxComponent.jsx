@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {Plus,X} from 'react-bootstrap-icons';
+import {X} from 'react-bootstrap-icons';
+import bobr from '../../../../static/images/bobr1.png';
 import styled from 'styled-components';
 const StyledLine = styled.div`
 
@@ -53,12 +54,12 @@ const StyledUnchecked = styled.div`
 const StyledConspectbox = styled.div`
 display:inline-block;
 a{
-    width:166px;
-white-space: nowrap;
+  width:166px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-    margin-bottom:10px;
+    margin-bottom:5px;
     color: black;
     font-size: 1em;
     transition-property: color;
@@ -68,10 +69,24 @@ white-space: nowrap;
 }
 }
     img{
+        /*
+        background-color:#DCDEEA;
+        background-color:#f1f1f1;
+        background-color:#02dac5;
+        */
+        background-color:rgba(255,255,255,0.35);
+        background-color:#DCDEEA;
+        /*мед*/
+        background-color:rgb(255, 227, 179);
+        /*баттеркап
+        background-color:rgb(255, 250, 200);
+        */
+        
+        border-radius: 100px;
         width: 200px;
         height: 200px;
         object-fit: cover;
-        box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .4);
+        box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, .4);
         transition: box-shadow .3s;
         :hover{
             box-shadow: none;
@@ -101,7 +116,8 @@ class Conspectbox extends React.Component{
                 </StyledLine>
                 
                 <NavLink className="noellipsis" to={this.props.path}>
-                    <img src={this.props.img} alt="some value"/>
+                    <img src={bobr} alt="some value"/>
+                    {/*<img src={this.props.img} alt="some value"/>*/}
                 </NavLink>
             </StyledConspectbox>
         )

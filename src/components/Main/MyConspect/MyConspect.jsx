@@ -74,7 +74,7 @@ class MyConspect extends React.Component{
         }
         return (
         <div> 
-                <NavBarContainer name="Конспекты"/>
+                <NavBarContainer name="Мои конспекты"/>
                 <Conspects 
                     Readcted={true}
                     pages={pages}
