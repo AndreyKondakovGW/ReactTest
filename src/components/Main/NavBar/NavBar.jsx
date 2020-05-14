@@ -207,8 +207,8 @@ class ConspectSaver extends React.Component{
                        placeholder="Название..."
                 />
                 :
-                <div>{this.state.name}</div>}
-                    <ActionBox  text="Сохранить" icon={<Check/>} action={this.handleSubmit}/>
+                <></>}
+                <ActionBox  text="Сохранить" icon={<Check/>} action={this.handleSubmit}/>
             </div>
         )
     }
