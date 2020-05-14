@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const StyledTags = styled.div`
     margin-top:20px ;
     width:100%;
-    height: 100%;
     
+    /*height: 100%;*/
+    padding-bottom:20px;
     display: flex;
     flex-direction:column;
 
@@ -16,8 +17,8 @@ const StyledGrid = styled.div`
 margin:0px;
 width:100%;
 display:grid;
-grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-grid-gap: 15px;
+grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
+grid-gap: 25px;
 justify-items: center;
 align-items: center;
 `;
@@ -30,10 +31,10 @@ text-align: center;
 }
 `;
 const StyledInterface = styled.div`
-/*display: flex;
+display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;*/
+height: 100%;
 
 `;
 const Topics=(props)=>{

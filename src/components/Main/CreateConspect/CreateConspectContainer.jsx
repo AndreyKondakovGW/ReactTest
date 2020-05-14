@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import CreateConspect from './CreateConspect.jsx';
 import {DELETEFOTOCreator,CHANGEPERWIEPHOTOCreator,OpenConspectAC,OpenEmptyConspect} from './../../../redux/ConspectCreater-reducer';
-import {SetCurrentConspectCR,OpenEmptyCOnspectAC,LoadConspectAC} from './../../../redux/Curentconspect-reducer';
+import {SetCurrentConspectCR,OpenEmptyCOnspectAC,LoadConspectAC,DataLoadSwitch} from './../../../redux/Curentconspect-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
+        dataisLoading: state.Curentconspectreducer.dataisLoading,
         Conspects: state.UserDatareducer.UserData.Conspects,
         Conspectname: state.CurentCreatorreducer.CreatorData.name,
         fotos: state.CurentCreatorreducer.CreatorData.fotos,
@@ -46,7 +47,10 @@ let mapDispatchtoProps =(dispatch) =>{
             dispatch(action)
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
-        }
+        },
+        LoadData: ()=>{
+            dispatch(DataLoadSwitch())
+        },
     }
 }
 

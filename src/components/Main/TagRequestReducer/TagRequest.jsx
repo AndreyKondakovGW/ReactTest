@@ -110,10 +110,8 @@ text-align:center;
     outline:hidden;
     
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
-    transition: color 1s ease, 
-                box-shadow .3s ease;
+    transition: color .3s, 
+                box-shadow .3s;
     :hover {
       background-color:rgb(119, 90, 163);
       color: #f1f1f1;

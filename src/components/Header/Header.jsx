@@ -14,7 +14,7 @@ const StyledHeader = styled.div`
     text-decoration: none;
     transition: 0.3s;
     &:hover {
-      color:#02dac5;
+      color:#f1f1f1;
     }
   }
 
@@ -31,7 +31,7 @@ const StyledHeader = styled.div`
     height:30px;
     transform: ${({ open }) => open ? 'rotate(0.5turn)' : 'none'};
     box-shadow: ${({ open }) => open ? '-3px -3px 3px 0px rgba(0, 0, 0, .3)' : '3px 3px 3px 0px rgba(0, 0, 0, .3)'};
-    transition: color 1s ease, 
+    transition: color .3s ease, 
                 transform .4s ease-in-out,
                 box-shadow .3s ease;
     outline:none;

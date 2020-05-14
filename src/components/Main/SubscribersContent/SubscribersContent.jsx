@@ -26,7 +26,7 @@ line-height: 35px;
 }
 .contentbox{
     display: flex;
-flex-direction: column;
+    flex-direction: column;
 }
 `;
 
@@ -144,7 +144,5 @@ class SubscribersContent extends React.Component{
 }
 }
 export default SubscribersContent;
-
-
 
 

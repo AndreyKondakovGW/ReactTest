@@ -3,17 +3,20 @@ import NavBarContainer from '../NavBar/NavBarContainer.jsx';
 import PohotoVeiwer from './PohotoVeiwer/PohotoVeiwer.jsx';
 import * as axios from 'axios';
 import styled from 'styled-components';
+import preloader from '../../../static/2.gif';
+
 const StyledMainbox = styled.div`
     margin-top:20px ;
     width:100%;
-    height: 100%;
+    /*height: 100%;*/
+    padding-bottom:20px;
+    
     display:flex;
     flex-direction: column;
-    flex-wrap:wrap;
-    text-align:center;
+    flex-wrap:nowrap;
     justify-content:center;
     align-items: flex-start;
-
+    
     .mygrid{
     width:100%;
     display:grid;
@@ -25,11 +28,11 @@ const StyledMainbox = styled.div`
 `;
 const StyledImagePerwier = styled.div`
 width:100%;
-height:50vh;
+
 margin-bottom:20px;
-display:flex;
+    display:flex;
     flex-direction: column;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     justify-content:center;
     align-items: center;
 
@@ -38,15 +41,16 @@ display:flex;
         width: auto;
         height: auto;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 50vh;
         box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
     }
 `;
 const StyledInvite = styled.div`
 width:100%;
-height: 100%;
-font-size:1em;
-display:flex;
+height:100%;
+
+    font-size:1em;
+    display:flex;
     flex-direction: column;
     flex-wrap:wrap;
     justify-content:center;
@@ -59,10 +63,8 @@ display:flex;
     }
 `;
 const StyledInterface = styled.div`
-/*display: flex;
-flex-direction: column;
+
 width:100%;
-height: 100%;*/
 
 `;
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
@@ -107,6 +109,7 @@ class CreateConspect extends React.Component{
             this.props.OpenEmptyConspect()
         }
         if ((this.props.match.params.id) && (this.props.conspectid!==this.props.match.params.id)){
+            this.props.LoadData()
             axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 LoadConspectFromData(response,this.props.match.params.conspect,this.props.match.params.id,this.props.OpenConspect)
             })
@@ -129,14 +132,14 @@ class CreateConspect extends React.Component{
     render(){
     return( 
         <StyledInterface>
+            {(!this.props.dataisLoading)?<>
             <NavBarContainer name={this.props.Conspectname}/>
             <StyledMainbox>
                 {this.ImgPeriwe()}
-                <div className="mygrid">
-                    {this.ReactContents()}
-                </div>
-            </StyledMainbox>
+                <div className="mygrid">{this.ReactContents()}</div>
+            </StyledMainbox></>:<StyledInvite><img src={preloader} alt="some image"/></StyledInvite>}
         </StyledInterface>
+        
     )
 }
 }

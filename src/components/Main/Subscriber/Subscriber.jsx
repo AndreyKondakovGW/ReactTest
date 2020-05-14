@@ -6,19 +6,14 @@ import bobr from '../../../static/images/bobr1.jpg';
 import * as axios from 'axios';
 import styled from 'styled-components';
 
-const StyledLine = styled.div`
-text-align: left;
-margin-bottom:10px;
-`;
+
 const StyledInterface = styled.div`
 display: flex;
 flex-direction: column;
 width:100%;
-height: 100%;
-
+/*height: 100%;*/
+    padding-bottom:20px;
 `;
-
-
 
 const StyledGrid = styled.div`
 margin-top:20px;
@@ -30,13 +25,17 @@ justify-items: center;
 align-items: center;
 `;
 const StyledUserBox = styled.div`
-
 display:flex;
 flex-direction: column;
 text-align:center;
 a{
+    width:200px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
     color: black;
     font-size: 1em;
+    
     transition-property: color;
     transition-duration: .3s;
     :hover{
@@ -63,6 +62,10 @@ a{
           }  
     }
 `;
+const StyledLine = styled.div`
+text-align: left;
+`;
+
 class Subscriber extends React.Component{
     componentDidMount(){
         axios.get("http://conspect-structure.eastus.cloudapp.azure.com/friend_list").then(response =>{
@@ -85,10 +88,10 @@ class Subscriber extends React.Component{
                                 {elm.username}
                             </NavLink> 
                         </StyledLine>
-                        <NavLink to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
-                            <img src={elm.av} alt="some value"/>
+                        <NavLink className="noellipsis" to={"/comunity/"+elm.username+"/"+elm.user_id+"/conspect_and_tags"}>
+                            <img  src={elm.av} alt="some value"/>
                         </NavLink>
-                        <ActionBox text="отписаться" action={()=>this.DeleteSubscriber(elm.user_id)
+                        <ActionBox text="Отписаться" action={()=>this.DeleteSubscriber(elm.user_id)
                         }/> 
                     </StyledUserBox>)}
                 </StyledGrid>

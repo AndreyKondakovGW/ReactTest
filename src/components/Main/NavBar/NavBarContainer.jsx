@@ -113,6 +113,7 @@ let mapDispatchtoProps =(dispatch) =>{
             dispatch(action2)
         },
         SaveConspect: async (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
+            dispatch(DataLoadSwitch())
             const OldIDs=new Set (CurentConspectfotos.map(elm=>elm.index))
             const NewIDs=new Set (fotos.map(elm=>elm.index))
             OldIDs.forEach(elm=>{
@@ -127,7 +128,6 @@ let mapDispatchtoProps =(dispatch) =>{
                     if (fotos[i].index==="null"){
                         let formData = new FormData();
                         formData.append('file', fotos[i].file);
-                        console.log(formData)
                         await new Promise((resolve, reject) => {
                             resolve(axios.post('http://conspect-structure.eastus.cloudapp.azure.com/savephoto/'+ response.data.conspect_id,
                                 formData,
@@ -171,7 +171,6 @@ let mapDispatchtoProps =(dispatch) =>{
                     }
                 })
                 */
-
             })
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);

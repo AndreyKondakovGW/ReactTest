@@ -6,7 +6,14 @@ import Button from '../Button/Button';
 
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
-import { Pencil,FileEarmarkPlus, BoxArrowInRight,FileEarmarkCode,Code,FileEarmark,PeopleFill} from 'react-bootstrap-icons';
+import { 
+    FileEarmark,
+    StarFill,
+    FileEarmarkPlus,
+    StarHalf,
+    Pencil,
+    PeopleFill,
+    BoxArrowInRight} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
 
@@ -56,14 +63,14 @@ const SideBar=(props) =>{
         <img src={logo} alt="some value" id="logo" />
         <div className="SidebarContent">
             <Button  text='Мои конспекты' icon={<FileEarmark/>} path="myconspects" />
-            <Button  text='Мои тэги'icon={<Code/>}  path="content" />
+            <Button  text='Мои тэги'icon={<StarFill/>}  path="content" />
             <Button  text='Создать конспект' 
                     path="creteconspect/newconspect" 
                     icon={<FileEarmarkPlus/>} 
                     onClick={openemptyconspect} />
-            <Button text='Создать выборку' icon={<FileEarmarkCode/>} path="topicrequest" />
+            <Button text='Создать выборку' icon={<StarHalf/>} path="topicrequest" />
             <Button text='Редактор' path={(props.CurrentConspect.id!==-1)?"redactor/"+props.CurrentConspect.name+"/"+props.CurrentConspect.id:"redactor/emptyconspect/"+props.CurrentConspect.id} icon={<Pencil/>}/>
-            <Button text='Мои поверенные' icon={<PeopleFill/>}  path={"comunity"}/>
+            <Button text='Мои подписки' icon={<PeopleFill/>}  path={"comunity"}/>
         </div>
     <Button text="Выйти" path="logout" icon={<BoxArrowInRight/>} /> 
     </StyledSideBar>

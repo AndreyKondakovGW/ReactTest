@@ -2,7 +2,7 @@ import React from 'react';
 
 import ActionBox from './../../ActionBox/ActionBox.jsx';
 import MyConspectList from './../../ConspectList/ConspectList.jsx';
-import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
+//import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
 import UserFinderContainer from '../UsersFinder/UserFinderContainer';
 import UserAccsesForm from '../UserAccsesForm/UserAccsesForm.jsx';
@@ -10,16 +10,25 @@ import * as axios from 'axios';
 import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import {Link45deg ,Check, FilePlus, FileMinus,ChevronDoubleDown,FileEarmarkPlus,FileEarmarkMinus,FileEarmark,FileEarmarkCode, CodeSlash} from 'react-bootstrap-icons';
+import {
+    LayoutTextWindow,
+    Pencil,
+    StarHalf,
+    StarFill,
+    Star,
+    Check, 
+    FilePlus, 
+    FileMinus,
+    ChevronDoubleDown,
+    FileEarmarkPlus,
+    FileEarmarkMinus,
+    FileEarmark
+    } from 'react-bootstrap-icons';
 import { createBrowserHistory } from 'history';
 
 
 import styled from 'styled-components';
 const StyledLine = styled.div`
-/*text-align: center;
-*{
-    display:inline-block;
-}*/
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
@@ -29,13 +38,14 @@ text-align:center;
 
 `;
 const StyledNavBar = styled.div`
-margin-top:56px;
 background-color:rgba(255,255,255,0.5);
 
  .button, .actionbox, #lineinput, #filelabel{
     margin:5px;
 }
-
+#textlabel{
+    margin:0px;
+}
 #basic-navbar-nav {
     transition-delay: 0s;
     transition-duration: .4s;
@@ -85,7 +95,13 @@ background-color:rgba(255,255,255,0.5);
     align-content:center;
     text-align:center;
     .dropdown-item{
-        background-color:rgba(255,255,255);
+        background-color:#DCDEEA;
+    }
+    .button{
+        background-color:rgb(192, 175, 211);
+        :hover{
+            background-color:rgb(119, 90, 163);
+        }
     }
   }
 `;
@@ -134,8 +150,6 @@ text-align:center;
   a{
     background-color:   rgb(192, 175, 211);
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
     transition: color 1s ease, 
                 box-shadow .3s ease;
     :hover {
@@ -221,10 +235,12 @@ class RequestSaveForm extends React.Component{
         return(<>
             {(this.state.value!=="")?
             <ActionBox text="Сохранить" action={this.handleSubmit}/>:<></>}
-            <input type='text'
+            <input 
+            id="lineinput"
+            type='text'
                value={this.vlaue}
                onChange={this.handleChange}
-               placeholder="Введите название выборки..."/>
+               placeholder="Название..."/>
         </>
         )
     }
@@ -252,7 +268,7 @@ class NavBar extends React.Component{
                 <StyledFlexRowConspect>
                         <Route history={props} path = "/myconspects/:contentname/:id/content" render ={(props)=><>
                            <NavLink to ={"/myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
-                             <ActionBox text="Создать PDF" action={()=>{}}/>
+                             <ActionBox text="Создать PDF" icon={<LayoutTextWindow/>} action={()=>{}}/>
                            </NavLink>
                             <UserAccsesForm conspectid={props.match.params.id}/>
                            </>}
@@ -260,13 +276,13 @@ class NavBar extends React.Component{
                         
                         <Route history={props} path = "/myconspects/:contentname/:id/pdf" render ={(props)=><>
                            <NavLink to ={"/myconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
-                             <ActionBox text="Вернуться" action={()=>{}}/>
+                             <ActionBox text="Вернуться к конспекту" icon={<FileEarmark />} action={()=>{}}/>
                             </NavLink>
                             <UserAccsesForm conspectid={props.match.params.id}/>
                            </>
                         }/>
-                        <Button text="Открыть в редакторе" path={"redactor/"+this.props.name+"/"+this.props.id}/>
-                        <Button  text="Добавить фото" path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
+                        <Button text="Открыть в редакторе" icon={<Pencil />}path={"redactor/"+this.props.name+"/"+this.props.id}/>
+                        <Button  text="Добавить фото" icon={<FilePlus/>} path={"creteconspect/"+this.props.name+"/"+this.props.id}/>
                         
                 </StyledFlexRowConspect>
                 }/>
@@ -288,13 +304,13 @@ class NavBar extends React.Component{
 
                 <Route history={history} path="/content" render={()=><StyledLine>
                     <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
-                    <Button  text="Создать выборку" icon={<FileEarmarkCode/>}path={"topicrequest"}/>
+                    <Button  text="Создать выборку" icon={<StarHalf/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 
                 <Route history={history} exact path ="/creteconspect/newconspect" render={()=><StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
-                    <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
-                    <CommentsListConatiner/>
+                    <label id="filelabel" for="file" >{<FilePlus/>} Добавить фото</label>
+                    {/*<CommentsListConatiner/>*/}
                     <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing}/>
                 </StyledLine>}/>
                 
@@ -310,7 +326,7 @@ class NavBar extends React.Component{
                 <Route history={history} path ="/redactor" render={()=>
                     <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!==-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
-                        {(this.props.id!==-1)?<CommentsListConatiner />:<></>}
+                        {/*{(this.props.id!==-1)?<CommentsListConatiner />:<></>}*/}
                         <MyConspectList>
                             {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id}/>)}
                         </MyConspectList>
@@ -324,16 +340,16 @@ class NavBar extends React.Component{
                 <Route history={history} path ="/topicrequest" render={()=>
                 <StyledFlexRowRedactor>
                     <NavLink to={"/sample_pdf"}>
-                        <ActionBox text="Показать" action={this.props.WriteRequestF}/>
+                        <ActionBox text="Показать" icon={<StarFill/>} action={this.props.WriteRequestF}/>
                     </NavLink>
-                    <ActionBox text="Отчистить" action={this.props.Openempty}/>
+                        <ActionBox text="Очистить" icon={<Star/>} action={this.props.Openempty}/>
                     <RequestSaveForm WriteRequest={this.props.WriteRequestF} request={this.props.topicrequest}/>
                 </StyledFlexRowRedactor>}/>
 
                 <Route history={history} path ="/sample_pdf" render={()=>
                 <StyledFlexRowRedactor>
-                    <NavLink to={"/topicrequest"}>
-                        <ActionBox text="Вернутся"/>
+                    <NavLink  to={"/topicrequest"}>
+                        <ActionBox text="Вернуться"/>
                     </NavLink>
                     <RequestSaveForm WriteRequest={this.props.WriteRequestF} request={this.props.topicrequest}/>
                 </StyledFlexRowRedactor>}/>

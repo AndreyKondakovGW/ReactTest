@@ -5,7 +5,7 @@ import Cropper from 'react-easy-crop'
 import Slider from '@material-ui/core/Slider';
 import * as axios from 'axios';
 
-import { ArrowLeft, ArrowRight,PlusSquare} from 'react-bootstrap-icons';
+import { ArrowLeft, ArrowRight,PlusSquare, StarFill} from 'react-bootstrap-icons';
 import preloader from '../../../static/2.gif';
 import styled from 'styled-components';
 const StyledRedactor = styled.div`
@@ -27,9 +27,7 @@ const StyledRedactor = styled.div`
         width: 50px;
         height:30px;
         line-height: 30px;
-        transition-property: color;
-        transition-duration: 1s;
-        transition-timing-function: ease;
+        transition: color .3s;
         :hover{
             background-color:#018786;
             color: #f1f1f1;
@@ -63,35 +61,41 @@ const StyledRedactor = styled.div`
     /*================================================*/
 
     .scrolbar{
-       margin:15px;
-       margin-top:0px;
-        overflow-x: scroll;
-        height: 50vh;
+        padding-top:10px;
+        margin:10px;
+        margin-top:0px;
         overflow-y: scroll;
+        /*overflow-x: scroll;*/
+        height: 50vh;
         background-color: rgba(202, 162, 200,0);
         border-style: solid;
         border-width: 1px;
         border-color: #f1f1f1;
     }
     .item img{ /*img внутри .scrolbar*/
-        margin-bottom: 10px;
+        margin:10px;
+        margin-top:0px;
         height: 150px;
         width: 150px;
         object-fit: cover;
         box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
+        transition:box-shadow .3s;
         :hover{
             cursor:pointer;
+            box-shadow:none;
         }
     }
     
     .tagbar{
-        margin:15px;
-        margin-top:-15px;
-        /*display:block;*/
+        margin:10px;
         background-color: rgba(140, 88, 167,0);
+        .actionbox, #lineinput{
+            margin-bottom:10px;
+        }
     }
     
     .instruments{
+        margin-bottom:10px;
         display: flex;
         flex-direction: column;
     }
@@ -127,6 +131,7 @@ display:flex;
 `;
 
 const StyledInterface = styled.div`
+/*TODO*/
 display: flex;
 flex-direction: column;
 width:100%;
@@ -162,7 +167,7 @@ const ImgCroper = (props)=> {
         />
         </div>
 
-        <p id="noMargin">Zoom</p>   
+        <p id="noMargin">zoom</p>   
         <Slider
             value={zoom}
             min={1}
@@ -238,17 +243,21 @@ class TagsForm  extends React.Component{
         this.ClearForm()
     }
 
-    Showtags=()=>(this.state.tags.map(elm=><div>
-        <input type='text'
+    Showtags=()=>(this.state.tags.map(elm=>
+    <div>
+        <input 
+               id="lineinput"
+               type='text'
                name= {elm.id}
                value={elm.text}
                onChange={this.handleChange}
                placeholder="Введите тэг..."/>
     </div>))
-    Addtagsbutton=()=>{return(this.state.maxTagAmount>this.state.tags.length?<Actionbox icon={<PlusSquare/>} action={this.Addtag}/>:<div></div>)}
+    Addtagsbutton=()=>{return(this.state.maxTagAmount>this.state.tags.length?<Actionbox icon={<PlusSquare/>} text="Новый тэг" action={this.Addtag}/>:<div></div>)}
     render(){
-        return (<div>
-            <Actionbox text="Добавить тэги" id="noTopMargin" action={this.handleSubmit}/>
+        return (
+        <div>
+            <Actionbox icon={<StarFill/>} text="Привязать тэги" action={this.handleSubmit}/>
             {this.Showtags()}
             {this.Addtagsbutton()}
         </div>)

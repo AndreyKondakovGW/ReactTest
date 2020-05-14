@@ -2,6 +2,7 @@ import React from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
+import { PersonPlusFill} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
 class UserFinderForm extends React.Component{
@@ -36,7 +37,7 @@ class UserFinderForm extends React.Component{
         {(this.props.CurentOption.name)?
         <ActionBox  text={"Добавить " + (this.props.CurentOption.name)} action={this.props.add}/>:<></>}
       <Dropdown>
-            <Dropdown.Toggle id="filelabel" >Поиск...</Dropdown.Toggle>
+        <Dropdown.Toggle id="filelabel" >{<PersonPlusFill/>} Найти...</Dropdown.Toggle>
             <Dropdown.Menu>
             <div id="dditemcenterinput">
               <input 
@@ -48,9 +49,9 @@ class UserFinderForm extends React.Component{
               />
             </div>
               {this.state.options.map(elm=>
-                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>
-                  <div id="dditemcenter">{elm.username}</div>
-                </Dropdown.Item>)}
+                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+                  {/*<div id="dditemcenter">{elm.username}</div>*/}
+                
             </Dropdown.Menu>
       </Dropdown>
       </StyledFlexRow>

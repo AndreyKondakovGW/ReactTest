@@ -1,53 +1,51 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {Plus,Dash} from 'react-bootstrap-icons';
+import {Plus,X} from 'react-bootstrap-icons';
 import styled from 'styled-components';
 const StyledLine = styled.div`
 
 text-align: left;
-margin-bottom:3px;
 *{
     display:inline-block;
 }
-a{
-    
-    margin-bottom:10px;
-}
+
 `;
 const StyledChecked = styled.div`
-/* зеленый background-color: rgb(88, 214, 88);*/
-/* красный background-color: rgb(255, 80, 80);
-    бирюзовый светлый background-color:#02dac5;
-    */
     border-radius: 5px;
-    width: 27px;
-    height: 27px;
-    padding-left: 6px;
+    width: 24px;
+    height: 24px;
+    padding-left: 4px;
     margin-right:10px;
+    svg{
+        margin-bottom:2px;
+    }
     background-color: rgb(255, 80, 80);
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
+    transition: box-shadow .3s,
+                color .3s;
     :hover{
-        
-        background-color: rgb(255, 110, 104);
+        color: #f1f1f1;
+        background-color:#c0afd3;
         cursor: pointer;
         box-shadow: none;
     }
 `;
 const StyledUnchecked = styled.div`
     border-radius: 5px;
-    width: 27px;
-    height: 27px;
-    padding-left: 6px;
-   background-color:#02dac5;
+    width: 24px;
+    height: 24px;
+    padding-left: 4px;
+    background-color:#c0afd3;
     margin-right:10px;
-
+    svg{
+        margin-bottom:2px;
+    }
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
-    transition-property: box-shadow;
-    transition-duration: .3s;
+    transition: box-shadow .3s,
+                color .3s;
     :hover{
-        background-color: rgb(255, 110, 104);
+        background-color: rgb(255, 80, 80);
+        color: #f1f1f1;
         cursor: pointer;
         box-shadow: none;
     }
@@ -55,6 +53,12 @@ const StyledUnchecked = styled.div`
 const StyledConspectbox = styled.div`
 display:inline-block;
 a{
+    width:166px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+    margin-bottom:10px;
     color: black;
     font-size: 1em;
     transition-property: color;
@@ -68,8 +72,7 @@ a{
         height: 200px;
         object-fit: cover;
         box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .4);
-        transition-property: box-shadow;
-        transition-duration: .3s;
+        transition: box-shadow .3s;
         :hover{
             box-shadow: none;
         }
@@ -83,10 +86,10 @@ class Conspectbox extends React.Component{
     checkbox=()=>{
         if (this.props.checked){
             return (
-                <StyledChecked className ="checkbox" onClick={this.check}><Dash/></StyledChecked>)
+                <StyledChecked className ="checkbox" onClick={this.check}><X/></StyledChecked>)
         }
         else{
-            return (<StyledUnchecked className ="checkbox" onClick={this.check}><Dash/></StyledUnchecked>)
+            return (<StyledUnchecked className ="checkbox" onClick={this.check}><X/></StyledUnchecked>)
         }
     }
     render(){

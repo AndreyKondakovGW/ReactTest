@@ -6,49 +6,6 @@ import styled from 'styled-components';
 
 import helppdf from '../../../static/pdf/simplePDF.pdf';
 
-const StyledPreview = styled.div`
-margin-top:20px;
-display: flex;
-flex-direction: column;
-width:100%;
-height: 100%;
-justify-content:center;
-align-items: flex-start;
-text-align:center;
-.pdf{
-    height: 100%;
-    width: 100%;
-}
-.scrolbar{
-    padding-top:20px;
-    overflow-y: scroll;
-    overflow-x: scroll;
-    height: 100%;
-    width: 100%;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #f1f1f1;
-    .item{
-        margin:20px;
-        margin-top:0px;
-    }
-    img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
-    }
-}
-`;
-const StyledInterface = styled.div`
-display: flex;
-flex-direction: column;
-width:100%;
-height: 100%;
-
-
-`;
 const StyledInvite = styled.div`
 width:100%;
 height: 100%;
@@ -65,9 +22,6 @@ display:flex;
         height: 50px;
     }
 `;
-
-
-
 const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
     let promise = new Promise(async (resolve) => {
         let f=[]
@@ -117,8 +71,6 @@ const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     setPdf(fileURL,conspectname)
     })
 }
-
-
 const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
     axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
         setConspects(response.data)
@@ -130,7 +82,6 @@ const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
         }) 
     }
 }
-
 class Viewer extends React.Component{
     constructor(props){
         super(props)
@@ -248,8 +199,52 @@ Content=()=>{
     )
     }
 }
-
 export default Viewer;
 
+const StyledPreview = styled.div`
+margin-top:20px;
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+
+justify-content:center;
+align-items: flex-start;
+text-align:center;
+.pdf{
+    height: 100%;
+    width: 100%;
+    margin-bottom:20px;
+}
+.scrolbar{
+    padding-top:20px;
+    /*overflow-y: scroll;
+    overflow-x: scroll;*/
+    margin-bottom:20px;
+
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #f1f1f1;
+    .item{
+        margin:20px;
+        margin-top:0px;
+    }
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 4px 4px 3px 0px rgba(0, 0, 0, .3);
+    }
+}
+`;
+const StyledInterface = styled.div`
+display: flex;
+flex-direction: column;
+width:100%;
+height: 100%;
+`;
 
 

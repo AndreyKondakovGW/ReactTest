@@ -16,12 +16,15 @@ import { bool, func } from 'prop-types';
 import bground2 from '../../static/bground2.jpg'
 import styled from 'styled-components';
 const StyledMain = styled.div`
-
 display:inline-block;
+text-align:center;
+
 float:right;
 width: 100vw;
 height: 100vh;
-overflow: auto;
+
+overflow:auto;
+
 position: relative;
 padding-left:20px;
 padding-right:20px;
@@ -39,9 +42,7 @@ background: url(${bground2}) no-repeat center center fixed;
 -o-background-size: cover;
 background-size:cover;
 
-@media (max-width: 324px) {
-  margin-top:30px;
-}
+padding-top:56px;
 
 .nomargin{
   margin:0px;

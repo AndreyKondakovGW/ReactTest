@@ -2,6 +2,9 @@ import React from 'react';
 import ActionBox from '../../ActionBox/ActionBox.jsx';
 import Dropdown from 'react-bootstrap/Dropdown'
 import * as axios from 'axios';
+import {
+  Link45deg,ListUl
+  } from 'react-bootstrap-icons';
 class UserAccsesForm extends React.Component{
     constructor(props){
       super(props)
@@ -24,30 +27,22 @@ class UserAccsesForm extends React.Component{
           selecteoptions: response.data.filter(elm=>elm.user_id!==-1).map(function(elm){return({...elm,cheked: true})})
         })
         response.data.forEach(elm=>this.state.checkinoption.add(elm.user_id))
-        console.log(this.state)
       })
     }
 
     CheckedById=(id)=>{
-      console.log(this.state.selecteoptions)
-      console.log(this.state.options)
-      console.log(id)
       if ((this.state.selecteoptions.find(elm=>elm.user_id===id))&&(this.state.selecteoptions.find(elm=>elm.user_id===id).cheked)){
         this.state.checkinoption.delete(id)
         this.state.selecteoptions=this.state.selecteoptions.filter(elm=>elm.user_id!==id)
-        console.log(this.state)
       }
       else{
         this.state.checkinoption.add(id)
         this.state.selecteoptions.push({...this.state.options.find(elm=>elm.user_id===id),cheked:true})
-        console.log(this.state.options.find(elm=>elm.user_id===id))
       }
       this.setState({
           ...this.state,
           options: this.state.options.map(elm=>(elm.user_id===id)?{...elm,cheked:!elm.cheked}:elm)
       })
-      console.log(this.state.selecteoptions)
-      console.log(this.state.options)
     }
     handleChange=(e)=>{
       let value = e.target.value;
@@ -68,7 +63,6 @@ class UserAccsesForm extends React.Component{
         options: []
       })
     }
-    console.log(this.state)
     }
 
     HandleSubmit=()=>{
@@ -95,9 +89,9 @@ class UserAccsesForm extends React.Component{
     render(){
       return (
           (!this.state.checkeveryone)?<>
-          <ActionBox text="Открыть для всех" action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}}/>
+          <ActionBox text="Открыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}}/>
           <Dropdown>
-              <Dropdown.Toggle id="filelabel">Доступ</Dropdown.Toggle>
+              <Dropdown.Toggle id="filelabel">{<ListUl />} Доступ</Dropdown.Toggle>
               <Dropdown.Menu>
                 <div id="dditem">
                   <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
@@ -136,7 +130,7 @@ class UserAccsesForm extends React.Component{
               </Dropdown.Menu>
             
           </Dropdown>
-          </>:<ActionBox text="Закрыть для всех" action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('conspect-structure.eastus.cloudapp.azure.com/set_conspect_private/'+this.props.conspectid)}}/>
+          </>:<ActionBox text="Закрыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/set_conspect_private/'+this.props.conspectid)}}/>
       )
     }
 }

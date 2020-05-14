@@ -10,7 +10,7 @@ import { Row,  Container } from 'react-bootstrap';
 import styled from 'styled-components';
 const Styles = styled.div`
   background-color: rgb(220, 222, 234);
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 `;
 
