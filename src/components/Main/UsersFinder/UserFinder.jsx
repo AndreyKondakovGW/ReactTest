@@ -85,9 +85,10 @@ text-align:center;
   justify-content:center;
 }
 #dditem{
+  width:180px;
   color:black;
   background-color:#dcdeea;
-  transition: color 1s ease;
+  transition: color .3s ease;
   :hover {
     background-color:rgb(119, 90, 163);
     color: #f1f1f1;
