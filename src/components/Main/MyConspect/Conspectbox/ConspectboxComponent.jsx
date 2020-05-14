@@ -82,7 +82,7 @@ a{
         background-color:rgb(255, 250, 200);
         */
         
-        border-radius: 110px;
+        border-radius: 100px;
         width: 200px;
         height: 200px;
         object-fit: cover;
