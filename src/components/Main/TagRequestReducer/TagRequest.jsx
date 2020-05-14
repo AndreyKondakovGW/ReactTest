@@ -96,7 +96,6 @@ text-align:center;
 #filelabel,  .button, .actionbox, .dropdown{
     margin:5px;
 }
-
 .dropdown-toggle.btn.btn-success{
     padding:0px;
     width:90px;

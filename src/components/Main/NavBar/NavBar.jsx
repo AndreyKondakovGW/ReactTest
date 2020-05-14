@@ -22,7 +22,9 @@ import {
     ChevronDoubleDown,
     FileEarmarkPlus,
     FileEarmarkMinus,
-    FileEarmark
+    FileEarmark,
+    FileEarmarkText
+
     } from 'react-bootstrap-icons';
 import { createBrowserHistory } from 'history';
 
@@ -330,7 +332,7 @@ class NavBar extends React.Component{
                 </StyledLine>}/>
 
                 <Route history={history} path="/content" render={()=><StyledLine>
-                    <Button  text="Мои конспекты" icon={<FileEarmark/>}path={"myconspects"}/>
+                    <Button  text="Мои конспекты" icon={<FileEarmarkText/>}path={"myconspects"}/>
                     <Button  text="Создать выборку" icon={<StarHalf/>}path={"topicrequest"}/>
                 </StyledLine>}/>
 

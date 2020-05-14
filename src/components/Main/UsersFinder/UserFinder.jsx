@@ -39,7 +39,7 @@ class UserFinderForm extends React.Component{
       <Dropdown>
         <Dropdown.Toggle id="filelabel" >{<PersonPlusFill/>} Найти...</Dropdown.Toggle>
             <Dropdown.Menu>
-            <div id="dditemcenterinput">
+            <div >
               <input 
                 autoFocus
                 id="lineinput"
@@ -49,9 +49,8 @@ class UserFinderForm extends React.Component{
               />
             </div>
               {this.state.options.map(elm=>
-                <Dropdown.Item onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
+                <Dropdown.Item id="dditem" onClick={()=>this.props.setoption(elm.username,elm.user_id)}>{elm.username}</Dropdown.Item>)}
                   {/*<div id="dditemcenter">{elm.username}</div>*/}
-                
             </Dropdown.Menu>
       </Dropdown>
       </StyledFlexRow>
@@ -84,5 +83,14 @@ text-align:center;
 
 #dditemcenterinput{
   justify-content:center;
+}
+#dditem{
+  color:black;
+  background-color:#dcdeea;
+  transition: color 1s ease;
+  :hover {
+    background-color:rgb(119, 90, 163);
+    color: #f1f1f1;
+  }  
 }
 `;
