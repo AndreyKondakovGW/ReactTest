@@ -74,8 +74,6 @@ a{
         background-color:#f1f1f1;
         background-color:#02dac5;
         */
-        background-color:rgba(255,255,255,0.35);
-        background-color:#DCDEEA;
         /*мед*/
         background-color:rgb(255, 227, 179);
         /*баттеркап
