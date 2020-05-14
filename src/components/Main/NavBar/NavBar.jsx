@@ -320,7 +320,7 @@ class NavBar extends React.Component{
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
-                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false} routing={this.Routing}/> )})()}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false} routing={this.Routing}/>)})()}
                 </StyledLine>
                 <UserAccsesForm conspectid={props.match.params.id}/>
                 </>}/>

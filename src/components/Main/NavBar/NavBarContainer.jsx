@@ -139,6 +139,8 @@ let mapDispatchtoProps =(dispatch) =>{
                                 i++
                             } 
                         ))})
+                    }else{
+                        i++
                     }
                 }
                 if (i===fotos.length){

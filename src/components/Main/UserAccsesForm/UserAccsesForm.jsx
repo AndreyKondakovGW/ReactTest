@@ -54,7 +54,6 @@ class UserAccsesForm extends React.Component{
             options: response.data.filter(option=>(option.user_id!==-1)&&(!this.state.checkinoption.has(option.user_id))).map(function(elm){return({...elm,cheked: false})})
           })
         })
-        
       }
       else{
       this.setState({
@@ -64,7 +63,6 @@ class UserAccsesForm extends React.Component{
       })
     }
     }
-
     HandleSubmit=()=>{
       if (this.state.checkallsubscribers){
         axios.post('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
