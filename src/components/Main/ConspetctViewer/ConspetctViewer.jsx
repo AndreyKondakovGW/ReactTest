@@ -224,9 +224,10 @@ text-align:center;
 
     height: 100%;
     width: 100%;
-    border-style: solid;
+    /*border-style: solid;
     border-width: 1px;
     border-color: #f1f1f1;
+    */
     .item{
         margin:20px;
         margin-top:0px;
