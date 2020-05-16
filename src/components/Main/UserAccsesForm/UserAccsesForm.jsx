@@ -5,6 +5,17 @@ import * as axios from 'axios';
 import {
   Link45deg,ListUl
   } from 'react-bootstrap-icons';
+
+  import styled from 'styled-components';
+const StyledLine = styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+align-content:center;
+text-align:center;
+
+`;
 class UserAccsesForm extends React.Component{
     constructor(props){
       super(props)
@@ -83,7 +94,7 @@ class UserAccsesForm extends React.Component{
   
     render(){
       return (
-          (!this.state.checkeveryone)?<>
+          (!this.state.checkeveryone)?<StyledLine>
           <ActionBox text="Открыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); 
             axios.put('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}
           }/>
@@ -123,7 +134,7 @@ class UserAccsesForm extends React.Component{
               </Dropdown.Menu>
             
           </Dropdown>
-          </>:<ActionBox text="Закрыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/set_conspect_private/'+this.props.conspectid)}}/>
+          </StyledLine>:<ActionBox text="Закрыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/set_conspect_private/'+this.props.conspectid)}}/>
       )
     }
 }

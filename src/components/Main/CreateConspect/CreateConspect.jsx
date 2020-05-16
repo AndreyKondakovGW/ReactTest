@@ -61,6 +61,16 @@ height:100%;
         width: 50px;
         height: 50px;
     }
+    .preloaderContainer{
+        width:100%;
+        height: calc(100vh - 56px);
+        display:flex;
+        flex-direction: column;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items: center;
+        text-align:center;
+    }
 `;
 const StyledInterface = styled.div`
 
@@ -137,7 +147,12 @@ class CreateConspect extends React.Component{
             <StyledMainbox>
                 {this.ImgPeriwe()}
                 <div className="mygrid">{this.ReactContents()}</div>
-            </StyledMainbox></>:<StyledInvite><img src={preloader} alt="some image"/></StyledInvite>}
+            </StyledMainbox></>
+            :<StyledInvite>
+                <div className="preloaderContainer">
+                    <img src={preloader} alt="some image"/>
+                </div>
+            </StyledInvite>}
         </StyledInterface>
         
     )
