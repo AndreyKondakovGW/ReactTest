@@ -301,23 +301,27 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 class Redactor extends React.Component{ 
     componentDidMount= async ()=>{
-        axios.get("http://127.0.0.1:5000/getconspects").then(response =>{
-                this.props.setConspect(response.data)
-           })
-        if ((this.props.match.params.id!==-1) && (this.props.CurentconspectID!==this.props.match.params.id)){
+        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
+                this.props.setConspect(response.data)})
+        if (this.props.CurentconspectID!=-1){
+        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
+                this.props.setConspect(response.data)})
+        if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!==this.props.match.params.id)){
             this.props.LoadData()
-            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
+            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
             }) 
         }
+        }
+        
     }
     
 
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {
-        if ((!this.props.dataisLoading) && (this.props.match.params.id!==-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
+        if ((!this.props.dataisLoading) && (this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
             this.props.LoadData()
-            axios.get('http://127.0.0.1:5000/getconspectphotos/'+ this.props.match.params.id).then(response=>{
+            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
                 LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
             })    
         }
@@ -327,7 +331,7 @@ class Redactor extends React.Component{
     ConspectPhotos=()=>{return(this.props.Photos.map(elm=><ScrolbarItem action={this.props.ChangeCurentPhoto} id={elm.index} img={elm.path}/>))}
     Content=()=>{return ((!this.props.dataisLoading)?
         <StyledRedactor>
-            {(this.props.match.params.id!==-1)?<>
+            {(this.props.match.params.id!=-1)?<>
                 <div className="photoviewer">
                     <ImgCroper img={this.props.Currentpotopath} width={100} height={100} SetCordinate={this.props.SetCordinate}></ImgCroper>
                     <div className ="button" onClick={this.props.ChangeCurPR}> <ArrowLeft/> </div>

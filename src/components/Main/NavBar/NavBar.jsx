@@ -328,7 +328,6 @@ class NavBar extends React.Component{
                 <Route history={history} path ="/redactor" render={()=>
                     <StyledFlexRowRedactor>
                         <Button  text="Добавить фото" icon={<FilePlus/>} path={(this.props.id!==-1)?"creteconspect/"+this.props.name+"/"+this.props.id:"creteconspect/newconspect"}/>
-                        {/*{(this.props.id!==-1)?<CommentsListConatiner />:<></>}*/}
                         <MyConspectList>
                             {this.props.Conspects.map(elm => <Button  text={elm.name} path={"redactor/"+elm.name+"/"+elm.id}/>)}
                         </MyConspectList>

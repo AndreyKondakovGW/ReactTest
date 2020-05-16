@@ -48,13 +48,16 @@ class TopicsAPI extends React.Component{
     }
     DeleteTag(id){
         axios.delete("http://conspect-structure.eastus.cloudapp.azure.com/delete_tag/"+id)
-        this.setState({
+        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/gettags").then(response =>{
+            this.props.setTopics(response.data)
+        })
+       /* this.setState({
             ReactContents : this.props.Topics.filter(elm=>elm.id!==id).slice(this.props.Pagesize*(this.props.CurrentPage-1),this.props.Pagesize*this.props.CurrentPage).map(elm => 
             <StyledTagBox>
                 <ActionBox icon={<X id="nosvgmargin"/>}  action={()=>{this.DeleteTag(elm.id)}}/> 
                 <Button text={elm.name} icon={<StarFill/>} path={"content/"+elm.name} />
             </StyledTagBox> )
-        })
+        })*/
     }
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {

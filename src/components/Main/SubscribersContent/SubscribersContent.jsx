@@ -66,10 +66,11 @@ class SubscribersContent extends React.Component{
     }
     
     componentDidMount(){
+
             axios.get("http://conspect-structure.eastus.cloudapp.azure.com/get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
+                this.state.Conspects=response.data.map(function(elm){return({...elm,img: img1})})
                 this.setState({
                     ...this.state,
-                    
                     Conspects: response.data.map(function(elm){return({...elm,img: img1})}),
                     ReactContentsConspect : response.data.map(function(elm){return({...elm,img: img1})}).slice(this.props.ConspectPagesize*(this.props.ConspectCurrentPage-1),this.props.ConspectPagesize*this.props.ConspectCurrentPage).map(elm => 
                         <Conspectbox 
@@ -83,7 +84,6 @@ class SubscribersContent extends React.Component{
                         /> )
                 })
            })
-           console.log("Отправлелен запрос на получене тэгов")
     }
     
    changePageConspect=(pageNum)=>{

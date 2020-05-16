@@ -336,7 +336,7 @@ const UserDatareducer =(state=initialstate, action)=>{
                 ...state,
                 UserData: {
                     ...state.UserData,
-                    Subscribers: [...state.UserData.Subscribers,{username:state.CurentOption.name,id:state.CurentOption.id,av: state.bobrmass[Math.floor(Math.random() * (state.bobrmass.length - 0)) + 0]}]
+                    Subscribers: [...state.UserData.Subscribers,{username:state.CurentOption.name,user_id: state.CurentOption.id,av: state.bobrmass[Math.floor(Math.random() * (state.bobrmass.length - 0)) + 0]}]
                 },
                 CurentOption: ""
             }

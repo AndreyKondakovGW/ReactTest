@@ -64,9 +64,6 @@ class UserAccsesForm extends React.Component{
     }
     }
     HandleSubmit=()=>{
-      if (this.state.checkallsubscribers){
-        axios.post('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_friends/'+this.props.conspectid+'/viewer')
-      }
       axios.get('http://conspect-structure.eastus.cloudapp.azure.com/get_users_with_access/'+this.props.conspectid).then(response=>{
         let usersold=new Set(response.data.map(elm=>elm.user_id))
         let usersnew=new Set(this.state.selecteoptions.map(elm=>elm.user_id))
@@ -87,14 +84,12 @@ class UserAccsesForm extends React.Component{
     render(){
       return (
           (!this.state.checkeveryone)?<>
-          <ActionBox text="Открыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}}/>
+          <ActionBox text="Открыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); 
+            axios.put('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}
+          }/>
           <Dropdown>
-              <Dropdown.Toggle id="filelabel">{<ListUl />} Доступ</Dropdown.Toggle>
+              <Dropdown.Toggle id="filelabel">{<ListUl />} Доступ </Dropdown.Toggle>
               <Dropdown.Menu>
-                <div id="dditem">
-                  <input type="checkbox" id="Все поверенные" checked={this.state.checkallsubscribers} onChange={() => {this.setState({...this.state, checkallsubscribers:!this.state.checkallsubscribers})}} />
-                  <label id ="textlabel" for="Все поверенные">Все поверенные</label>
-                </div>
                 
               {this.state.selecteoptions.map(elm=>
                 <div id="dditem">

@@ -80,7 +80,7 @@ let mapDispatchtoProps =(dispatch) =>{
             promise.then(result=>{
                 if  (!result.every(elm=>elm.tags===""))
                 {
-                    dispatch(ShowAlertAC(result.map(elm=>"Тэги: " + elm.tags +" из конспекта " + elm.name).join("\n")))
+                    dispatch(ShowAlertAC("Удалены будут следующие теги: "+result.filter(elm=>elm.tags!="").map(elm=>elm.tags +" из конспекта " + elm.name+".  ").join("\n")))
                 }else{
                     dispatch(DeleteCheckedConspectAC());
                 }
@@ -92,10 +92,18 @@ let mapDispatchtoProps =(dispatch) =>{
             debugger;
             reader.onloadend = () => {
                 let name = file.name
-                let id = "null"
-                let image = reader.result
-                const action=ADDFOTOCreator(name,id,image,file)
-                dispatch(action)
+                let file_type = name.split('.').pop();
+                console.log(file.name)
+                console.log(file)
+                if(file_type!="jpeg" && file_type!="jpg"  && file_type!="png"){
+                    alert("Допускаются файлы только jpeg, jpg, png");
+                    console.log("Допускаются файлы только jpeg, jpg, png")
+                }else{
+                    let id = "null"
+                    let image = reader.result
+                    const action=ADDFOTOCreator(name,id,image,file)
+                    dispatch(action)
+                }
             } 
             reader.readAsDataURL(file)          
         },

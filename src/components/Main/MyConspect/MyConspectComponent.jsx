@@ -36,10 +36,11 @@ const Conspects=(props)=>{
                 <StyledConspects>
                     {(props.alert)?props.alert():<></>}
                     <StyledLine>
+                    {(props.pages.length>1)?<>
                     {props.pages.map(elm=>
                         <div className={props.CurrentPage ===elm && s.selected} onClick={()=>props.changePage(elm)}>
                             {elm}
-                        </div>)}
+                        </div>)}</>:<></>}
                     </StyledLine>
                    <StyledGrid>{props.ReactContents}</StyledGrid>
                 </StyledConspects>

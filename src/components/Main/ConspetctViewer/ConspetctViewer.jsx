@@ -4,7 +4,7 @@ import preloader from '../../../static/2.gif';
 import * as axios from 'axios';
 import styled from 'styled-components';
 
-import helppdf from '../../../static/pdf/simplePDF.pdf';
+import helppdf from '../../../static/pdf/pomosch_2.pdf';
 
 const StyledInvite = styled.div`
 width:100%;
