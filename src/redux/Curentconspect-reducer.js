@@ -3,7 +3,7 @@ import bobr2 from './../static/images/bobr2.jpg'
 import bobr3 from './../static/images/bobr3.jpeg'
 import pdf from './../static/pdf/simplePDF.pdf'
 import * as axios from 'axios';
-
+import Siteaddres from './Siteaddres'
 
 const Change_Cur_PR ="ChangeCurPR";
 const Change_Cur_PL ="ChangeCurPL";
@@ -19,6 +19,7 @@ const DATA_LOADSWITH="DATA_LOADSWITH";
 const CangeConspectAcsess="CangeConspectAcsess";
 
 let initialstate={
+    siteaddres: Siteaddres,
     LogicData:{
         CurrentConspect: {
             name: "EmptyConspect",
@@ -44,14 +45,14 @@ let initialstate={
     dataisLoading: false
 }
 
-const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
+const LoadConspectFromData= async (fotos,name,id,OpenConspect,siteaddres)=>{
     let promise = new Promise(async (resolve, reject) => {
         let f=[]
         var i=0
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve, reject) => {
-                resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                resolve(axios.get(siteaddres+'getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
@@ -209,8 +210,8 @@ const Curentconspectreducer =(state=initialstate, action) =>{
                     currentpdf: {name: "simplePDF",pdf:pdf}
                 }
             }
-            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ action.id).then(response=>{
-                LoadConspectFromData(response,action.conspectname,action.id,action.OpenConspect)
+            axios.get(state.siteaddres+'getconspectphotos/'+ action.id).then(response=>{
+                LoadConspectFromData(response,action.conspectname,action.id,action.OpenConspect,state.siteaddres)
             })
             return newstate
 

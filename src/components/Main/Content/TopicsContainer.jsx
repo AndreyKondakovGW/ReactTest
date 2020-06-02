@@ -7,7 +7,8 @@ let mapStatetoProps =(state)=>{
         Topics : state.UserDatareducer.UserData.Topics,
         Pagesize :state.UserDatareducer.Topicspagesize,
         Topicscount: state.UserDatareducer.TotalTopicscount,
-        CurrentPage: state.UserDatareducer.CurrentTopicPage
+        CurrentPage: state.UserDatareducer.CurrentTopicPage,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 

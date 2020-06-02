@@ -17,7 +17,7 @@ class UserFinderForm extends React.Component{
   handleChange=(e)=>{
     let value = e.target.value;
     if (value!==""){
-      axios.get('http://conspect-structure.eastus.cloudapp.azure.com/search_users/'+value).then(response=>{
+      axios.get(this.props.siteaddres+'search_users/'+value).then(response=>{
         this.setState({
           value: value,
           options:response.data.filter(elm=>!this.props.SubscrubersSet.has(elm.user_id))

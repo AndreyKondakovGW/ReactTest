@@ -22,14 +22,14 @@ display:flex;
         height: 50px;
     }
 `;
-const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
+const LoadConspectFromData= async (fotos,name,id,OpenConspect,siteaddres)=>{ 
     let promise = new Promise(async (resolve) => {
         let f=[]
         var i=0
         while (i<fotos.data.length)
         {
             let promise = new Promise((resolve) => {
-                resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                resolve(axios.get(siteaddres+'getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
             })
             let response= await promise
             const file = new Blob(
@@ -57,9 +57,10 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
         OpenConspect(name,id, result)  
     })  
 }
-const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
+
+const LoadPDF=async (LoadData,conspectname,setPdf,conspectid,siteaddres)=>{
     LoadData()
-    axios('http://conspect-structure.eastus.cloudapp.azure.com/getconspectpdf/'+conspectid,
+    axios(siteaddres+'getconspectpdf/'+conspectid,
     {   
         method: 'GET',
         responseType: 'blob'}
@@ -71,17 +72,19 @@ const LoadPDF=async (LoadData,conspectname,setPdf,conspectid)=>{
     setPdf(fileURL,conspectname)
     })
 }
-const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect)=>{
-    axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
+
+const LoadContent=async(setConspects,LoadData,id,conspectname,OpenConspect,siteaddres)=>{
+    axios.get(siteaddres+"getconspects").then(response =>{
         setConspects(response.data)
     })
     if (id!==-1){
         LoadData()
-        axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ id).then(response=>{
-            LoadConspectFromData(response,conspectname,id,OpenConspect)
+        axios.get(siteaddres+'getconspectphotos/'+ id).then(response=>{
+            LoadConspectFromData(response,conspectname,id,OpenConspect,siteaddres)
         }) 
     }
 }
+
 class Viewer extends React.Component{
     constructor(props){
         super(props)
@@ -93,7 +96,7 @@ class Viewer extends React.Component{
     componentDidMount(){
         if (this.props.match.url.split('/')[1]==="content"){
             this.props.LoadData()
-            axios('http://conspect-structure.eastus.cloudapp.azure.com/gettagpdf/'+this.props.match.url.split('/')[2],
+            axios(this.props.siteaddres+'gettagpdf/'+this.props.match.url.split('/')[2],
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{
@@ -106,7 +109,7 @@ class Viewer extends React.Component{
         }
         if (this.props.match.url.split('/')[1]==="sample_pdf"){
             this.props.LoadData()
-            axios('http://conspect-structure.eastus.cloudapp.azure.com/get_sample_pdf/'+this.props.topicrequest,
+            axios(this.props.siteaddres+'get_sample_pdf/'+this.props.topicrequest,
             {   method: 'GET',
                 responseType: 'blob'}
             ).then(response =>{
@@ -119,10 +122,10 @@ class Viewer extends React.Component{
         }
         if ((this.props.match.url.split('/')[1]==="myconspects") || (this.props.match.url.split('/')[1]==="subscriberconspects")){
             if (this.props.match.url.split('/')[4]==="pdf"){
-                LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
+                LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id,this.props.siteaddres)
             }
             if (this.props.match.url.split('/')[4]==="content"){
-                LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
+                LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect,this.props.siteaddres)
             }
         }
     }
@@ -134,14 +137,14 @@ class Viewer extends React.Component{
                         ...this.state,
                         option: this.props.match.url.split('/')[4]
                     })
-                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
+                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id,this.props.siteaddres)
                 }
                 if (this.props.match.url.split('/')[4]==="content"){
                     this.setState({
                         ...this.state,
                         option: this.props.match.url.split('/')[4]
                     })
-                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
+                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect,this.props.siteaddres)
                 }
             }
             if ((this.state.suboption!=this.props.match.url.split('/')[4]) && (this.props.match.url.split('/')[1]==="subscriberconspects")){
@@ -150,14 +153,14 @@ class Viewer extends React.Component{
                         ...this.state,
                         suboption: this.props.match.url.split('/')[4]
                     })
-                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id)
+                    LoadPDF(this.props.LoadData,this.props.match.url.split('/')[2],this.props.setPdf,this.props.match.params.id,this.props.siteaddres)
                 }
                 if (this.props.match.url.split('/')[4]==="content"){
                     this.setState({
                         ...this.state,
                         suboption: this.props.match.url.split('/')[4]
                     })
-                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect)
+                    LoadContent(this.props.setConspects,this.props.LoadData,this.props.match.params.id,this.props.match.params.conspectname,this.props.OpenConspect,this.props.siteaddres)
                 }
             }
         }

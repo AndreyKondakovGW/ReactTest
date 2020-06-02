@@ -16,21 +16,22 @@ let mapStatetoProps =(state)=>{
         id: state.Curentconspectreducer.LogicData.CurrentConspect.id,
         CurentConspectfotos: state.Curentconspectreducer.LogicData.CurrentConspect.data.fotos,
         topicrequest: state.TagRequestReducere.request,
-        conspectispublic: state.Curentconspectreducer.LogicData.CurrentConspect.conspect_is_public
+        conspectispublic: state.Curentconspectreducer.LogicData.CurrentConspect.conspect_is_public,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 
 }
 
 let mapDispatchtoProps =(dispatch) =>{
     return{
-        LoadConspectFromData: async (fotos,name,id,OpenConspect)=>{
+        LoadConspectFromData: async (fotos,name,id,OpenConspect,siteaddres)=>{
             let promise = new Promise(async (resolve) => {
                 let f=[]
                 var i=0
                 while (i<fotos.data.length)
                 {
                     let promise = new Promise((resolve) => {
-                        resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                        resolve(axios.get(siteaddres+'getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                     })
                     let response= await promise
                     const file = new Blob(
@@ -61,13 +62,13 @@ let mapDispatchtoProps =(dispatch) =>{
             console.log("add")
             dispatch(AddSubscriber())
         },
-        ShowAlert:(Conspects)=>{
+        ShowAlert:(Conspects,siteaddres)=>{
             let alertT=[]
             let promise = new Promise(async (resolve) => {
                 var i=0
                 while (i<Conspects.filter(elm=>elm.checked).length){
                     let promise = new Promise((resolve) => {
-                        resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
+                        resolve(axios.get(siteaddres+'related_tags/'+Conspects.filter(elm=>elm.checked)[i].id)) 
                     })
                     let response= await promise
                     alertT=[...alertT,{name: Conspects.filter(elm=>elm.checked)[i].name,tags: response.data.map(elm=>elm.tag_name).join()}]
@@ -120,16 +121,16 @@ let mapDispatchtoProps =(dispatch) =>{
             let action2=OpenConspectAC(conspect)
             dispatch(action2)
         },
-        SaveConspect: async (name,fotos,id,CurentConspectfotos,OpenConspect,routing)=>{
+        SaveConspect: async (name,fotos,id,CurentConspectfotos,OpenConspect,routing,siteaddres)=>{
             dispatch(DataLoadSwitch())
             const OldIDs=new Set (CurentConspectfotos.map(elm=>elm.index))
             const NewIDs=new Set (fotos.map(elm=>elm.index))
             OldIDs.forEach(elm=>{
                 if (!NewIDs.has(elm)){
-                    axios.delete('http://conspect-structure.eastus.cloudapp.azure.com/deletephoto/'+ elm)
+                    axios.delete(siteaddres+'deletephoto/'+ elm)
                 }
             })
-            axios.put('http://conspect-structure.eastus.cloudapp.azure.com/put_conspect/'+name+"/False").then(async function(response){
+            axios.put(siteaddres+'put_conspect/'+name+"/False").then(async function(response){
                 let promise1 = new Promise(async (resolve) => {
                 var i=0
                 while (i<fotos.length){
@@ -137,7 +138,7 @@ let mapDispatchtoProps =(dispatch) =>{
                         let formData = new FormData();
                         formData.append('file', fotos[i].file);
                         await new Promise((resolve, reject) => {
-                            resolve(axios.post('http://conspect-structure.eastus.cloudapp.azure.com/savephoto/'+ response.data.conspect_id,
+                            resolve(axios.post(siteaddres+'savephoto/'+ response.data.conspect_id,
                                 formData,
                                 {
                                     headers: {'Content-Type': 'multipart/form-data'}
@@ -160,27 +161,6 @@ let mapDispatchtoProps =(dispatch) =>{
                     routing(name,response.data.conspect_id)
                     document.location.reload(true);
                 })
-                /*
-                fotos.forEach(elm=>{
-                    if (elm.index==="null"){
-                        let formData = new FormData();
-                        formData.append('file', elm.file);
-                        console.log(formData)
-                        axios.post('http://conspect-structure.eastus.cloudapp.azure.com/savephoto/'+ response.data.conspect_id,
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        }
-                        ).then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error);
-                          });
-                    }
-                })
-                */
             })
             let action=LoadConspectAC(name,id,OpenConspect);
             dispatch(action);

@@ -29,7 +29,7 @@ import i24 from '../static/images/24.jpg';
 import i25 from '../static/images/25.jpeg';
 
 import * as axios from 'axios';
-
+import Siteaddres from './Siteaddres'
 
 const SET_USERNAME="SetUsername"
 const SET_TOPICS="SetTopics"
@@ -49,6 +49,7 @@ const SET_CUR_OPTION="SET_CUR_OPTION"
 
 
 let initialstate={
+    siteaddres: Siteaddres,
     bobrmass:[i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,i21,i22,i23,i24,i25],
     UserData: {
         Username: "",

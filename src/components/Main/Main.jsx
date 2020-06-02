@@ -51,7 +51,7 @@ padding-top:56px;
 
 const Main=(props) =>{
     let logout=()=>{
-      axios.get("http://conspect-structure.eastus.cloudapp.azure.com/logout")
+      axios.get(props.siteaddres+"logout")
       document.location.reload(true);
     }
     const {history}=props

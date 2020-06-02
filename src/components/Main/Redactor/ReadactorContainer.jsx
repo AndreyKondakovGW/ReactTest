@@ -13,7 +13,8 @@ let mapStatetoProps =(state)=>{
         curentfoto : state.Curentconspectreducer.LogicData.CurrentConspect.data.curentfoto,      
         Currentpotopath: state.Curentconspectreducer.LogicData.CurrentConspect.data.curentfoto.path,
         Conspects: state.UserDatareducer.UserData.Conspects,
-        coordinate: state.Curentconspectreducer.Coordinate
+        coordinate: state.Curentconspectreducer.Coordinate,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 
@@ -56,8 +57,8 @@ let mapDispatchtoProps =(dispatch) =>{
             let action=SetCordinateAC(x1,x2,y1,y2)
             dispatch(action)
         },
-        SaveTags:(tags,photoid,coordinate)=>{
-            axios.post('http://conspect-structure.eastus.cloudapp.azure.com/sendfragment',{photo_id:photoid,x1:coordinate.x1,y1:coordinate.y1,x2:coordinate.x2,y2:coordinate.y2,tags:tags}).then(function(){
+        SaveTags:(tags,photoid,coordinate,siteaddres)=>{
+            axios.post(siteaddres+'sendfragment',{photo_id:photoid,x1:coordinate.x1,y1:coordinate.y1,x2:coordinate.x2,y2:coordinate.y2,tags:tags}).then(function(){
                 console.log('SUCCESS!!')})
         },
         setConspect: (conspects) =>{

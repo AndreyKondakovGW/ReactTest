@@ -5,7 +5,7 @@ import MyConspectList from './../../ConspectList/ConspectList.jsx';
 //import CommentsListConatiner from '../../CommentsList/CommentListContainer.jsx';
 import Button from '../../Button/Button.jsx';
 import UserFinderContainer from '../UsersFinder/UserFinderContainer';
-import UserAccsesForm from '../UserAccsesForm/UserAccsesForm.jsx';
+import UserAccsesForm from '../UserAccsesForm/UserAccsesFormContainer';
 import * as axios from 'axios';
 import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -186,7 +186,7 @@ class ConspectSaver extends React.Component{
 
     handleSubmit=()=> {
         if ((this.state.name!=="") && (this.props.fotos.length>0)) 
-            this.props.save(this.state.name,this.props.fotos,this.props.id,this.props.conspects,this.props.OpenConspect,this.props.routing) 
+            this.props.save(this.state.name,this.props.fotos,this.props.id,this.props.conspects,this.props.OpenConspect,this.props.routing,this.props.siteaddres) 
         this.ClearForm()
     }
 
@@ -230,7 +230,7 @@ class RequestSaveForm extends React.Component{
 
     handleSubmit=()=> {
         this.props.WriteRequest()
-        axios.post(decodeURIComponent('http://conspect-structure.eastus.cloudapp.azure.com/create_sample_tag/'+this.props.request+'/'+this.state.value))
+        axios.post(decodeURIComponent(this.props.siteaddres+'create_sample_tag/'+this.props.request+'/'+this.state.value))
 
     }
     render(){
@@ -263,7 +263,7 @@ class NavBar extends React.Component{
         <Nav className="ml-auto">
                 <Route history={history} exact path = "/myconspects" render={()=><StyledLine>
                     <Button  text="Создать конспект" icon={<FileEarmarkPlus/>} path={"creteconspect/newconspect"}/>
-                    <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects)}/>
+                    <ActionBox text="Удалить выбранные" icon={<FileEarmarkMinus/>} action={()=>this.props.ShowAlert(this.props.Conspects,this.props.siteaddres)}/>
                 </StyledLine>}/>
 
                 <Route history={history} path = "/myconspects/:contentname/:id" render ={(props)=>
@@ -294,14 +294,14 @@ class NavBar extends React.Component{
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
                         <ActionBox text="Создать PDF" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://conspect-structure.eastus.cloudapp.azure.com/copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
                         <ActionBox text="Вернуться" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post('http://conspect-structure.eastus.cloudapp.azure.com/copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path="/content" render={()=><StyledLine>
@@ -313,14 +313,14 @@ class NavBar extends React.Component{
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >{<FilePlus/>} Добавить фото</label>
                     {/*<CommentsListConatiner/>*/}
-                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing}/>
+                    <ConspectSaver save={this.props.SaveConspect} fotos={this.props.fotos} name="" conspects={this.props.CurentConspectfotos} mutable={true} routing={this.Routing} siteaddres={this.props.siteaddres}/>
                 </StyledLine>}/>
                 
                 <Route history={history} path ="/creteconspect/:conspect/:id" render={(props)=><>
                 <StyledLine>
                     <input id="file" type="file" onChange={(e)=>this.props.AddFoto(e)}/>
                     <label id="filelabel" for="file" >{<FilePlus/>} Загрузить файл</label>
-                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false} routing={this.Routing}/>)})()}
+                    {(()=>{return(<ConspectSaver save={this.props.SaveConspect} name={this.props.name} fotos={this.props.fotos} conspects={this.props.CurentConspectfotos} mutable={false} routing={this.Routing} siteaddres={this.props.siteaddres}/>)})()}
                 </StyledLine>
                 <UserAccsesForm conspectid={props.match.params.id}/>
                 </>}/>
@@ -362,6 +362,5 @@ class NavBar extends React.Component{
 }
 }
 export default (NavBar);
-
 //this.LoadPDF(this.props.LoadData,props.match.params.contentname,this.props.setPdf,props.match.params.id
 //this.LoadContent(this.props.setConspects,this.props.LoadData,props.match.params.id,props.match.params.conspectname,this.props.OpenConspect)

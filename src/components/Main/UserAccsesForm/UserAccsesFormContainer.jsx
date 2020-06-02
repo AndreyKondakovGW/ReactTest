@@ -7,7 +7,8 @@ let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
         CurentOption: state.UserDatareducer.CurentOption,
-        CurentUser: state.UserDatareducer.UserData.Username
+        CurentUser: state.UserDatareducer.UserData.Username,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 
@@ -18,6 +19,6 @@ let mapDispatchtoProps =(dispatch) =>{
 
 
 
-const UserAccsesFormContainer=connect(mapStatetoProps,mapDispatchtoProps)(UserAccsesForm)
+const UserFinderContainer=connect(mapStatetoProps,mapDispatchtoProps)(UserAccsesForm)
 
 export default UserFinderContainer
