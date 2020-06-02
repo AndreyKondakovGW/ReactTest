@@ -128,6 +128,16 @@ display:flex;
         width: 50px;
         height: 50px;
     }
+    .preloaderContainer{
+        width:100%;
+        height: calc(100vh - 56px);
+        display:flex;
+        flex-direction: column;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items: center;
+        text-align:center;
+    }
 `;
 
 const StyledInterface = styled.div`
@@ -353,7 +363,11 @@ class Redactor extends React.Component{
             </StyledInvite>}
     </StyledRedactor>
     :
-    <StyledInvite><img src={preloader} alt="some image"></img></StyledInvite>)}
+    <StyledInvite>
+        <div className="preloaderContainer">
+            <img src={preloader} alt="some image"></img>
+        </div>
+    </StyledInvite>)}
 
     
     render(){
