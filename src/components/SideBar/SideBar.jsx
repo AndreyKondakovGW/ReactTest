@@ -31,7 +31,7 @@ const StyledSideBar = styled.div`
     height: 100%;
     overflow: auto;
     z-index: 200;
-
+    text-align:center;
 /*уголок магии. не трогать*/
 left: ${({ open }) => open ? '0%' : '-100%'};
 transition-delay: 0s;
@@ -39,11 +39,8 @@ transition-duration: .4s;
 transition-property: left;
 transition-timing-function: ease-in-out;
 
-#logo{
-    margin: 20px auto 20px auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+.logobox{
+    margin-bottom: 8px;
 }
 .SidebarContent{
 .button{
@@ -61,8 +58,8 @@ const SideBar=(props) =>{
     return (
     <StyledSideBar  open={props.open}>
         <h2>Welcome.</h2>
-        <NavLink to ={"/main"}>
-            <img src={logo} alt="some value" id="logo" />
+        <NavLink to ={"/main"} className="logobox">
+            <img src={logo} alt="some value"  />
         </NavLink> 
         
         <div className="SidebarContent">

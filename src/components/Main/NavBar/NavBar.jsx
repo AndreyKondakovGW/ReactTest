@@ -77,9 +77,10 @@ background-color:rgba(255,255,255,0.5);
     justify-content:center;
 }
 .dropdown-menu.show{
-    width:190px;
-    height:40vh;
+    width:207px;
+    max-height:50vh;
     overflow-y: auto;
+    overflow-x: hidden;
     background-color:#DCDEEA;
     animation: appear 300ms ease-in-out 1;
     @keyframes appear {
@@ -91,12 +92,14 @@ background-color:rgba(255,255,255,0.5);
     border: 0px;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, .3);
     padding:0px;
-    display:flex;
+    /* display:flex;
     flex-direction:column;
-    justify-content:center;
-    align-content:center;
+    justify-content:center;*/
+   display:block;
+   text-align:center;
     .dropdown-item{
         background-color:#DCDEEA;
+        text-align:center;
     }
     .button{
         background-color:rgb(192, 175, 211);
