@@ -93,7 +93,6 @@ background-color:rgba(255,255,255,0.5);
     padding:0px;
     display:flex;
     flex-direction:column;
-    flex-wrap:wrap;
     justify-content:center;
     align-content:center;
     text-align:center;
