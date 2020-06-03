@@ -78,7 +78,7 @@ background-color:rgba(255,255,255,0.5);
 }
 .dropdown-menu.show{
     width:190px;
-    max-height:40vh;
+    height:40vh;
     overflow-y: auto;
     background-color:#DCDEEA;
     animation: appear 300ms ease-in-out 1;
@@ -96,7 +96,6 @@ background-color:rgba(255,255,255,0.5);
     flex-wrap:wrap;
     justify-content:center;
     align-content:center;
-    text-align:center;
     .dropdown-item{
         background-color:#DCDEEA;
     }
@@ -318,19 +317,23 @@ class NavBar extends React.Component{
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/pdf"}>
                         <ActionBox text="Создать PDF" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{alert("Скопирован конспект " + props.match.params.contentname);axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id)}}/>
                 </StyledLine>}/>
 
                 <Route history={history} path = "/subscriberconspects/:contentname/:id/pdf" render ={(props)=><StyledLine>
                     <NavLink to ={"/subscriberconspects/"+props.match.params.contentname+"/"+props.match.params.id+"/content"}>
                         <ActionBox text="Вернуться" action={()=>{}}/>
                     </NavLink>
-                    <ActionBox text="Скопировать конспект" action={()=>{axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id)}}/>
+                    <ActionBox text="Скопировать конспект" action={()=>{alert("Скопирован конспект" + props.match.params.contentname);axios.post(this.props.siteaddres+'copy_conspect/'+ props.match.params.id);}}/>
+                </StyledLine>}/>
+
+                <Route history={history} path = "/comunity/:name/:id/conspect_and_tags" render ={(props)=><StyledLine>
+                    <Button  text="Вернутся" path={"comunity"}/>
                 </StyledLine>}/>
 
                 <Route history={history} path="/content" render={()=><StyledLine>
-                    <Button  text="Мои конспекты" icon={<FileEarmarkText/>}path={"myconspects"}/>
-                    <Button  text="Создать выборку" icon={<StarHalf/>}path={"topicrequest"}/>
+                    <Button  text="Мои конспекты" icon={<FileEarmarkText/>} path={"myconspects"}/>
+                    <Button  text="Создать выборку" icon={<StarHalf/>} path={"topicrequest"}/>
                 </StyledLine>}/>
 
                 <Route history={history} exact path ="/creteconspect/newconspect" render={()=><StyledLine>

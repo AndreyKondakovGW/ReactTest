@@ -305,7 +305,7 @@ const UserDatareducer =(state=initialstate, action)=>{
         }
         case DELETE_CHECKEDCONSPECT:{
             state.UserData.Conspects.filter(elm=>elm.checked).forEach(elm=>
-                axios.delete('http://conspect-structure.eastus.cloudapp.azure.com/deleteconspect/'+elm.id))
+                axios.delete(state.siteaddres + 'deleteconspect/'+elm.id))
             let newstate={
                 ...state,
                 UserData: {
@@ -332,7 +332,7 @@ const UserDatareducer =(state=initialstate, action)=>{
         }
         case ADD_SUBSCRIBER:{
             if (state.CurentOption!==""){
-            axios.post('http://conspect-structure.eastus.cloudapp.azure.com/add_friend/'+state.CurentOption.id)
+            axios.post(state.siteaddres + 'add_friend/'+state.CurentOption.id)
             let newstate={
                 ...state,
                 UserData: {

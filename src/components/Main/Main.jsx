@@ -57,7 +57,7 @@ const Main=(props) =>{
     const {history}=props
     return (
         <StyledMain open={props.open} >
-            <Route history={history} exact path ="/main/:username" component = {HelloComponent}/>
+            <Route history={history} path ="/main" component = {HelloComponent}/>
             <Route history={history} exact path = "/content" render = {() => <MyTopicsContainer/>} />
             <Route history={history} path = "/content/:conspectname" component = {ConspectViewerContainer}/>
             <Route history={history} exact path ="/myconspects" render ={() => <MyConspectContainer/>} />
