@@ -4,7 +4,8 @@ import {SetUsernameAC} from '../../redux/UserData-reducer';
 
 let mapStatetoProps =(state)=>{
     return {
-        CurentUser : state.UserDatareducer.UserData.Username
+        CurentUser : state.UserDatareducer.UserData.Username,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 

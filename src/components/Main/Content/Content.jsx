@@ -41,14 +41,14 @@ class TopicsAPI extends React.Component{
     
     componentDidMount(){
         console.log("Отправлелен запрос на получение тэгов")
-        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/gettags").then(response =>{
+        axios.get(this.props.siteaddres+"gettags").then(response =>{
             this.props.setTopics(response.data)
         })
 
     }
     DeleteTag(id){
-        axios.delete("http://conspect-structure.eastus.cloudapp.azure.com/delete_tag/"+id)
-        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/gettags").then(response =>{
+        axios.delete(this.props.siteaddres+"delete_tag/"+id)
+        axios.get(this.props.siteaddres+"gettags").then(response =>{
             this.props.setTopics(response.data)
         })
        /* this.setState({

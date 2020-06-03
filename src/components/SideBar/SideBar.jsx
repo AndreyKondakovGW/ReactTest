@@ -2,7 +2,8 @@ import React from 'react';
 
 
 import Button from '../Button/Button';
-
+import { NavLink } from 'react-router-dom';
+import {Route } from 'react-router-dom';
 
 import logo from '../../logo.png';
 import { bool, func } from 'prop-types';
@@ -60,7 +61,10 @@ const SideBar=(props) =>{
     return (
     <StyledSideBar  open={props.open}>
         <h2>Welcome.</h2>
-        <img src={logo} alt="some value" id="logo" />
+        <NavLink to ={"/main"}>
+            <img src={logo} alt="some value" id="logo" />
+        </NavLink> 
+        
         <div className="SidebarContent">
             <Button  text='Мои конспекты' icon={<FileEarmarkText/>} path="myconspects"/>
             <Button  text='Мои тэги'icon={<StarFill/>}  path="content" />

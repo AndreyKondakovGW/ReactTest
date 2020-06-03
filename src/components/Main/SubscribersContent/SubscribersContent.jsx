@@ -67,7 +67,7 @@ class SubscribersContent extends React.Component{
     
     componentDidMount(){
 
-            axios.get("http://conspect-structure.eastus.cloudapp.azure.com/get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
+            axios.get(this.props.siteaddres+"get_opened_conspects/"+this.props.match.url.split('/')[3]).then(response =>{
                 this.state.Conspects=response.data.map(function(elm){return({...elm,img: img1})})
                 this.setState({
                     ...this.state,

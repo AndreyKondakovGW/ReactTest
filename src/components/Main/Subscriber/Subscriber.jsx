@@ -68,12 +68,12 @@ text-align: left;
 
 class Subscriber extends React.Component{
     componentDidMount(){
-        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/friend_list").then(response =>{
+        axios.get(this.props.siteaddres+"friend_list").then(response =>{
             this.props.setsubscribers(response.data)
        })
     }
     DeleteSubscriber(id){
-        axios.delete("http://conspect-structure.eastus.cloudapp.azure.com/delete_friend/"+id)
+        axios.delete(this.props.siteaddres+"delete_friend/"+id)
         this.props.setsubscribers(this.props.Subscribers.filter(elm=>elm.user_id!==id))
     }
     render(){

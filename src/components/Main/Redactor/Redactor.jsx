@@ -249,7 +249,7 @@ class TagsForm  extends React.Component{
     }
 
     handleSubmit=()=> {
-        this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!==""),this.props.curentfoto.index,this.props.Coordinate)
+        this.props.SaveTags(this.state.tags.map(elm=>elm.text).filter(elm=>elm!==""),this.props.curentfoto.index,this.props.Coordinate,this.props.siteaddres)
         this.ClearForm()
     }
 
@@ -274,14 +274,14 @@ class TagsForm  extends React.Component{
     }
 }
 
-const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
+const LoadConspectFromData= async (fotos,name,id,OpenConspect,siteaddres)=>{
         let promise = new Promise(async (resolve, reject) => {
             let f=[]
             var i=0
             while (i<fotos.data.length)
             {
                 let promise = new Promise((resolve, reject) => {
-                    resolve(axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
+                    resolve(axios.get(siteaddres+'getphotobyid/'+ fotos.data[i].id,{ responseType: 'blob' })) 
                 })
                 let response= await promise
                 const file = new Blob(
@@ -311,15 +311,15 @@ const LoadConspectFromData= async (fotos,name,id,OpenConspect)=>{
 
 class Redactor extends React.Component{ 
     componentDidMount= async ()=>{
-        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
+        axios.get(this.props.siteaddres+"getconspects").then(response =>{
                 this.props.setConspect(response.data)})
         if (this.props.CurentconspectID!=-1){
-        axios.get("http://conspect-structure.eastus.cloudapp.azure.com/getconspects").then(response =>{
+        axios.get(this.props.siteaddres+"getconspects").then(response =>{
                 this.props.setConspect(response.data)})
         if ((this.props.match.params.id!=-1) && (this.props.CurentconspectID!==this.props.match.params.id)){
             this.props.LoadData()
-            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
+            axios.get(this.props.siteaddres+'getconspectphotos/'+ this.props.match.params.id).then(response=>{
+                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect,this.props.siteaddres)
             }) 
         }
         }
@@ -331,8 +331,8 @@ class Redactor extends React.Component{
         if (prevProps !== this.props) {
         if ((!this.props.dataisLoading) && (this.props.match.params.id!=-1) && (this.props.CurentconspectID!=this.props.match.params.id)){
             this.props.LoadData()
-            axios.get('http://conspect-structure.eastus.cloudapp.azure.com/getconspectphotos/'+ this.props.match.params.id).then(response=>{
-                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect)
+            axios.get(this.props.siteaddres+'getconspectphotos/'+ this.props.match.params.id).then(response=>{
+                LoadConspectFromData(response,this.props.match.params.conspectname,this.props.match.params.id,this.props.OpenConspect,this.props.siteaddres)
             })    
         }
         }

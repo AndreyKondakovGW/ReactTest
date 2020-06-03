@@ -11,7 +11,8 @@ let mapStatetoProps =(state)=>{
         fotos: state.CurentCreatorreducer.CreatorData.fotos,
         conspectid : state.Curentconspectreducer.LogicData.CurrentConspect.data.curentfoto.id,
         createrid : state.CurentCreatorreducer.CreatorData.id,
-        imagePreviewUrl: state.CurentCreatorreducer.CreatorData.imagePreviewUrl
+        imagePreviewUrl: state.CurentCreatorreducer.CreatorData.imagePreviewUrl,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 
 }

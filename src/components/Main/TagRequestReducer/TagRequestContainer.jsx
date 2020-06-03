@@ -10,7 +10,8 @@ let mapStatetoProps =(state)=>{
         maxUn: state.TagRequestReducere.maxUninon,
         data: state.TagRequestReducere.data,
         request:  state.TagRequestReducere.request,
-        tags: state.UserDatareducer.UserData.Topics.map(e=>e.name)
+        tags: state.UserDatareducer.UserData.Topics.map(e=>e.name),
+        siteaddres: state.UserDatareducer.siteaddres
     }
 
 }

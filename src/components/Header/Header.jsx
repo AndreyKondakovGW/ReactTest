@@ -51,8 +51,8 @@ transition-property: height;
 transition-timing-function: ease-in-out;
 }
 `;
-const GetCurUser=(SetUsername)=>{
-  axios.get('http://conspect-structure.eastus.cloudapp.azure.com/get_current_user').then(response=>{
+const GetCurUser=(SetUsername,siteaddres)=>{
+  axios.get(siteaddres+'get_current_user').then(response=>{
     SetUsername(response.data.name)
 })
 }
@@ -72,7 +72,7 @@ const Header=(props)=>{
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/comunity">@{(props.CurentUser==="")?GetCurUser(props.SetUsername):props.CurentUser}</Link>
+              <Link to="/comunity">@{(props.CurentUser==="")?GetCurUser(props.SetUsername,props.siteaddres):props.CurentUser}</Link>
             </Nav.Link>
           </Nav.Item>
         </Nav>

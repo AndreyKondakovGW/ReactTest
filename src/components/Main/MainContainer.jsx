@@ -7,6 +7,7 @@ let mapStatetoProps=(state)=>{
         Topics : state.UserDatareducer.UserData.Topics,
         Conspects : state.UserDatareducer.UserData.Conspects,
         CurrentConspect: state.Curentconspectreducer.LogicData.CurrentConspect,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 

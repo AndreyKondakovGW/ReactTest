@@ -5,7 +5,8 @@ import Subscriber from './Subscriber.jsx';
 let mapStatetoProps =(state)=>{
     return {
         Subscribers: state.UserDatareducer.UserData.Subscribers,
-        bobrlist: state.UserDatareducer.bobrlist
+        bobrlist: state.UserDatareducer.bobrlist,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 

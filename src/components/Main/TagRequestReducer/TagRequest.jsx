@@ -8,7 +8,7 @@ import { ExpandMore } from '@material-ui/icons';
 class TagRequest extends React.Component{
     componentDidMount(){
         this.props.Openempty()
-        axios.get("conspect-structure.eastus.cloudapp.azure.com/gettags").then(response =>{
+        axios.get(this.props.siteaddres+"gettags").then(response =>{
             this.props.setTopics(response.data)
         })
     }

@@ -30,7 +30,7 @@ class UserAccsesForm extends React.Component{
       this.handleChange=this.handleChange.bind(this)
     }
     componentDidMount=()=>{
-      axios.get('http://conspect-structure.eastus.cloudapp.azure.com/get_users_with_access/'+this.props.conspectid).then(response=>{
+      axios.get(this.props.siteaddres+'get_users_with_access/'+this.props.conspectid).then(response=>{
         console.log(response.data)
         this.setState({
           ...this.state,
@@ -58,7 +58,7 @@ class UserAccsesForm extends React.Component{
     handleChange=(e)=>{
       let value = e.target.value;
       if (value!==""){
-        axios.get('http://conspect-structure.eastus.cloudapp.azure.com/search_users/'+value).then(response=>{
+        axios.get(this.props.siteaddres+'search_users/'+value).then(response=>{
           this.setState({
             ...this.state,
             value: value,
@@ -75,17 +75,17 @@ class UserAccsesForm extends React.Component{
     }
     }
     HandleSubmit=()=>{
-      axios.get('http://conspect-structure.eastus.cloudapp.azure.com/get_users_with_access/'+this.props.conspectid).then(response=>{
+      axios.get(this.props.siteaddres+'get_users_with_access/'+this.props.conspectid).then(response=>{
         let usersold=new Set(response.data.map(elm=>elm.user_id))
         let usersnew=new Set(this.state.selecteoptions.map(elm=>elm.user_id))
         usersold.forEach(elm=>{
           if (!usersnew.has(elm)){
-            axios.delete('http://conspect-structure.eastus.cloudapp.azure.com/remove_user_access/'+elm+'/'+this.props.conspectid)
+            axios.delete(this.props.siteaddres+'remove_user_access/'+elm+'/'+this.props.conspectid)
           }
         })
         usersnew.forEach(elm=>{
           if (!usersold.has(elm)){
-            axios.post('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect/'+this.props.conspectid+'/'+elm+'/viewer')
+            axios.post(this.props.siteaddres+'share_conspect/'+this.props.conspectid+'/'+elm+'/viewer')
           }
         })
       })
@@ -96,7 +96,7 @@ class UserAccsesForm extends React.Component{
       return (
           (!this.state.checkeveryone)?<StyledLine>
           <ActionBox text="Открыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); 
-            axios.put('http://conspect-structure.eastus.cloudapp.azure.com/share_conspect_to_all/'+this.props.conspectid)}
+            axios.put(this.props.siteaddres+'share_conspect_to_all/'+this.props.conspectid)}
           }/>
           <Dropdown>
               <Dropdown.Toggle id="filelabel">{<ListUl />} Доступ </Dropdown.Toggle>
@@ -134,7 +134,7 @@ class UserAccsesForm extends React.Component{
               </Dropdown.Menu>
             
           </Dropdown>
-          </StyledLine>:<ActionBox text="Закрыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put('http://conspect-structure.eastus.cloudapp.azure.com/set_conspect_private/'+this.props.conspectid)}}/>
+          </StyledLine>:<ActionBox text="Закрыть для всех" icon={<Link45deg />} action={()=>{this.setState({...this.state, checkeveryone:!this.state.checkeveryone}); axios.put(this.props.siteaddres+'set_conspect_private/'+this.props.conspectid)}}/>
       )
     }
 }

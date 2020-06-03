@@ -9,7 +9,8 @@ let mapStatetoProps =(state)=>{
         Conspects : state.UserDatareducer.UserData.Conspects,
         Pagesize :state.UserDatareducer.Conspectspagesize,
         Conspectcount: state.UserDatareducer.TotalConspectscount,
-        CurrentPage: state.UserDatareducer.CurrentConspectPage
+        CurrentPage: state.UserDatareducer.CurrentConspectPage,
+        siteaddres: state.UserDatareducer.siteaddres
     }
 }
 

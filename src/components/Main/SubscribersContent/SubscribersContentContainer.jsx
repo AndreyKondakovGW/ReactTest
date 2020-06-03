@@ -12,6 +12,7 @@ let mapStatetoProps =(state)=>{
         TopicsPagesize :state.UserDatareducer.Subscriberdata.Topicspagesize,
         Topicscount: state.UserDatareducer.Subscriberdata.TotalTopicscount,
         TopicsCurrentPage: state.UserDatareducer.Subscriberdata.CurrentTopicsPage,
+        siteaddres: state.UserDatareducer.siteaddres
 
     }
 }
